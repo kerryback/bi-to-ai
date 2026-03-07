@@ -163,7 +163,6 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#step-3-visualize-the-tradeoffs" id="toc-step-3-visualize-the-tradeoffs" class="nav-link" data-scroll-target="#step-3-visualize-the-tradeoffs">Step 3: Visualize the tradeoffs</a></li>
   <li><a href="#step-4-build-the-recommendation" id="toc-step-4-build-the-recommendation" class="nav-link" data-scroll-target="#step-4-build-the-recommendation">Step 4: Build the recommendation</a></li>
   <li><a href="#what-just-happened" id="toc-what-just-happened" class="nav-link" data-scroll-target="#what-just-happened">What just happened</a></li>
-  <li><a href="#what-comes-next" id="toc-what-comes-next" class="nav-link" data-scroll-target="#what-comes-next">What comes next</a></li>
   <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a></li>
   </ul>
 </nav>
@@ -242,11 +241,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="what-just-happened" class="level2">
 <h2 class="anchored" data-anchor-id="what-just-happened">What just happened</h2>
-<p>Behind the scenes, the agent read the CSV into Python, wrote and ran code for each question, rendered charts with matplotlib, and synthesized findings into a memo. You never saw the code unless you asked for it.</p>
-</section>
-<section id="what-comes-next" class="level2">
-<h2 class="anchored" data-anchor-id="what-comes-next">What comes next</h2>
-<p>This chapter analyzed data right on your machine. Chapter 3 uses AI as a thinking partner to challenge your conclusions. Chapter 4 connects AI to databases and builds reusable skills anyone on your team can use. Chapters 5 through 7 cover agents, document-based AI, and the trust and governance framework for deploying these tools in your organization.</p>
+<p>Behind the scenes, the agent read the CSV into Python, wrote and ran code for each question, rendered charts with Python, and synthesized findings into a memo. You never see the code unless you ask for it.</p>
 </section>
 <section id="exercises" class="level2">
 <h2 class="anchored" data-anchor-id="exercises">Exercises</h2>
@@ -268,55 +263,60 @@ Exercise 1: The Superstore Walkthrough
 </div>
 </div>
 </div>
-<div class="callout callout-style-default callout-note callout-titled" title="Exercise 2: Speed Analysis Challenge">
+<div class="callout callout-style-default callout-note callout-titled" title="Exercise 2: Data Detective">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Exercise 2: Speed Analysis Challenge
+Exercise 2: Data Detective
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Set a timer for five minutes. Open your coding agent in the Superstore data folder and ask as many questions as you can. At the end, identify your single most interesting finding and state it in one sentence.</p>
+<p>Your colleague has made several claims about the Superstore data. Use your coding agent to verify or debunk each one.</p>
+<p>Claim 1: Discounts over 30% always increase total profit. Claim 2: The East region has the best profit margins. Claim 3: Office Supplies is the most profitable category. Claim 4: Q4 is always the best quarter.</p>
+<p>For each claim, ask the agent to test it, show the evidence, and write one sentence stating whether the claim is confirmed or debunked, with the supporting number.</p>
 </div>
 </div>
 </div>
-<div class="callout callout-style-default callout-note callout-titled" title="Exercise 3: Chart Type Matching">
+<div class="callout callout-style-default callout-note callout-titled" title="Exercise 3: Employee Attrition Walkthrough">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Exercise 3: Chart Type Matching
+Exercise 3: Employee Attrition Walkthrough
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>For each of the following questions, decide which chart type is most appropriate, then ask your coding agent to build it using the <a href="data/superstore.csv">Superstore data</a>.</p>
-<p>How has revenue changed over time? Which category is most profitable? Is there a relationship between discount and profit margin? What share of revenue comes from each region? What is the distribution of order sizes?</p>
-<p>Build at least three of these charts. For each, write one sentence explaining what decision the chart informs.</p>
+<p>You are an HR director at a mid-size company. Employee turnover has been rising and the CEO wants to know why people are leaving and what to do about it.</p>
+<p>Download <a href="data/employee-attrition.csv">employee-attrition.csv</a> and place it in a folder. Open your coding agent and work through the same four steps from this chapter.</p>
+<p>First, ask the agent to describe the data. How many employees are in the dataset? What is the overall attrition rate? What departments and job roles are represented?</p>
+<p>Second, ask decision-relevant questions: Which departments have the highest attrition? Does overtime correlate with leaving? How does monthly income differ between employees who stay and those who leave? Are employees with longer commutes more likely to leave?</p>
+<p>Third, create at least three charts: a bar chart comparing attrition rates by department, a box plot of monthly income for stayers vs.&nbsp;leavers, and a chart of your choice that reveals a pattern you find interesting.</p>
+<p>Fourth, ask the agent to write a one-page memo recommending three retention interventions, backed by the data.</p>
 </div>
 </div>
 </div>
-<div class="callout callout-style-default callout-note callout-titled" title="Exercise 4: Data Detective">
+<div class="callout callout-style-default callout-note callout-titled" title="Exercise 4: Attrition Data Detective">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Exercise 4: Data Detective
+Exercise 4: Attrition Data Detective
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Your colleague has made several claims about the Superstore data. Use your coding agent to verify or debunk each one.</p>
-<p>Claim 1: Discounts over 30% always increase total profit. Claim 2: The East region has the best profit margins. Claim 3: Office Supplies is the most profitable category. Claim 4: Q4 is always the best quarter.</p>
-<p>Pick two claims and, for each, ask the agent to test it, show the evidence, and write one sentence stating whether the claim is confirmed or debunked, with the supporting number.</p>
+<p>Your VP of People Operations has made several claims about the employee attrition data. Use your coding agent to verify or debunk each one.</p>
+<p>Claim 1: Employees who work overtime leave at more than double the rate of those who don’t. Claim 2: Job satisfaction has no meaningful relationship with attrition. Claim 3: Younger employees (under 30) are the most likely to leave. Claim 4: Employees who haven’t been promoted in the last two years leave at higher rates.</p>
+<p>For each claim, ask the agent to test it, show the evidence, and write one sentence stating whether the claim is confirmed or debunked, with the supporting number.</p>
 </div>
 </div>
 </div>
@@ -334,7 +334,6 @@ Exercise 5: The Weekly Report
 <div class="callout-body-container callout-body">
 <p>Identify a recurring report your team produces — weekly sales, monthly KPIs, quarterly review — and try to automate it.</p>
 <p>Place the source data in a folder and open your coding agent. Ask it to produce the full report: charts, tables, and a narrative summary. Then compare: how long does this report normally take to produce? How long did AI take? What is missing from the AI version?</p>
-<p>Write a brief note on what AI got right, what it missed, and whether you would use this approach going forward.</p>
 </div>
 </div>
 </div>

@@ -54,11 +54,7 @@ In ten minutes you have gone from a raw CSV to a written recommendation backed b
 
 ## What just happened
 
-Behind the scenes, the agent read the CSV into Python, wrote and ran code for each question, rendered charts with matplotlib, and synthesized findings into a memo.  You never saw the code unless you asked for it.
-
-## What comes next
-
-This chapter analyzed data right on your machine.  Chapter 3 uses AI as a thinking partner to challenge your conclusions.  Chapter 4 connects AI to databases and builds reusable skills anyone on your team can use.  Chapters 5 through 7 cover agents, document-based AI, and the trust and governance framework for deploying these tools in your organization.
+Behind the scenes, the agent read the CSV into Python, wrote and ran code for each question, rendered charts with Python, and synthesized findings into a memo.  You never see the code unless you ask for it.
 
 ## Exercises
 
@@ -70,30 +66,39 @@ First, ask the agent to describe the data.  Confirm the row count, column names,
 Bring your dataset and memo to Chapter 3 --- you will use them as thinking-partner exercises.
 :::
 
-::: {.callout-note title="Exercise 2: Speed Analysis Challenge" collapse="true"}
-Set a timer for five minutes.  Open your coding agent in the Superstore data folder and ask as many questions as you can.  At the end, identify your single most interesting finding and state it in one sentence.
-:::
 
-::: {.callout-note title="Exercise 3: Chart Type Matching" collapse="true"}
-For each of the following questions, decide which chart type is most appropriate, then ask your coding agent to build it using the [Superstore data](data/superstore.csv).
-
-How has revenue changed over time?  Which category is most profitable?  Is there a relationship between discount and profit margin?  What share of revenue comes from each region?  What is the distribution of order sizes?
-
-Build at least three of these charts.  For each, write one sentence explaining what decision the chart informs.
-:::
-
-::: {.callout-note title="Exercise 4: Data Detective" collapse="true"}
+::: {.callout-note title="Exercise 2: Data Detective" collapse="true"}
 Your colleague has made several claims about the Superstore data.  Use your coding agent to verify or debunk each one.
 
 Claim 1: Discounts over 30% always increase total profit.  Claim 2: The East region has the best profit margins.  Claim 3: Office Supplies is the most profitable category.  Claim 4: Q4 is always the best quarter.
 
-Pick two claims and, for each, ask the agent to test it, show the evidence, and write one sentence stating whether the claim is confirmed or debunked, with the supporting number.
+For each claim, ask the agent to test it, show the evidence, and write one sentence stating whether the claim is confirmed or debunked, with the supporting number.
+:::
+
+::: {.callout-note title="Exercise 3: Employee Attrition Walkthrough" collapse="true"}
+You are an HR director at a mid-size company.  Employee turnover has been rising and the CEO wants to know why people are leaving and what to do about it.
+
+Download [employee-attrition.csv](data/employee-attrition.csv) and place it in a folder.  Open your coding agent and work through the same four steps from this chapter.
+
+First, ask the agent to describe the data.  How many employees are in the dataset?  What is the overall attrition rate?  What departments and job roles are represented?
+
+Second, ask decision-relevant questions: Which departments have the highest attrition?  Does overtime correlate with leaving?  How does monthly income differ between employees who stay and those who leave?  Are employees with longer commutes more likely to leave?
+
+Third, create at least three charts: a bar chart comparing attrition rates by department, a box plot of monthly income for stayers vs. leavers, and a chart of your choice that reveals a pattern you find interesting.
+
+Fourth, ask the agent to write a one-page memo recommending three retention interventions, backed by the data.
+:::
+
+::: {.callout-note title="Exercise 4: Attrition Data Detective" collapse="true"}
+Your VP of People Operations has made several claims about the employee attrition data.  Use your coding agent to verify or debunk each one.
+
+Claim 1: Employees who work overtime leave at more than double the rate of those who don't.  Claim 2: Job satisfaction has no meaningful relationship with attrition.  Claim 3: Younger employees (under 30) are the most likely to leave.  Claim 4: Employees who haven't been promoted in the last two years leave at higher rates.
+
+For each claim, ask the agent to test it, show the evidence, and write one sentence stating whether the claim is confirmed or debunked, with the supporting number.
 :::
 
 ::: {.callout-note title="Exercise 5: The Weekly Report" collapse="true"}
 Identify a recurring report your team produces --- weekly sales, monthly KPIs, quarterly review --- and try to automate it.
 
 Place the source data in a folder and open your coding agent.  Ask it to produce the full report: charts, tables, and a narrative summary.  Then compare: how long does this report normally take to produce?  How long did AI take?  What is missing from the AI version?
-
-Write a brief note on what AI got right, what it missed, and whether you would use this approach going forward.
 :::
