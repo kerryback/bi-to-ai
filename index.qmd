@@ -12,7 +12,7 @@ Chapter 3 asks whether AI can help you think through decisions.  You will use AI
 
 Chapter 4 asks whether AI can connect to databases and let anyone on your team query them in plain English.  You will learn about MCP connectors, build a reusable "skill" that encodes a database schema, and watch AI write SQL for you.
 
-Chapter 5 asks whether AI can go beyond answering questions and actually take action.  You will learn about agents, tool use, containers, and the path from a prototype on your laptop to a deployed tool on the corporate intranet.
+Chapter 5 asks whether AI can automate reporting cycles.  You will learn about agents --- AI systems that chain steps autonomously --- and use your coding agent to build a reporting pipeline that queries a database, generates charts, writes summaries, and assembles a PowerPoint deck.
 
 Chapter 6 asks whether AI can answer questions about your company's documents without hallucinating.  You will learn about Retrieval-Augmented Generation (RAG) --- how AI retrieves relevant passages, generates grounded answers with citations, and where it can go wrong.
 

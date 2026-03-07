@@ -195,6 +195,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#setting-up-claude-code" id="toc-setting-up-claude-code" class="nav-link" data-scroll-target="#setting-up-claude-code">Setting up Claude Code</a></li>
   <li><a href="#setting-up-gemini-cli" id="toc-setting-up-gemini-cli" class="nav-link" data-scroll-target="#setting-up-gemini-cli">Setting up Gemini CLI</a></li>
   <li><a href="#setting-up-openai-codex" id="toc-setting-up-openai-codex" class="nav-link" data-scroll-target="#setting-up-openai-codex">Setting up OpenAI Codex</a></li>
+  <li><a href="#installing-python" id="toc-installing-python" class="nav-link" data-scroll-target="#installing-python">Installing Python</a></li>
+  <li><a href="#installing-libraries" id="toc-installing-libraries" class="nav-link" data-scroll-target="#installing-libraries">Installing libraries</a></li>
+  <li><a href="#setting-up-openrouter" id="toc-setting-up-openrouter" class="nav-link" data-scroll-target="#setting-up-openrouter">Setting up OpenRouter</a></li>
   <li><a href="#significant-differences" id="toc-significant-differences" class="nav-link" data-scroll-target="#significant-differences">Significant differences</a></li>
   <li><a href="#other-interfaces" id="toc-other-interfaces" class="nav-link" data-scroll-target="#other-interfaces">Other interfaces</a></li>
   </ul>
@@ -230,6 +233,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>A cloud sandbox is a temporary computing environment hosted by the AI provider. Claude Chat and ChatGPT both offer this: you upload a file, the AI processes it on a remote server, and you download the results. Cloud sandboxes are convenient for quick, ad-hoc analysis, but your data leaves your machine and the session is ephemeral.</p>
 <p>A virtual machine is a sandboxed environment that runs on your own computer. Claude Cowork is an example: it spins up a VM locally, giving AI a full computing environment with file access and persistence across sessions. Virtual machines are good for longer batch work, and because they run on your machine, your data stays local.</p>
 <p>A local environment runs directly in your terminal. Claude Code, Gemini CLI, and OpenAI Codex are examples. The AI writes code that executes right on your machine, with full access to your files, databases, and network. Nothing is uploaded. This is what we use throughout this book.</p>
+<p>The key takeaway is that AI does not need a special platform to analyze your data. It runs where you already work — in the terminal, on your laptop, with your files. The rest of this chapter shows how to set that up.</p>
 </section>
 <section id="setting-up-claude-code" class="level2">
 <h2 class="anchored" data-anchor-id="setting-up-claude-code">Setting up Claude Code</h2>
@@ -251,6 +255,48 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">npm</span> install <span class="at">-g</span> @openai/codex</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Launch it by typing <code>codex</code>. Codex requires either a ChatGPT Plus subscription or an OpenAI API key. Set your API key as an environment variable (<code>OPENAI_API_KEY</code>) before launching, or the tool will prompt you to authenticate.</p>
 <p>Codex displays its reasoning by default — you can see the agent’s thought process without enabling any special mode. It reads project instructions from a <code>AGENTS.md</code> file in the working directory.</p>
+</section>
+<section id="installing-python" class="level2">
+<h2 class="anchored" data-anchor-id="installing-python">Installing Python</h2>
+<p>The coding agents write Python behind the scenes, but the demo apps in later chapters need Python installed on your machine so you can run them yourself.</p>
+<p>Download Python 3.10 or later from <a href="https://www.python.org/downloads/">python.org</a>. On Windows, check <strong>“Add Python to PATH”</strong> during installation. On Mac, you can also install via Homebrew with <code>brew install python</code>. After installing, verify by opening a terminal and running:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">--version</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>You should see something like <code>Python 3.12.4</code>. If the command is not found, restart your terminal or check that Python was added to your PATH.</p>
+</section>
+<section id="installing-libraries" class="level2">
+<h2 class="anchored" data-anchor-id="installing-libraries">Installing libraries</h2>
+<p>Two Python packages are needed for the demo apps in later chapters:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install streamlit openai</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Streamlit builds simple web apps from Python scripts — you write a short script and Streamlit turns it into an interactive page. The <code>openai</code> package is a Python client for OpenAI-compatible APIs, which includes OpenRouter (described next). Later chapters mention additional packages as needed.</p>
+</section>
+<section id="setting-up-openrouter" class="level2">
+<h2 class="anchored" data-anchor-id="setting-up-openrouter">Setting up OpenRouter</h2>
+<p>Later chapters include demo apps that call a large language model via API. OpenRouter provides free access to open-source models — no credit card required.</p>
+<ol type="1">
+<li><p>Sign up at <a href="https://openrouter.ai">openrouter.ai</a> using a Google or GitHub account.</p></li>
+<li><p>Create an API key at <a href="https://openrouter.ai/keys">openrouter.ai/keys</a>.</p></li>
+<li><p>Set the key as an environment variable so the demo apps can find it:</p>
+<p><strong>Mac / Linux</strong> — add to your shell profile (<code>.bashrc</code> or <code>.zshrc</code>) to persist:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">OPENROUTER_API_KEY</span><span class="op">=</span><span class="st">"sk-or-..."</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Windows</strong> — run once in a terminal, then restart the terminal:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">setx</span> OPENROUTER_API_KEY <span class="st">"sk-or-..."</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+</ol>
+<p>The free tier allows roughly 20 requests per minute and 200 per day — more than enough for the exercises. To verify your key works, save this as <code>test_openrouter.py</code> and run it with <code>python test_openrouter.py</code>:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> openai <span class="im">import</span> OpenAI</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>client <span class="op">=</span> OpenAI(</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    base_url<span class="op">=</span><span class="st">"https://openrouter.ai/api/v1"</span>,</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    api_key<span class="op">=</span>os.environ[<span class="st">"OPENROUTER_API_KEY"</span>],</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>response <span class="op">=</span> client.chat.completions.create(</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    model<span class="op">=</span><span class="st">"google/gemini-2.0-flash-exp:free"</span>,</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    messages<span class="op">=</span>[{<span class="st">"role"</span>: <span class="st">"user"</span>, <span class="st">"content"</span>: <span class="st">"Say hello in one sentence."</span>}],</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(response.choices[<span class="dv">0</span>].message.content)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>If you see a greeting, the key is working and you are ready for the demo apps in Chapters 4 and beyond.</p>
 </section>
 <section id="significant-differences" class="level2">
 <h2 class="anchored" data-anchor-id="significant-differences">Significant differences</h2>

@@ -104,7 +104,24 @@ In this chapter we connect to a local SQLite file.  In your organization, the sa
 
 A polished skill is what gets deployed on your intranet.  The skill file encodes which tables matter, how they relate, and what the business terminology means.  IT adds the infrastructure: SSO authentication, read-only database credentials, and query logging for audit.
 
-The skill file is the deployment artifact.  IT adds infrastructure; you provide domain knowledge.  Chapter 5 covers the full deployment path in detail.
+The skill file is the deployment artifact.  IT adds infrastructure; you provide domain knowledge.  Chapter 5 shows how to chain this skill into an automated reporting pipeline.
+
+## A natural-language query app
+
+To see the skill concept in action as a working prototype, consider a small Streamlit app that lets you type a plain-English question and get results from the Chinook database.  No coding agent is needed --- the app calls an LLM directly via API.
+
+Here is what happens when you type a question.  The app sends your question, along with a description of the Chinook schema, to a free model on OpenRouter.  The model returns a SQL query.  The app runs that query against `chinook.db` and displays the results in a table.  The generated SQL is shown above the results --- the same transparency principle discussed in the "SQL transparency" section.
+
+Download the app files here: [app.py](data/demos/chinook-query/app.py) and [requirements.txt](data/demos/chinook-query/requirements.txt).  Copy `chinook.db` into the same folder, install the dependencies, and run:
+
+```bash
+pip install -r requirements.txt
+streamlit run app.py
+```
+
+Try asking "What are the top 5 countries by revenue?" or "Which artist has the most tracks?"  You can see the SQL the model generates and verify it against what you would expect.
+
+This is a demo, not a production application.  There is no authentication, no guardrails on the SQL, and no sandboxing of query execution.  Chapter 5 covers sandboxing and the path to production.  But as a prototype that proves the concept, fifty lines of Python is all it takes.
 
 ## Exercises
 
@@ -146,4 +163,10 @@ Identify a recurring report your team produces --- weekly sales summary, monthly
 Add an instruction to the skill: "When I say 'Monday report,' run these three queries and format the results as a one-page summary."  Test it.  Does one command produce your entire report?
 
 The deliverable is the skill file and a sample report output.
+:::
+
+::: {.callout-note title="Exercise 6: Build Your Own Query App" collapse="true"}
+Ask your coding agent to build a natural-language query app similar to the [chinook-query demo](data/demos/chinook-query/app.py), either from scratch or by improving the demo.  Possible extensions: add chart generation for numeric results, show query history in a sidebar, add error handling that suggests corrections when the SQL fails, or let the user choose between different databases.
+
+The deliverable is a working Streamlit app and a brief note on what you added or changed.
 :::

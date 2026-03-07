@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Agents and Deployment – From BI to AI</title>
+<title>Automating Reporting Cycles – From BI to AI</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -81,7 +81,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./05-agents-deployment.html"><span class="chapter-title">Agents and Deployment</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./05-agents-deployment.html"><span class="chapter-title">Automating Reporting Cycles</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -134,7 +134,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./05-agents-deployment.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Agents and Deployment</span></a>
+  <a href="./05-agents-deployment.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Automating Reporting Cycles</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -157,15 +157,14 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#what-is-an-agent" id="toc-what-is-an-agent" class="nav-link active" data-scroll-target="#what-is-an-agent">What is an agent?</a></li>
+  <li><a href="#from-query-to-report" id="toc-from-query-to-report" class="nav-link active" data-scroll-target="#from-query-to-report">From query to report</a></li>
+  <li><a href="#what-is-an-agent" id="toc-what-is-an-agent" class="nav-link" data-scroll-target="#what-is-an-agent">What is an agent?</a></li>
   <li><a href="#the-agent-loop" id="toc-the-agent-loop" class="nav-link" data-scroll-target="#the-agent-loop">The agent loop</a></li>
   <li><a href="#how-agents-use-tools" id="toc-how-agents-use-tools" class="nav-link" data-scroll-target="#how-agents-use-tools">How agents use tools</a></li>
-  <li><a href="#agent-architectures" id="toc-agent-architectures" class="nav-link" data-scroll-target="#agent-architectures">Agent architectures</a></li>
-  <li><a href="#the-permission-model" id="toc-the-permission-model" class="nav-link" data-scroll-target="#the-permission-model">The permission model</a></li>
-  <li><a href="#containers-and-sandboxed-execution" id="toc-containers-and-sandboxed-execution" class="nav-link" data-scroll-target="#containers-and-sandboxed-execution">Containers and sandboxed execution</a></li>
-  <li><a href="#deploying-to-a-corporate-intranet" id="toc-deploying-to-a-corporate-intranet" class="nav-link" data-scroll-target="#deploying-to-a-corporate-intranet">Deploying to a corporate intranet</a></li>
-  <li><a href="#the-deployment-path" id="toc-the-deployment-path" class="nav-link" data-scroll-target="#the-deployment-path">The deployment path</a></li>
-  <li><a href="#sandboxed-python-on-the-intranet" id="toc-sandboxed-python-on-the-intranet" class="nav-link" data-scroll-target="#sandboxed-python-on-the-intranet">Sandboxed Python on the intranet</a></li>
+  <li><a href="#the-reporting-pipeline" id="toc-the-reporting-pipeline" class="nav-link" data-scroll-target="#the-reporting-pipeline">The reporting pipeline</a></li>
+  <li><a href="#building-it-with-your-coding-agent" id="toc-building-it-with-your-coding-agent" class="nav-link" data-scroll-target="#building-it-with-your-coding-agent">Building it with your coding agent</a></li>
+  <li><a href="#sandboxed-execution" id="toc-sandboxed-execution" class="nav-link" data-scroll-target="#sandboxed-execution">Sandboxed execution</a></li>
+  <li><a href="#from-prototype-to-production" id="toc-from-prototype-to-production" class="nav-link" data-scroll-target="#from-prototype-to-production">From prototype to production</a></li>
   <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a></li>
   </ul>
 </nav>
@@ -175,7 +174,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-title">Agents and Deployment</span></h1>
+<h1 class="title"><span class="chapter-title">Automating Reporting Cycles</span></h1>
 </div>
 
 
@@ -192,43 +191,65 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>The first four chapters built skills for querying data. AI answered questions, generated charts, and wrote memos. But in each case, you were the orchestrator — you decided what to ask next, when to generate a chart, and when to synthesize.</p>
-<p>This chapter introduces agents: AI systems that can plan, execute actions, observe results, and iterate autonomously. It also covers the practical path from a prototype on your laptop to a deployed tool on your corporate intranet.</p>
+<p>Chapter 4 connected AI to a database. You typed a question, the AI wrote SQL, and you got an answer. That works for one-off questions, but real work rarely stops at a single query.</p>
+<p>A weekly sales report requires pulling data, charting it, writing a narrative, and assembling a deck. A quarterly review adds trend analysis, comparisons to targets, and an executive summary. Each step depends on the one before it. Doing this manually every week is exactly the kind of repetitive, multi-step work that AI can automate.</p>
+<p>This chapter shows how agents chain those steps into a reporting pipeline — and how you can use your coding agent to build the whole thing.</p>
+<section id="from-query-to-report" class="level2">
+<h2 class="anchored" data-anchor-id="from-query-to-report">From query to report</h2>
+<p>In Chapter 4, the Chinook query app answered questions one at a time. You asked “What are the top ten countries by revenue?” and got a table. Useful, but a stakeholder does not want a table — they want a slide deck with a chart, key findings, and a recommendation.</p>
+<p>Getting from a raw query to a finished report means executing a sequence of steps: run the SQL, transform the results, generate a visualization, write a summary, and assemble the output document. That sequence is a pipeline, and automating it is what agents do.</p>
+</section>
 <section id="what-is-an-agent" class="level2">
 <h2 class="anchored" data-anchor-id="what-is-an-agent">What is an agent?</h2>
 <p>An agent is an AI system that pursues a goal through a loop of planning, executing, observing, and iterating. The distinction from a chatbot is autonomy. A chatbot handles a single turn: you ask, it answers, and you decide what to do next. An agent handles multiple steps: it breaks the task down, calls tools in sequence, checks the results, and adjusts its approach — all from a single instruction.</p>
-<p>A research agent might search for information, read the results, summarize findings, and then search deeper based on what it learned. A data pipeline agent might query a database, clean the data, generate charts, write a report, and save everything to a folder. A coding agent might read requirements, write code, run tests, and fix failures.</p>
-<p>The skills you built in Chapter 4 are the building blocks. A skill answers one question. An agent chains skills and other tools together to complete a workflow.</p>
+<p>The coding agents you have been using since Chapter 1 are agents. When you asked Claude Code or Gemini CLI to “build a Streamlit app that queries the Chinook database,” it planned the file structure, wrote the code, ran it, noticed errors, and fixed them — autonomously. That is the agent loop in action.</p>
 </section>
 <section id="the-agent-loop" class="level2">
 <h2 class="anchored" data-anchor-id="the-agent-loop">The agent loop</h2>
-<p>Every agent follows the same four-step loop. First, it plans by breaking the task into steps. Second, it executes by calling tools and running code. Third, it observes by checking the results of each action. Fourth, it iterates by adjusting its plan based on what it observed. Then the loop repeats until the task is complete.</p>
-<p>This is exactly what your coding agent does when you give it a complex instruction. Ask it to “analyze the Chinook database, create three charts, and write a summary report,” and it will plan the steps, execute them in sequence, check each result, and produce the final deliverable. You have been using an agent since Chapter 2 — you just did not call it that.</p>
+<p>Every agent follows the same four-step loop.</p>
+<ol type="1">
+<li><strong>Plan</strong> — break the task into steps.</li>
+<li><strong>Execute</strong> — call tools, run code, write files.</li>
+<li><strong>Observe</strong> — check the results of each action.</li>
+<li><strong>Iterate</strong> — adjust the plan based on what was observed.</li>
+</ol>
+<p>The loop repeats until the task is complete. A reporting pipeline is a natural fit: query the database (execute), check that the data looks right (observe), generate a chart (execute), verify the chart matches the data (observe), write a summary (execute), and so on.</p>
 </section>
 <section id="how-agents-use-tools" class="level2">
 <h2 class="anchored" data-anchor-id="how-agents-use-tools">How agents use tools</h2>
 <p>The AI does not just generate text. It decides which tool to call, formats the request, and interprets the result.</p>
-<p>Tools can be API calls (REST endpoints, webhooks, external services), file operations (reading, writing, and organizing files on disk), or database queries (SQL via the skills from Chapter 4). The tool-use protocol works the same way regardless of the tool: the AI receives a goal from the user, selects the right tool, formats the call, and interprets the result. Then it decides whether the task is complete or whether another tool call is needed.</p>
-<p>Consider a concrete example. You give the agent a single prompt: “Query the Chinook database for the top ten countries by revenue. Create a bar chart and a summary table. Write a one-page PDF report with the chart, table, and a three-sentence executive summary. Save everything to the reports folder.”</p>
-<p>The agent queries the database using the Chapter 4 skill, generates a matplotlib chart and saves it as a PNG, builds a PDF with the chart, table, and narrative, and saves all files to the specified folder. Four tools, one prompt. The agent orchestrated the entire pipeline.</p>
+<p>Tools can be database queries, file operations, API calls, or code execution. The tool-use protocol is the same regardless: the AI receives a goal, selects the right tool, formats the call, interprets the result, and decides whether the task is complete or another tool call is needed.</p>
+<p>For a reporting pipeline, the tools might be:</p>
+<ul>
+<li><strong>SQL query</strong> to pull revenue data from the database.</li>
+<li><strong>matplotlib</strong> to render a bar chart from the query results.</li>
+<li><strong>LLM call</strong> to generate a three-sentence executive summary from the data.</li>
+<li><strong>python-pptx</strong> to assemble a PowerPoint deck with a title slide, the chart, and the findings.</li>
+</ul>
+<p>Four tools, one prompt. The agent orchestrates the entire pipeline.</p>
 </section>
-<section id="agent-architectures" class="level2">
-<h2 class="anchored" data-anchor-id="agent-architectures">Agent architectures</h2>
-<p>Not all agents work the same way. The architecture depends on the complexity and stakes of the task.</p>
-<p>A single-agent architecture uses one AI with access to multiple tools. This is what Claude Code, Gemini CLI, and Codex each provide, and it is sufficient for most workflows.</p>
-<p>A multi-agent architecture uses multiple specialized agents that collaborate. One agent might plan the workflow while others execute individual steps. This is useful for complex pipelines where different steps require different expertise.</p>
-<p>A human-in-the-loop architecture adds approval checkpoints. The agent pauses at predefined points and waits for human confirmation before continuing. This is essential for high-stakes actions where mistakes are costly or irreversible.</p>
+<section id="the-reporting-pipeline" class="level2">
+<h2 class="anchored" data-anchor-id="the-reporting-pipeline">The reporting pipeline</h2>
+<p>Here is the workflow, step by step.</p>
+<p><strong>Step 1: Query the database.</strong> The agent runs a SQL query against the Chinook database — the same kind of query the Chapter 4 app generates. The result is a pandas DataFrame: rows of data ready for analysis.</p>
+<p><strong>Step 2: Render a chart.</strong> The agent passes the DataFrame to matplotlib (or Plotly) and generates a visualization — a bar chart, line chart, or whatever fits the data. The chart is saved as a PNG image.</p>
+<p><strong>Step 3: Generate a narrative.</strong> The agent sends the data to an LLM and asks for a concise executive summary. The prompt includes the numbers so the summary is grounded in facts, not hallucinated.</p>
+<p><strong>Step 4: Assemble the deck.</strong> The agent uses python-pptx to build a three-slide PowerPoint: a title slide with the report name and date, a slide with the chart, and a slide with the key findings. The deck is saved as a <code>.pptx</code> file.</p>
+<p><strong>Step 5: Deliver.</strong> In a Streamlit app, the chart and summary appear on screen, and a download button lets the user grab the PowerPoint file. The same pattern from Chapter 4 — Streamlit as the web wrapper — but the output is a document instead of a table.</p>
+<p>Each step is straightforward. The value of the agent is chaining them together so the user clicks one button and gets a finished report.</p>
 </section>
-<section id="the-permission-model" class="level2">
-<h2 class="anchored" data-anchor-id="the-permission-model">The permission model</h2>
-<p>The most important architectural decision is the permission model: what can the agent do without asking?</p>
-<p>At the read-only level, the agent can query data and generate reports but cannot modify anything. A database analyst agent would operate at this level.</p>
-<p>At the write-local level, the agent can save files to a project folder. A report generator that creates PDFs and charts would operate here.</p>
-<p>At the write-external level, the agent can send emails, update systems, and interact with external services. Workflow automation agents operate here and require the most careful governance.</p>
-<p>Start with read-only. Add permissions as trust builds. The trust spectrum from Chapter 7 applies directly: the higher the stakes, the more checkpoints.</p>
+<section id="building-it-with-your-coding-agent" class="level2">
+<h2 class="anchored" data-anchor-id="building-it-with-your-coding-agent">Building it with your coding agent</h2>
+<p>You do not need to write this app by hand. Your coding agent can build it for you. Here is an example prompt you can give it:</p>
+<blockquote class="blockquote">
+<p>Build a Streamlit app that connects to chinook.db. Add a dropdown with five pre-defined reports: Revenue by Country, Monthly Revenue Trend, Top 10 Artists, Genre Breakdown, and Customer Spending. When the user selects a report and clicks Generate, run the SQL query, create a chart with matplotlib, call OpenRouter to write a three-sentence executive summary, and assemble a three-slide PowerPoint (title, chart, findings) using python-pptx. Show the chart and summary on screen with a download button for the PowerPoint file. Log every LLM request and response to llm_log.jsonl with timestamps.</p>
+</blockquote>
+<p>This prompt is specific enough that a coding agent can execute it end to end. It names the database, the reports, the tools (matplotlib, python-pptx, OpenRouter), the output format, and the logging requirement.</p>
+<p>Your job is not to write the code. Your job is to test the result, refine the prompt, and iterate until the output meets your standards. If the charts are ugly, tell the agent to improve the styling. If the summaries are too generic, tell it to include specific numbers. If a report query is wrong, describe the correct logic. Prompt engineering is the skill; the agent is the labor.</p>
+<p>Notice the last line of the prompt: logging. Every LLM request and response is written to a JSONL file with timestamps. This creates an audit trail — you can see exactly what the AI was asked and what it said. Chapter 7 will use these logs for verification and governance.</p>
 </section>
-<section id="containers-and-sandboxed-execution" class="level2">
-<h2 class="anchored" data-anchor-id="containers-and-sandboxed-execution">Containers and sandboxed execution</h2>
+<section id="sandboxed-execution" class="level2">
+<h2 class="anchored" data-anchor-id="sandboxed-execution">Sandboxed execution</h2>
 <p>When AI runs code, you need to control where it runs. On your laptop during development, a coding agent runs in your environment with access to your files. That is fine for prototyping. In production, you want isolation.</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Built-in sandboxing">
 <div class="callout-header d-flex align-content-center">
@@ -244,27 +265,13 @@ Built-in sandboxing
 </div>
 </div>
 <p>A container (Docker is the standard) is a disposable, isolated computing environment. Think of it as a virtual computer that exists only for one task and is destroyed afterward. It can only access what you explicitly allow. A bug in the AI-generated code cannot affect your other files, your database, or your network.</p>
-<p>The sandbox pattern for production looks like this: a user asks a question through a web interface, the AI agent plans and orchestrates, the agent runs code inside a sandboxed Python container, the container queries the database through a read-only connection, and the results flow back to the user.</p>
-<p>The user never touches the database. The agent never escapes the sandbox. This is defense in depth.</p>
+<p>The sandbox pattern for production: a user asks for a report through a web interface, the agent plans and orchestrates, code runs inside a sandboxed container, the container queries the database through a read-only connection, and the finished report flows back to the user. The user never touches the database. The agent never escapes the sandbox. This is defense in depth.</p>
 </section>
-<section id="deploying-to-a-corporate-intranet" class="level2">
-<h2 class="anchored" data-anchor-id="deploying-to-a-corporate-intranet">Deploying to a corporate intranet</h2>
-<p>Deploying an AI data tool on your intranet requires two contributions.</p>
-<p>You provide the SKILL.md from Chapter 4 — your domain knowledge — along with test queries, expected results, and business rules.</p>
-<p>IT provides a web wrapper (a browser interface built with Streamlit, Flask, or an internal portal), SSO authentication so only authorized users can query, and logging so every query is recorded for compliance.</p>
-<p>The skill file is the deployment artifact. IT adds infrastructure; you provide domain knowledge.</p>
-</section>
-<section id="the-deployment-path" class="level2">
-<h2 class="anchored" data-anchor-id="the-deployment-path">The deployment path</h2>
-<p>The path from prototype to production follows three phases.</p>
-<p>In the sandbox phase, you build and test the skill on your laptop. This is what you did in Chapters 2 through 4.</p>
-<p>In the audit phase, you red-team the skill, review the SQL it generates, and check for data leakage. This is covered in Chapter 7.</p>
-<p>In the deploy phase, IT wraps the skill in a web interface with SSO, logging, and read-only credentials. The skill you built in Chapter 4 is the same artifact that powers the deployed tool. The difference is infrastructure, not intelligence.</p>
-</section>
-<section id="sandboxed-python-on-the-intranet" class="level2">
-<h2 class="anchored" data-anchor-id="sandboxed-python-on-the-intranet">Sandboxed Python on the intranet</h2>
-<p>The end state is straightforward: anyone on your team submits a question through a web interface, the agent runs code in a container, and the answer comes back. Users see a simple chat interface with no terminal and no code. The agent uses your SKILL.md to query the database correctly. All queries are logged, the database is read-only, and the container is disposable.</p>
-<p>The technology exists today. The bottleneck is organizational readiness — governance, trust, and the willingness to start.</p>
+<section id="from-prototype-to-production" class="level2">
+<h2 class="anchored" data-anchor-id="from-prototype-to-production">From prototype to production</h2>
+<p>The reporting app on your laptop is a prototype. Moving it to production adds infrastructure, not intelligence.</p>
+<p>Production adds SSO authentication so only authorized users can generate reports, scheduled runs so weekly reports are generated automatically, logging so every query and LLM call is recorded for compliance, and read-only database credentials so the agent cannot modify data.</p>
+<p>The reporting pipeline you prototyped is the same artifact that powers the production tool. IT wraps it in infrastructure; you provide the domain knowledge and the prompt.</p>
 </section>
 <section id="exercises" class="level2">
 <h2 class="anchored" data-anchor-id="exercises">Exercises</h2>
@@ -281,28 +288,28 @@ Exercise 1: Multi-Step Agent Workflow
 <div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Open your coding agent in a folder containing the <a href="data/chinook.db">Chinook database</a> and your SKILL.md from Chapter 4. Give it a single compound instruction that requires at least three steps.</p>
-<p>For example: “Query the Chinook database for the top ten artists by revenue. Create a bar chart. Write a one-paragraph summary. Save the chart and summary to a reports folder.”</p>
+<p>For example: “Query the Chinook database for the top ten artists by revenue. Create a bar chart. Write a one-paragraph executive summary. Save the chart and summary to a reports folder.”</p>
 <p>Observe the agent loop. How many distinct tool calls does the agent make? Does it check its own work? If the output is not right, refine your prompt and try again.</p>
-<p>The deliverable is your multi-step prompt, the number of tool calls you observed, and the final output.</p>
+<p><strong>Deliverable:</strong> Your multi-step prompt, the number of tool calls you observed, and the final output.</p>
 </div>
 </div>
 </div>
-<div class="callout callout-style-default callout-note callout-titled" title="Exercise 2: Permission Boundary Design">
+<div class="callout callout-style-default callout-note callout-titled" title="Exercise 2: Build the Report App">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Exercise 2: Permission Boundary Design
+Exercise 2: Build the Report App
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Pick a use case from your organization: a sales report agent, a customer support analyzer, or an inventory monitor.</p>
-<p>List five actions the agent would need to take. Classify each as auto-approve (the agent can do it without asking), require-human-approval (the agent pauses and waits), or never-allow (the agent must not do this under any circumstances).</p>
-<p>Discuss with a colleague: would you trust this agent with these permissions? What would need to change for you to feel comfortable?</p>
-<p>The deliverable is your five-action permission matrix with classifications.</p>
+<p>Use the example prompt from the “Building it with your coding agent” section to build the reporting app. Give the prompt to your coding agent and let it generate the app.</p>
+<p>Test all five reports. For each, verify that the SQL returns correct data, the chart matches the data, the executive summary references actual numbers, and the PowerPoint has three slides.</p>
+<p>If anything is wrong, refine your prompt and regenerate. Keep notes on what you changed and why.</p>
+<p><strong>Deliverable:</strong> The working app (all source files), a screenshot of one generated report, and notes on any prompt refinements you made.</p>
 </div>
 </div>
 </div>
@@ -319,46 +326,47 @@ Exercise 3: Workflow Decomposition
 <div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Consider the task: “Prepare the quarterly business review for the CEO.”</p>
-<p>List the five to seven steps a human analyst would take to complete this task. For each step, identify what tool the agent would use and what data it would need. Then write a single prompt that describes the full workflow.</p>
-<p>Which steps need human approval before the agent continues? Where are the highest-risk points?</p>
-<p>The deliverable is your step-by-step decomposition, the single-prompt version, and notes on which steps require human oversight.</p>
+<p>List the five to seven steps a human analyst would take to complete this task. For each step, identify what tool the agent would use and what data it would need. Mark which steps need human approval before the agent continues.</p>
+<p>Then write a single prompt that describes the full workflow for an agent.</p>
+<p><strong>Deliverable:</strong> Your step-by-step decomposition with tools and approval points, plus the single-prompt version.</p>
 </div>
 </div>
 </div>
-<div class="callout callout-style-default callout-note callout-titled" title="Exercise 4: Agent Use Case Inventory">
+<div class="callout callout-style-default callout-note callout-titled" title="Exercise 4: Report App for Your Own Data">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Exercise 4: Agent Use Case Inventory
+Exercise 4: Report App for Your Own Data
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Review your team’s recurring tasks and identify five that are multi-step, repetitive, and data-driven — good candidates for agent automation.</p>
-<p>For each, describe the trigger (what starts the task), the steps (what happens), and the output (what gets delivered). Rate each on automation potential (high, medium, or low) and risk level (high, medium, or low).</p>
-<p>Pick the highest-potential, lowest-risk workflow as your pilot candidate and write one paragraph explaining why you would start there.</p>
+<p>Adapt the reporting pattern to a dataset from your work. Pick a database, spreadsheet, or API that you query regularly.</p>
+<p>Write an agent prompt that generates a report from your data — including the SQL (or data-fetching logic), chart type, summary style, and output format. Give the prompt to your coding agent and test the result.</p>
+<p>If you cannot use real work data, use a public dataset: the <a href="https://github.com/Microsoft/sql-server-samples/tree/master/samples/databases/northwind-pubs">Northwind database</a>, <a href="https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page">NYC taxi data</a>, or any CSV from your field.</p>
+<p><strong>Deliverable:</strong> Your adapted prompt, the generated app or report, and a paragraph describing how this would save time in your workflow.</p>
 </div>
 </div>
 </div>
-<div class="callout callout-style-default callout-note callout-titled" title="Exercise 5: Deployment Architecture Sketch">
+<div class="callout callout-style-default callout-note callout-titled" title="Exercise 5: Agent Use Case Inventory">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Exercise 5: Deployment Architecture Sketch
+Exercise 5: Agent Use Case Inventory
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Design the deployment architecture for your Chapter 4 skill.</p>
-<p>Draw a simple diagram showing the flow from user to web interface to agent to database. Annotate where SSO happens, where the sandbox boundary is, and where queries are logged.</p>
-<p>List three questions you would need to answer before IT would approve the deployment. Then write a one-paragraph pitch explaining why IT should invest in building this.</p>
-<p>The deliverable is the architecture diagram and the pitch paragraph.</p>
+<p>Review your team’s recurring tasks and identify five that are multi-step, repetitive, and data-driven — good candidates for agent automation.</p>
+<p>For each, describe the trigger (what starts the task), the steps (what happens), the output (what gets delivered), and the frequency (how often it runs). Rate each on automation potential (high, medium, or low) and risk level (high, medium, or low).</p>
+<p>Pick the highest-potential, lowest-risk workflow as your pilot candidate and write one paragraph explaining why you would start there.</p>
+<p><strong>Deliverable:</strong> Your five-task inventory with ratings, and the pilot-candidate paragraph.</p>
 </div>
 </div>
 </div>

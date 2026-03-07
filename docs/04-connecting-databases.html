@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -170,6 +204,7 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#iterating-on-the-skill" id="toc-iterating-on-the-skill" class="nav-link" data-scroll-target="#iterating-on-the-skill">Iterating on the skill</a></li>
   <li><a href="#behind-the-firewall" id="toc-behind-the-firewall" class="nav-link" data-scroll-target="#behind-the-firewall">Behind the firewall</a></li>
   <li><a href="#the-skill-as-deployment-artifact" id="toc-the-skill-as-deployment-artifact" class="nav-link" data-scroll-target="#the-skill-as-deployment-artifact">The skill as deployment artifact</a></li>
+  <li><a href="#a-natural-language-query-app" id="toc-a-natural-language-query-app" class="nav-link" data-scroll-target="#a-natural-language-query-app">A natural-language query app</a></li>
   <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a></li>
   </ul>
 </nav>
@@ -286,6 +321,16 @@ MCP support across coding agents
 <p>A polished skill is what gets deployed on your intranet. The skill file encodes which tables matter, how they relate, and what the business terminology means. IT adds the infrastructure: SSO authentication, read-only database credentials, and query logging for audit.</p>
 <p>The skill file is the deployment artifact. IT adds infrastructure; you provide domain knowledge. Chapter 5 covers the full deployment path in detail.</p>
 </section>
+<section id="a-natural-language-query-app" class="level2">
+<h2 class="anchored" data-anchor-id="a-natural-language-query-app">A natural-language query app</h2>
+<p>To see the skill concept in action as a working prototype, consider a small Streamlit app that lets you type a plain-English question and get results from the Chinook database. No coding agent is needed — the app calls an LLM directly via API.</p>
+<p>Here is what happens when you type a question. The app sends your question, along with a description of the Chinook schema, to a free model on OpenRouter. The model returns a SQL query. The app runs that query against <code>chinook.db</code> and displays the results in a table. The generated SQL is shown above the results — the same transparency principle discussed in the “SQL transparency” section.</p>
+<p>Download the app files here: <a href="data/demos/chinook-query/app.py">app.py</a> and <a href="data/demos/chinook-query/requirements.txt">requirements.txt</a>. Copy <code>chinook.db</code> into the same folder, install the dependencies, and run:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install <span class="at">-r</span> requirements.txt</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">streamlit</span> run app.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Try asking “What are the top 5 countries by revenue?” or “Which artist has the most tracks?” You can see the SQL the model generates and verify it against what you would expect.</p>
+<p>This is a demo, not a production application. There is no authentication, no guardrails on the SQL, and no sandboxing of query execution. Chapter 5 covers what a production deployment requires. But as a prototype that proves the concept, fifty lines of Python is all it takes.</p>
+</section>
 <section id="exercises" class="level2">
 <h2 class="anchored" data-anchor-id="exercises">Exercises</h2>
 <div class="callout callout-style-default callout-note callout-titled" title="Exercise 1: Build a Chinook Skill">
@@ -375,6 +420,23 @@ Exercise 5: The Monday Morning Report
 <p>Identify a recurring report your team produces — weekly sales summary, monthly KPIs, pipeline report. Write a SKILL.md that includes the database schema, the specific queries needed, and the output format.</p>
 <p>Add an instruction to the skill: “When I say ‘Monday report,’ run these three queries and format the results as a one-page summary.” Test it. Does one command produce your entire report?</p>
 <p>The deliverable is the skill file and a sample report output.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Exercise 6: Build Your Own Query App">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exercise 6: Build Your Own Query App
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Ask your coding agent to build a natural-language query app similar to the <a href="data/demos/chinook-query/app.py">chinook-query demo</a>, either from scratch or by improving the demo. Possible extensions: add chart generation for numeric results, show query history in a sidebar, add error handling that suggests corrections when the SQL fails, or let the user choose between different databases.</p>
+<p>The deliverable is a working Streamlit app and a brief note on what you added or changed.</p>
 </div>
 </div>
 </div>

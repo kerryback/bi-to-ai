@@ -52,6 +52,69 @@ Launch it by typing `codex`.  Codex requires either a ChatGPT Plus subscription 
 
 Codex displays its reasoning by default --- you can see the agent's thought process without enabling any special mode.  It reads project instructions from a `AGENTS.md` file in the working directory.
 
+## Installing Python
+
+The coding agents write Python behind the scenes, but the demo apps in later chapters need Python installed on your machine so you can run them yourself.
+
+Download Python 3.10 or later from [python.org](https://www.python.org/downloads/).  On Windows, check **"Add Python to PATH"** during installation.  On Mac, you can also install via Homebrew with `brew install python`.  After installing, verify by opening a terminal and running:
+
+```bash
+python --version
+```
+
+You should see something like `Python 3.12.4`.  If the command is not found, restart your terminal or check that Python was added to your PATH.
+
+## Installing libraries
+
+Two Python packages are needed for the demo apps in later chapters:
+
+```bash
+pip install streamlit openai
+```
+
+Streamlit builds simple web apps from Python scripts --- you write a short script and Streamlit turns it into an interactive page.  The `openai` package is a Python client for OpenAI-compatible APIs, which includes OpenRouter (described next).  Later chapters mention additional packages as needed.
+
+## Setting up OpenRouter
+
+Later chapters include demo apps that call a large language model via API.  OpenRouter provides free access to open-source models --- no credit card required.
+
+1. Sign up at [openrouter.ai](https://openrouter.ai) using a Google or GitHub account.
+2. Create an API key at [openrouter.ai/keys](https://openrouter.ai/keys).
+3. Set the key as an environment variable so the demo apps can find it:
+
+   **Mac / Linux** --- add to your shell profile (`.bashrc` or `.zshrc`) to persist:
+
+   ```bash
+   export OPENROUTER_API_KEY="sk-or-..."
+   ```
+
+   **Windows** --- run once in a terminal, then restart the terminal:
+
+   ```bash
+   setx OPENROUTER_API_KEY "sk-or-..."
+   ```
+
+The free tier allows roughly 20 requests per minute and 200 per day --- more than enough for the exercises.  To verify your key works, save this as `test_openrouter.py` and run it with `python test_openrouter.py`:
+
+```python
+import os
+from openai import OpenAI
+
+client = OpenAI(
+    base_url="https://openrouter.ai/api/v1",
+    api_key=os.environ["OPENROUTER_API_KEY"],
+)
+
+response = client.chat.completions.create(
+    model="google/gemini-2.0-flash-exp:free",
+    messages=[{"role": "user", "content": "Say hello in one sentence."}],
+)
+
+print(response.choices[0].message.content)
+```
+
+If you see a greeting, the key is working and you are ready for the demo apps in Chapters 4 and beyond.
+
 ## Significant differences
 
 All three agents read local files, write Python, and return results in the conversation.  The workflows in this book apply to all of them, and you should pick whichever fits your budget and preferences.  That said, several differences are worth noting.
