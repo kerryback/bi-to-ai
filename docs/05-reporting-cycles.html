@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Automating Reporting Cycles – From BI to AI</title>
+<title>5&nbsp; Automating Reporting Cycles – From BI to AI</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -37,10 +37,12 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-b53751a350365c71b6c909e95f209ed1.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-2ef01e258a497a70032e58193e2c5164.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-06bbe0a581982c371d7d7257fa09cfcb.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-21eba6fda6364eff178b22e017261986.min.css" rel="prefetch" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -68,6 +70,12 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script async="" src="https://hypothes.is/embed.js"></script>
+<script>
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    document.body.classList.add('hypothesis-enabled');
+  });
+</script>
 
 
 </head>
@@ -81,7 +89,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./05-reporting-cycles.html"><span class="chapter-title">Automating Reporting Cycles</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./05-reporting-cycles.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Automating Reporting Cycles</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -97,6 +105,15 @@ ul.task-list li input[type="checkbox"] {
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">From BI to AI</a> 
+        <div class="sidebar-tools-main tools-wide">
+    <a href="https://github.com/kerryback/bi-to-ai.git" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -114,37 +131,44 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./01-coding-tools.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Get Started with AI Coding Tools</span></a>
+  <a href="./01-coding-tools.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Get Started with AI Coding Tools</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./02-exploring-data.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Exploring Data with AI</span></a>
+  <a href="./02-exploring-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Exploring Data with AI</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./03-thinking-partner.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">AI as Thinking Partner</span></a>
+  <a href="./03-thinking-partner.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">AI as Thinking Partner</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./04-connecting-databases.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Connecting Databases</span></a>
+  <a href="./04-connecting-databases.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Connecting Databases</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./05-reporting-cycles.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Automating Reporting Cycles</span></a>
+  <a href="./05-reporting-cycles.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Automating Reporting Cycles</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./06-rag.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Retrieval-Augmented Generation</span></a>
+  <a href="./06-rag.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Retrieval-Augmented Generation</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./07-reliability.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Reliability and Compliance</span></a>
+  <a href="./07-reliability.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Reliability and Compliance</span></span></a>
   </div>
 </li>
     </ul>
@@ -154,27 +178,27 @@ ul.task-list li input[type="checkbox"] {
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
+    <h2 id="toc-title">Chapter contents</h2>
    
   <ul>
-  <li><a href="#from-query-to-report" id="toc-from-query-to-report" class="nav-link active" data-scroll-target="#from-query-to-report">From query to report</a></li>
-  <li><a href="#what-is-an-agent" id="toc-what-is-an-agent" class="nav-link" data-scroll-target="#what-is-an-agent">What is an agent?</a></li>
-  <li><a href="#the-agent-loop" id="toc-the-agent-loop" class="nav-link" data-scroll-target="#the-agent-loop">The agent loop</a></li>
-  <li><a href="#how-agents-use-tools" id="toc-how-agents-use-tools" class="nav-link" data-scroll-target="#how-agents-use-tools">How agents use tools</a></li>
-  <li><a href="#the-reporting-pipeline" id="toc-the-reporting-pipeline" class="nav-link" data-scroll-target="#the-reporting-pipeline">The reporting pipeline</a></li>
-  <li><a href="#building-it-with-your-coding-agent" id="toc-building-it-with-your-coding-agent" class="nav-link" data-scroll-target="#building-it-with-your-coding-agent">Building it with your coding agent</a></li>
-  <li><a href="#sandboxed-execution" id="toc-sandboxed-execution" class="nav-link" data-scroll-target="#sandboxed-execution">Sandboxed execution</a></li>
-  <li><a href="#from-prototype-to-production" id="toc-from-prototype-to-production" class="nav-link" data-scroll-target="#from-prototype-to-production">From prototype to production</a></li>
-  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a></li>
+  <li><a href="#from-query-to-report" id="toc-from-query-to-report" class="nav-link active" data-scroll-target="#from-query-to-report"><span class="header-section-number">5.1</span> From query to report</a></li>
+  <li><a href="#what-is-an-agent" id="toc-what-is-an-agent" class="nav-link" data-scroll-target="#what-is-an-agent"><span class="header-section-number">5.2</span> What is an agent?</a></li>
+  <li><a href="#the-agent-loop" id="toc-the-agent-loop" class="nav-link" data-scroll-target="#the-agent-loop"><span class="header-section-number">5.3</span> The agent loop</a></li>
+  <li><a href="#how-agents-use-tools" id="toc-how-agents-use-tools" class="nav-link" data-scroll-target="#how-agents-use-tools"><span class="header-section-number">5.4</span> How agents use tools</a></li>
+  <li><a href="#the-reporting-pipeline" id="toc-the-reporting-pipeline" class="nav-link" data-scroll-target="#the-reporting-pipeline"><span class="header-section-number">5.5</span> The reporting pipeline</a></li>
+  <li><a href="#building-it-with-your-coding-agent" id="toc-building-it-with-your-coding-agent" class="nav-link" data-scroll-target="#building-it-with-your-coding-agent"><span class="header-section-number">5.6</span> Building it with your coding agent</a></li>
+  <li><a href="#sandboxed-execution" id="toc-sandboxed-execution" class="nav-link" data-scroll-target="#sandboxed-execution"><span class="header-section-number">5.7</span> Sandboxed execution</a></li>
+  <li><a href="#from-prototype-to-production" id="toc-from-prototype-to-production" class="nav-link" data-scroll-target="#from-prototype-to-production"><span class="header-section-number">5.8</span> From prototype to production</a></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">5.9</span> Exercises</a></li>
   </ul>
-</nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/kerryback/bi-to-ai.git/blob/main/05-reporting-cycles.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-title">Automating Reporting Cycles</span></h1>
+<h1 class="title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Automating Reporting Cycles</span></h1>
 </div>
 
 
@@ -194,18 +218,18 @@ ul.task-list li input[type="checkbox"] {
 <p>Chapter 4 connected AI to a database. You typed a question, the AI wrote SQL, and you got an answer. That works for one-off questions, but real work rarely stops at a single query.</p>
 <p>A weekly sales report requires pulling data, charting it, writing a narrative, and assembling a deck. A quarterly review adds trend analysis, comparisons to targets, and an executive summary. Each step depends on the one before it. Doing this manually every week is exactly the kind of repetitive, multi-step work that AI can automate.</p>
 <p>This chapter shows how agents chain those steps into a reporting pipeline — and how you can use your coding agent to build the whole thing.</p>
-<section id="from-query-to-report" class="level2">
-<h2 class="anchored" data-anchor-id="from-query-to-report">From query to report</h2>
+<section id="from-query-to-report" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="from-query-to-report"><span class="header-section-number">5.1</span> From query to report</h2>
 <p>In Chapter 4, the Chinook query app answered questions one at a time. You asked “What are the top ten countries by revenue?” and got a table. Useful, but a stakeholder does not want a table — they want a slide deck with a chart, key findings, and a recommendation.</p>
 <p>Getting from a raw query to a finished report means executing a sequence of steps: run the SQL, transform the results, generate a visualization, write a summary, and assemble the output document. That sequence is a pipeline, and automating it is what agents do.</p>
 </section>
-<section id="what-is-an-agent" class="level2">
-<h2 class="anchored" data-anchor-id="what-is-an-agent">What is an agent?</h2>
+<section id="what-is-an-agent" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="what-is-an-agent"><span class="header-section-number">5.2</span> What is an agent?</h2>
 <p>An agent is an AI system that pursues a goal through a loop of planning, executing, observing, and iterating. The distinction from a chatbot is autonomy. A chatbot handles a single turn: you ask, it answers, and you decide what to do next. An agent handles multiple steps: it breaks the task down, calls tools in sequence, checks the results, and adjusts its approach — all from a single instruction.</p>
 <p>The coding agents you have been using since Chapter 1 are agents. When you asked Claude Code or Gemini CLI to “build a Streamlit app that queries the Chinook database,” it planned the file structure, wrote the code, ran it, noticed errors, and fixed them — autonomously. That is the agent loop in action.</p>
 </section>
-<section id="the-agent-loop" class="level2">
-<h2 class="anchored" data-anchor-id="the-agent-loop">The agent loop</h2>
+<section id="the-agent-loop" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="the-agent-loop"><span class="header-section-number">5.3</span> The agent loop</h2>
 <p>Every agent follows the same four-step loop.</p>
 <ol type="1">
 <li><strong>Plan</strong> — break the task into steps.</li>
@@ -215,8 +239,8 @@ ul.task-list li input[type="checkbox"] {
 </ol>
 <p>The loop repeats until the task is complete. A reporting pipeline is a natural fit: query the database (execute), check that the data looks right (observe), generate a chart (execute), verify the chart matches the data (observe), write a summary (execute), and so on.</p>
 </section>
-<section id="how-agents-use-tools" class="level2">
-<h2 class="anchored" data-anchor-id="how-agents-use-tools">How agents use tools</h2>
+<section id="how-agents-use-tools" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="how-agents-use-tools"><span class="header-section-number">5.4</span> How agents use tools</h2>
 <p>The AI does not just generate text. It decides which tool to call, formats the request, and interprets the result.</p>
 <p>Tools can be database queries, file operations, API calls, or code execution. The tool-use protocol is the same regardless: the AI receives a goal, selects the right tool, formats the call, interprets the result, and decides whether the task is complete or another tool call is needed.</p>
 <p>For a reporting pipeline, the tools might be:</p>
@@ -228,8 +252,8 @@ ul.task-list li input[type="checkbox"] {
 </ul>
 <p>Four tools, one prompt. The agent orchestrates the entire pipeline.</p>
 </section>
-<section id="the-reporting-pipeline" class="level2">
-<h2 class="anchored" data-anchor-id="the-reporting-pipeline">The reporting pipeline</h2>
+<section id="the-reporting-pipeline" class="level2" data-number="5.5">
+<h2 data-number="5.5" class="anchored" data-anchor-id="the-reporting-pipeline"><span class="header-section-number">5.5</span> The reporting pipeline</h2>
 <p>Here is the workflow, step by step.</p>
 <p><strong>Step 1: Query the database.</strong> The agent runs a SQL query against the Chinook database — the same kind of query the Chapter 4 app generates. The result is a pandas DataFrame: rows of data ready for analysis.</p>
 <p><strong>Step 2: Render a chart.</strong> The agent passes the DataFrame to matplotlib (or Plotly) and generates a visualization — a bar chart, line chart, or whatever fits the data. The chart is saved as a PNG image.</p>
@@ -238,8 +262,8 @@ ul.task-list li input[type="checkbox"] {
 <p><strong>Step 5: Deliver.</strong> In a Streamlit app, the chart and summary appear on screen, and a download button lets the user grab the PowerPoint file. The same pattern from Chapter 4 — Streamlit as the web wrapper — but the output is a document instead of a table.</p>
 <p>Each step is straightforward. The value of the agent is chaining them together so the user clicks one button and gets a finished report.</p>
 </section>
-<section id="building-it-with-your-coding-agent" class="level2">
-<h2 class="anchored" data-anchor-id="building-it-with-your-coding-agent">Building it with your coding agent</h2>
+<section id="building-it-with-your-coding-agent" class="level2" data-number="5.6">
+<h2 data-number="5.6" class="anchored" data-anchor-id="building-it-with-your-coding-agent"><span class="header-section-number">5.6</span> Building it with your coding agent</h2>
 <p>You do not need to write this app by hand. Your coding agent can build it for you. Here is an example prompt you can give it:</p>
 <blockquote class="blockquote">
 <p>Build a Streamlit app that connects to chinook.db. Add a dropdown with five pre-defined reports: Revenue by Country, Monthly Revenue Trend, Top 10 Artists, Genre Breakdown, and Customer Spending. When the user selects a report and clicks Generate, run the SQL query, create a chart with matplotlib, call OpenRouter to write a three-sentence executive summary, and assemble a three-slide PowerPoint (title, chart, findings) using python-pptx. Show the chart and summary on screen with a download button for the PowerPoint file. Log every LLM request and response to llm_log.jsonl with timestamps.</p>
@@ -248,8 +272,8 @@ ul.task-list li input[type="checkbox"] {
 <p>Your job is not to write the code. Your job is to test the result, refine the prompt, and iterate until the output meets your standards. If the charts are ugly, tell the agent to improve the styling. If the summaries are too generic, tell it to include specific numbers. If a report query is wrong, describe the correct logic. Prompt engineering is the skill; the agent is the labor.</p>
 <p>Notice the last line of the prompt: logging. Every LLM request and response is written to a JSONL file with timestamps. This creates an audit trail — you can see exactly what the AI was asked and what it said. Chapter 7 will use these logs for verification and governance.</p>
 </section>
-<section id="sandboxed-execution" class="level2">
-<h2 class="anchored" data-anchor-id="sandboxed-execution">Sandboxed execution</h2>
+<section id="sandboxed-execution" class="level2" data-number="5.7">
+<h2 data-number="5.7" class="anchored" data-anchor-id="sandboxed-execution"><span class="header-section-number">5.7</span> Sandboxed execution</h2>
 <p>When AI runs code, you need to control where it runs. On your laptop during development, a coding agent runs in your environment with access to your files. That is fine for prototyping. In production, you want isolation.</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Built-in sandboxing">
 <div class="callout-header d-flex align-content-center">
@@ -267,14 +291,14 @@ Built-in sandboxing
 <p>A container (Docker is the standard) is a disposable, isolated computing environment. Think of it as a virtual computer that exists only for one task and is destroyed afterward. It can only access what you explicitly allow. A bug in the AI-generated code cannot affect your other files, your database, or your network.</p>
 <p>The sandbox pattern for production: a user asks for a report through a web interface, the agent plans and orchestrates, code runs inside a sandboxed container, the container queries the database through a read-only connection, and the finished report flows back to the user. The user never touches the database. The agent never escapes the sandbox. This is defense in depth.</p>
 </section>
-<section id="from-prototype-to-production" class="level2">
-<h2 class="anchored" data-anchor-id="from-prototype-to-production">From prototype to production</h2>
+<section id="from-prototype-to-production" class="level2" data-number="5.8">
+<h2 data-number="5.8" class="anchored" data-anchor-id="from-prototype-to-production"><span class="header-section-number">5.8</span> From prototype to production</h2>
 <p>The reporting app on your laptop is a prototype. Moving it to production adds infrastructure, not intelligence.</p>
 <p>Production adds SSO authentication so only authorized users can generate reports, scheduled runs so weekly reports are generated automatically, logging so every query and LLM call is recorded for compliance, and read-only database credentials so the agent cannot modify data.</p>
 <p>The reporting pipeline you prototyped is the same artifact that powers the production tool. IT wraps it in infrastructure; you provide the domain knowledge and the prompt.</p>
 </section>
-<section id="exercises" class="level2">
-<h2 class="anchored" data-anchor-id="exercises">Exercises</h2>
+<section id="exercises" class="level2" data-number="5.9">
+<h2 data-number="5.9" class="anchored" data-anchor-id="exercises"><span class="header-section-number">5.9</span> Exercises</h2>
 <div class="callout callout-style-default callout-note callout-titled" title="Exercise 1: Multi-Step Agent Workflow">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -390,6 +414,150 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
   toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
   const icon = "";
   const anchorJS = new window.AnchorJS();
   anchorJS.options = {
@@ -790,12 +958,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./04-connecting-databases.html" class="pagination-link" aria-label="Connecting Databases">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Connecting Databases</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Connecting Databases</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./06-rag.html" class="pagination-link" aria-label="Retrieval-Augmented Generation">
-        <span class="nav-page-text"><span class="chapter-title">Retrieval-Augmented Generation</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Retrieval-Augmented Generation</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -804,4 +972,4 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-</body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/kerryback/bi-to-ai.git/blob/main/05-reporting-cycles.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></div></div></footer></body></html>

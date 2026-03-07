@@ -8,11 +8,16 @@ project:
     - data/chinook.db
     - data/company-handbook.md
 
+number-depth: 2
+
 book:
   title: "From BI to AI"
   subtitle: "Data-Driven Decision Making with Agentic AI"
   author: "Kerry Back"
   date: today
+  reader-mode: true
+  repo-url: "https://github.com/kerryback/bi-to-ai.git"
+  repo-actions: [source]
   chapters:
     - index.qmd
     - 01-coding-tools.qmd
@@ -25,8 +30,18 @@ book:
 
 format:
   html:
-    theme: cosmo
+    footnotes-hover: true
+    number-sections: true
+    theme:
+      light: flatly
+      dark: superhero
     toc: true
     toc-depth: 3
-    number-sections: false
+    toc-title: Chapter contents
+    code-fold: true
+    code-block-bg: true
+    code-block-border-left: "#31BAE9"
     code-overflow: wrap
+
+comments:
+  hypothesis: true

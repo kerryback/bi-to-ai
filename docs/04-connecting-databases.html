@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Connecting Databases – From BI to AI</title>
+<title>4&nbsp; Connecting Databases – From BI to AI</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -71,10 +71,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-b53751a350365c71b6c909e95f209ed1.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-2ef01e258a497a70032e58193e2c5164.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-06bbe0a581982c371d7d7257fa09cfcb.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-21eba6fda6364eff178b22e017261986.min.css" rel="prefetch" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -102,6 +104,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
+<script async="" src="https://hypothes.is/embed.js"></script>
+<script>
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    document.body.classList.add('hypothesis-enabled');
+  });
+</script>
 
 
 </head>
@@ -115,7 +123,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./04-connecting-databases.html"><span class="chapter-title">Connecting Databases</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./04-connecting-databases.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Connecting Databases</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -131,6 +139,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">From BI to AI</a> 
+        <div class="sidebar-tools-main tools-wide">
+    <a href="https://github.com/kerryback/bi-to-ai.git" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -148,37 +165,44 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./01-coding-tools.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Get Started with AI Coding Tools</span></a>
+  <a href="./01-coding-tools.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Get Started with AI Coding Tools</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./02-exploring-data.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Exploring Data with AI</span></a>
+  <a href="./02-exploring-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Exploring Data with AI</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./03-thinking-partner.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">AI as Thinking Partner</span></a>
+  <a href="./03-thinking-partner.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">AI as Thinking Partner</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./04-connecting-databases.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Connecting Databases</span></a>
+  <a href="./04-connecting-databases.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Connecting Databases</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./05-reporting-cycles.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Automating Reporting Cycles</span></a>
+  <a href="./05-reporting-cycles.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Automating Reporting Cycles</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./06-rag.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Retrieval-Augmented Generation</span></a>
+  <a href="./06-rag.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Retrieval-Augmented Generation</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./07-reliability.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Reliability and Compliance</span></a>
+  <a href="./07-reliability.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Reliability and Compliance</span></span></a>
   </div>
 </li>
     </ul>
@@ -188,23 +212,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
+    <h2 id="toc-title">Chapter contents</h2>
    
   <ul>
-  <li><a href="#the-dashboard-trap" id="toc-the-dashboard-trap" class="nav-link active" data-scroll-target="#the-dashboard-trap">The dashboard trap</a></li>
-  <li><a href="#from-spreadsheets-to-databases" id="toc-from-spreadsheets-to-databases" class="nav-link" data-scroll-target="#from-spreadsheets-to-databases">From spreadsheets to databases</a></li>
-  <li><a href="#how-ai-connects-to-a-database" id="toc-how-ai-connects-to-a-database" class="nav-link" data-scroll-target="#how-ai-connects-to-a-database">How AI connects to a database</a></li>
-  <li><a href="#the-sample-database-chinook" id="toc-the-sample-database-chinook" class="nav-link" data-scroll-target="#the-sample-database-chinook">The sample database: Chinook</a></li>
-  <li><a href="#what-is-a-skill" id="toc-what-is-a-skill" class="nav-link" data-scroll-target="#what-is-a-skill">What is a skill?</a></li>
-  <li><a href="#the-skill.md-file" id="toc-the-skill.md-file" class="nav-link" data-scroll-target="#the-skill.md-file">The SKILL.md file</a></li>
-  <li><a href="#creating-the-skill-step-by-step" id="toc-creating-the-skill-step-by-step" class="nav-link" data-scroll-target="#creating-the-skill-step-by-step">Creating the skill step by step</a></li>
-  <li><a href="#building-the-chinook-skill" id="toc-building-the-chinook-skill" class="nav-link" data-scroll-target="#building-the-chinook-skill">Building the Chinook skill</a></li>
-  <li><a href="#decision-driven-queries" id="toc-decision-driven-queries" class="nav-link" data-scroll-target="#decision-driven-queries">Decision-driven queries</a></li>
-  <li><a href="#sql-transparency" id="toc-sql-transparency" class="nav-link" data-scroll-target="#sql-transparency">SQL transparency</a></li>
-  <li><a href="#iterating-on-the-skill" id="toc-iterating-on-the-skill" class="nav-link" data-scroll-target="#iterating-on-the-skill">Iterating on the skill</a></li>
-  <li><a href="#behind-the-firewall" id="toc-behind-the-firewall" class="nav-link" data-scroll-target="#behind-the-firewall">Behind the firewall</a></li>
-  <li><a href="#the-skill-as-deployment-artifact" id="toc-the-skill-as-deployment-artifact" class="nav-link" data-scroll-target="#the-skill-as-deployment-artifact">The skill as deployment artifact</a></li>
-  <li><a href="#a-natural-language-query-app" id="toc-a-natural-language-query-app" class="nav-link" data-scroll-target="#a-natural-language-query-app">A natural-language query app</a>
+  <li><a href="#the-dashboard-trap" id="toc-the-dashboard-trap" class="nav-link active" data-scroll-target="#the-dashboard-trap"><span class="header-section-number">4.1</span> The dashboard trap</a></li>
+  <li><a href="#from-spreadsheets-to-databases" id="toc-from-spreadsheets-to-databases" class="nav-link" data-scroll-target="#from-spreadsheets-to-databases"><span class="header-section-number">4.2</span> From spreadsheets to databases</a></li>
+  <li><a href="#how-ai-connects-to-a-database" id="toc-how-ai-connects-to-a-database" class="nav-link" data-scroll-target="#how-ai-connects-to-a-database"><span class="header-section-number">4.3</span> How AI connects to a database</a></li>
+  <li><a href="#the-sample-database-chinook" id="toc-the-sample-database-chinook" class="nav-link" data-scroll-target="#the-sample-database-chinook"><span class="header-section-number">4.4</span> The sample database: Chinook</a></li>
+  <li><a href="#what-is-a-skill" id="toc-what-is-a-skill" class="nav-link" data-scroll-target="#what-is-a-skill"><span class="header-section-number">4.5</span> What is a skill?</a></li>
+  <li><a href="#the-skill.md-file" id="toc-the-skill.md-file" class="nav-link" data-scroll-target="#the-skill.md-file"><span class="header-section-number">4.6</span> The SKILL.md file</a></li>
+  <li><a href="#creating-the-skill-step-by-step" id="toc-creating-the-skill-step-by-step" class="nav-link" data-scroll-target="#creating-the-skill-step-by-step"><span class="header-section-number">4.7</span> Creating the skill step by step</a></li>
+  <li><a href="#building-the-chinook-skill" id="toc-building-the-chinook-skill" class="nav-link" data-scroll-target="#building-the-chinook-skill"><span class="header-section-number">4.8</span> Building the Chinook skill</a></li>
+  <li><a href="#decision-driven-queries" id="toc-decision-driven-queries" class="nav-link" data-scroll-target="#decision-driven-queries"><span class="header-section-number">4.9</span> Decision-driven queries</a></li>
+  <li><a href="#sql-transparency" id="toc-sql-transparency" class="nav-link" data-scroll-target="#sql-transparency"><span class="header-section-number">4.10</span> SQL transparency</a></li>
+  <li><a href="#iterating-on-the-skill" id="toc-iterating-on-the-skill" class="nav-link" data-scroll-target="#iterating-on-the-skill"><span class="header-section-number">4.11</span> Iterating on the skill</a></li>
+  <li><a href="#behind-the-firewall" id="toc-behind-the-firewall" class="nav-link" data-scroll-target="#behind-the-firewall"><span class="header-section-number">4.12</span> Behind the firewall</a></li>
+  <li><a href="#the-skill-as-deployment-artifact" id="toc-the-skill-as-deployment-artifact" class="nav-link" data-scroll-target="#the-skill-as-deployment-artifact"><span class="header-section-number">4.13</span> The skill as deployment artifact</a></li>
+  <li><a href="#a-natural-language-query-app" id="toc-a-natural-language-query-app" class="nav-link" data-scroll-target="#a-natural-language-query-app"><span class="header-section-number">4.14</span> A natural-language query app</a>
   <ul class="collapse">
   <li><a href="#setting-up-the-demo" id="toc-setting-up-the-demo" class="nav-link" data-scroll-target="#setting-up-the-demo">Setting up the demo</a></li>
   <li><a href="#what-the-app-sends-to-the-llm" id="toc-what-the-app-sends-to-the-llm" class="nav-link" data-scroll-target="#what-the-app-sends-to-the-llm">What the app sends to the LLM</a></li>
@@ -212,16 +236,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#the-data-flow" id="toc-the-data-flow" class="nav-link" data-scroll-target="#the-data-flow">The data flow</a></li>
   <li><a href="#from-demo-to-production" id="toc-from-demo-to-production" class="nav-link" data-scroll-target="#from-demo-to-production">From demo to production</a></li>
   </ul></li>
-  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">4.15</span> Exercises</a></li>
   </ul>
-</nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/kerryback/bi-to-ai.git/blob/main/04-connecting-databases.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-title">Connecting Databases</span></h1>
+<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Connecting Databases</span></h1>
 </div>
 
 
@@ -240,19 +264,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <p>The first three chapters worked with individual files — a CSV placed in a folder, a memo pasted into a conversation. Most real business data does not live in spreadsheets. It lives in databases: structured collections of related tables, hosted on servers, queried with SQL.</p>
 <p>This chapter connects AI to those databases. By the end, you will understand how your organization can create tools so that everyone can query a database in plain English — no SQL required. As throughout this book, the examples use Claude Code, but the same workflows apply to Gemini CLI and OpenAI Codex.</p>
-<section id="the-dashboard-trap" class="level2">
-<h2 class="anchored" data-anchor-id="the-dashboard-trap">The dashboard trap</h2>
+<section id="the-dashboard-trap" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="the-dashboard-trap"><span class="header-section-number">4.1</span> The dashboard trap</h2>
 <p>Organizations spend millions building dashboards that answer yesterday’s questions. The cycle is familiar: a user requests a report, an analyst builds it, IT deploys it to Tableau or Power BI, and then the user asks a follow-up question — which starts the cycle over.</p>
 <p>The cost is measured in three dimensions. Time: weeks to months per dashboard. Rigidity: fixed views of fixed data that cannot adapt to a new question. Adoption: according to Gartner (2023), fewer than half of data and analytics teams effectively provide value to their organizations.</p>
 <p>The dashboard was a workaround for the fact that databases do not speak English. Now they do. With natural language AI, you skip the entire build cycle and go straight from question to answer. Ask in plain English instead of writing SQL and ask whatever you want instead of being limited to dashboard views. Get answers in seconds instead of weeks. Follow-up questions are free — just type the next sentence.</p>
 </section>
-<section id="from-spreadsheets-to-databases" class="level2">
-<h2 class="anchored" data-anchor-id="from-spreadsheets-to-databases">From spreadsheets to databases</h2>
+<section id="from-spreadsheets-to-databases" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="from-spreadsheets-to-databases"><span class="header-section-number">4.2</span> From spreadsheets to databases</h2>
 <p>In Chapter 2 you analyzed a spreadsheet — a single table of rows and columns living in a file on your machine. Most real business data lives in databases: many related tables linked by keys, hosted on a server, queried with SQL.</p>
 <p>SQL is the language databases understand. You do not need to learn it. AI writes the SQL for you. But you do need to tell the AI what is in the database — which tables exist, what the columns mean, and how the tables relate to each other.</p>
 </section>
-<section id="how-ai-connects-to-a-database" class="level2">
-<h2 class="anchored" data-anchor-id="how-ai-connects-to-a-database">How AI connects to a database</h2>
+<section id="how-ai-connects-to-a-database" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="how-ai-connects-to-a-database"><span class="header-section-number">4.3</span> How AI connects to a database</h2>
 <p>There are several ways to give AI access to your data, ranging from simple to sophisticated.</p>
 <p><strong>Skill files.</strong> The simplest approach: write a markdown file that describes your database schema and hand it to a coding agent. The agent reads the description, writes SQL, and executes it. No special infrastructure is needed — just a file and a coding agent that can run code. This is what we build in this chapter.</p>
 <p><strong>Direct API calls.</strong> A lightweight application — even fifty lines of Python — can send a user’s question and a schema description to an LLM, get back SQL, run it, and display the results. This is the pattern behind the demo app at the end of this chapter. It works for prototypes and internal tools where you control the deployment.</p>
@@ -260,56 +284,56 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><strong>Vendor platforms.</strong> Salesforce, Snowflake, Databricks, and others are embedding natural-language query directly into their products. If your data already lives in one of these platforms, you may not need to build anything — just enable the feature.</p>
 <p>All of these approaches share the same core idea: give the AI a description of your data and let it write the query. The differences are in how the description is delivered, who runs the query, and how much infrastructure is involved. We start with skill files because they require no setup and teach the underlying pattern that every other approach builds on.</p>
 </section>
-<section id="the-sample-database-chinook" class="level2">
-<h2 class="anchored" data-anchor-id="the-sample-database-chinook">The sample database: Chinook</h2>
+<section id="the-sample-database-chinook" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="the-sample-database-chinook"><span class="header-section-number">4.4</span> The sample database: Chinook</h2>
 <p>The exercises in this chapter use the Chinook sample database, which you can download here: <a href="data/chinook.db">chinook.db</a>. It represents a music retailer’s operations and contains 11 related tables.</p>
 <p>The key tables are employees (8 staff members), customers (59 customers across 24 countries), invoices and invoice_items (412 transactions), and tracks, albums, artists, and genres (a product catalog of more than 3,500 tracks). It is a publicly available SQLite file that requires no setup — just place it in a folder and point your coding agent at it. The same skill pattern you learn here works with any database.</p>
 </section>
-<section id="what-is-a-skill" class="level2">
-<h2 class="anchored" data-anchor-id="what-is-a-skill">What is a skill?</h2>
+<section id="what-is-a-skill" class="level2" data-number="4.5">
+<h2 data-number="4.5" class="anchored" data-anchor-id="what-is-a-skill"><span class="header-section-number">4.5</span> What is a skill?</h2>
 <p>A skill is a set of instructions that specializes a general-purpose AI for a specific task. Every AI customization works the same way: additional text is added to the prompt. A skill provides three things: domain knowledge (what the data means), workflow instructions (how to do the task), and output format specifications (how to present results).</p>
 <p>Skills are not limited to databases. You could build a skill for weekly report generation, customer support analysis, or any recurring task where AI benefits from domain context.</p>
 </section>
-<section id="the-skill.md-file" class="level2">
-<h2 class="anchored" data-anchor-id="the-skill.md-file">The SKILL.md file</h2>
+<section id="the-skill.md-file" class="level2" data-number="4.6">
+<h2 data-number="4.6" class="anchored" data-anchor-id="the-skill.md-file"><span class="header-section-number">4.6</span> The SKILL.md file</h2>
 <p>The skill is a markdown file that the coding agent reads when you invoke it. The structure has three parts.</p>
 <p>The first part is the description and location: what the skill does and the path to the database file.</p>
 <p>The second part is the schema and relationships: every table, its columns, data types, and how tables link to each other. This is the most important part. The more precisely you describe the schema, the better the AI’s queries will be. Include column descriptions (“status is one of: active, completed, on-hold”), explain join paths (“invoices link to customers via CustomerId”), and note any business logic (“revenue means invoice_items.UnitPrice times Quantity”).</p>
 <p>The third part is the instructions: query style, output format, and chart preferences. For example: “Always show the SQL query before showing results. Use Plotly for interactive charts. Annotate the highest and lowest values.”</p>
 <p>The skill file is just text. Anyone can edit it. No programming is required — just clear descriptions of your data.</p>
 </section>
-<section id="creating-the-skill-step-by-step" class="level2">
-<h2 class="anchored" data-anchor-id="creating-the-skill-step-by-step">Creating the skill step by step</h2>
+<section id="creating-the-skill-step-by-step" class="level2" data-number="4.7">
+<h2 data-number="4.7" class="anchored" data-anchor-id="creating-the-skill-step-by-step"><span class="header-section-number">4.7</span> Creating the skill step by step</h2>
 <p>Create a project folder with the SQLite database file and a file called SKILL.md. Write the schema, describing each table, its columns, and its relationships. Then test by asking questions and refining based on what Claude gets wrong.</p>
 <p>Your first draft will not be perfect, and that is fine. The skill improves through iteration. Every time Claude misinterprets a question or uses the wrong join path, you add a clarification to the SKILL.md. After a few rounds of testing, the skill handles the most common questions reliably.</p>
 <p>You do not have to write the skill from scratch. Point your coding agent at the database and ask it to generate the SKILL.md for you. It will inspect the tables, columns, and foreign keys and produce a first draft. Your job is to read the result, verify that the descriptions match your understanding of the data, and add any business context the agent could not infer on its own.</p>
 </section>
-<section id="building-the-chinook-skill" class="level2">
-<h2 class="anchored" data-anchor-id="building-the-chinook-skill">Building the Chinook skill</h2>
+<section id="building-the-chinook-skill" class="level2" data-number="4.8">
+<h2 data-number="4.8" class="anchored" data-anchor-id="building-the-chinook-skill"><span class="header-section-number">4.8</span> Building the Chinook skill</h2>
 <p>To make this concrete, consider a scenario. You are an operations director at a music retailer. The CEO wants a recommendation by Friday: which markets to invest in, which product lines to promote, and how to improve per-customer revenue.</p>
 <p>The data lives in the Chinook database. The answer requires joining customer, invoice, and catalog data across multiple tables. There is no time to wait for an analyst.</p>
 <p>The solution: build a skill that knows the Chinook schema, then ask questions in plain English. The agent writes SQL, runs it, and returns charts.</p>
 </section>
-<section id="decision-driven-queries" class="level2">
-<h2 class="anchored" data-anchor-id="decision-driven-queries">Decision-driven queries</h2>
+<section id="decision-driven-queries" class="level2" data-number="4.9">
+<h2 data-number="4.9" class="anchored" data-anchor-id="decision-driven-queries"><span class="header-section-number">4.9</span> Decision-driven queries</h2>
 <p>With the skill active, every question should connect to the CEO’s decision.</p>
 <p>“Top five countries by revenue, bar chart, sorted” produces a bar chart comparing categories. “Monthly revenue trend line — is the business growing?” produces a line chart showing trends over time. “Plot average order value versus number of orders by country” produces a scatter plot that reveals clusters of high-value versus high-frequency markets.</p>
 <p>You can go deeper. “Correlation heatmap of all numeric columns” shows which metrics move together. “Make that chart interactive so I can hover for details” switches from matplotlib to Plotly, saving the result as an HTML file. “Annotate the outlier country on the scatter plot” adds context to the visualization.</p>
 <p>Each question is a different lens on the same decision. The skill ensures that every query uses the correct tables, joins, and business logic.</p>
 </section>
-<section id="sql-transparency" class="level2">
-<h2 class="anchored" data-anchor-id="sql-transparency">SQL transparency</h2>
+<section id="sql-transparency" class="level2" data-number="4.10">
+<h2 data-number="4.10" class="anchored" data-anchor-id="sql-transparency"><span class="header-section-number">4.10</span> SQL transparency</h2>
 <p>One of the most important features of this workflow is that you can always see the SQL. When you ask “Which country generates the most revenue? Show a bar chart of the top 10,” Claude generates a SQL query that selects country and summed revenue from the invoices and customers tables, groups by country, orders by revenue descending, and limits to ten results.</p>
 <p>You can read the SQL and verify that the joins are correct, the filters make sense, and the aggregation matches your intent. Analysts can review the logic. This builds trust: AI is not a black box.</p>
 <p>If you ask a follow-up — “Break down the US revenue by state” — Claude writes a new query with a WHERE clause and additional grouping. The SQL is always available for inspection.</p>
 </section>
-<section id="iterating-on-the-skill" class="level2">
-<h2 class="anchored" data-anchor-id="iterating-on-the-skill">Iterating on the skill</h2>
+<section id="iterating-on-the-skill" class="level2" data-number="4.11">
+<h2 data-number="4.11" class="anchored" data-anchor-id="iterating-on-the-skill"><span class="header-section-number">4.11</span> Iterating on the skill</h2>
 <p>Common refinements include adding column descriptions, specifying default sorting and format rules, and setting chart preferences. You can specify whether charts should be static (matplotlib, good for reports and slides) or interactive (Plotly, with hover, zoom, and filter, saved as HTML files and shareable via email). The same prompt works for both — just add “interactive” or “Plotly.”</p>
 <p>Skills turn institutional knowledge into executable instructions. Instead of a procedures manual that sits on a shelf, you have a prompt that AI follows every time. The knowledge is not just documented; it is operationalized.</p>
 </section>
-<section id="behind-the-firewall" class="level2">
-<h2 class="anchored" data-anchor-id="behind-the-firewall">Behind the firewall</h2>
+<section id="behind-the-firewall" class="level2" data-number="4.12">
+<h2 data-number="4.12" class="anchored" data-anchor-id="behind-the-firewall"><span class="header-section-number">4.12</span> Behind the firewall</h2>
 <p>Understanding the data flow matters for security. When you use a coding agent, the flow works like this: you type a question, the agent sends your question and the schema description to the LLM (hosted in the cloud), the LLM returns SQL, and the agent executes that SQL against your database locally. The raw data never leaves your network — only your question and the schema travel to the cloud. The query results stay on your machine.</p>
 <p>In a deployed app (like the Streamlit demo), the app replaces the coding agent: the app sends the question to the LLM, receives SQL back, runs it against the database, and displays results to the user. Again, the LLM never sees the actual data — only the question and the schema.</p>
 <p>IT controls which databases the agent or app can access and can restrict connections to read-only credentials.</p>
@@ -329,12 +353,12 @@ MCP support across coding agents
 </div>
 <p>In this chapter we connect to a local SQLite file. In your organization, the same pattern connects to PostgreSQL, Snowflake, or any database your team uses.</p>
 </section>
-<section id="the-skill-as-deployment-artifact" class="level2">
-<h2 class="anchored" data-anchor-id="the-skill-as-deployment-artifact">The skill as deployment artifact</h2>
+<section id="the-skill-as-deployment-artifact" class="level2" data-number="4.13">
+<h2 data-number="4.13" class="anchored" data-anchor-id="the-skill-as-deployment-artifact"><span class="header-section-number">4.13</span> The skill as deployment artifact</h2>
 <p>A polished skill is what gets deployed on your intranet. The skill file encodes which tables matter, how they relate, and what the business terminology means. IT adds the infrastructure: SSO authentication, read-only database credentials, and query logging for audit. Chapter 5 shows how to chain this skill into an automated reporting pipeline.</p>
 </section>
-<section id="a-natural-language-query-app" class="level2">
-<h2 class="anchored" data-anchor-id="a-natural-language-query-app">A natural-language query app</h2>
+<section id="a-natural-language-query-app" class="level2" data-number="4.14">
+<h2 data-number="4.14" class="anchored" data-anchor-id="a-natural-language-query-app"><span class="header-section-number">4.14</span> A natural-language query app</h2>
 <p>The skill-file approach works well with a coding agent, but what about the rest of your organization? Not everyone will use a terminal. The same pattern — send a question and schema to an LLM, get SQL back, run it — can be wrapped in a simple web app that anyone can use from a browser.</p>
 <p>In production, this app would be deployed on the corporate intranet, the database would be a PostgreSQL or Snowflake instance on the company’s servers, and the LLM would be an enterprise-licensed model (more on licensing and compliance in Chapter 7). For this demo, we run everything locally: a small Streamlit app on your laptop, the Chinook SQLite file in the same folder, and a free LLM API from <a href="https://openrouter.ai">OpenRouter</a>.</p>
 <section id="setting-up-the-demo" class="level3">
@@ -392,8 +416,8 @@ Revenue = SUM(invoice_items.UnitPrice * invoice_items.Quantity).</code></pre>
 <p>This is a demo, not a production application. There is no authentication, no guardrails on the SQL, and no sandboxing of query execution. In a production deployment, IT would add SSO login, restrict the database connection to read-only credentials, log every query for audit, and use an enterprise LLM with a data-processing agreement. Chapter 7 covers these considerations in detail. But as a prototype that proves the concept, fifty lines of Python is all it takes.</p>
 </section>
 </section>
-<section id="exercises" class="level2">
-<h2 class="anchored" data-anchor-id="exercises">Exercises</h2>
+<section id="exercises" class="level2" data-number="4.15">
+<h2 data-number="4.15" class="anchored" data-anchor-id="exercises"><span class="header-section-number">4.15</span> Exercises</h2>
 <div class="callout callout-style-default callout-note callout-titled" title="Exercise 1: Build a Chinook Skill">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -531,6 +555,150 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
   toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
   const icon = "";
   const anchorJS = new window.AnchorJS();
   anchorJS.options = {
@@ -931,12 +1099,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./03-thinking-partner.html" class="pagination-link" aria-label="AI as Thinking Partner">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">AI as Thinking Partner</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">AI as Thinking Partner</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./05-reporting-cycles.html" class="pagination-link" aria-label="Automating Reporting Cycles">
-        <span class="nav-page-text"><span class="chapter-title">Automating Reporting Cycles</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Automating Reporting Cycles</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -945,4 +1113,4 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-</body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/kerryback/bi-to-ai.git/blob/main/04-connecting-databases.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></div></div></footer></body></html>

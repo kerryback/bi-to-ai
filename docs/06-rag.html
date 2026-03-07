@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Retrieval-Augmented Generation – From BI to AI</title>
+<title>6&nbsp; Retrieval-Augmented Generation – From BI to AI</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -37,10 +37,12 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-b53751a350365c71b6c909e95f209ed1.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-2ef01e258a497a70032e58193e2c5164.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-06bbe0a581982c371d7d7257fa09cfcb.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-21eba6fda6364eff178b22e017261986.min.css" rel="prefetch" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -68,6 +70,12 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script async="" src="https://hypothes.is/embed.js"></script>
+<script>
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    document.body.classList.add('hypothesis-enabled');
+  });
+</script>
 
 
 </head>
@@ -81,7 +89,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./06-rag.html"><span class="chapter-title">Retrieval-Augmented Generation</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./06-rag.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Retrieval-Augmented Generation</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -97,6 +105,15 @@ ul.task-list li input[type="checkbox"] {
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">From BI to AI</a> 
+        <div class="sidebar-tools-main tools-wide">
+    <a href="https://github.com/kerryback/bi-to-ai.git" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -114,37 +131,44 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./01-coding-tools.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Get Started with AI Coding Tools</span></a>
+  <a href="./01-coding-tools.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Get Started with AI Coding Tools</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./02-exploring-data.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Exploring Data with AI</span></a>
+  <a href="./02-exploring-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Exploring Data with AI</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./03-thinking-partner.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">AI as Thinking Partner</span></a>
+  <a href="./03-thinking-partner.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">AI as Thinking Partner</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./04-connecting-databases.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Connecting Databases</span></a>
+  <a href="./04-connecting-databases.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Connecting Databases</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./05-reporting-cycles.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Automating Reporting Cycles</span></a>
+  <a href="./05-reporting-cycles.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Automating Reporting Cycles</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./06-rag.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Retrieval-Augmented Generation</span></a>
+  <a href="./06-rag.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Retrieval-Augmented Generation</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./07-reliability.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Reliability and Compliance</span></a>
+  <a href="./07-reliability.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Reliability and Compliance</span></span></a>
   </div>
 </li>
     </ul>
@@ -154,30 +178,30 @@ ul.task-list li input[type="checkbox"] {
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
+    <h2 id="toc-title">Chapter contents</h2>
    
   <ul>
-  <li><a href="#the-problem-ai-does-not-know-your-documents" id="toc-the-problem-ai-does-not-know-your-documents" class="nav-link active" data-scroll-target="#the-problem-ai-does-not-know-your-documents">The problem: AI does not know your documents</a></li>
-  <li><a href="#the-open-book-exam-analogy" id="toc-the-open-book-exam-analogy" class="nav-link" data-scroll-target="#the-open-book-exam-analogy">The open-book exam analogy</a></li>
-  <li><a href="#the-rag-pipeline" id="toc-the-rag-pipeline" class="nav-link" data-scroll-target="#the-rag-pipeline">The RAG pipeline</a></li>
-  <li><a href="#embeddings-and-semantic-search" id="toc-embeddings-and-semantic-search" class="nav-link" data-scroll-target="#embeddings-and-semantic-search">Embeddings and semantic search</a></li>
-  <li><a href="#citations-and-source-attribution" id="toc-citations-and-source-attribution" class="nav-link" data-scroll-target="#citations-and-source-attribution">Citations and source attribution</a></li>
-  <li><a href="#when-to-use-rag" id="toc-when-to-use-rag" class="nav-link" data-scroll-target="#when-to-use-rag">When to use RAG</a></li>
-  <li><a href="#why-chunk-size-matters" id="toc-why-chunk-size-matters" class="nav-link" data-scroll-target="#why-chunk-size-matters">Why chunk size matters</a></li>
-  <li><a href="#common-failure-modes" id="toc-common-failure-modes" class="nav-link" data-scroll-target="#common-failure-modes">Common failure modes</a></li>
-  <li><a href="#hands-on-querying-your-documents" id="toc-hands-on-querying-your-documents" class="nav-link" data-scroll-target="#hands-on-querying-your-documents">Hands-on: querying your documents</a></li>
-  <li><a href="#evaluating-rag-quality" id="toc-evaluating-rag-quality" class="nav-link" data-scroll-target="#evaluating-rag-quality">Evaluating RAG quality</a></li>
-  <li><a href="#rag-in-production" id="toc-rag-in-production" class="nav-link" data-scroll-target="#rag-in-production">RAG in production</a></li>
-  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a></li>
+  <li><a href="#the-problem-ai-does-not-know-your-documents" id="toc-the-problem-ai-does-not-know-your-documents" class="nav-link active" data-scroll-target="#the-problem-ai-does-not-know-your-documents"><span class="header-section-number">6.1</span> The problem: AI does not know your documents</a></li>
+  <li><a href="#the-open-book-exam-analogy" id="toc-the-open-book-exam-analogy" class="nav-link" data-scroll-target="#the-open-book-exam-analogy"><span class="header-section-number">6.2</span> The open-book exam analogy</a></li>
+  <li><a href="#the-rag-pipeline" id="toc-the-rag-pipeline" class="nav-link" data-scroll-target="#the-rag-pipeline"><span class="header-section-number">6.3</span> The RAG pipeline</a></li>
+  <li><a href="#embeddings-and-semantic-search" id="toc-embeddings-and-semantic-search" class="nav-link" data-scroll-target="#embeddings-and-semantic-search"><span class="header-section-number">6.4</span> Embeddings and semantic search</a></li>
+  <li><a href="#citations-and-source-attribution" id="toc-citations-and-source-attribution" class="nav-link" data-scroll-target="#citations-and-source-attribution"><span class="header-section-number">6.5</span> Citations and source attribution</a></li>
+  <li><a href="#when-to-use-rag" id="toc-when-to-use-rag" class="nav-link" data-scroll-target="#when-to-use-rag"><span class="header-section-number">6.6</span> When to use RAG</a></li>
+  <li><a href="#why-chunk-size-matters" id="toc-why-chunk-size-matters" class="nav-link" data-scroll-target="#why-chunk-size-matters"><span class="header-section-number">6.7</span> Why chunk size matters</a></li>
+  <li><a href="#common-failure-modes" id="toc-common-failure-modes" class="nav-link" data-scroll-target="#common-failure-modes"><span class="header-section-number">6.8</span> Common failure modes</a></li>
+  <li><a href="#hands-on-querying-your-documents" id="toc-hands-on-querying-your-documents" class="nav-link" data-scroll-target="#hands-on-querying-your-documents"><span class="header-section-number">6.9</span> Hands-on: querying your documents</a></li>
+  <li><a href="#evaluating-rag-quality" id="toc-evaluating-rag-quality" class="nav-link" data-scroll-target="#evaluating-rag-quality"><span class="header-section-number">6.10</span> Evaluating RAG quality</a></li>
+  <li><a href="#rag-in-production" id="toc-rag-in-production" class="nav-link" data-scroll-target="#rag-in-production"><span class="header-section-number">6.11</span> RAG in production</a></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">6.12</span> Exercises</a></li>
   </ul>
-</nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/kerryback/bi-to-ai.git/blob/main/06-rag.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-title">Retrieval-Augmented Generation</span></h1>
+<h1 class="title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Retrieval-Augmented Generation</span></h1>
 </div>
 
 
@@ -196,39 +220,39 @@ ul.task-list li input[type="checkbox"] {
 
 <p>Chapters 2 through 5 worked with structured data — spreadsheets and databases where every row has the same columns and every query returns a precise answer. But much of the knowledge in an organization lives in unstructured documents: policy handbooks, contracts, product manuals, research reports, meeting transcripts.</p>
 <p>This chapter covers Retrieval-Augmented Generation, or RAG — the technique that lets AI answer questions about your documents with grounded, cited answers instead of hallucinations.</p>
-<section id="the-problem-ai-does-not-know-your-documents" class="level2">
-<h2 class="anchored" data-anchor-id="the-problem-ai-does-not-know-your-documents">The problem: AI does not know your documents</h2>
+<section id="the-problem-ai-does-not-know-your-documents" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="the-problem-ai-does-not-know-your-documents"><span class="header-section-number">6.1</span> The problem: AI does not know your documents</h2>
 <p>AI models are trained on public data. They know a great deal about the world in general, but they know nothing about your company’s travel policy, your product warranty terms, or last quarter’s board report.</p>
 <p>Without RAG, if you ask “What is our return policy for enterprise customers?” the AI will either make something up (confidently and plausibly) or admit it does not know. Neither response is useful. What you want is for the AI to look up the answer in your actual policy document, quote the relevant passage, and tell you where it found it.</p>
 <p>That is what RAG does.</p>
 </section>
-<section id="the-open-book-exam-analogy" class="level2">
-<h2 class="anchored" data-anchor-id="the-open-book-exam-analogy">The open-book exam analogy</h2>
+<section id="the-open-book-exam-analogy" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="the-open-book-exam-analogy"><span class="header-section-number">6.2</span> The open-book exam analogy</h2>
 <p>The simplest way to understand RAG is the open-book exam. Standard AI is a closed-book exam: the student answers from memory, is confident even when wrong, and cannot cite sources. RAG is an open-book exam: the student looks up the answer in the reference materials, quotes the source, and can say “this is not covered in my materials” when the answer is not there.</p>
 <p>The quality of the answer depends entirely on what is in the book. If the documents are incomplete, outdated, or poorly organized, the RAG system will produce incomplete, outdated, or confused answers. The AI is only as good as the documents you give it.</p>
 </section>
-<section id="the-rag-pipeline" class="level2">
-<h2 class="anchored" data-anchor-id="the-rag-pipeline">The RAG pipeline</h2>
+<section id="the-rag-pipeline" class="level2" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="the-rag-pipeline"><span class="header-section-number">6.3</span> The RAG pipeline</h2>
 <p>RAG works in three stages: ingest, retrieve, and generate.</p>
 <p>In the ingest stage, documents are split into chunks — typically paragraphs or sections — and each chunk is converted into a numerical representation called an embedding. The embeddings are stored in a vector database (a searchable index optimized for similarity search).</p>
 <p>In the retrieve stage, when a user asks a question, the question is also converted into an embedding. The system finds the chunks whose embeddings are most similar to the question’s embedding. These are the chunks most likely to contain the answer.</p>
 <p>In the generate stage, the retrieved chunks are fed to the AI along with the user’s question. The AI reads the chunks and generates an answer, citing the sources.</p>
 </section>
-<section id="embeddings-and-semantic-search" class="level2">
-<h2 class="anchored" data-anchor-id="embeddings-and-semantic-search">Embeddings and semantic search</h2>
+<section id="embeddings-and-semantic-search" class="level2" data-number="6.4">
+<h2 data-number="6.4" class="anchored" data-anchor-id="embeddings-and-semantic-search"><span class="header-section-number">6.4</span> Embeddings and semantic search</h2>
 <p>Embeddings are what make RAG fundamentally different from keyword search.</p>
 <p>Traditional keyword search finds documents containing the exact words you typed. If you search for “vacation policy,” you will find documents containing those words but miss documents that say “PTO guidelines” or “time-off rules” or “leave entitlement.”</p>
 <p>Semantic search works on meaning. Embeddings convert text into high-dimensional numerical vectors such that texts with similar meanings point in similar directions. When you search for “vacation policy,” semantic search finds all of those variations because they have similar embeddings. It understands meaning, not just words.</p>
 <p>This is why RAG can answer questions in natural language. You do not need to know the exact terminology used in the document. You ask the question in your own words and the system finds the relevant passages regardless of how they are phrased.</p>
 </section>
-<section id="citations-and-source-attribution" class="level2">
-<h2 class="anchored" data-anchor-id="citations-and-source-attribution">Citations and source attribution</h2>
+<section id="citations-and-source-attribution" class="level2" data-number="6.5">
+<h2 data-number="6.5" class="anchored" data-anchor-id="citations-and-source-attribution"><span class="header-section-number">6.5</span> Citations and source attribution</h2>
 <p>RAG does not just answer — it shows where the answer came from.</p>
 <p>Each answer includes references to the source documents and, when possible, page numbers or section headings. Users can click through to verify the original text. If the answer is not in the documents, a well-built RAG system says so instead of hallucinating.</p>
 <p>Citations transform AI from “trust me” to “here’s the evidence.” This is what makes RAG suitable for high-stakes use cases where accuracy matters and where someone will eventually ask “where did you get that number?”</p>
 </section>
-<section id="when-to-use-rag" class="level2">
-<h2 class="anchored" data-anchor-id="when-to-use-rag">When to use RAG</h2>
+<section id="when-to-use-rag" class="level2" data-number="6.6">
+<h2 data-number="6.6" class="anchored" data-anchor-id="when-to-use-rag"><span class="header-section-number">6.6</span> When to use RAG</h2>
 <p>RAG is not always the right approach. The choice depends on the type of data.</p>
 <p>For structured data (spreadsheets, databases, tables of numbers), a skill that writes SQL queries is more appropriate. This is what you built in Chapter 4.</p>
 <p>For unstructured documents (policies, contracts, manuals, reports), RAG is the right tool.</p>
@@ -248,22 +272,22 @@ Context window sizes
 </div>
 <p>For situations where you need both structured queries and document context, you can combine a skill with RAG — querying the database for numbers and the documents for context.</p>
 </section>
-<section id="why-chunk-size-matters" class="level2">
-<h2 class="anchored" data-anchor-id="why-chunk-size-matters">Why chunk size matters</h2>
+<section id="why-chunk-size-matters" class="level2" data-number="6.7">
+<h2 data-number="6.7" class="anchored" data-anchor-id="why-chunk-size-matters"><span class="header-section-number">6.7</span> Why chunk size matters</h2>
 <p>Documents are split into chunks before embedding. The size of these chunks determines what the system can find and what it misses.</p>
 <p>Chunks that are too small (individual sentences) lose context. A sentence alone may be meaningless without the paragraph around it. The system retrieves fragments instead of answers.</p>
 <p>Chunks that are too large (entire chapters) include too much irrelevant content. The signal is diluted by noise. The AI may struggle to identify which part of the chunk actually answers the question.</p>
 <p>The sweet spot is usually a few paragraphs — enough context to be meaningful, small enough to be relevant. Overlapping chunks (where each chunk shares some text with its neighbors) help ensure that nothing falls through the cracks.</p>
 </section>
-<section id="common-failure-modes" class="level2">
-<h2 class="anchored" data-anchor-id="common-failure-modes">Common failure modes</h2>
+<section id="common-failure-modes" class="level2" data-number="6.8">
+<h2 data-number="6.8" class="anchored" data-anchor-id="common-failure-modes"><span class="header-section-number">6.8</span> Common failure modes</h2>
 <p>RAG is not perfect. Understanding the failure modes helps you spot and fix problems.</p>
 <p>On the retrieval side, the system may retrieve the wrong chunk (semantically similar but irrelevant), miss the right chunk entirely (the answer exists but was not retrieved), or retrieve chunks that contradict each other.</p>
 <p>On the generation side, the AI may hallucinate a citation (citing a page that does not contain the claim), over-generalize (drawing a conclusion the source does not support), or give an incomplete answer (using one chunk when the full answer spans multiple documents).</p>
 <p>The most dangerous failure is the hallucinated citation. The answer looks grounded — it has a source reference — but when you check the cited passage, it does not say what the AI claims. This creates false confidence, which is worse than no citation at all.</p>
 </section>
-<section id="hands-on-querying-your-documents" class="level2">
-<h2 class="anchored" data-anchor-id="hands-on-querying-your-documents">Hands-on: querying your documents</h2>
+<section id="hands-on-querying-your-documents" class="level2" data-number="6.9">
+<h2 data-number="6.9" class="anchored" data-anchor-id="hands-on-querying-your-documents"><span class="header-section-number">6.9</span> Hands-on: querying your documents</h2>
 <p>The simplest way to experience RAG is to point your coding agent at a folder of documents and start asking questions.</p>
 <p>Download the <a href="data/company-handbook.md">sample company handbook</a> and place it in a folder. Open your coding agent in that folder. Then ask questions:</p>
 <blockquote class="blockquote">
@@ -278,23 +302,23 @@ Context window sizes
 <p>For each answer, evaluate three things. Is it relevant — did it find the right section of the document? Is it faithful — does the answer accurately represent what the source says? Is it complete — did it find all the relevant passages, or did it miss something?</p>
 <p>Then test the boundaries. Ask a question the document cannot answer: “What is our competitor’s market share?” Does AI admit the information is not in the document, or does it hallucinate an answer?</p>
 </section>
-<section id="evaluating-rag-quality" class="level2">
-<h2 class="anchored" data-anchor-id="evaluating-rag-quality">Evaluating RAG quality</h2>
+<section id="evaluating-rag-quality" class="level2" data-number="6.10">
+<h2 data-number="6.10" class="anchored" data-anchor-id="evaluating-rag-quality"><span class="header-section-number">6.10</span> Evaluating RAG quality</h2>
 <p>There are three dimensions for judging whether a RAG answer is good.</p>
 <p>Relevance measures whether the retrieved passages are on-topic. Did the system find the right sections? Would a human reading the document have picked the same passages?</p>
 <p>Faithfulness measures whether the generated answer accurately represents the source material. Does the answer match what the cited passage actually says? Are there any added claims that go beyond the source?</p>
 <p>Completeness measures whether the system found everything relevant. Did it retrieve all the passages that bear on the question? Would adding more context from the document change the answer?</p>
 <p>Use these three questions to evaluate every RAG answer: is it relevant, faithful, and complete?</p>
 </section>
-<section id="rag-in-production" class="level2">
-<h2 class="anchored" data-anchor-id="rag-in-production">RAG in production</h2>
+<section id="rag-in-production" class="level2" data-number="6.11">
+<h2 data-number="6.11" class="anchored" data-anchor-id="rag-in-production"><span class="header-section-number">6.11</span> RAG in production</h2>
 <p>In production, RAG has a document pipeline that runs continuously. New documents are automatically chunked and embedded. A vector store (Pinecone, Weaviate, Chroma, or similar) maintains a searchable index of all document chunks. When a user asks a question, the system retrieves the most relevant chunks, feeds them to the AI, and returns a cited answer.</p>
 <p>Production RAG requires ongoing maintenance. Documents need refresh schedules so that updated policies replace outdated ones. Access controls ensure that users can only query documents they are authorized to see. Versioning tracks changes so that when a policy is updated, the old version expires from the index.</p>
 <p>Quality assurance means maintaining a test suite of known question-answer pairs to validate accuracy, monitoring retrieval quality over time, and building a feedback loop where users can flag incorrect answers for improvement.</p>
 <p>The same sandbox-audit-deploy pattern from Chapter 5 applies. RAG is a system, not a feature, and it needs the same care as any production system.</p>
 </section>
-<section id="exercises" class="level2">
-<h2 class="anchored" data-anchor-id="exercises">Exercises</h2>
+<section id="exercises" class="level2" data-number="6.12">
+<h2 data-number="6.12" class="anchored" data-anchor-id="exercises"><span class="header-section-number">6.12</span> Exercises</h2>
 <div class="callout callout-style-default callout-note callout-titled" title="Exercise 1: Document Querying">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -410,6 +434,150 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
   toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
   const icon = "";
   const anchorJS = new window.AnchorJS();
   anchorJS.options = {
@@ -810,12 +978,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./05-reporting-cycles.html" class="pagination-link" aria-label="Automating Reporting Cycles">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Automating Reporting Cycles</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Automating Reporting Cycles</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./07-reliability.html" class="pagination-link" aria-label="Reliability and Compliance">
-        <span class="nav-page-text"><span class="chapter-title">Reliability and Compliance</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Reliability and Compliance</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -824,4 +992,4 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-</body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/kerryback/bi-to-ai.git/blob/main/06-rag.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></div></div></footer></body></html>
