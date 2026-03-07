@@ -1,4 +1,4 @@
-# Connecting AI to Databases
+# Connecting Databases
 
 The first three chapters worked with individual files --- a CSV placed in a folder, a memo pasted into a conversation.  Most real business data does not live in spreadsheets.  It lives in databases: structured collections of related tables, hosted on servers, queried with SQL.
 

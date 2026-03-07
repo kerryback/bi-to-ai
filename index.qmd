@@ -1,24 +1,22 @@
 # Preface {.unnumbered}
 
-Traditional business intelligence --- dashboards, static reports, and fixed queries --- is being replaced by AI that understands your questions, queries your data, and delivers answers in seconds.  This book accompanies a seven-session executive education program that gives professionals from any background a hands-on understanding of how agentic AI transforms analysis, reporting, and decision-making.  No coding experience is required.
+Traditional business intelligence --- dashboards, static reports, and fixed queries --- is being replaced by AI that understands your questions, queries your data, and delivers answers in seconds.  This book gives professionals from any background a hands-on understanding of how agentic AI transforms analysis, reporting, and decision-making.  No coding experience is required.
 
-Each chapter answers one question.
 
 Chapter 1 introduces the tools.  You will install a coding agent, learn how the three major options differ, and understand the environments where AI can execute code.
 
-Chapter 2 asks whether AI can analyze your data on the spot.  You will open a coding agent in a folder containing a spreadsheet and go from raw data to a written recommendation with charts in under ten minutes.
+Chapter 2 explains how to query data and generate visualizations and reports with plain English.  You will open a coding agent in a folder containing a spreadsheet and go from raw data to a written recommendation with charts in under ten minutes.
 
-Chapter 3 asks whether AI can help you think through decisions.  You will use AI as a sparring partner --- challenging assumptions, running pre-mortems, and stress-testing your own analysis from Chapter 2.
+Chapter 3 shows how AI can help you think through decisions.  You will use AI as a sparring partner --- challenging assumptions, running pre-mortems, and stress-testing your own analysis from Chapter 2.
 
-Chapter 4 asks whether AI can connect to databases and let anyone on your team query them in plain English.  You will learn about MCP connectors, build a reusable "skill" that encodes a database schema, and watch AI write SQL for you.
+Chapter 4 shows how AI can be connected to your company's databases, so anyone on the corporate intranet with proper credentials can query them in plain English.  You will learn about MCP connectors, build a reusable "skill" that encodes a database schema, and watch AI interact with the database to extract data for you.
 
-Chapter 5 asks whether AI can automate reporting cycles.  You will learn about agents --- AI systems that chain steps autonomously --- and use your coding agent to build a reporting pipeline that queries a database, generates charts, writes summaries, and assembles a PowerPoint deck.
+Chapter 5 shows how to use AI to automate activities.  We consider the example of generating regular reports from company data.  You will learn about agents --- AI systems that chain steps autonomously --- and use your coding agent to build a reporting pipeline that queries a database, generates charts, writes summaries, and assembles a PowerPoint deck.
 
-Chapter 6 asks whether AI can answer questions about your company's documents without hallucinating.  You will learn about Retrieval-Augmented Generation (RAG) --- how AI retrieves relevant passages, generates grounded answers with citations, and where it can go wrong.
+Chapter 6 shows how to use AI to query your company's documents and return answers grounded in your documents and document its sources rather than relying on its general knowledge.  This is called Retrieval-Augmented Generation (RAG).
 
-Chapter 7 asks whether you can trust it.  You will validate AI outputs, red-team skills and RAG systems, and build the governance framework your organization needs before deploying any of this.
+Chapter 7 addresses reliability and compliance issues.  You will validate AI outputs, red-team skills and RAG systems, and build the governance framework your organization needs before deploying any of this.
 
-The answer to every question is yes --- with the right verification.
 
 ## Data files
 

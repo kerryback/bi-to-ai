@@ -1,4 +1,4 @@
-# Can I Trust It?
+# Reliability and Compliance
 
 The previous six chapters built an increasingly powerful toolkit: coding tools, data analysis, thinking-partner conversations, database skills, agent workflows, and document-based AI.  Before any of this is deployed, leadership will ask one question: can we trust it?
 

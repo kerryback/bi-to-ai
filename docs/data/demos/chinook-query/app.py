@@ -1,7 +1,10 @@
 """Chinook natural-language query app — ask questions in plain English."""
 
+import json
 import os
 import sqlite3
+from datetime import datetime, timezone
+
 import streamlit as st
 from openai import OpenAI
 
@@ -30,6 +33,7 @@ SYSTEM_PROMPT = (
 )
 
 DB_PATH = os.path.join(os.path.dirname(__file__), "chinook.db")
+LOG_PATH = os.path.join(os.path.dirname(__file__), "llm_log.jsonl")
 
 client = OpenAI(
     base_url="https://openrouter.ai/api/v1",
@@ -43,14 +47,27 @@ question = st.text_input("Your question")
 
 if question:
     with st.spinner("Generating SQL…"):
+        messages = [
+            {"role": "system", "content": SYSTEM_PROMPT},
+            {"role": "user", "content": question},
+        ]
         response = client.chat.completions.create(
             model="google/gemini-2.0-flash-exp:free",
-            messages=[
-                {"role": "system", "content": SYSTEM_PROMPT},
-                {"role": "user", "content": question},
-            ],
+            messages=messages,
         )
         sql = response.choices[0].message.content.strip()
+
+        with open(LOG_PATH, "a") as f:
+            json.dump(
+                {
+                    "timestamp": datetime.now(timezone.utc).isoformat(),
+                    "model": response.model,
+                    "messages": messages,
+                    "response": sql,
+                },
+                f,
+            )
+            f.write("\n")
 
     st.subheader("Generated SQL")
     st.code(sql, language="sql")

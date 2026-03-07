@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Connecting AI to Databases – From BI to AI</title>
+<title>Connecting Databases – From BI to AI</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -115,7 +115,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./04-connecting-databases.html"><span class="chapter-title">Connecting AI to Databases</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./04-connecting-databases.html"><span class="chapter-title">Connecting Databases</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -148,7 +148,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./01-coding-tools.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">AI Coding Tools</span></a>
+  <a href="./01-coding-tools.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Get Started with AI Coding Tools</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -163,12 +163,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./04-connecting-databases.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Connecting AI to Databases</span></a>
+  <a href="./04-connecting-databases.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Connecting Databases</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./05-agents-deployment.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Agents and Deployment</span></a>
+  <a href="./05-agents-deployment.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Automating Reporting Cycles</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -178,7 +178,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./07-trust.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Can I Trust It?</span></a>
+  <a href="./07-trust.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Reliability and Compliance</span></a>
   </div>
 </li>
     </ul>
@@ -214,7 +214,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-title">Connecting AI to Databases</span></h1>
+<h1 class="title"><span class="chapter-title">Connecting Databases</span></h1>
 </div>
 
 
@@ -319,7 +319,7 @@ MCP support across coding agents
 <section id="the-skill-as-deployment-artifact" class="level2">
 <h2 class="anchored" data-anchor-id="the-skill-as-deployment-artifact">The skill as deployment artifact</h2>
 <p>A polished skill is what gets deployed on your intranet. The skill file encodes which tables matter, how they relate, and what the business terminology means. IT adds the infrastructure: SSO authentication, read-only database credentials, and query logging for audit.</p>
-<p>The skill file is the deployment artifact. IT adds infrastructure; you provide domain knowledge. Chapter 5 covers the full deployment path in detail.</p>
+<p>The skill file is the deployment artifact. IT adds infrastructure; you provide domain knowledge. Chapter 5 shows how to chain this skill into an automated reporting pipeline.</p>
 </section>
 <section id="a-natural-language-query-app" class="level2">
 <h2 class="anchored" data-anchor-id="a-natural-language-query-app">A natural-language query app</h2>
@@ -329,7 +329,7 @@ MCP support across coding agents
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install <span class="at">-r</span> requirements.txt</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">streamlit</span> run app.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Try asking “What are the top 5 countries by revenue?” or “Which artist has the most tracks?” You can see the SQL the model generates and verify it against what you would expect.</p>
-<p>This is a demo, not a production application. There is no authentication, no guardrails on the SQL, and no sandboxing of query execution. Chapter 5 covers what a production deployment requires. But as a prototype that proves the concept, fifty lines of Python is all it takes.</p>
+<p>This is a demo, not a production application. There is no authentication, no guardrails on the SQL, and no sandboxing of query execution. Chapter 5 covers sandboxing and the path to production. But as a prototype that proves the concept, fifty lines of Python is all it takes.</p>
 </section>
 <section id="exercises" class="level2">
 <h2 class="anchored" data-anchor-id="exercises">Exercises</h2>
@@ -869,8 +869,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./05-agents-deployment.html" class="pagination-link" aria-label="Agents and Deployment">
-        <span class="nav-page-text"><span class="chapter-title">Agents and Deployment</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./05-agents-deployment.html" class="pagination-link" aria-label="Automating Reporting Cycles">
+        <span class="nav-page-text"><span class="chapter-title">Automating Reporting Cycles</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

@@ -1,4 +1,4 @@
-# AI Coding Tools
+# Get Started with AI Coding Tools
 
 Large language models are impressive conversationalists, but without the ability to run code they can only describe how to analyze your data.  They can outline the steps, suggest the formulas, and draft the chart specifications --- but you still have to do the work.  When you attach a code-execution tool, the dynamic changes completely.  The AI loads your data into a Python dataframe, writes and runs the analysis, renders the charts, and synthesizes the findings into a memo.  You provide the questions; the AI provides the answers.  The result is not a plan for an analysis but the analysis itself --- complete with numbers, visualizations, and narrative.
 
