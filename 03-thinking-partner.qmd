@@ -130,13 +130,25 @@ For each weak claim, ask what data you would need to strengthen it.  Then ask Cl
 Compare the original and revised summaries.  Which one would survive tougher scrutiny in a meeting?
 :::
 
-::: {.callout-note title="Exercise 3: Scenario Swap" collapse="true"}
+::: {.callout-note title="Exercise 3: Challenge Your Retention Memo" collapse="true"}
+Open the retention memo you wrote in Chapter 2 Exercise 3 (or re-run the attrition analysis using [employee-attrition.csv](data/employee-attrition.csv)).  Give the memo to Claude and work through three thinking-partner moves.
+
+First, ask Claude to argue against your top recommendation.  If you recommended reducing overtime, have it make the case that overtime is a symptom, not a cause.  If you recommended raising salaries, have it explain why that might not move the needle.
+
+Second, ask: "What would need to be true for my recommendations to fail?"  Identify the assumptions your memo depends on.
+
+Third, run a pre-mortem: "We implemented all three interventions and attrition got worse.  What happened?"
+
+Revise your memo to acknowledge the strongest counterargument.  The deliverable is the original memo, the thinking-partner conversation, and the revised memo.
+:::
+
+::: {.callout-note title="Exercise 4: Scenario Swap" collapse="true"}
 If you are working through this book with a colleague, write down a real business decision you are facing in one or two sentences.  Swap scenarios.  Have a thinking-partner conversation about your colleague's scenario using at least three of the five conversation moves.
 
 Share back: "Here's what AI surfaced about your decision."  It is often easier to be objective about someone else's problem.  The deliverable is two key insights for your partner.
 :::
 
-::: {.callout-note title="Exercise 4: Second-Order Thinking Practice" collapse="true"}
+::: {.callout-note title="Exercise 5: Second-Order Thinking Practice" collapse="true"}
 Consider the following decision: "We are going to require all employees to return to the office five days a week."
 
 Ask Claude to trace three levels of consequences if this decision works as intended.  Then ask it to trace three levels of consequences if it does not work as intended.
@@ -144,7 +156,7 @@ Ask Claude to trace three levels of consequences if this decision works as inten
 Compare the two chains.  Where do they diverge?  What is the earliest signal that tells you which path you are on?
 :::
 
-::: {.callout-note title="Exercise 5: Stakeholder Simulation" collapse="true"}
+::: {.callout-note title="Exercise 6: Stakeholder Simulation" collapse="true"}
 Write a one-paragraph proposal --- a new initiative, a policy change, or a budget request.
 
 Ask Claude to react to the proposal as four different stakeholders: your CEO, your CFO, a skeptical board member, and a front-line employee.  For each persona, note the main concern and what would win them over.
