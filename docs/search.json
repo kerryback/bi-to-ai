@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "From BI to AI",
     "section": "",
-    "text": "Preface\nTraditional business intelligence — dashboards, static reports, and fixed queries — is being replaced by AI that understands your questions, queries your data, and delivers answers in seconds. This book gives professionals from any background a hands-on understanding of how agentic AI transforms analysis, reporting, and decision-making. No coding experience is required.\nChapter 1 introduces the tools. You will install a coding agent, learn how the three major options differ, and understand the environments where AI can execute code.\nChapter 2 explains how to query data and generate visualizations and reports with plain English. You will open a coding agent in a folder containing a spreadsheet and go from raw data to a written recommendation with charts in under ten minutes.\nChapter 3 shows how AI can help you think through decisions. You will use AI as a sparring partner — challenging assumptions, running pre-mortems, and stress-testing your own analysis from Chapter 2.\nChapter 4 shows how AI can be connected to your company’s databases, so anyone on the corporate intranet with proper credentials can query them in plain English. You will learn about MCP connectors, build a reusable “skill” that encodes a database schema, and watch AI interact with the database to extract data for you.\nChapter 5 shows how to use AI to automate activities. We consider the example of generating regular reports from company data. You will learn about agents — AI systems that chain steps autonomously — and use your coding agent to build a reporting pipeline that queries a database, generates charts, writes summaries, and assembles a PowerPoint deck.\nChapter 6 shows how to use AI to query your company’s documents and return answers grounded in your documents and document its sources rather than relying on its general knowledge. This is called Retrieval-Augmented Generation (RAG).\nChapter 7 addresses reliability and compliance issues. You will validate AI outputs, red-team skills and RAG systems, and build the governance framework your organization needs before deploying any of this.",
+    "text": "Preface\nTraditional business intelligence — dashboards, static reports, and fixed queries — is being replaced by AI that understands your questions, queries your data, and delivers answers in seconds. This book gives professionals from any background a hands-on understanding of how agentic AI transforms analysis, reporting, and decision-making. No coding experience is required.\nChapter 1 introduces the tools. You will install a coding agent, learn how the three major options differ, and understand the environments where AI can execute code.\nChapter 2 explains how to query data and generate visualizations and reports with plain English. You will open a coding agent in a folder containing a spreadsheet and go from raw data to a written recommendation with charts in under ten minutes.\nChapter 3 shows how AI can help you think through decisions. You will use AI as a sparring partner — challenging assumptions, running pre-mortems, and stress-testing your own analysis from Chapter 2.\nChapter 4 shows how AI can be connected to your company’s databases, so anyone on the corporate intranet with proper credentials can query them in plain English. You will learn about MCP connectors, build a reusable “skill” that encodes a database schema, and watch AI interact with the database to extract data for you.\nChapter 5 shows how to use AI to automate activities. We consider the example of generating regular reports from company data. You will learn about agents — AI systems that chain steps autonomously — and use your coding agent to build a reporting pipeline that queries a database, generates charts, writes summaries, and assembles a PowerPoint deck.\nChapter 6 shows how to use AI to query your company’s documents and return answers grounded in your documents (and document its sources) rather than relying on its general knowledge. This is called Retrieval-Augmented Generation (RAG).\nChapter 7 addresses reliability and compliance issues. You will validate AI outputs, red-team skills and RAG systems, and build the governance framework your organization needs before deploying any of this.",
     "crumbs": [
       "Preface"
     ]
@@ -14,7 +14,7 @@
     "href": "index.html#data-files",
     "title": "From BI to AI",
     "section": "Data files",
-    "text": "Data files\nThe exercises in this book use two datasets.\nThe Superstore CSV contains roughly 10,000 retail orders across four U.S. regions with columns for sales, profit, discount, product category, and customer segment. It is used throughout Chapters 2, 3, and 7.\nThe Chinook database is a SQLite file representing a music retailer’s operations with 11 related tables covering employees, customers, invoices, tracks, albums, artists, and genres. It is the primary dataset for Chapter 4 and is revisited in Chapters 5 and 7.\nChapter 6 uses a sample company handbook for RAG exercises.",
+    "text": "Data files\nThe exercises in this book use two datasets.\nThe Superstore CSV contains roughly 10,000 retail orders across four U.S. regions with columns for sales, profit, discount, product category, and customer segment.1 It is used throughout Chapters 2, 3, and 7.\nThe Chinook database is a SQLite file representing a music retailer’s operations with 11 related tables covering employees, customers, invoices, tracks, albums, artists, and genres.2 It is the primary dataset for Chapter 4 and is revisited in Chapters 5 and 7.\nChapter 6 uses a sample company handbook for RAG exercises.",
     "crumbs": [
       "Preface"
     ]
@@ -25,6 +25,16 @@
     "title": "From BI to AI",
     "section": "Prerequisites",
     "text": "Prerequisites\nYou need one of the three major coding agents installed on your machine. Chapter 1 walks through the installation of Claude Code, Gemini CLI, and OpenAI Codex. All three run in the terminal, read local files, and execute code. No prior coding or data science experience is assumed.",
+    "crumbs": [
+      "Preface"
+    ]
+  },
+  {
+    "objectID": "index.html#footnotes",
+    "href": "index.html#footnotes",
+    "title": "From BI to AI",
+    "section": "",
+    "text": "The Sample Superstore dataset is published on Kaggle at https://www.kaggle.com/datasets/vivek468/superstore-dataset-final. It is widely used in data-visualization tutorials and Tableau exercises.↩︎\nThe Chinook database was created by Luis Rocha as a modern alternative to the Northwind sample database. The source repository is at https://github.com/lerocha/chinook-database.↩︎",
     "crumbs": [
       "Preface"
     ]
@@ -124,7 +134,7 @@
     "href": "02-exploring-data.html",
     "title": "Exploring Data with AI",
     "section": "",
-    "text": "The scenario\nChapter 1 introduced the coding agents and showed how to install them. Now it is time to use one. This chapter goes from a raw spreadsheet to a written recommendation with charts in under ten minutes — using nothing but plain-English conversation.\nYou are a regional VP at a retail company. Q4 numbers just came in. The question on the table: which regions should get additional marketing budget, and which product lines should be expanded or cut?\nThe data is the Kaggle “Sample Superstore” dataset — roughly 10,000 orders across four U.S. regions, with columns for sales, profit, discount, product category, and customer segment. You can download it here: superstore.csv.\nAn analyst would take half a day to work through this. With a coding agent, you can do it in ten minutes.",
+    "text": "The scenario\nThis chapter goes from a raw spreadsheet to a written recommendation with charts in under ten minutes — using nothing but plain-English conversation. We use a spreadsheet as an example, but other data sources can be used similarly. Chapter 4 discusses databases.\nYou are a regional VP at a retail company. Q4 numbers just came in. The question on the table: which regions should get additional marketing budget, and which product lines should be expanded or cut?\nThe data is the Kaggle “Sample Superstore” dataset — roughly 10,000 orders across four U.S. regions, with columns for sales, profit, discount, product category, and customer segment. You can download it here: superstore.csv.\nAn analyst would take half a day to work through this. With a coding agent, you can do it in ten minutes.",
     "crumbs": [
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Exploring Data with AI</span>"
     ]

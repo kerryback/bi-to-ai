@@ -1,6 +1,6 @@
 # Exploring Data with AI
 
-Chapter 1 introduced the coding agents and showed how to install them.  Now it is time to use one.  This chapter goes from a raw spreadsheet to a written recommendation with charts in under ten minutes --- using nothing but plain-English conversation.
+This chapter goes from a raw spreadsheet to a written recommendation with charts in under ten minutes --- using nothing but plain-English conversation.  We use a spreadsheet as an example, but other data sources can be used similarly.  Chapter 4 discusses databases.
 
 ## The scenario
 
