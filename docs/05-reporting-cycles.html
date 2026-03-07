@@ -81,7 +81,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./05-agents-deployment.html"><span class="chapter-title">Automating Reporting Cycles</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./05-reporting-cycles.html"><span class="chapter-title">Automating Reporting Cycles</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -134,7 +134,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./05-agents-deployment.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Automating Reporting Cycles</span></a>
+  <a href="./05-reporting-cycles.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Automating Reporting Cycles</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -144,7 +144,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./07-trust.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Reliability and Compliance</span></a>
+  <a href="./07-reliability.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Reliability and Compliance</span></a>
   </div>
 </li>
     </ul>
@@ -290,7 +290,6 @@ Exercise 1: Multi-Step Agent Workflow
 <p>Open your coding agent in a folder containing the <a href="data/chinook.db">Chinook database</a> and your SKILL.md from Chapter 4. Give it a single compound instruction that requires at least three steps.</p>
 <p>For example: “Query the Chinook database for the top ten artists by revenue. Create a bar chart. Write a one-paragraph executive summary. Save the chart and summary to a reports folder.”</p>
 <p>Observe the agent loop. How many distinct tool calls does the agent make? Does it check its own work? If the output is not right, refine your prompt and try again.</p>
-<p><strong>Deliverable:</strong> Your multi-step prompt, the number of tool calls you observed, and the final output.</p>
 </div>
 </div>
 </div>
@@ -309,7 +308,6 @@ Exercise 2: Build the Report App
 <p>Use the example prompt from the “Building it with your coding agent” section to build the reporting app. Give the prompt to your coding agent and let it generate the app.</p>
 <p>Test all five reports. For each, verify that the SQL returns correct data, the chart matches the data, the executive summary references actual numbers, and the PowerPoint has three slides.</p>
 <p>If anything is wrong, refine your prompt and regenerate. Keep notes on what you changed and why.</p>
-<p><strong>Deliverable:</strong> The working app (all source files), a screenshot of one generated report, and notes on any prompt refinements you made.</p>
 </div>
 </div>
 </div>
@@ -328,7 +326,6 @@ Exercise 3: Workflow Decomposition
 <p>Consider the task: “Prepare the quarterly business review for the CEO.”</p>
 <p>List the five to seven steps a human analyst would take to complete this task. For each step, identify what tool the agent would use and what data it would need. Mark which steps need human approval before the agent continues.</p>
 <p>Then write a single prompt that describes the full workflow for an agent.</p>
-<p><strong>Deliverable:</strong> Your step-by-step decomposition with tools and approval points, plus the single-prompt version.</p>
 </div>
 </div>
 </div>
@@ -347,7 +344,6 @@ Exercise 4: Report App for Your Own Data
 <p>Adapt the reporting pattern to a dataset from your work. Pick a database, spreadsheet, or API that you query regularly.</p>
 <p>Write an agent prompt that generates a report from your data — including the SQL (or data-fetching logic), chart type, summary style, and output format. Give the prompt to your coding agent and test the result.</p>
 <p>If you cannot use real work data, use a public dataset: the <a href="https://github.com/Microsoft/sql-server-samples/tree/master/samples/databases/northwind-pubs">Northwind database</a>, <a href="https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page">NYC taxi data</a>, or any CSV from your field.</p>
-<p><strong>Deliverable:</strong> Your adapted prompt, the generated app or report, and a paragraph describing how this would save time in your workflow.</p>
 </div>
 </div>
 </div>
@@ -366,7 +362,6 @@ Exercise 5: Agent Use Case Inventory
 <p>Review your team’s recurring tasks and identify five that are multi-step, repetitive, and data-driven — good candidates for agent automation.</p>
 <p>For each, describe the trigger (what starts the task), the steps (what happens), the output (what gets delivered), and the frequency (how often it runs). Rate each on automation potential (high, medium, or low) and risk level (high, medium, or low).</p>
 <p>Pick the highest-potential, lowest-risk workflow as your pilot candidate and write one paragraph explaining why you would start there.</p>
-<p><strong>Deliverable:</strong> Your five-task inventory with ratings, and the pilot-candidate paragraph.</p>
 </div>
 </div>
 </div>

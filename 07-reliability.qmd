@@ -166,7 +166,6 @@ Second, inspect methodology: for three queries, ask "show me the code."  Read ea
 
 Third, spot-check edge cases: test three edge cases (empty results, boundary dates, null values).  Does AI handle them gracefully?
 
-The deliverable is a one-page verification report with pass or fail for each step.
 :::
 
 ::: {.callout-note title="Exercise 2: Red-Team Your Skill" collapse="true"}
@@ -174,7 +173,7 @@ Open your coding agent with the [Chinook database](data/chinook.db) and your SKI
 
 Run five adversarial queries designed to break the skill: a query about nonexistent data ("Sales in 2025"), a complex multi-table join ("Revenue by artist by country"), a request for data not in the schema ("Customer satisfaction scores"), an ambiguous column name, and a boundary date query.
 
-For each failure, diagnose the root cause, fix the SKILL.md, and retest.  The deliverable is a hardened SKILL.md and a log of your five adversarial queries with outcomes.
+For each failure, diagnose the root cause, fix the SKILL.md, and retest.
 :::
 
 ::: {.callout-note title="Exercise 3: RAG Citation Audit" collapse="true"}
@@ -184,7 +183,6 @@ For each answer, locate every cited passage in the original document.  Rate each
 
 Then ask three questions the document cannot answer.  Does AI admit it does not know, or does it hallucinate?
 
-The deliverable is your citation audit log with ratings and your out-of-scope test results.
 :::
 
 ::: {.callout-note title="Exercise 4: Draft an AI Usage Policy" collapse="true"}
@@ -192,7 +190,6 @@ Write a one-page AI usage policy for your organization (or a hypothetical one).
 
 Cover four areas.  First, what data can and cannot be sent to AI providers, classified by sensitivity level.  Second, which AI tools are approved for which use cases.  Third, when human review is required before acting on AI output.  Fourth, how RAG citations should be verified before sharing results externally.
 
-The deliverable is the one-page policy.
 :::
 
 ::: {.callout-note title="Exercise 5: Compliance Scenario Analysis" collapse="true"}
@@ -202,5 +199,4 @@ Describe a specific use case: what data would AI access, and what questions woul
 
 List three guardrails you would add to enforce compliance.
 
-The deliverable is a one-page compliance scenario analysis.
 :::

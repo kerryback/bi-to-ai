@@ -152,5 +152,5 @@ Compare the experience.  Which agent was faster?  Did the charts differ in style
 ::: {.callout-note title="Exercise 3: Instruction Files" collapse="true"}
 Create a project instruction file (`CLAUDE.md`, `GEMINI.md`, or `AGENTS.md` depending on your agent) in a folder containing the sample CSV from Exercise 1.  Add two instructions: a preferred chart style (for example, "use a dark background with white text for all charts") and a default analysis behavior (for example, "always show the code you run").
 
-Ask the agent to create a chart.  Does it follow your instructions?  Modify the instruction file and ask again.  The deliverable is your instruction file and a brief note on what the agent followed and what it ignored.
+Ask the agent to create a chart.  Does it follow your instructions?  Modify the instruction file and ask again.
 :::

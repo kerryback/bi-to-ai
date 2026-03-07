@@ -2,7 +2,7 @@
 
 The first three chapters worked with individual files --- a CSV placed in a folder, a memo pasted into a conversation.  Most real business data does not live in spreadsheets.  It lives in databases: structured collections of related tables, hosted on servers, queried with SQL.
 
-This chapter connects AI to those databases.  By the end, you will have built a reusable "skill" that lets anyone on your team query a database in plain English --- no SQL required.
+This chapter connects AI to those databases.  By the end, you will understand how your organization can create tools so that everyone can query a database in plain English --- no SQL required.  As throughout this book, the examples use Claude Code, but the same workflows apply to Gemini CLI and OpenAI Codex.
 
 ## The dashboard trap
 
@@ -10,23 +10,27 @@ Organizations spend millions building dashboards that answer yesterday's questio
 
 The cost is measured in three dimensions.  Time: weeks to months per dashboard.  Rigidity: fixed views of fixed data that cannot adapt to a new question.  Adoption: according to Gartner (2023), fewer than half of data and analytics teams effectively provide value to their organizations.
 
-The dashboard was a workaround for the fact that databases do not speak English.  Now they do.  With natural language AI, you skip the entire build cycle and go straight from question to answer.  Ask in plain English instead of writing SQL.  Get answers in seconds instead of weeks.  Follow-up questions are free --- just type the next sentence.
-
-## MCP: the universal connector
-
-Out of the box, AI chatbots can only read and write text.  They cannot query your database, pull data from the web, or update a spreadsheet.  The Model Context Protocol (MCP) solves this problem.
-
-MCP is an open standard that lets AI connect to external tools --- think of it as USB for AI.  An AI assistant acts as the MCP client and connects to MCP servers that wrap databases, browsers, calendars, CRMs, and anything else with an API.  You can connect as many tools as you want, and the AI sees all their capabilities and can use them together.
-
-The practical implication is that the same AI that analyzed your spreadsheet in Chapter 2 can now query your PostgreSQL database, pull records from Salesforce, check your calendar, and update a Jira ticket --- all in the same conversation.
-
-Anthropic launched official plugins on January 30, 2026, bundling skills, MCP connectors, and slash commands into installable packages.  The market reaction was dramatic: \$285 billion in market cap evaporated from enterprise software companies in days, with LegalZoom dropping 20%, Thomson Reuters 16%, and Intuit more than 10%.  The plugins were research previews, not production-ready tools, but the direction of travel was clear enough to spook the market.
+The dashboard was a workaround for the fact that databases do not speak English.  Now they do.  With natural language AI, you skip the entire build cycle and go straight from question to answer.  Ask in plain English instead of writing SQL and ask whatever you want instead of being limited to dashboard views.  Get answers in seconds instead of weeks.  Follow-up questions are free --- just type the next sentence.
 
 ## From spreadsheets to databases
 
 In Chapter 2 you analyzed a spreadsheet --- a single table of rows and columns living in a file on your machine.  Most real business data lives in databases: many related tables linked by keys, hosted on a server, queried with SQL.
 
-SQL is the language databases understand.  You do not need to learn it.  AI writes the SQL for you.  But you do need to tell the AI what is in the database --- which tables exist, what the columns mean, and how the tables relate to each other.  That is what a skill does.
+SQL is the language databases understand.  You do not need to learn it.  AI writes the SQL for you.  But you do need to tell the AI what is in the database --- which tables exist, what the columns mean, and how the tables relate to each other.
+
+## How AI connects to a database
+
+There are several ways to give AI access to your data, ranging from simple to sophisticated.
+
+**Skill files.**  The simplest approach: write a markdown file that describes your database schema and hand it to a coding agent.  The agent reads the description, writes SQL, and executes it.  No special infrastructure is needed --- just a file and a coding agent that can run code.  This is what we build in this chapter.
+
+**Direct API calls.**  A lightweight application --- even fifty lines of Python --- can send a user's question and a schema description to an LLM, get back SQL, run it, and display the results.  This is the pattern behind the demo app at the end of this chapter.  It works for prototypes and internal tools where you control the deployment.
+
+**MCP (Model Context Protocol).**  An open standard that lets AI connect to external tools --- databases, CRMs, calendars, anything with an API.  Think of it as USB for AI.  The AI assistant acts as an MCP client and connects to MCP servers that wrap external systems.  MCP is most useful when you need to connect to many different tools in a single conversation or when IT wants a standardized way to manage AI's access to corporate systems.
+
+**Vendor platforms.**  Salesforce, Snowflake, Databricks, and others are embedding natural-language query directly into their products.  If your data already lives in one of these platforms, you may not need to build anything --- just enable the feature.
+
+All of these approaches share the same core idea: give the AI a description of your data and let it write the query.  The differences are in how the description is delivered, who runs the query, and how much infrastructure is involved.  We start with skill files because they require no setup and teach the underlying pattern that every other approach builds on.
 
 ## The sample database: Chinook
 
@@ -38,7 +42,7 @@ The key tables are employees (8 staff members), customers (59 customers across 2
 
 A skill is a set of instructions that specializes a general-purpose AI for a specific task.  Every AI customization works the same way: additional text is added to the prompt.  A skill provides three things: domain knowledge (what the data means), workflow instructions (how to do the task), and output format specifications (how to present results).
 
-Skills are not limited to databases.  You could build a skill for weekly report generation, customer support analysis, or any recurring task where AI benefits from domain context.  But the database query skill is the most common and the most immediately useful, so that is what we build here.
+Skills are not limited to databases.  You could build a skill for weekly report generation, customer support analysis, or any recurring task where AI benefits from domain context.  
 
 ## The SKILL.md file
 
@@ -57,6 +61,8 @@ The skill file is just text.  Anyone can edit it.  No programming is required --
 Create a project folder with the SQLite database file and a file called SKILL.md.  Write the schema, describing each table, its columns, and its relationships.  Then test by asking questions and refining based on what Claude gets wrong.
 
 Your first draft will not be perfect, and that is fine.  The skill improves through iteration.  Every time Claude misinterprets a question or uses the wrong join path, you add a clarification to the SKILL.md.  After a few rounds of testing, the skill handles the most common questions reliably.
+
+You do not have to write the skill from scratch.  Point your coding agent at the database and ask it to generate the SKILL.md for you.  It will inspect the tables, columns, and foreign keys and produce a first draft.  Your job is to read the result, verify that the descriptions match your understanding of the data, and add any business context the agent could not infer on its own.
 
 ## Building the Chinook skill
 
@@ -92,7 +98,13 @@ Skills turn institutional knowledge into executable instructions.  Instead of a 
 
 ## Behind the firewall
 
-MCP connectors exist for Salesforce, Jira, Slack, internal databases, and anything else with an API.  On a corporate network, the coding agent connects to your database behind the firewall.  No data leaves your network --- AI sends queries, not raw data, to the model.  IT controls which databases and tools AI can access via MCP configuration.
+Understanding the data flow matters for security.  When you use a coding agent, the flow works like this: you type a question, the agent sends your question and the schema description to the LLM (hosted in the cloud), the LLM returns SQL, and the agent executes that SQL against your database locally.  The raw data never leaves your network --- only your question and the schema travel to the cloud.  The query results stay on your machine.
+
+In a deployed app (like the Streamlit demo), the app replaces the coding agent: the app sends the question to the LLM, receives SQL back, runs it against the database, and displays results to the user.  Again, the LLM never sees the actual data --- only the question and the schema.
+
+IT controls which databases the agent or app can access and can restrict connections to read-only credentials.
+
+For organizations that need to connect AI to multiple systems --- databases, CRMs, ticketing tools --- MCP provides a standardized way to manage those connections.  MCP connectors exist for Salesforce, Jira, Slack, internal databases, and anything else with an API.
 
 ::: {.callout-tip title="MCP support across coding agents"}
 Claude Code has native MCP support, and Gemini CLI also supports MCP servers.  Codex uses a different tool-integration mechanism but can connect to the same databases through its own plugin system.  The skill-file pattern described in this chapter works with any agent that can read a markdown file and execute SQL.
@@ -102,15 +114,21 @@ In this chapter we connect to a local SQLite file.  In your organization, the sa
 
 ## The skill as deployment artifact
 
-A polished skill is what gets deployed on your intranet.  The skill file encodes which tables matter, how they relate, and what the business terminology means.  IT adds the infrastructure: SSO authentication, read-only database credentials, and query logging for audit.
-
-The skill file is the deployment artifact.  IT adds infrastructure; you provide domain knowledge.  Chapter 5 shows how to chain this skill into an automated reporting pipeline.
+A polished skill is what gets deployed on your intranet.  The skill file encodes which tables matter, how they relate, and what the business terminology means.  IT adds the infrastructure: SSO authentication, read-only database credentials, and query logging for audit.  Chapter 5 shows how to chain this skill into an automated reporting pipeline.
 
 ## A natural-language query app
 
-To see the skill concept in action as a working prototype, consider a small Streamlit app that lets you type a plain-English question and get results from the Chinook database.  No coding agent is needed --- the app calls an LLM directly via API.
+The skill-file approach works well with a coding agent, but what about the rest of your organization?  Not everyone will use a terminal.  The same pattern --- send a question and schema to an LLM, get SQL back, run it --- can be wrapped in a simple web app that anyone can use from a browser.
 
-Here is what happens when you type a question.  The app sends your question, along with a description of the Chinook schema, to a free model on OpenRouter.  The model returns a SQL query.  The app runs that query against `chinook.db` and displays the results in a table.  The generated SQL is shown above the results --- the same transparency principle discussed in the "SQL transparency" section.
+In production, this app would be deployed on the corporate intranet, the database would be a PostgreSQL or Snowflake instance on the company's servers, and the LLM would be an enterprise-licensed model (more on licensing and compliance in Chapter 7).  For this demo, we run everything locally: a small Streamlit app on your laptop, the Chinook SQLite file in the same folder, and a free LLM API from [OpenRouter](https://openrouter.ai).
+
+### Setting up the demo
+
+You need a free OpenRouter API key.  Go to [openrouter.ai](https://openrouter.ai), create an account, and generate an API key from your dashboard.  Set it as an environment variable:
+
+```bash
+export OPENROUTER_API_KEY="sk-or-..."
+```
 
 Download the app files here: [app.py](data/demos/chinook-query/app.py) and [requirements.txt](data/demos/chinook-query/requirements.txt).  Copy `chinook.db` into the same folder, install the dependencies, and run:
 
@@ -119,9 +137,59 @@ pip install -r requirements.txt
 streamlit run app.py
 ```
 
-Try asking "What are the top 5 countries by revenue?" or "Which artist has the most tracks?"  You can see the SQL the model generates and verify it against what you would expect.
+### What the app sends to the LLM
 
-This is a demo, not a production application.  There is no authentication, no guardrails on the SQL, and no sandboxing of query execution.  Chapter 5 covers sandboxing and the path to production.  But as a prototype that proves the concept, fifty lines of Python is all it takes.
+When you type a question, the app sends two things to the LLM: a system prompt containing the database schema, and your question.  Here is the system prompt (abbreviated):
+
+```
+You are a SQL assistant. Given the schema below and a user
+question, return ONLY a single SQLite SELECT statement.
+
+The Chinook database has these tables:
+
+artists(ArtistId, Name)
+albums(AlbumId, Title, ArtistId) → artists
+tracks(TrackId, Name, AlbumId, GenreId, UnitPrice) → albums, genres
+invoices(InvoiceId, CustomerId, InvoiceDate, Total) → customers
+invoice_items(InvoiceLineId, InvoiceId, TrackId, UnitPrice, Quantity)
+...
+
+Revenue = SUM(invoice_items.UnitPrice * invoice_items.Quantity).
+```
+
+Notice what is *not* in this prompt: no actual data.  The LLM sees only the table and column names --- the same schema description you would put in a skill file.
+
+### What comes back
+
+If you ask "What are the top 5 countries by revenue?", the LLM returns pure SQL:
+
+```sql
+SELECT c.Country, SUM(ii.UnitPrice * ii.Quantity) AS Revenue
+FROM invoice_items ii
+JOIN invoices i ON ii.InvoiceId = i.InvoiceId
+JOIN customers c ON i.CustomerId = c.CustomerId
+GROUP BY c.Country
+ORDER BY Revenue DESC
+LIMIT 5;
+```
+
+The app runs this query against the local `chinook.db` file and displays the results in a table.  The generated SQL is shown above the results --- the same transparency principle discussed in the "SQL transparency" section.  The LLM never sees the query results; it only writes the SQL.
+
+### The data flow
+
+The complete round trip looks like this:
+
+1. You type a question in the browser.
+2. The app sends your question + the schema description to the LLM (cloud).
+3. The LLM returns a SQL query (cloud → your machine).
+4. The app executes the SQL against the database (entirely local).
+5. The app displays the results in your browser (entirely local).
+
+The only things that leave your machine are the question and the schema.  The actual data --- customer names, revenue figures, transaction records --- never goes to the cloud.
+
+### From demo to production
+
+This is a demo, not a production application.  There is no authentication, no guardrails on the SQL, and no sandboxing of query execution.  In a production deployment, IT would add SSO login, restrict the database connection to read-only credentials, log every query for audit, and use an enterprise LLM with a data-processing agreement.  Chapter 7 covers these considerations in detail.  But as a prototype that proves the concept, fifty lines of Python is all it takes.
 
 ## Exercises
 
@@ -130,7 +198,7 @@ Download [chinook.db](data/chinook.db) and place it in a new project folder.  Cr
 
 Open your coding agent in the folder and test three decision-relevant queries.  For each, ask Claude to show the SQL and verify that the joins and filters are correct.  Then ask for an interactive Plotly chart and iterate on it at least once --- change colors, add annotations, or improve the layout.
 
-The deliverable is a working SKILL.md and one interactive chart.
+You should end up with a working SKILL.md and at least one interactive chart.
 :::
 
 ::: {.callout-note title="Exercise 2: Database Schema Detective" collapse="true"}
@@ -140,7 +208,7 @@ Ask: "What tables are in this database?  How are they related?"  Let Claude disc
 
 Follow up with two questions that require joining at least two tables (for example, "Revenue by artist" requires joining invoices, invoice_items, tracks, albums, and artists).
 
-The deliverable is Claude's relationship summary and two multi-table query results.
+Compare the agent's schema discovery to what you know from the chapter.  Did it miss anything?
 :::
 
 ::: {.callout-note title="Exercise 3: Decision Scenario Queries" collapse="true"}
@@ -154,7 +222,14 @@ Write one sentence stating which two genres you would cut and why.
 ::: {.callout-note title="Exercise 4: Skill for Your Own Data" collapse="true"}
 Take a CSV from your work (anonymize if needed) or a public dataset you care about.  Ask the agent to convert it to a SQLite database.  Then write a SKILL.md describing the tables, columns, relationships, and five example questions.
 
-Test five queries and refine the skill until all five return correct results.  The deliverable is your SKILL.md and the SQLite database file.
+If you do not have a work dataset, try one of these public sources:
+
+- [Kaggle Datasets](https://www.kaggle.com/datasets) --- thousands of downloadable CSVs across business, finance, healthcare, sports, and more.
+- [UCI Machine Learning Repository](https://archive.ics.uci.edu/) --- classic datasets for analysis, including census, retail, and banking data.
+- [data.gov](https://data.gov) --- U.S. government open data on economics, education, health, and public safety.
+- [World Bank Open Data](https://data.worldbank.org) --- country-level economic and development indicators.
+
+Test five queries and refine the skill until all five return correct results.
 :::
 
 ::: {.callout-note title="Exercise 5: The Monday Morning Report" collapse="true"}
@@ -162,11 +237,8 @@ Identify a recurring report your team produces --- weekly sales summary, monthly
 
 Add an instruction to the skill: "When I say 'Monday report,' run these three queries and format the results as a one-page summary."  Test it.  Does one command produce your entire report?
 
-The deliverable is the skill file and a sample report output.
 :::
 
 ::: {.callout-note title="Exercise 6: Build Your Own Query App" collapse="true"}
 Ask your coding agent to build a natural-language query app similar to the [chinook-query demo](data/demos/chinook-query/app.py), either from scratch or by improving the demo.  Possible extensions: add chart generation for numeric results, show query history in a sidebar, add error handling that suggests corrections when the SQL fails, or let the user choose between different databases.
-
-The deliverable is a working Streamlit app and a brief note on what you added or changed.
 :::

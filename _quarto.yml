@@ -19,9 +19,9 @@ book:
     - 02-exploring-data.qmd
     - 03-thinking-partner.qmd
     - 04-connecting-databases.qmd
-    - 05-agents-deployment.qmd
+    - 05-reporting-cycles.qmd
     - 06-rag.qmd
-    - 07-trust.qmd
+    - 07-reliability.qmd
 
 format:
   html:

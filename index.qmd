@@ -33,3 +33,5 @@ Chapter 6 uses a [sample company handbook](data/company-handbook.md) for RAG exe
 ## Prerequisites
 
 You need one of the three major coding agents installed on your machine.  Chapter 1 walks through the installation of Claude Code, Gemini CLI, and OpenAI Codex.  All three run in the terminal, read local files, and execute code.  No prior coding or data science experience is assumed.
+
+The examples in this book use Claude Code, but the concepts and workflows apply equally to Gemini CLI and OpenAI Codex.  Where we say "Claude" or "ask Claude," you can substitute whichever agent you installed.

@@ -64,7 +64,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./05-agents-deployment.html" rel="next">
+<link href="./05-reporting-cycles.html" rel="next">
 <link href="./03-thinking-partner.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -168,7 +168,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./05-agents-deployment.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Automating Reporting Cycles</span></a>
+  <a href="./05-reporting-cycles.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Automating Reporting Cycles</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -178,7 +178,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./07-trust.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Reliability and Compliance</span></a>
+  <a href="./07-reliability.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Reliability and Compliance</span></a>
   </div>
 </li>
     </ul>
@@ -192,8 +192,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#the-dashboard-trap" id="toc-the-dashboard-trap" class="nav-link active" data-scroll-target="#the-dashboard-trap">The dashboard trap</a></li>
-  <li><a href="#mcp-the-universal-connector" id="toc-mcp-the-universal-connector" class="nav-link" data-scroll-target="#mcp-the-universal-connector">MCP: the universal connector</a></li>
   <li><a href="#from-spreadsheets-to-databases" id="toc-from-spreadsheets-to-databases" class="nav-link" data-scroll-target="#from-spreadsheets-to-databases">From spreadsheets to databases</a></li>
+  <li><a href="#how-ai-connects-to-a-database" id="toc-how-ai-connects-to-a-database" class="nav-link" data-scroll-target="#how-ai-connects-to-a-database">How AI connects to a database</a></li>
   <li><a href="#the-sample-database-chinook" id="toc-the-sample-database-chinook" class="nav-link" data-scroll-target="#the-sample-database-chinook">The sample database: Chinook</a></li>
   <li><a href="#what-is-a-skill" id="toc-what-is-a-skill" class="nav-link" data-scroll-target="#what-is-a-skill">What is a skill?</a></li>
   <li><a href="#the-skill.md-file" id="toc-the-skill.md-file" class="nav-link" data-scroll-target="#the-skill.md-file">The SKILL.md file</a></li>
@@ -204,7 +204,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#iterating-on-the-skill" id="toc-iterating-on-the-skill" class="nav-link" data-scroll-target="#iterating-on-the-skill">Iterating on the skill</a></li>
   <li><a href="#behind-the-firewall" id="toc-behind-the-firewall" class="nav-link" data-scroll-target="#behind-the-firewall">Behind the firewall</a></li>
   <li><a href="#the-skill-as-deployment-artifact" id="toc-the-skill-as-deployment-artifact" class="nav-link" data-scroll-target="#the-skill-as-deployment-artifact">The skill as deployment artifact</a></li>
-  <li><a href="#a-natural-language-query-app" id="toc-a-natural-language-query-app" class="nav-link" data-scroll-target="#a-natural-language-query-app">A natural-language query app</a></li>
+  <li><a href="#a-natural-language-query-app" id="toc-a-natural-language-query-app" class="nav-link" data-scroll-target="#a-natural-language-query-app">A natural-language query app</a>
+  <ul class="collapse">
+  <li><a href="#setting-up-the-demo" id="toc-setting-up-the-demo" class="nav-link" data-scroll-target="#setting-up-the-demo">Setting up the demo</a></li>
+  <li><a href="#what-the-app-sends-to-the-llm" id="toc-what-the-app-sends-to-the-llm" class="nav-link" data-scroll-target="#what-the-app-sends-to-the-llm">What the app sends to the LLM</a></li>
+  <li><a href="#what-comes-back" id="toc-what-comes-back" class="nav-link" data-scroll-target="#what-comes-back">What comes back</a></li>
+  <li><a href="#the-data-flow" id="toc-the-data-flow" class="nav-link" data-scroll-target="#the-data-flow">The data flow</a></li>
+  <li><a href="#from-demo-to-production" id="toc-from-demo-to-production" class="nav-link" data-scroll-target="#from-demo-to-production">From demo to production</a></li>
+  </ul></li>
   <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a></li>
   </ul>
 </nav>
@@ -232,24 +239,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <p>The first three chapters worked with individual files — a CSV placed in a folder, a memo pasted into a conversation. Most real business data does not live in spreadsheets. It lives in databases: structured collections of related tables, hosted on servers, queried with SQL.</p>
-<p>This chapter connects AI to those databases. By the end, you will have built a reusable “skill” that lets anyone on your team query a database in plain English — no SQL required.</p>
+<p>This chapter connects AI to those databases. By the end, you will understand how your organization can create tools so that everyone can query a database in plain English — no SQL required. As throughout this book, the examples use Claude Code, but the same workflows apply to Gemini CLI and OpenAI Codex.</p>
 <section id="the-dashboard-trap" class="level2">
 <h2 class="anchored" data-anchor-id="the-dashboard-trap">The dashboard trap</h2>
 <p>Organizations spend millions building dashboards that answer yesterday’s questions. The cycle is familiar: a user requests a report, an analyst builds it, IT deploys it to Tableau or Power BI, and then the user asks a follow-up question — which starts the cycle over.</p>
 <p>The cost is measured in three dimensions. Time: weeks to months per dashboard. Rigidity: fixed views of fixed data that cannot adapt to a new question. Adoption: according to Gartner (2023), fewer than half of data and analytics teams effectively provide value to their organizations.</p>
-<p>The dashboard was a workaround for the fact that databases do not speak English. Now they do. With natural language AI, you skip the entire build cycle and go straight from question to answer. Ask in plain English instead of writing SQL. Get answers in seconds instead of weeks. Follow-up questions are free — just type the next sentence.</p>
-</section>
-<section id="mcp-the-universal-connector" class="level2">
-<h2 class="anchored" data-anchor-id="mcp-the-universal-connector">MCP: the universal connector</h2>
-<p>Out of the box, AI chatbots can only read and write text. They cannot query your database, pull data from the web, or update a spreadsheet. The Model Context Protocol (MCP) solves this problem.</p>
-<p>MCP is an open standard that lets AI connect to external tools — think of it as USB for AI. An AI assistant acts as the MCP client and connects to MCP servers that wrap databases, browsers, calendars, CRMs, and anything else with an API. You can connect as many tools as you want, and the AI sees all their capabilities and can use them together.</p>
-<p>The practical implication is that the same AI that analyzed your spreadsheet in Chapter 2 can now query your PostgreSQL database, pull records from Salesforce, check your calendar, and update a Jira ticket — all in the same conversation.</p>
-<p>Anthropic launched official plugins on January 30, 2026, bundling skills, MCP connectors, and slash commands into installable packages. The market reaction was dramatic: $285 billion in market cap evaporated from enterprise software companies in days, with LegalZoom dropping 20%, Thomson Reuters 16%, and Intuit more than 10%. The plugins were research previews, not production-ready tools, but the direction of travel was clear enough to spook the market.</p>
+<p>The dashboard was a workaround for the fact that databases do not speak English. Now they do. With natural language AI, you skip the entire build cycle and go straight from question to answer. Ask in plain English instead of writing SQL and ask whatever you want instead of being limited to dashboard views. Get answers in seconds instead of weeks. Follow-up questions are free — just type the next sentence.</p>
 </section>
 <section id="from-spreadsheets-to-databases" class="level2">
 <h2 class="anchored" data-anchor-id="from-spreadsheets-to-databases">From spreadsheets to databases</h2>
 <p>In Chapter 2 you analyzed a spreadsheet — a single table of rows and columns living in a file on your machine. Most real business data lives in databases: many related tables linked by keys, hosted on a server, queried with SQL.</p>
-<p>SQL is the language databases understand. You do not need to learn it. AI writes the SQL for you. But you do need to tell the AI what is in the database — which tables exist, what the columns mean, and how the tables relate to each other. That is what a skill does.</p>
+<p>SQL is the language databases understand. You do not need to learn it. AI writes the SQL for you. But you do need to tell the AI what is in the database — which tables exist, what the columns mean, and how the tables relate to each other.</p>
+</section>
+<section id="how-ai-connects-to-a-database" class="level2">
+<h2 class="anchored" data-anchor-id="how-ai-connects-to-a-database">How AI connects to a database</h2>
+<p>There are several ways to give AI access to your data, ranging from simple to sophisticated.</p>
+<p><strong>Skill files.</strong> The simplest approach: write a markdown file that describes your database schema and hand it to a coding agent. The agent reads the description, writes SQL, and executes it. No special infrastructure is needed — just a file and a coding agent that can run code. This is what we build in this chapter.</p>
+<p><strong>Direct API calls.</strong> A lightweight application — even fifty lines of Python — can send a user’s question and a schema description to an LLM, get back SQL, run it, and display the results. This is the pattern behind the demo app at the end of this chapter. It works for prototypes and internal tools where you control the deployment.</p>
+<p><strong>MCP (Model Context Protocol).</strong> An open standard that lets AI connect to external tools — databases, CRMs, calendars, anything with an API. Think of it as USB for AI. The AI assistant acts as an MCP client and connects to MCP servers that wrap external systems. MCP is most useful when you need to connect to many different tools in a single conversation or when IT wants a standardized way to manage AI’s access to corporate systems.</p>
+<p><strong>Vendor platforms.</strong> Salesforce, Snowflake, Databricks, and others are embedding natural-language query directly into their products. If your data already lives in one of these platforms, you may not need to build anything — just enable the feature.</p>
+<p>All of these approaches share the same core idea: give the AI a description of your data and let it write the query. The differences are in how the description is delivered, who runs the query, and how much infrastructure is involved. We start with skill files because they require no setup and teach the underlying pattern that every other approach builds on.</p>
 </section>
 <section id="the-sample-database-chinook" class="level2">
 <h2 class="anchored" data-anchor-id="the-sample-database-chinook">The sample database: Chinook</h2>
@@ -259,7 +268,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="what-is-a-skill" class="level2">
 <h2 class="anchored" data-anchor-id="what-is-a-skill">What is a skill?</h2>
 <p>A skill is a set of instructions that specializes a general-purpose AI for a specific task. Every AI customization works the same way: additional text is added to the prompt. A skill provides three things: domain knowledge (what the data means), workflow instructions (how to do the task), and output format specifications (how to present results).</p>
-<p>Skills are not limited to databases. You could build a skill for weekly report generation, customer support analysis, or any recurring task where AI benefits from domain context. But the database query skill is the most common and the most immediately useful, so that is what we build here.</p>
+<p>Skills are not limited to databases. You could build a skill for weekly report generation, customer support analysis, or any recurring task where AI benefits from domain context.</p>
 </section>
 <section id="the-skill.md-file" class="level2">
 <h2 class="anchored" data-anchor-id="the-skill.md-file">The SKILL.md file</h2>
@@ -273,6 +282,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="creating-the-skill-step-by-step">Creating the skill step by step</h2>
 <p>Create a project folder with the SQLite database file and a file called SKILL.md. Write the schema, describing each table, its columns, and its relationships. Then test by asking questions and refining based on what Claude gets wrong.</p>
 <p>Your first draft will not be perfect, and that is fine. The skill improves through iteration. Every time Claude misinterprets a question or uses the wrong join path, you add a clarification to the SKILL.md. After a few rounds of testing, the skill handles the most common questions reliably.</p>
+<p>You do not have to write the skill from scratch. Point your coding agent at the database and ask it to generate the SKILL.md for you. It will inspect the tables, columns, and foreign keys and produce a first draft. Your job is to read the result, verify that the descriptions match your understanding of the data, and add any business context the agent could not infer on its own.</p>
 </section>
 <section id="building-the-chinook-skill" class="level2">
 <h2 class="anchored" data-anchor-id="building-the-chinook-skill">Building the Chinook skill</h2>
@@ -300,7 +310,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="behind-the-firewall" class="level2">
 <h2 class="anchored" data-anchor-id="behind-the-firewall">Behind the firewall</h2>
-<p>MCP connectors exist for Salesforce, Jira, Slack, internal databases, and anything else with an API. On a corporate network, the coding agent connects to your database behind the firewall. No data leaves your network — AI sends queries, not raw data, to the model. IT controls which databases and tools AI can access via MCP configuration.</p>
+<p>Understanding the data flow matters for security. When you use a coding agent, the flow works like this: you type a question, the agent sends your question and the schema description to the LLM (hosted in the cloud), the LLM returns SQL, and the agent executes that SQL against your database locally. The raw data never leaves your network — only your question and the schema travel to the cloud. The query results stay on your machine.</p>
+<p>In a deployed app (like the Streamlit demo), the app replaces the coding agent: the app sends the question to the LLM, receives SQL back, runs it against the database, and displays results to the user. Again, the LLM never sees the actual data — only the question and the schema.</p>
+<p>IT controls which databases the agent or app can access and can restrict connections to read-only credentials.</p>
+<p>For organizations that need to connect AI to multiple systems — databases, CRMs, ticketing tools — MCP provides a standardized way to manage those connections. MCP connectors exist for Salesforce, Jira, Slack, internal databases, and anything else with an API.</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="MCP support across coding agents">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -318,18 +331,66 @@ MCP support across coding agents
 </section>
 <section id="the-skill-as-deployment-artifact" class="level2">
 <h2 class="anchored" data-anchor-id="the-skill-as-deployment-artifact">The skill as deployment artifact</h2>
-<p>A polished skill is what gets deployed on your intranet. The skill file encodes which tables matter, how they relate, and what the business terminology means. IT adds the infrastructure: SSO authentication, read-only database credentials, and query logging for audit.</p>
-<p>The skill file is the deployment artifact. IT adds infrastructure; you provide domain knowledge. Chapter 5 shows how to chain this skill into an automated reporting pipeline.</p>
+<p>A polished skill is what gets deployed on your intranet. The skill file encodes which tables matter, how they relate, and what the business terminology means. IT adds the infrastructure: SSO authentication, read-only database credentials, and query logging for audit. Chapter 5 shows how to chain this skill into an automated reporting pipeline.</p>
 </section>
 <section id="a-natural-language-query-app" class="level2">
 <h2 class="anchored" data-anchor-id="a-natural-language-query-app">A natural-language query app</h2>
-<p>To see the skill concept in action as a working prototype, consider a small Streamlit app that lets you type a plain-English question and get results from the Chinook database. No coding agent is needed — the app calls an LLM directly via API.</p>
-<p>Here is what happens when you type a question. The app sends your question, along with a description of the Chinook schema, to a free model on OpenRouter. The model returns a SQL query. The app runs that query against <code>chinook.db</code> and displays the results in a table. The generated SQL is shown above the results — the same transparency principle discussed in the “SQL transparency” section.</p>
+<p>The skill-file approach works well with a coding agent, but what about the rest of your organization? Not everyone will use a terminal. The same pattern — send a question and schema to an LLM, get SQL back, run it — can be wrapped in a simple web app that anyone can use from a browser.</p>
+<p>In production, this app would be deployed on the corporate intranet, the database would be a PostgreSQL or Snowflake instance on the company’s servers, and the LLM would be an enterprise-licensed model (more on licensing and compliance in Chapter 7). For this demo, we run everything locally: a small Streamlit app on your laptop, the Chinook SQLite file in the same folder, and a free LLM API from <a href="https://openrouter.ai">OpenRouter</a>.</p>
+<section id="setting-up-the-demo" class="level3">
+<h3 class="anchored" data-anchor-id="setting-up-the-demo">Setting up the demo</h3>
+<p>You need a free OpenRouter API key. Go to <a href="https://openrouter.ai">openrouter.ai</a>, create an account, and generate an API key from your dashboard. Set it as an environment variable:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">OPENROUTER_API_KEY</span><span class="op">=</span><span class="st">"sk-or-..."</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Download the app files here: <a href="data/demos/chinook-query/app.py">app.py</a> and <a href="data/demos/chinook-query/requirements.txt">requirements.txt</a>. Copy <code>chinook.db</code> into the same folder, install the dependencies, and run:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install <span class="at">-r</span> requirements.txt</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">streamlit</span> run app.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Try asking “What are the top 5 countries by revenue?” or “Which artist has the most tracks?” You can see the SQL the model generates and verify it against what you would expect.</p>
-<p>This is a demo, not a production application. There is no authentication, no guardrails on the SQL, and no sandboxing of query execution. Chapter 5 covers sandboxing and the path to production. But as a prototype that proves the concept, fifty lines of Python is all it takes.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install <span class="at">-r</span> requirements.txt</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">streamlit</span> run app.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="what-the-app-sends-to-the-llm" class="level3">
+<h3 class="anchored" data-anchor-id="what-the-app-sends-to-the-llm">What the app sends to the LLM</h3>
+<p>When you type a question, the app sends two things to the LLM: a system prompt containing the database schema, and your question. Here is the system prompt (abbreviated):</p>
+<pre><code>You are a SQL assistant. Given the schema below and a user
+question, return ONLY a single SQLite SELECT statement.
+
+The Chinook database has these tables:
+
+artists(ArtistId, Name)
+albums(AlbumId, Title, ArtistId) → artists
+tracks(TrackId, Name, AlbumId, GenreId, UnitPrice) → albums, genres
+invoices(InvoiceId, CustomerId, InvoiceDate, Total) → customers
+invoice_items(InvoiceLineId, InvoiceId, TrackId, UnitPrice, Quantity)
+...
+
+Revenue = SUM(invoice_items.UnitPrice * invoice_items.Quantity).</code></pre>
+<p>Notice what is <em>not</em> in this prompt: no actual data. The LLM sees only the table and column names — the same schema description you would put in a skill file.</p>
+</section>
+<section id="what-comes-back" class="level3">
+<h3 class="anchored" data-anchor-id="what-comes-back">What comes back</h3>
+<p>If you ask “What are the top 5 countries by revenue?”, the LLM returns pure SQL:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> c.Country, <span class="fu">SUM</span>(ii.UnitPrice <span class="op">*</span> ii.Quantity) <span class="kw">AS</span> Revenue</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> invoice_items ii</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="kw">JOIN</span> invoices i <span class="kw">ON</span> ii.InvoiceId <span class="op">=</span> i.InvoiceId</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="kw">JOIN</span> customers c <span class="kw">ON</span> i.CustomerId <span class="op">=</span> c.CustomerId</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> c.Country</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> Revenue <span class="kw">DESC</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="kw">LIMIT</span> <span class="dv">5</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The app runs this query against the local <code>chinook.db</code> file and displays the results in a table. The generated SQL is shown above the results — the same transparency principle discussed in the “SQL transparency” section. The LLM never sees the query results; it only writes the SQL.</p>
+</section>
+<section id="the-data-flow" class="level3">
+<h3 class="anchored" data-anchor-id="the-data-flow">The data flow</h3>
+<p>The complete round trip looks like this:</p>
+<ol type="1">
+<li>You type a question in the browser.</li>
+<li>The app sends your question + the schema description to the LLM (cloud).</li>
+<li>The LLM returns a SQL query (cloud → your machine).</li>
+<li>The app executes the SQL against the database (entirely local).</li>
+<li>The app displays the results in your browser (entirely local).</li>
+</ol>
+<p>The only things that leave your machine are the question and the schema. The actual data — customer names, revenue figures, transaction records — never goes to the cloud.</p>
+</section>
+<section id="from-demo-to-production" class="level3">
+<h3 class="anchored" data-anchor-id="from-demo-to-production">From demo to production</h3>
+<p>This is a demo, not a production application. There is no authentication, no guardrails on the SQL, and no sandboxing of query execution. In a production deployment, IT would add SSO login, restrict the database connection to read-only credentials, log every query for audit, and use an enterprise LLM with a data-processing agreement. Chapter 7 covers these considerations in detail. But as a prototype that proves the concept, fifty lines of Python is all it takes.</p>
+</section>
 </section>
 <section id="exercises" class="level2">
 <h2 class="anchored" data-anchor-id="exercises">Exercises</h2>
@@ -347,7 +408,7 @@ Exercise 1: Build a Chinook Skill
 <div class="callout-body-container callout-body">
 <p>Download <a href="data/chinook.db">chinook.db</a> and place it in a new project folder. Create a SKILL.md file in the same folder with three sections: a description and database path, at least three table descriptions with columns and relationships, and three example questions.</p>
 <p>Open your coding agent in the folder and test three decision-relevant queries. For each, ask Claude to show the SQL and verify that the joins and filters are correct. Then ask for an interactive Plotly chart and iterate on it at least once — change colors, add annotations, or improve the layout.</p>
-<p>The deliverable is a working SKILL.md and one interactive chart.</p>
+<p>You should end up with a working SKILL.md and at least one interactive chart.</p>
 </div>
 </div>
 </div>
@@ -366,7 +427,7 @@ Exercise 2: Database Schema Detective
 <p>Connect your coding agent to the <a href="data/chinook.db">Chinook database</a> without any SKILL.md — no documentation at all.</p>
 <p>Ask: “What tables are in this database? How are they related?” Let Claude discover the schema on its own. Then ask: “If I were the CEO of this music company, what three questions should I be asking?”</p>
 <p>Follow up with two questions that require joining at least two tables (for example, “Revenue by artist” requires joining invoices, invoice_items, tracks, albums, and artists).</p>
-<p>The deliverable is Claude’s relationship summary and two multi-table query results.</p>
+<p>Compare the agent’s schema discovery to what you know from the chapter. Did it miss anything?</p>
 </div>
 </div>
 </div>
@@ -401,7 +462,14 @@ Exercise 4: Skill for Your Own Data
 <div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Take a CSV from your work (anonymize if needed) or a public dataset you care about. Ask the agent to convert it to a SQLite database. Then write a SKILL.md describing the tables, columns, relationships, and five example questions.</p>
-<p>Test five queries and refine the skill until all five return correct results. The deliverable is your SKILL.md and the SQLite database file.</p>
+<p>If you do not have a work dataset, try one of these public sources:</p>
+<ul>
+<li><a href="https://www.kaggle.com/datasets">Kaggle Datasets</a> — thousands of downloadable CSVs across business, finance, healthcare, sports, and more.</li>
+<li><a href="https://archive.ics.uci.edu/">UCI Machine Learning Repository</a> — classic datasets for analysis, including census, retail, and banking data.</li>
+<li><a href="https://data.gov">data.gov</a> — U.S. government open data on economics, education, health, and public safety.</li>
+<li><a href="https://data.worldbank.org">World Bank Open Data</a> — country-level economic and development indicators.</li>
+</ul>
+<p>Test five queries and refine the skill until all five return correct results.</p>
 </div>
 </div>
 </div>
@@ -419,7 +487,6 @@ Exercise 5: The Monday Morning Report
 <div class="callout-body-container callout-body">
 <p>Identify a recurring report your team produces — weekly sales summary, monthly KPIs, pipeline report. Write a SKILL.md that includes the database schema, the specific queries needed, and the output format.</p>
 <p>Add an instruction to the skill: “When I say ‘Monday report,’ run these three queries and format the results as a one-page summary.” Test it. Does one command produce your entire report?</p>
-<p>The deliverable is the skill file and a sample report output.</p>
 </div>
 </div>
 </div>
@@ -436,7 +503,6 @@ Exercise 6: Build Your Own Query App
 <div id="callout-7" class="callout-7-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Ask your coding agent to build a natural-language query app similar to the <a href="data/demos/chinook-query/app.py">chinook-query demo</a>, either from scratch or by improving the demo. Possible extensions: add chart generation for numeric results, show query history in a sidebar, add error handling that suggests corrections when the SQL fails, or let the user choose between different databases.</p>
-<p>The deliverable is a working Streamlit app and a brief note on what you added or changed.</p>
 </div>
 </div>
 </div>
@@ -869,7 +935,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./05-agents-deployment.html" class="pagination-link" aria-label="Automating Reporting Cycles">
+      <a href="./05-reporting-cycles.html" class="pagination-link" aria-label="Automating Reporting Cycles">
         <span class="nav-page-text"><span class="chapter-title">Automating Reporting Cycles</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>

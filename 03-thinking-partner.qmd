@@ -119,7 +119,7 @@ Pick a real decision you are currently facing --- work or personal.  Have a thin
 
 After each move, write one sentence describing what the move revealed.  At the end, reflect: did AI change your mind?  Did it surface something you had not considered?
 
-The deliverable is the conversation transcript plus a five-sentence reflection, one per move.
+Write up the conversation transcript and a five-sentence reflection, one per move.
 :::
 
 ::: {.callout-note title="Exercise 2: Challenge Your Chapter 2 Analysis" collapse="true"}
@@ -139,13 +139,13 @@ Second, ask: "What would need to be true for my recommendations to fail?"  Ident
 
 Third, run a pre-mortem: "We implemented all three interventions and attrition got worse.  What happened?"
 
-Revise your memo to acknowledge the strongest counterargument.  The deliverable is the original memo, the thinking-partner conversation, and the revised memo.
+Revise your memo to acknowledge the strongest counterargument.
 :::
 
 ::: {.callout-note title="Exercise 4: Scenario Swap" collapse="true"}
 If you are working through this book with a colleague, write down a real business decision you are facing in one or two sentences.  Swap scenarios.  Have a thinking-partner conversation about your colleague's scenario using at least three of the five conversation moves.
 
-Share back: "Here's what AI surfaced about your decision."  It is often easier to be objective about someone else's problem.  The deliverable is two key insights for your partner.
+Share back: "Here's what AI surfaced about your decision."  It is often easier to be objective about someone else's problem.
 :::
 
 ::: {.callout-note title="Exercise 5: Second-Order Thinking Practice" collapse="true"}
@@ -161,5 +161,5 @@ Write a one-paragraph proposal --- a new initiative, a policy change, or a budge
 
 Ask Claude to react to the proposal as four different stakeholders: your CEO, your CFO, a skeptical board member, and a front-line employee.  For each persona, note the main concern and what would win them over.
 
-Revise the proposal to address the top two concerns.  The deliverable is the original proposal, the stakeholder reactions, and the revised proposal.
+Revise the proposal to address the top two concerns.
 :::

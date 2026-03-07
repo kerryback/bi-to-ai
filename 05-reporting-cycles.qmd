@@ -101,7 +101,6 @@ For example: "Query the Chinook database for the top ten artists by revenue.  Cr
 
 Observe the agent loop.  How many distinct tool calls does the agent make?  Does it check its own work?  If the output is not right, refine your prompt and try again.
 
-**Deliverable:** Your multi-step prompt, the number of tool calls you observed, and the final output.
 :::
 
 ::: {.callout-note title="Exercise 2: Build the Report App" collapse="true"}
@@ -111,7 +110,6 @@ Test all five reports.  For each, verify that the SQL returns correct data, the 
 
 If anything is wrong, refine your prompt and regenerate.  Keep notes on what you changed and why.
 
-**Deliverable:** The working app (all source files), a screenshot of one generated report, and notes on any prompt refinements you made.
 :::
 
 ::: {.callout-note title="Exercise 3: Workflow Decomposition" collapse="true"}
@@ -121,7 +119,6 @@ List the five to seven steps a human analyst would take to complete this task.  
 
 Then write a single prompt that describes the full workflow for an agent.
 
-**Deliverable:** Your step-by-step decomposition with tools and approval points, plus the single-prompt version.
 :::
 
 ::: {.callout-note title="Exercise 4: Report App for Your Own Data" collapse="true"}
@@ -131,7 +128,6 @@ Write an agent prompt that generates a report from your data --- including the S
 
 If you cannot use real work data, use a public dataset: the [Northwind database](https://github.com/Microsoft/sql-server-samples/tree/master/samples/databases/northwind-pubs), [NYC taxi data](https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page), or any CSV from your field.
 
-**Deliverable:** Your adapted prompt, the generated app or report, and a paragraph describing how this would save time in your workflow.
 :::
 
 ::: {.callout-note title="Exercise 5: Agent Use Case Inventory" collapse="true"}
@@ -141,5 +137,4 @@ For each, describe the trigger (what starts the task), the steps (what happens),
 
 Pick the highest-potential, lowest-risk workflow as your pilot candidate and write one paragraph explaining why you would start there.
 
-**Deliverable:** Your five-task inventory with ratings, and the pilot-candidate paragraph.
 :::

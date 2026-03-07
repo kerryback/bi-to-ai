@@ -129,7 +129,6 @@ For each answer, evaluate relevance (did it find the right section?), faithfulne
 
 Then ask two questions the document cannot answer.  Does AI admit it does not know, or does it hallucinate?
 
-The deliverable is your five questions with evaluation ratings and your two out-of-scope test results.
 :::
 
 ::: {.callout-note title="Exercise 2: Citation Verification" collapse="true"}
@@ -139,7 +138,6 @@ For each answer, locate every cited passage in the original document.  Rate each
 
 If any citation is inaccurate, rephrase the question and see if the citation improves.
 
-The deliverable is three answers with citation verification notes.
 :::
 
 ::: {.callout-note title="Exercise 3: Conflicting Sources" collapse="true"}
@@ -147,7 +145,7 @@ Create a second version of the [company handbook](data/company-handbook.md) in w
 
 Ask a question where the two versions disagree.  Does AI cite both?  Pick one?  Acknowledge the conflict?
 
-This simulates a common production problem: stale documents coexisting with current ones.  The deliverable is the question, AI's answer, and your assessment of how it handled the conflict.
+This simulates a common production problem: stale documents coexisting with current ones.
 :::
 
 ::: {.callout-note title="Exercise 4: RAG vs. Direct Reading" collapse="true"}
@@ -165,5 +163,4 @@ Identify the document set (employee handbook, product documentation, compliance 
 
 List three risks and how you would mitigate them.  The most common risks are hallucinated citations (mitigated by citation verification workflows), stale documents (mitigated by refresh schedules), and unauthorized access (mitigated by document-level permissions).
 
-The deliverable is the one-page proposal.
 :::

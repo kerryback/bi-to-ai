@@ -80,7 +80,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./07-trust.html"><span class="chapter-title">Reliability and Compliance</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./07-reliability.html"><span class="chapter-title">Reliability and Compliance</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -133,7 +133,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./05-agents-deployment.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Automating Reporting Cycles</span></a>
+  <a href="./05-reporting-cycles.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Automating Reporting Cycles</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -143,7 +143,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./07-trust.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Reliability and Compliance</span></a>
+  <a href="./07-reliability.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Reliability and Compliance</span></a>
   </div>
 </li>
     </ul>
@@ -318,7 +318,6 @@ Exercise 1: The Verification Protocol
 <p>First, sanity-check: open the <a href="data/superstore.csv">Superstore data</a> in your coding agent and ask three questions where you know the answer (row count, total revenue, number of unique customers). Does AI match?</p>
 <p>Second, inspect methodology: for three queries, ask “show me the code.” Read each script. Is the logic correct? Then rephrase each question and run it again. Do the answers agree?</p>
 <p>Third, spot-check edge cases: test three edge cases (empty results, boundary dates, null values). Does AI handle them gracefully?</p>
-<p>The deliverable is a one-page verification report with pass or fail for each step.</p>
 </div>
 </div>
 </div>
@@ -336,7 +335,7 @@ Exercise 2: Red-Team Your Skill
 <div class="callout-body-container callout-body">
 <p>Open your coding agent with the <a href="data/chinook.db">Chinook database</a> and your SKILL.md from Chapter 4.</p>
 <p>Run five adversarial queries designed to break the skill: a query about nonexistent data (“Sales in 2025”), a complex multi-table join (“Revenue by artist by country”), a request for data not in the schema (“Customer satisfaction scores”), an ambiguous column name, and a boundary date query.</p>
-<p>For each failure, diagnose the root cause, fix the SKILL.md, and retest. The deliverable is a hardened SKILL.md and a log of your five adversarial queries with outcomes.</p>
+<p>For each failure, diagnose the root cause, fix the SKILL.md, and retest.</p>
 </div>
 </div>
 </div>
@@ -355,7 +354,6 @@ Exercise 3: RAG Citation Audit
 <p>Open your coding agent with the <a href="data/company-handbook.md">company handbook</a> from Chapter 6 and ask five factual questions.</p>
 <p>For each answer, locate every cited passage in the original document. Rate each citation as accurate, partially accurate, or hallucinated.</p>
 <p>Then ask three questions the document cannot answer. Does AI admit it does not know, or does it hallucinate?</p>
-<p>The deliverable is your citation audit log with ratings and your out-of-scope test results.</p>
 </div>
 </div>
 </div>
@@ -373,7 +371,6 @@ Exercise 4: Draft an AI Usage Policy
 <div class="callout-body-container callout-body">
 <p>Write a one-page AI usage policy for your organization (or a hypothetical one).</p>
 <p>Cover four areas. First, what data can and cannot be sent to AI providers, classified by sensitivity level. Second, which AI tools are approved for which use cases. Third, when human review is required before acting on AI output. Fourth, how RAG citations should be verified before sharing results externally.</p>
-<p>The deliverable is the one-page policy.</p>
 </div>
 </div>
 </div>
@@ -392,7 +389,6 @@ Exercise 5: Compliance Scenario Analysis
 <p>Identify the primary data regulation in your industry (HIPAA, SOX, GDPR, PCI-DSS, FERPA, or another).</p>
 <p>Describe a specific use case: what data would AI access, and what questions would it answer? Design the compliant workflow: what information goes to AI (schema only, or actual data)? What stays local? Where are the audit points?</p>
 <p>List three guardrails you would add to enforce compliance.</p>
-<p>The deliverable is a one-page compliance scenario analysis.</p>
 </div>
 </div>
 </div>
