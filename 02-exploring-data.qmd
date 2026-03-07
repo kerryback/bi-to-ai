@@ -1,0 +1,99 @@
+# Exploring Data with AI
+
+Chapter 1 introduced the coding agents and showed how to install them.  Now it is time to use one.  This chapter goes from a raw spreadsheet to a written recommendation with charts in under ten minutes --- using nothing but plain-English conversation.
+
+## The scenario
+
+You are a regional VP at a retail company.  Q4 numbers just came in.  The question on the table: which regions should get additional marketing budget, and which product lines should be expanded or cut?
+
+The data is the Kaggle "Sample Superstore" dataset --- roughly 10,000 orders across four U.S. regions, with columns for sales, profit, discount, product category, and customer segment.  You can download it here: [superstore.csv](data/superstore.csv).
+
+An analyst would take half a day to work through this.  With a coding agent, you can do it in ten minutes.
+
+## Step 1: Open and orient
+
+Place the CSV file in a folder and open your coding agent in that folder.  Then ask:
+
+> Describe the data in this folder.
+
+The agent reads the CSV into a dataframe and reports back: 10,000 rows, 21 columns, four regions, three product categories, a date range from 2014 to 2017, total sales of roughly \$2.3 million with an average profit margin around 12%.  It may also flag surprises --- sub-categories that are losing money, or a disproportionate concentration of sales in one region.
+
+This orienting step catches formatting issues (dates parsed as strings, currencies with dollar signs, encoding problems) and surfaces the structure of the data before you start asking pointed questions.
+
+## Step 2: Ask decision-relevant questions
+
+Frame every question around the decision, not around the data.  For the budget decision:
+
+> Which region has the highest profit margin, and which has the lowest?
+
+> Show quarterly sales trends by region.  Are any accelerating or declining?
+
+> Which sub-categories are losing money?  How much?
+
+Each of these questions connects directly to the budget allocation decision.  The first identifies where margin is strongest.  The second reveals momentum --- a region with declining sales may not deserve more investment regardless of its current margin.  The third pinpoints money-losers that could be cut.
+
+## Step 3: Visualize the tradeoffs
+
+Ask the agent to create charts that make the decision visual.
+
+"Quarterly profit by region" calls for a line chart, because you are looking at trends over time.  "Profit by sub-category, sorted" calls for a bar chart, because you are comparing categories.  "Discount rate vs. profit margin" calls for a scatter plot, because you are looking for a relationship between two continuous variables.
+
+Once you have a chart, iterate.  Ask the agent to highlight money-losers in red, add a break-even line, or annotate the December spike.  Each follow-up takes seconds.  If an annotation overlaps a data point, you can ask the agent to view its own chart and fix the layout --- it can see images and adjust the code accordingly.
+
+## Step 4: Build the recommendation
+
+The final step is synthesis.  Ask the agent to turn the analysis into a recommendation.
+
+> Which two regions should get increased marketing budget and why?
+
+> Which sub-categories should we discontinue?  Quantify the savings.
+
+> Write a one-page executive memo with the recommendation and supporting charts.
+
+In ten minutes you have gone from a raw CSV to a written recommendation backed by evidence.  No code was written by you.  No analyst was involved.  No one waited three days for a dashboard.
+
+## What just happened
+
+Behind the scenes, the agent read the CSV into Python, wrote and ran code for each question, rendered charts with matplotlib, and synthesized findings into a memo.  You never saw the code unless you asked for it.
+
+## What comes next
+
+This chapter analyzed data right on your machine.  Chapter 3 uses AI as a thinking partner to challenge your conclusions.  Chapter 4 connects AI to databases and builds reusable skills anyone on your team can use.  Chapters 5 through 7 cover agents, document-based AI, and the trust and governance framework for deploying these tools in your organization.
+
+## Exercises
+
+::: {.callout-note title="Exercise 1: The Superstore Walkthrough" collapse="true"}
+This is the core exercise for Chapter 2.  Download [superstore.csv](data/superstore.csv) and place it in a folder.  Open your coding agent in that folder and work through the four steps described above.
+
+First, ask the agent to describe the data.  Confirm the row count, column names, date range, and financial summary.  Second, ask three decision-relevant questions tied to the marketing budget allocation decision.  Third, create at least one line chart (for trends), one bar chart (for comparisons), and one scatter plot (for relationships).  Iterate on at least one chart by adding annotations or improving the layout.  Fourth, ask the agent to write a one-page executive memo with the recommendation and supporting charts.
+
+Bring your dataset and memo to Chapter 3 --- you will use them as thinking-partner exercises.
+:::
+
+::: {.callout-note title="Exercise 2: Speed Analysis Challenge" collapse="true"}
+Set a timer for five minutes.  Open your coding agent in the Superstore data folder and ask as many questions as you can.  At the end, identify your single most interesting finding and state it in one sentence.
+:::
+
+::: {.callout-note title="Exercise 3: Chart Type Matching" collapse="true"}
+For each of the following questions, decide which chart type is most appropriate, then ask your coding agent to build it using the [Superstore data](data/superstore.csv).
+
+How has revenue changed over time?  Which category is most profitable?  Is there a relationship between discount and profit margin?  What share of revenue comes from each region?  What is the distribution of order sizes?
+
+Build at least three of these charts.  For each, write one sentence explaining what decision the chart informs.
+:::
+
+::: {.callout-note title="Exercise 4: Data Detective" collapse="true"}
+Your colleague has made several claims about the Superstore data.  Use your coding agent to verify or debunk each one.
+
+Claim 1: Discounts over 30% always increase total profit.  Claim 2: The East region has the best profit margins.  Claim 3: Office Supplies is the most profitable category.  Claim 4: Q4 is always the best quarter.
+
+Pick two claims and, for each, ask the agent to test it, show the evidence, and write one sentence stating whether the claim is confirmed or debunked, with the supporting number.
+:::
+
+::: {.callout-note title="Exercise 5: The Weekly Report" collapse="true"}
+Identify a recurring report your team produces --- weekly sales, monthly KPIs, quarterly review --- and try to automate it.
+
+Place the source data in a folder and open your coding agent.  Ask it to produce the full report: charts, tables, and a narrative summary.  Then compare: how long does this report normally take to produce?  How long did AI take?  What is missing from the AI version?
+
+Write a brief note on what AI got right, what it missed, and whether you would use this approach going forward.
+:::

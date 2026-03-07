@@ -1,0 +1,149 @@
+# Connecting AI to Databases
+
+The first three chapters worked with individual files --- a CSV placed in a folder, a memo pasted into a conversation.  Most real business data does not live in spreadsheets.  It lives in databases: structured collections of related tables, hosted on servers, queried with SQL.
+
+This chapter connects AI to those databases.  By the end, you will have built a reusable "skill" that lets anyone on your team query a database in plain English --- no SQL required.
+
+## The dashboard trap
+
+Organizations spend millions building dashboards that answer yesterday's questions.  The cycle is familiar: a user requests a report, an analyst builds it, IT deploys it to Tableau or Power BI, and then the user asks a follow-up question --- which starts the cycle over.
+
+The cost is measured in three dimensions.  Time: weeks to months per dashboard.  Rigidity: fixed views of fixed data that cannot adapt to a new question.  Adoption: according to Gartner (2023), fewer than half of data and analytics teams effectively provide value to their organizations.
+
+The dashboard was a workaround for the fact that databases do not speak English.  Now they do.  With natural language AI, you skip the entire build cycle and go straight from question to answer.  Ask in plain English instead of writing SQL.  Get answers in seconds instead of weeks.  Follow-up questions are free --- just type the next sentence.
+
+## MCP: the universal connector
+
+Out of the box, AI chatbots can only read and write text.  They cannot query your database, pull data from the web, or update a spreadsheet.  The Model Context Protocol (MCP) solves this problem.
+
+MCP is an open standard that lets AI connect to external tools --- think of it as USB for AI.  An AI assistant acts as the MCP client and connects to MCP servers that wrap databases, browsers, calendars, CRMs, and anything else with an API.  You can connect as many tools as you want, and the AI sees all their capabilities and can use them together.
+
+The practical implication is that the same AI that analyzed your spreadsheet in Chapter 2 can now query your PostgreSQL database, pull records from Salesforce, check your calendar, and update a Jira ticket --- all in the same conversation.
+
+Anthropic launched official plugins on January 30, 2026, bundling skills, MCP connectors, and slash commands into installable packages.  The market reaction was dramatic: \$285 billion in market cap evaporated from enterprise software companies in days, with LegalZoom dropping 20%, Thomson Reuters 16%, and Intuit more than 10%.  The plugins were research previews, not production-ready tools, but the direction of travel was clear enough to spook the market.
+
+## From spreadsheets to databases
+
+In Chapter 2 you analyzed a spreadsheet --- a single table of rows and columns living in a file on your machine.  Most real business data lives in databases: many related tables linked by keys, hosted on a server, queried with SQL.
+
+SQL is the language databases understand.  You do not need to learn it.  AI writes the SQL for you.  But you do need to tell the AI what is in the database --- which tables exist, what the columns mean, and how the tables relate to each other.  That is what a skill does.
+
+## The sample database: Chinook
+
+The exercises in this chapter use the Chinook sample database, which you can download here: [chinook.db](data/chinook.db).  It represents a music retailer's operations and contains 11 related tables.
+
+The key tables are employees (8 staff members), customers (59 customers across 24 countries), invoices and invoice_items (412 transactions), and tracks, albums, artists, and genres (a product catalog of more than 3,500 tracks).  It is a publicly available SQLite file that requires no setup --- just place it in a folder and point your coding agent at it.  The same skill pattern you learn here works with any database.
+
+## What is a skill?
+
+A skill is a set of instructions that specializes a general-purpose AI for a specific task.  Every AI customization works the same way: additional text is added to the prompt.  A skill provides three things: domain knowledge (what the data means), workflow instructions (how to do the task), and output format specifications (how to present results).
+
+Skills are not limited to databases.  You could build a skill for weekly report generation, customer support analysis, or any recurring task where AI benefits from domain context.  But the database query skill is the most common and the most immediately useful, so that is what we build here.
+
+## The SKILL.md file
+
+The skill is a markdown file that the coding agent reads when you invoke it.  The structure has three parts.
+
+The first part is the description and location: what the skill does and the path to the database file.
+
+The second part is the schema and relationships: every table, its columns, data types, and how tables link to each other.  This is the most important part.  The more precisely you describe the schema, the better the AI's queries will be.  Include column descriptions ("status is one of: active, completed, on-hold"), explain join paths ("invoices link to customers via CustomerId"), and note any business logic ("revenue means invoice_items.UnitPrice times Quantity").
+
+The third part is the instructions: query style, output format, and chart preferences.  For example: "Always show the SQL query before showing results.  Use Plotly for interactive charts.  Annotate the highest and lowest values."
+
+The skill file is just text.  Anyone can edit it.  No programming is required --- just clear descriptions of your data.
+
+## Creating the skill step by step
+
+Create a project folder with the SQLite database file and a file called SKILL.md.  Write the schema, describing each table, its columns, and its relationships.  Then test by asking questions and refining based on what Claude gets wrong.
+
+Your first draft will not be perfect, and that is fine.  The skill improves through iteration.  Every time Claude misinterprets a question or uses the wrong join path, you add a clarification to the SKILL.md.  After a few rounds of testing, the skill handles the most common questions reliably.
+
+## Building the Chinook skill
+
+To make this concrete, consider a scenario.  You are an operations director at a music retailer.  The CEO wants a recommendation by Friday: which markets to invest in, which product lines to promote, and how to improve per-customer revenue.
+
+The data lives in the Chinook database.  The answer requires joining customer, invoice, and catalog data across multiple tables.  There is no time to wait for an analyst.
+
+The solution: build a skill that knows the Chinook schema, then ask questions in plain English.  The agent writes SQL, runs it, and returns charts.
+
+## Decision-driven queries
+
+With the skill active, every question should connect to the CEO's decision.
+
+"Top five countries by revenue, bar chart, sorted" produces a bar chart comparing categories.  "Monthly revenue trend line --- is the business growing?" produces a line chart showing trends over time.  "Plot average order value versus number of orders by country" produces a scatter plot that reveals clusters of high-value versus high-frequency markets.
+
+You can go deeper.  "Correlation heatmap of all numeric columns" shows which metrics move together.  "Make that chart interactive so I can hover for details" switches from matplotlib to Plotly, saving the result as an HTML file.  "Annotate the outlier country on the scatter plot" adds context to the visualization.
+
+Each question is a different lens on the same decision.  The skill ensures that every query uses the correct tables, joins, and business logic.
+
+## SQL transparency
+
+One of the most important features of this workflow is that you can always see the SQL.  When you ask "Which country generates the most revenue? Show a bar chart of the top 10," Claude generates a SQL query that selects country and summed revenue from the invoices and customers tables, groups by country, orders by revenue descending, and limits to ten results.
+
+You can read the SQL and verify that the joins are correct, the filters make sense, and the aggregation matches your intent.  Analysts can review the logic.  This builds trust: AI is not a black box.
+
+If you ask a follow-up --- "Break down the US revenue by state" --- Claude writes a new query with a WHERE clause and additional grouping.  The SQL is always available for inspection.
+
+## Iterating on the skill
+
+Common refinements include adding column descriptions, specifying default sorting and format rules, and setting chart preferences.  You can specify whether charts should be static (matplotlib, good for reports and slides) or interactive (Plotly, with hover, zoom, and filter, saved as HTML files and shareable via email).  The same prompt works for both --- just add "interactive" or "Plotly."
+
+Skills turn institutional knowledge into executable instructions.  Instead of a procedures manual that sits on a shelf, you have a prompt that AI follows every time.  The knowledge is not just documented; it is operationalized.
+
+## Behind the firewall
+
+MCP connectors exist for Salesforce, Jira, Slack, internal databases, and anything else with an API.  On a corporate network, the coding agent connects to your database behind the firewall.  No data leaves your network --- AI sends queries, not raw data, to the model.  IT controls which databases and tools AI can access via MCP configuration.
+
+::: {.callout-tip title="MCP support across coding agents"}
+Claude Code has native MCP support, and Gemini CLI also supports MCP servers.  Codex uses a different tool-integration mechanism but can connect to the same databases through its own plugin system.  The skill-file pattern described in this chapter works with any agent that can read a markdown file and execute SQL.
+:::
+
+In this chapter we connect to a local SQLite file.  In your organization, the same pattern connects to PostgreSQL, Snowflake, or any database your team uses.
+
+## The skill as deployment artifact
+
+A polished skill is what gets deployed on your intranet.  The skill file encodes which tables matter, how they relate, and what the business terminology means.  IT adds the infrastructure: SSO authentication, read-only database credentials, and query logging for audit.
+
+The skill file is the deployment artifact.  IT adds infrastructure; you provide domain knowledge.  Chapter 5 covers the full deployment path in detail.
+
+## Exercises
+
+::: {.callout-note title="Exercise 1: Build a Chinook Skill" collapse="true"}
+Download [chinook.db](data/chinook.db) and place it in a new project folder.  Create a SKILL.md file in the same folder with three sections: a description and database path, at least three table descriptions with columns and relationships, and three example questions.
+
+Open your coding agent in the folder and test three decision-relevant queries.  For each, ask Claude to show the SQL and verify that the joins and filters are correct.  Then ask for an interactive Plotly chart and iterate on it at least once --- change colors, add annotations, or improve the layout.
+
+The deliverable is a working SKILL.md and one interactive chart.
+:::
+
+::: {.callout-note title="Exercise 2: Database Schema Detective" collapse="true"}
+Connect your coding agent to the [Chinook database](data/chinook.db) without any SKILL.md --- no documentation at all.
+
+Ask: "What tables are in this database?  How are they related?"  Let Claude discover the schema on its own.  Then ask: "If I were the CEO of this music company, what three questions should I be asking?"
+
+Follow up with two questions that require joining at least two tables (for example, "Revenue by artist" requires joining invoices, invoice_items, tracks, albums, and artists).
+
+The deliverable is Claude's relationship summary and two multi-table query results.
+:::
+
+::: {.callout-note title="Exercise 3: Decision Scenario Queries" collapse="true"}
+You are the Chinook CEO.  The board wants you to cut two of the five lowest-performing genres from the catalog to reduce licensing costs.
+
+Using your Chinook skill (or a bare connection to [chinook.db](data/chinook.db)), answer these questions in sequence: Which genres contribute the least revenue?  For those two genres, how many unique customers would be affected?  Are any of those customers high-value customers who also buy other genres?
+
+Write one sentence stating which two genres you would cut and why.
+:::
+
+::: {.callout-note title="Exercise 4: Skill for Your Own Data" collapse="true"}
+Take a CSV from your work (anonymize if needed) or a public dataset you care about.  Ask the agent to convert it to a SQLite database.  Then write a SKILL.md describing the tables, columns, relationships, and five example questions.
+
+Test five queries and refine the skill until all five return correct results.  The deliverable is your SKILL.md and the SQLite database file.
+:::
+
+::: {.callout-note title="Exercise 5: The Monday Morning Report" collapse="true"}
+Identify a recurring report your team produces --- weekly sales summary, monthly KPIs, pipeline report.  Write a SKILL.md that includes the database schema, the specific queries needed, and the output format.
+
+Add an instruction to the skill: "When I say 'Monday report,' run these three queries and format the results as a one-page summary."  Test it.  Does one command produce your entire report?
+
+The deliverable is the skill file and a sample report output.
+:::

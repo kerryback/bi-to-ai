@@ -1,0 +1,206 @@
+# Can I Trust It?
+
+The previous six chapters built an increasingly powerful toolkit: coding tools, data analysis, thinking-partner conversations, database skills, agent workflows, and document-based AI.  Before any of this is deployed, leadership will ask one question: can we trust it?
+
+This chapter provides the answer, which is yes --- with the right verification.  You will learn a repeatable protocol for validating AI outputs, stress-testing skills and RAG systems, and building the governance framework your organization needs.
+
+## The trust spectrum
+
+AI with code execution is like a fast junior analyst --- capable but in need of oversight.  The appropriate level of oversight depends on the stakes.
+
+For low-stakes work (exploratory charts, directional trends, internal brainstorming), a quick sanity check is sufficient.  Glance at the numbers, confirm they are in the right ballpark, and move on.
+
+For medium-stakes work (team skills from Chapter 4, recurring reports, RAG-based Q&A from Chapter 6), test with known answers before relying on the results.  Run queries where you already know the answer and confirm that AI matches.
+
+For high-stakes work (board presentations, budget recommendations, external reporting), apply the full verification protocol described later in this chapter.  Every number, every chart, every claim should be independently verified.
+
+
+## Hallucination: the core risk
+
+"How do I know the AI isn't making things up?"
+
+AI in code-execution mode does not invent facts the way a chatbot might.  It reads real data and runs real computations.  But it makes silent analytical errors: wrong filters, dropped rows, incorrect joins, misinterpreted column names.  In RAG mode, it can also hallucinate citations --- citing a page that does not actually contain the claim.
+
+These errors are dangerous precisely because the output looks professional.  Charts render cleanly even when the underlying data is wrong.  Memos read smoothly even when the conclusion does not follow from the evidence.  A polished result inspires confidence, and confidence without verification is the real risk.
+
+You have seen examples throughout this book.  Date or currency parsing surprises in Chapter 2.  Incorrect join paths in Chapter 4.  Hallucinated citations in Chapter 6.  Each error was fixable, but only if someone checked.
+
+## The verification protocol
+
+A three-step process you can apply to any AI-generated analysis.
+
+The first step is to sanity-check with known answers.  Ask questions where you already know the result: row count, column names, a total you can verify in Excel.  "How many rows are in this dataset?"  "What is the total revenue?"  If AI's answer does not match your independently verified number, stop and investigate before proceeding.
+
+The second step is to inspect the methodology.  Ask "show me the code" or "show me the SQL."  Read the logic, not just the output.  Check that the joins are correct, the filters make sense, and the aggregation matches your intent.  Then rephrase the question and run it again.  If the answers agree, you have confirmation.  If they differ, one approach is wrong.
+
+The third step is to spot-check edge cases.  Test the smallest group, zero values, null fields, and boundary dates.  Errors hide at the edges.  A query that works perfectly for the top ten countries may break for the bottom three.
+
+If you would spot-check a human analyst's work, spot-check AI's.
+
+## Catching silent errors
+
+To make this concrete, consider a deliberately tricky prompt.
+
+"What's the average profit margin by sub-category?  Exclude any sub-categories with negative total profit."
+
+The trap is in the filter logic.  Does AI filter before or after aggregating?  Does it drop individual rows with negative profit, or sub-categories whose total profit is negative?  The order matters, and AI often gets it wrong.
+
+To catch it, ask three follow-up questions.  "Show me the code" --- inspect the filter logic.  "How many rows are in the result?" --- does the count match your expectation?  "List the excluded sub-categories" --- are they the right ones?
+
+The more specific the filter logic, the more likely AI misinterprets it.
+
+## Trusting RAG answers
+
+RAG (Chapter 6) grounds AI in your documents, but grounding does not guarantee correctness.
+
+RAG introduces three specific risks.  The first is hallucinated citations: AI cites a page or section that does not actually contain the claim.  The citation looks authoritative, but when you check the source, the passage says something different or does not address the question at all.
+
+The second is stale documents.  If a policy changed but the old version is still in the index, RAG will retrieve and cite the outdated version.  The answer is grounded --- just in the wrong version of the truth.
+
+The third is wrong-chunk retrieval.  The retrieved passage is semantically similar to the question but does not actually answer it.  This happens when the document contains multiple sections that use similar language for different purposes.
+
+The verification approach is the same: click through every citation and confirm that the cited passage actually says what the AI claims.  Check document dates to ensure you are getting the current version.  Ask the same question in different words to see if the citation changes.
+
+A citation that looks right but is not is worse than no citation at all.  It creates false confidence.
+
+## Red-teaming RAG
+
+Test your RAG system the way an adversary would.
+
+Ask out-of-scope questions: "What is our competitor's revenue?" when no competitor data is in the documents.  Does AI admit it does not know, or does it hallucinate an answer?
+
+Upload two documents that disagree on a fact and ask about the disputed point.  Does AI cite both?  Pick one?  Acknowledge the conflict?
+
+Ask boundary questions about topics at the edge of what is documented.  These are the questions most likely to produce hallucinated citations, because the system retrieves a passage that is close but not quite on point.
+
+Every failure you find now is one your team will not encounter in production.
+
+## Red-teaming your skill
+
+The database skill from Chapter 4 is the kind of tool people stop questioning once it is deployed.  Test it like any tool your team depends on.
+
+Validate with known answers by running queries where you already know the result (total invoices, number of customers).  Compare AI's SQL to a hand-written query.  Ask the same question multiple times and check for consistency.
+
+Stress-test with edge cases.  Ask for revenue from a nonexistent country.  Query boundary dates (the first and last month in the dataset).  Use ambiguous column names ("show me the name" when multiple tables have a name column).
+
+For each failure, diagnose the root cause (bad SQL, missing context, or wrong table), fix the SKILL.md, and retest.  This is how production skills get hardened.  Every failure makes the skill better.
+
+## Three layers of auditability
+
+Production AI systems should have multiple layers of verification.
+
+The first layer is RAG: the AI answers based on your documents, with citations.  This grounds responses in source material.  You verify by checking citations against the original text.
+
+The second layer is code transparency: the AI displays the SQL or Python it used.  Analysts review the logic, not just the answer.  This is what you practiced in Chapters 2 through 4.
+
+The third layer is guardrails: read-only database access, restricted tables, and every query logged for audit.  The system prevents mistakes, not just detects them.
+
+The more layers you add, the harder it is for errors to reach your team.  Defense in depth --- the same principle as cybersecurity.
+
+## Security and governance
+
+Before deploying AI with your data, three questions need clear answers.
+
+First, data privacy: what data can AI access, and where is it processed?  Cloud APIs send data to the provider's servers.  On-premise models keep everything internal.  Most organizations need a mix: cloud APIs for non-sensitive work and on-premise solutions for confidential data.
+
+Second, model selection: cloud APIs are more capable but require sending data externally.  On-premise models offer maximum control but lag in capability.  The choice depends on the sensitivity of the data and the regulatory environment.
+
+Third, audit requirements: SOX, GDPR, HIPAA, and industry-specific regulations all impose requirements on how data is processed and by whom.  AI interactions are data processing events and must be treated accordingly.
+
+## Data policies: training and retention
+
+Before sending data to any AI provider, know the answers to two questions.
+
+Will they train on your data?  Consumer tiers (free ChatGPT, free Claude) may use your input to improve their models.  API and enterprise tiers typically do not.  Check your agreement and confirm that any opt-out is active.
+
+How long do they retain it?  Providers retain prompts for a window (often 30 days) for safety monitoring.  Enterprise contracts may offer zero retention.  Know the policy before you send sensitive data.
+
+Ask your vendor three things: Do you train on our data?  How long do you retain it?  Can we request deletion?
+
+## Compliance in practice
+
+FERPA protects student education records.  HIPAA protects health information.  SOX governs financial reporting.  GDPR regulates personal data in the EU.  Every regulated industry has its version of the same concern: where does the data go, and who can see it?
+
+AI can analyze sensitive data without ever reading the actual records.  The technique from Chapter 4 applies: describe the table structure in the SKILL.md (table names, column names, data types), and the agent writes SQL from the schema alone, never seeing the actual records.  The script runs locally, and the output stays on your server.
+
+Table metadata is not PII.  The actual records stay behind the firewall.  AI produces the tool, not the output.  This pattern --- send the schema, keep the data --- works for any regulated environment.
+
+## Session log auditing
+
+Every AI conversation can be exported as a transcript.  The transcript contains the user's questions, the AI's responses, the code it generated, and the results it produced.  This is the paper trail your compliance team needs.
+
+Review session logs for three things: PII or proprietary data that should stay internal, SQL or Python logic errors in the generated code, and RAG citations that do not match the source.
+
+Export logs, archive them, and review them periodically.  Session logs are not just a compliance requirement; they are a learning tool.  Reviewing what AI got wrong in past sessions tells you exactly what to improve in your SKILL.md or RAG configuration.
+
+## The sandbox-audit-deploy pattern
+
+Before deploying any AI workflow to your team, follow three phases.
+
+In the sandbox phase, run the full workflow with synthetic or test data.  Test edge cases.  Break it on purpose.  This is where you discover the failure modes described throughout this chapter.
+
+In the audit phase, export session logs and review the generated code.  Verify SQL logic.  Check RAG citations.  Look for data leakage.  Have a colleague who did not build the system try to break it.
+
+In the deploy phase, roll out to users with monitoring.  Review logs weekly.  Set up alerting for anomalies.  Treat the first month as a soft launch.
+
+## The adoption roadmap
+
+Each stage of AI adoption maps to a trust level.
+
+Quick wins, achievable in weeks, require only light verification.  Using AI for research, summarization, and email drafting.  Analyzing local data with a coding agent (Chapter 2).  Having thinking-partner conversations (Chapter 3).
+
+Medium-term adoption, taking months, requires test-before-deploy discipline.  Skills for recurring database workflows (Chapter 4).  Agent-powered reports and pipelines (Chapter 5).  RAG for document-based Q&A (Chapter 6).
+
+Strategic adoption, measured in quarters, requires a full audit trail.  Production apps with authentication and audit trails.  An AI usage policy, compliance review, and governance framework.  Organization-wide adoption with monitoring.
+
+
+
+## Exercises
+
+::: {.callout-note title="Exercise 1: The Verification Protocol" collapse="true"}
+Run the complete three-step verification protocol on a real analysis.
+
+First, sanity-check: open the [Superstore data](data/superstore.csv) in your coding agent and ask three questions where you know the answer (row count, total revenue, number of unique customers).  Does AI match?
+
+Second, inspect methodology: for three queries, ask "show me the code."  Read each script.  Is the logic correct?  Then rephrase each question and run it again.  Do the answers agree?
+
+Third, spot-check edge cases: test three edge cases (empty results, boundary dates, null values).  Does AI handle them gracefully?
+
+The deliverable is a one-page verification report with pass or fail for each step.
+:::
+
+::: {.callout-note title="Exercise 2: Red-Team Your Skill" collapse="true"}
+Open your coding agent with the [Chinook database](data/chinook.db) and your SKILL.md from Chapter 4.
+
+Run five adversarial queries designed to break the skill: a query about nonexistent data ("Sales in 2025"), a complex multi-table join ("Revenue by artist by country"), a request for data not in the schema ("Customer satisfaction scores"), an ambiguous column name, and a boundary date query.
+
+For each failure, diagnose the root cause, fix the SKILL.md, and retest.  The deliverable is a hardened SKILL.md and a log of your five adversarial queries with outcomes.
+:::
+
+::: {.callout-note title="Exercise 3: RAG Citation Audit" collapse="true"}
+Open your coding agent with the [company handbook](data/company-handbook.md) from Chapter 6 and ask five factual questions.
+
+For each answer, locate every cited passage in the original document.  Rate each citation as accurate, partially accurate, or hallucinated.
+
+Then ask three questions the document cannot answer.  Does AI admit it does not know, or does it hallucinate?
+
+The deliverable is your citation audit log with ratings and your out-of-scope test results.
+:::
+
+::: {.callout-note title="Exercise 4: Draft an AI Usage Policy" collapse="true"}
+Write a one-page AI usage policy for your organization (or a hypothetical one).
+
+Cover four areas.  First, what data can and cannot be sent to AI providers, classified by sensitivity level.  Second, which AI tools are approved for which use cases.  Third, when human review is required before acting on AI output.  Fourth, how RAG citations should be verified before sharing results externally.
+
+The deliverable is the one-page policy.
+:::
+
+::: {.callout-note title="Exercise 5: Compliance Scenario Analysis" collapse="true"}
+Identify the primary data regulation in your industry (HIPAA, SOX, GDPR, PCI-DSS, FERPA, or another).
+
+Describe a specific use case: what data would AI access, and what questions would it answer?  Design the compliant workflow: what information goes to AI (schema only, or actual data)?  What stays local?  Where are the audit points?
+
+List three guardrails you would add to enforce compliance.
+
+The deliverable is a one-page compliance scenario analysis.
+:::

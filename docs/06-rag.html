@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.42">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Retrieval-Augmented Generation – From BI to AI</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./07-trust.html" rel="next">
+<link href="./05-agents-deployment.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-2ef01e258a497a70032e58193e2c5164.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./06-rag.html"><span class="chapter-title">Retrieval-Augmented Generation</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">From BI to AI</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-coding-tools.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">AI Coding Tools</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-exploring-data.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Exploring Data with AI</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-thinking-partner.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">AI as Thinking Partner</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-connecting-databases.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Connecting AI to Databases</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-agents-deployment.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Agents and Deployment</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-rag.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Retrieval-Augmented Generation</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-trust.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Can I Trust It?</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#the-problem-ai-does-not-know-your-documents" id="toc-the-problem-ai-does-not-know-your-documents" class="nav-link active" data-scroll-target="#the-problem-ai-does-not-know-your-documents">The problem: AI does not know your documents</a></li>
+  <li><a href="#the-open-book-exam-analogy" id="toc-the-open-book-exam-analogy" class="nav-link" data-scroll-target="#the-open-book-exam-analogy">The open-book exam analogy</a></li>
+  <li><a href="#the-rag-pipeline" id="toc-the-rag-pipeline" class="nav-link" data-scroll-target="#the-rag-pipeline">The RAG pipeline</a></li>
+  <li><a href="#embeddings-and-semantic-search" id="toc-embeddings-and-semantic-search" class="nav-link" data-scroll-target="#embeddings-and-semantic-search">Embeddings and semantic search</a></li>
+  <li><a href="#citations-and-source-attribution" id="toc-citations-and-source-attribution" class="nav-link" data-scroll-target="#citations-and-source-attribution">Citations and source attribution</a></li>
+  <li><a href="#when-to-use-rag" id="toc-when-to-use-rag" class="nav-link" data-scroll-target="#when-to-use-rag">When to use RAG</a></li>
+  <li><a href="#why-chunk-size-matters" id="toc-why-chunk-size-matters" class="nav-link" data-scroll-target="#why-chunk-size-matters">Why chunk size matters</a></li>
+  <li><a href="#common-failure-modes" id="toc-common-failure-modes" class="nav-link" data-scroll-target="#common-failure-modes">Common failure modes</a></li>
+  <li><a href="#hands-on-querying-your-documents" id="toc-hands-on-querying-your-documents" class="nav-link" data-scroll-target="#hands-on-querying-your-documents">Hands-on: querying your documents</a></li>
+  <li><a href="#evaluating-rag-quality" id="toc-evaluating-rag-quality" class="nav-link" data-scroll-target="#evaluating-rag-quality">Evaluating RAG quality</a></li>
+  <li><a href="#rag-in-production" id="toc-rag-in-production" class="nav-link" data-scroll-target="#rag-in-production">RAG in production</a></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-title">Retrieval-Augmented Generation</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Chapters 2 through 5 worked with structured data — spreadsheets and databases where every row has the same columns and every query returns a precise answer. But much of the knowledge in an organization lives in unstructured documents: policy handbooks, contracts, product manuals, research reports, meeting transcripts.</p>
+<p>This chapter covers Retrieval-Augmented Generation, or RAG — the technique that lets AI answer questions about your documents with grounded, cited answers instead of hallucinations.</p>
+<section id="the-problem-ai-does-not-know-your-documents" class="level2">
+<h2 class="anchored" data-anchor-id="the-problem-ai-does-not-know-your-documents">The problem: AI does not know your documents</h2>
+<p>AI models are trained on public data. They know a great deal about the world in general, but they know nothing about your company’s travel policy, your product warranty terms, or last quarter’s board report.</p>
+<p>Without RAG, if you ask “What is our return policy for enterprise customers?” the AI will either make something up (confidently and plausibly) or admit it does not know. Neither response is useful. What you want is for the AI to look up the answer in your actual policy document, quote the relevant passage, and tell you where it found it.</p>
+<p>That is what RAG does.</p>
+</section>
+<section id="the-open-book-exam-analogy" class="level2">
+<h2 class="anchored" data-anchor-id="the-open-book-exam-analogy">The open-book exam analogy</h2>
+<p>The simplest way to understand RAG is the open-book exam. Standard AI is a closed-book exam: the student answers from memory, is confident even when wrong, and cannot cite sources. RAG is an open-book exam: the student looks up the answer in the reference materials, quotes the source, and can say “this is not covered in my materials” when the answer is not there.</p>
+<p>The quality of the answer depends entirely on what is in the book. If the documents are incomplete, outdated, or poorly organized, the RAG system will produce incomplete, outdated, or confused answers. The AI is only as good as the documents you give it.</p>
+</section>
+<section id="the-rag-pipeline" class="level2">
+<h2 class="anchored" data-anchor-id="the-rag-pipeline">The RAG pipeline</h2>
+<p>RAG works in three stages: ingest, retrieve, and generate.</p>
+<p>In the ingest stage, documents are split into chunks — typically paragraphs or sections — and each chunk is converted into a numerical representation called an embedding. The embeddings are stored in a vector database (a searchable index optimized for similarity search).</p>
+<p>In the retrieve stage, when a user asks a question, the question is also converted into an embedding. The system finds the chunks whose embeddings are most similar to the question’s embedding. These are the chunks most likely to contain the answer.</p>
+<p>In the generate stage, the retrieved chunks are fed to the AI along with the user’s question. The AI reads the chunks and generates an answer, citing the sources.</p>
+</section>
+<section id="embeddings-and-semantic-search" class="level2">
+<h2 class="anchored" data-anchor-id="embeddings-and-semantic-search">Embeddings and semantic search</h2>
+<p>Embeddings are what make RAG fundamentally different from keyword search.</p>
+<p>Traditional keyword search finds documents containing the exact words you typed. If you search for “vacation policy,” you will find documents containing those words but miss documents that say “PTO guidelines” or “time-off rules” or “leave entitlement.”</p>
+<p>Semantic search works on meaning. Embeddings convert text into high-dimensional numerical vectors such that texts with similar meanings point in similar directions. When you search for “vacation policy,” semantic search finds all of those variations because they have similar embeddings. It understands meaning, not just words.</p>
+<p>This is why RAG can answer questions in natural language. You do not need to know the exact terminology used in the document. You ask the question in your own words and the system finds the relevant passages regardless of how they are phrased.</p>
+</section>
+<section id="citations-and-source-attribution" class="level2">
+<h2 class="anchored" data-anchor-id="citations-and-source-attribution">Citations and source attribution</h2>
+<p>RAG does not just answer — it shows where the answer came from.</p>
+<p>Each answer includes references to the source documents and, when possible, page numbers or section headings. Users can click through to verify the original text. If the answer is not in the documents, a well-built RAG system says so instead of hallucinating.</p>
+<p>Citations transform AI from “trust me” to “here’s the evidence.” This is what makes RAG suitable for high-stakes use cases where accuracy matters and where someone will eventually ask “where did you get that number?”</p>
+</section>
+<section id="when-to-use-rag" class="level2">
+<h2 class="anchored" data-anchor-id="when-to-use-rag">When to use RAG</h2>
+<p>RAG is not always the right approach. The choice depends on the type of data.</p>
+<p>For structured data (spreadsheets, databases, tables of numbers), a skill that writes SQL queries is more appropriate. This is what you built in Chapter 4.</p>
+<p>For unstructured documents (policies, contracts, manuals, reports), RAG is the right tool.</p>
+<p>For small texts that fit within the AI’s context window (fewer than about 100 pages), you can skip the RAG pipeline entirely and just give the document directly to the AI. A coding agent does this naturally when you point it at a folder containing documents.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Context window sizes">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Context window sizes
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The amount of text an agent can process in one session varies. Gemini CLI supports up to one million tokens (roughly 3,000 pages). Codex supports 192,000 tokens. Claude Code’s limit depends on the model, ranging from 200,000 to over 1,000,000 tokens. For most business documents, any of these is sufficient for direct reading without RAG.</p>
+</div>
+</div>
+<p>For situations where you need both structured queries and document context, you can combine a skill with RAG — querying the database for numbers and the documents for context.</p>
+</section>
+<section id="why-chunk-size-matters" class="level2">
+<h2 class="anchored" data-anchor-id="why-chunk-size-matters">Why chunk size matters</h2>
+<p>Documents are split into chunks before embedding. The size of these chunks determines what the system can find and what it misses.</p>
+<p>Chunks that are too small (individual sentences) lose context. A sentence alone may be meaningless without the paragraph around it. The system retrieves fragments instead of answers.</p>
+<p>Chunks that are too large (entire chapters) include too much irrelevant content. The signal is diluted by noise. The AI may struggle to identify which part of the chunk actually answers the question.</p>
+<p>The sweet spot is usually a few paragraphs — enough context to be meaningful, small enough to be relevant. Overlapping chunks (where each chunk shares some text with its neighbors) help ensure that nothing falls through the cracks.</p>
+</section>
+<section id="common-failure-modes" class="level2">
+<h2 class="anchored" data-anchor-id="common-failure-modes">Common failure modes</h2>
+<p>RAG is not perfect. Understanding the failure modes helps you spot and fix problems.</p>
+<p>On the retrieval side, the system may retrieve the wrong chunk (semantically similar but irrelevant), miss the right chunk entirely (the answer exists but was not retrieved), or retrieve chunks that contradict each other.</p>
+<p>On the generation side, the AI may hallucinate a citation (citing a page that does not contain the claim), over-generalize (drawing a conclusion the source does not support), or give an incomplete answer (using one chunk when the full answer spans multiple documents).</p>
+<p>The most dangerous failure is the hallucinated citation. The answer looks grounded — it has a source reference — but when you check the cited passage, it does not say what the AI claims. This creates false confidence, which is worse than no citation at all.</p>
+</section>
+<section id="hands-on-querying-your-documents" class="level2">
+<h2 class="anchored" data-anchor-id="hands-on-querying-your-documents">Hands-on: querying your documents</h2>
+<p>The simplest way to experience RAG is to point your coding agent at a folder of documents and start asking questions.</p>
+<p>Download the <a href="data/company-handbook.md">sample company handbook</a> and place it in a folder. Open your coding agent in that folder. Then ask questions:</p>
+<blockquote class="blockquote">
+<p>What is our return policy for enterprise customers?</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>What are the eligibility requirements for the bonus program?</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>How many days of PTO do employees with five years of service receive?</p>
+</blockquote>
+<p>For each answer, evaluate three things. Is it relevant — did it find the right section of the document? Is it faithful — does the answer accurately represent what the source says? Is it complete — did it find all the relevant passages, or did it miss something?</p>
+<p>Then test the boundaries. Ask a question the document cannot answer: “What is our competitor’s market share?” Does AI admit the information is not in the document, or does it hallucinate an answer?</p>
+</section>
+<section id="evaluating-rag-quality" class="level2">
+<h2 class="anchored" data-anchor-id="evaluating-rag-quality">Evaluating RAG quality</h2>
+<p>There are three dimensions for judging whether a RAG answer is good.</p>
+<p>Relevance measures whether the retrieved passages are on-topic. Did the system find the right sections? Would a human reading the document have picked the same passages?</p>
+<p>Faithfulness measures whether the generated answer accurately represents the source material. Does the answer match what the cited passage actually says? Are there any added claims that go beyond the source?</p>
+<p>Completeness measures whether the system found everything relevant. Did it retrieve all the passages that bear on the question? Would adding more context from the document change the answer?</p>
+<p>Use these three questions to evaluate every RAG answer: is it relevant, faithful, and complete?</p>
+</section>
+<section id="rag-in-production" class="level2">
+<h2 class="anchored" data-anchor-id="rag-in-production">RAG in production</h2>
+<p>In production, RAG has a document pipeline that runs continuously. New documents are automatically chunked and embedded. A vector store (Pinecone, Weaviate, Chroma, or similar) maintains a searchable index of all document chunks. When a user asks a question, the system retrieves the most relevant chunks, feeds them to the AI, and returns a cited answer.</p>
+<p>Production RAG requires ongoing maintenance. Documents need refresh schedules so that updated policies replace outdated ones. Access controls ensure that users can only query documents they are authorized to see. Versioning tracks changes so that when a policy is updated, the old version expires from the index.</p>
+<p>Quality assurance means maintaining a test suite of known question-answer pairs to validate accuracy, monitoring retrieval quality over time, and building a feedback loop where users can flag incorrect answers for improvement.</p>
+<p>The same sandbox-audit-deploy pattern from Chapter 5 applies. RAG is a system, not a feature, and it needs the same care as any production system.</p>
+</section>
+<section id="exercises" class="level2">
+<h2 class="anchored" data-anchor-id="exercises">Exercises</h2>
+<div class="callout callout-style-default callout-note callout-titled" title="Exercise 1: Document Querying">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exercise 1: Document Querying
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Download the <a href="data/company-handbook.md">company handbook</a> and place it in a folder. Open your coding agent in that folder and ask five questions about the content.</p>
+<p>For each answer, evaluate relevance (did it find the right section?), faithfulness (does the answer match the source?), and completeness (did it find everything relevant?). Rate each dimension on a 1-to-5 scale.</p>
+<p>Then ask two questions the document cannot answer. Does AI admit it does not know, or does it hallucinate?</p>
+<p>The deliverable is your five questions with evaluation ratings and your two out-of-scope test results.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Exercise 2: Citation Verification">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exercise 2: Citation Verification
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Ask three questions about the <a href="data/company-handbook.md">company handbook</a> and get answers with citations.</p>
+<p>For each answer, locate every cited passage in the original document. Rate each citation: accurate (the passage says what the AI claims), partially accurate (the passage is related but the AI stretched or paraphrased), or hallucinated (the passage does not support the claim).</p>
+<p>If any citation is inaccurate, rephrase the question and see if the citation improves.</p>
+<p>The deliverable is three answers with citation verification notes.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Exercise 3: Conflicting Sources">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exercise 3: Conflicting Sources
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Create a second version of the <a href="data/company-handbook.md">company handbook</a> in which you change one or two facts (for example, change the PTO accrual rates or the return policy window). Place both versions in the same folder.</p>
+<p>Ask a question where the two versions disagree. Does AI cite both? Pick one? Acknowledge the conflict?</p>
+<p>This simulates a common production problem: stale documents coexisting with current ones. The deliverable is the question, AI’s answer, and your assessment of how it handled the conflict.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Exercise 4: RAG vs. Direct Reading">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exercise 4: RAG vs.&nbsp;Direct Reading
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Ask your coding agent to read the entire <a href="data/company-handbook.md">company handbook</a> as one document and answer a question (this is the direct-context approach). Then ask the same question in a way that forces chunked retrieval (for example, by placing many documents in the folder so the handbook is too large for the context window to hold in full).</p>
+<p>Compare the two answers. Which is more complete? Does the direct-reading approach catch context that chunked retrieval misses?</p>
+<p>This exercise illustrates the tradeoff: direct context is better for small document sets, while RAG scales to thousands of documents.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Exercise 5: RAG Use Case Proposal">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exercise 5: RAG Use Case Proposal
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Write a one-page proposal for deploying RAG in your organization.</p>
+<p>Identify the document set (employee handbook, product documentation, compliance policies, or whatever is most relevant to your work). Describe the users and their typical questions. Outline the architecture: how documents would be ingested, where the vector store would live, and how users would interact with the system.</p>
+<p>List three risks and how you would mitigate them. The most common risks are hallucinated citations (mitigated by citation verification workflows), stale documents (mitigated by refresh schedules), and unauthorized access (mitigated by document-level permissions).</p>
+<p>The deliverable is the one-page proposal.</p>
+</div>
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./05-agents-deployment.html" class="pagination-link" aria-label="Agents and Deployment">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Agents and Deployment</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./07-trust.html" class="pagination-link" aria-label="Can I Trust It?">
+        <span class="nav-page-text"><span class="chapter-title">Can I Trust It?</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

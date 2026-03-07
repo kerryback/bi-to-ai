@@ -1,0 +1,782 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "From BI to AI",
+    "section": "",
+    "text": "Preface\nTraditional business intelligence — dashboards, static reports, and fixed queries — is being replaced by AI that understands your questions, queries your data, and delivers answers in seconds. This book accompanies a seven-session executive education program that gives professionals from any background a hands-on understanding of how agentic AI transforms analysis, reporting, and decision-making. No coding experience is required.\nEach chapter answers one question.\nChapter 1 introduces the tools. You will install a coding agent, learn how the three major options differ, and understand the environments where AI can execute code.\nChapter 2 asks whether AI can analyze your data on the spot. You will open a coding agent in a folder containing a spreadsheet and go from raw data to a written recommendation with charts in under ten minutes.\nChapter 3 asks whether AI can help you think through decisions. You will use AI as a sparring partner — challenging assumptions, running pre-mortems, and stress-testing your own analysis from Chapter 2.\nChapter 4 asks whether AI can connect to databases and let anyone on your team query them in plain English. You will learn about MCP connectors, build a reusable “skill” that encodes a database schema, and watch AI write SQL for you.\nChapter 5 asks whether AI can go beyond answering questions and actually take action. You will learn about agents, tool use, containers, and the path from a prototype on your laptop to a deployed tool on the corporate intranet.\nChapter 6 asks whether AI can answer questions about your company’s documents without hallucinating. You will learn about Retrieval-Augmented Generation (RAG) — how AI retrieves relevant passages, generates grounded answers with citations, and where it can go wrong.\nChapter 7 asks whether you can trust it. You will validate AI outputs, red-team skills and RAG systems, and build the governance framework your organization needs before deploying any of this.\nThe answer to every question is yes — with the right verification.",
+    "crumbs": [
+      "Preface"
+    ]
+  },
+  {
+    "objectID": "index.html#data-files",
+    "href": "index.html#data-files",
+    "title": "From BI to AI",
+    "section": "Data files",
+    "text": "Data files\nThe exercises in this book use two datasets.\nThe Superstore CSV contains roughly 10,000 retail orders across four U.S. regions with columns for sales, profit, discount, product category, and customer segment. It is used throughout Chapters 2, 3, and 7.\nThe Chinook database is a SQLite file representing a music retailer’s operations with 11 related tables covering employees, customers, invoices, tracks, albums, artists, and genres. It is the primary dataset for Chapter 4 and is revisited in Chapters 5 and 7.\nChapter 6 uses a sample company handbook for RAG exercises.",
+    "crumbs": [
+      "Preface"
+    ]
+  },
+  {
+    "objectID": "index.html#prerequisites",
+    "href": "index.html#prerequisites",
+    "title": "From BI to AI",
+    "section": "Prerequisites",
+    "text": "Prerequisites\nYou need one of the three major coding agents installed on your machine. Chapter 1 walks through the installation of Claude Code, Gemini CLI, and OpenAI Codex. All three run in the terminal, read local files, and execute code. No prior coding or data science experience is assumed.",
+    "crumbs": [
+      "Preface"
+    ]
+  },
+  {
+    "objectID": "01-coding-tools.html",
+    "href": "01-coding-tools.html",
+    "title": "AI Coding Tools",
+    "section": "",
+    "text": "Code execution environments\nLarge language models are impressive conversationalists, but without the ability to run code they can only describe how to analyze your data. They can outline the steps, suggest the formulas, and draft the chart specifications — but you still have to do the work. When you attach a code-execution tool, the dynamic changes completely. The AI loads your data into a Python dataframe, writes and runs the analysis, renders the charts, and synthesizes the findings into a memo. You provide the questions; the AI provides the answers. The result is not a plan for an analysis but the analysis itself — complete with numbers, visualizations, and narrative.\nThis chapter introduces the three major coding agents, explains how to install and configure each one, and maps out the differences that matter for choosing between them.\nAI can write and run code in three different environments, each with different strengths.\nA cloud sandbox is a temporary computing environment hosted by the AI provider. Claude Chat and ChatGPT both offer this: you upload a file, the AI processes it on a remote server, and you download the results. Cloud sandboxes are convenient for quick, ad-hoc analysis, but your data leaves your machine and the session is ephemeral.\nA virtual machine is a sandboxed environment that runs on your own computer. Claude Cowork is an example: it spins up a VM locally, giving AI a full computing environment with file access and persistence across sessions. Virtual machines are good for longer batch work, and because they run on your machine, your data stays local.\nA local environment runs directly in your terminal. Claude Code, Gemini CLI, and OpenAI Codex are examples. The AI writes code that executes right on your machine, with full access to your files, databases, and network. Nothing is uploaded. This is what we use throughout this book.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>AI Coding Tools</span>"
+    ]
+  },
+  {
+    "objectID": "01-coding-tools.html#setting-up-claude-code",
+    "href": "01-coding-tools.html#setting-up-claude-code",
+    "title": "AI Coding Tools",
+    "section": "Setting up Claude Code",
+    "text": "Setting up Claude Code\nClaude Code is Anthropic’s terminal-based coding agent. It requires Node.js version 18 or higher. To install it, open a terminal and run:\nnpm install -g @anthropic-ai/claude-code\nThe first time you launch it by typing claude, the tool opens a browser window for OAuth authentication with your Anthropic account. Claude Code requires either a Pro subscription at $20 per month (which includes a generous usage allowance) or an Anthropic API key with credits. Once authenticated, the agent is ready to use in any folder on your machine.\nClaude Code reads a file called CLAUDE.md in the project directory for persistent instructions. This is where you store context about your data, preferred output formats, and any domain-specific guidance the agent should follow every session. You can also enable verbose output by pressing Ctrl+O during a conversation, which shows every step the agent takes: reading files, writing Python, running code, and interpreting results.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>AI Coding Tools</span>"
+    ]
+  },
+  {
+    "objectID": "01-coding-tools.html#setting-up-gemini-cli",
+    "href": "01-coding-tools.html#setting-up-gemini-cli",
+    "title": "AI Coding Tools",
+    "section": "Setting up Gemini CLI",
+    "text": "Setting up Gemini CLI\nGemini CLI is Google’s terminal-based coding agent. It also requires Node.js 18 or higher. Install it with:\nnpm install -g @google/gemini-cli\nLaunch it by typing gemini. On first run, it opens a browser window for Google account authentication. Gemini CLI offers a free tier with 60 requests per minute and 1,000 requests per day — enough for an entire working day of analysis without spending anything. Paid tiers are available through the Google AI API for heavier usage.\nGemini CLI reads a GEMINI.md file for project-level instructions, serving the same purpose as Claude Code’s CLAUDE.md. Verbose output is available by launching with --verbosity=verbose, which displays the agent’s internal reasoning and every tool call in real time.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>AI Coding Tools</span>"
+    ]
+  },
+  {
+    "objectID": "01-coding-tools.html#setting-up-openai-codex",
+    "href": "01-coding-tools.html#setting-up-openai-codex",
+    "title": "AI Coding Tools",
+    "section": "Setting up OpenAI Codex",
+    "text": "Setting up OpenAI Codex\nOpenAI Codex is an open-source terminal agent that connects to OpenAI’s models. Install it with:\nnpm install -g @openai/codex\nLaunch it by typing codex. Codex requires either a ChatGPT Plus subscription or an OpenAI API key. Set your API key as an environment variable (OPENAI_API_KEY) before launching, or the tool will prompt you to authenticate.\nCodex displays its reasoning by default — you can see the agent’s thought process without enabling any special mode. It reads project instructions from a AGENTS.md file in the working directory.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>AI Coding Tools</span>"
+    ]
+  },
+  {
+    "objectID": "01-coding-tools.html#significant-differences",
+    "href": "01-coding-tools.html#significant-differences",
+    "title": "AI Coding Tools",
+    "section": "Significant differences",
+    "text": "Significant differences\nAll three agents read local files, write Python, and return results in the conversation. The workflows in this book apply to all of them, and you should pick whichever fits your budget and preferences. That said, several differences are worth noting.\nSandboxing is the most visible difference. Codex runs generated code in an OS-level sandbox by default, isolating it from the rest of your system even during development. Claude Code and Gemini CLI rely on permission prompts instead — they ask before executing potentially destructive operations, but the code runs directly in your environment. For production deployment, all three benefit from container-based isolation (covered in Chapter 5).\nContext windows determine how much text the agent can process in a single session. Gemini CLI supports up to one million tokens (roughly 3,000 pages of text). Claude Code ranges from 200,000 to over one million tokens depending on the model. Codex supports 192,000 tokens. For most business datasets and documents, any of these is more than sufficient.\nInstruction files differ in name but serve the same purpose: CLAUDE.md for Claude Code, GEMINI.md for Gemini CLI, and AGENTS.md for Codex. Each file stores project-level context that persists across sessions.\nCost varies. Claude Code requires a $20/month subscription or API credits. Gemini CLI’s free tier covers most individual use. Codex is open source and free to run, but the OpenAI API calls it makes are billed per token.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>AI Coding Tools</span>"
+    ]
+  },
+  {
+    "objectID": "01-coding-tools.html#other-interfaces",
+    "href": "01-coding-tools.html#other-interfaces",
+    "title": "AI Coding Tools",
+    "section": "Other interfaces",
+    "text": "Other interfaces\nThe terminal agents are not the only way to work with AI on code and data. Several other interfaces are worth knowing about, even though this book focuses on the terminal workflow.\nClaude Desktop is a GUI chat application from Anthropic. It supports file attachments, image analysis, and recently added an agentic mode that can execute multi-step tasks. It is convenient for one-off conversations and for users who prefer a graphical interface to a terminal.\nGoogle Antigravity is an agent-first IDE — a fork of VS Code designed around AI collaboration. It is currently in free preview. Rather than adding AI to an existing editor, it was built from the ground up for agent-driven workflows, with the AI able to navigate files, run code, and iterate on changes directly in the editor.\nVS Code with AI extensions is the most common setup for developers who already use VS Code. Extensions like GitHub Copilot, Cline, and Roo Code add AI assistance ranging from autocomplete to full agentic coding. The experience is less unified than a purpose-built tool but integrates into an existing workflow.\n\n\n\n\n\n\nExercise 1: Install and Test\n\n\n\n\n\nInstall one of the three coding agents (Claude Code, Gemini CLI, or Codex) on your machine. Launch it, authenticate, and confirm it is working by asking it to print “Hello, world” in Python.\nThen ask it to create a simple CSV file with five rows of sample sales data (date, product, revenue, profit) and describe the data back to you. Verify that the file was created in your folder and that the description is accurate.\n\n\n\n\n\n\n\n\n\nExercise 2: Compare Two Agents\n\n\n\n\n\nInstall a second coding agent. Give both agents the same prompt: “Create a bar chart showing monthly revenue from this data” using the sample CSV from Exercise 1.\nCompare the experience. Which agent was faster? Did the charts differ in style or quality? Did one ask for clarification while the other just ran? Write two sentences summarizing the most notable difference.\n\n\n\n\n\n\n\n\n\nExercise 3: Instruction Files\n\n\n\n\n\nCreate a project instruction file (CLAUDE.md, GEMINI.md, or AGENTS.md depending on your agent) in a folder containing the sample CSV from Exercise 1. Add two instructions: a preferred chart style (for example, “use a dark background with white text for all charts”) and a default analysis behavior (for example, “always show the code you run”).\nAsk the agent to create a chart. Does it follow your instructions? Modify the instruction file and ask again. The deliverable is your instruction file and a brief note on what the agent followed and what it ignored.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>AI Coding Tools</span>"
+    ]
+  },
+  {
+    "objectID": "02-exploring-data.html",
+    "href": "02-exploring-data.html",
+    "title": "Exploring Data with AI",
+    "section": "",
+    "text": "The scenario\nChapter 1 introduced the coding agents and showed how to install them. Now it is time to use one. This chapter goes from a raw spreadsheet to a written recommendation with charts in under ten minutes — using nothing but plain-English conversation.\nYou are a regional VP at a retail company. Q4 numbers just came in. The question on the table: which regions should get additional marketing budget, and which product lines should be expanded or cut?\nThe data is the Kaggle “Sample Superstore” dataset — roughly 10,000 orders across four U.S. regions, with columns for sales, profit, discount, product category, and customer segment. You can download it here: superstore.csv.\nAn analyst would take half a day to work through this. With a coding agent, you can do it in ten minutes.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Exploring Data with AI</span>"
+    ]
+  },
+  {
+    "objectID": "02-exploring-data.html#step-1-open-and-orient",
+    "href": "02-exploring-data.html#step-1-open-and-orient",
+    "title": "Exploring Data with AI",
+    "section": "Step 1: Open and orient",
+    "text": "Step 1: Open and orient\nPlace the CSV file in a folder and open your coding agent in that folder. Then ask:\n\nDescribe the data in this folder.\n\nThe agent reads the CSV into a dataframe and reports back: 10,000 rows, 21 columns, four regions, three product categories, a date range from 2014 to 2017, total sales of roughly $2.3 million with an average profit margin around 12%. It may also flag surprises — sub-categories that are losing money, or a disproportionate concentration of sales in one region.\nThis orienting step catches formatting issues (dates parsed as strings, currencies with dollar signs, encoding problems) and surfaces the structure of the data before you start asking pointed questions.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Exploring Data with AI</span>"
+    ]
+  },
+  {
+    "objectID": "02-exploring-data.html#step-2-ask-decision-relevant-questions",
+    "href": "02-exploring-data.html#step-2-ask-decision-relevant-questions",
+    "title": "Exploring Data with AI",
+    "section": "Step 2: Ask decision-relevant questions",
+    "text": "Step 2: Ask decision-relevant questions\nFrame every question around the decision, not around the data. For the budget decision:\n\nWhich region has the highest profit margin, and which has the lowest?\n\n\nShow quarterly sales trends by region. Are any accelerating or declining?\n\n\nWhich sub-categories are losing money? How much?\n\nEach of these questions connects directly to the budget allocation decision. The first identifies where margin is strongest. The second reveals momentum — a region with declining sales may not deserve more investment regardless of its current margin. The third pinpoints money-losers that could be cut.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Exploring Data with AI</span>"
+    ]
+  },
+  {
+    "objectID": "02-exploring-data.html#step-3-visualize-the-tradeoffs",
+    "href": "02-exploring-data.html#step-3-visualize-the-tradeoffs",
+    "title": "Exploring Data with AI",
+    "section": "Step 3: Visualize the tradeoffs",
+    "text": "Step 3: Visualize the tradeoffs\nAsk the agent to create charts that make the decision visual.\n“Quarterly profit by region” calls for a line chart, because you are looking at trends over time. “Profit by sub-category, sorted” calls for a bar chart, because you are comparing categories. “Discount rate vs. profit margin” calls for a scatter plot, because you are looking for a relationship between two continuous variables.\nOnce you have a chart, iterate. Ask the agent to highlight money-losers in red, add a break-even line, or annotate the December spike. Each follow-up takes seconds. If an annotation overlaps a data point, you can ask the agent to view its own chart and fix the layout — it can see images and adjust the code accordingly.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Exploring Data with AI</span>"
+    ]
+  },
+  {
+    "objectID": "02-exploring-data.html#step-4-build-the-recommendation",
+    "href": "02-exploring-data.html#step-4-build-the-recommendation",
+    "title": "Exploring Data with AI",
+    "section": "Step 4: Build the recommendation",
+    "text": "Step 4: Build the recommendation\nThe final step is synthesis. Ask the agent to turn the analysis into a recommendation.\n\nWhich two regions should get increased marketing budget and why?\n\n\nWhich sub-categories should we discontinue? Quantify the savings.\n\n\nWrite a one-page executive memo with the recommendation and supporting charts.\n\nIn ten minutes you have gone from a raw CSV to a written recommendation backed by evidence. No code was written by you. No analyst was involved. No one waited three days for a dashboard.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Exploring Data with AI</span>"
+    ]
+  },
+  {
+    "objectID": "02-exploring-data.html#what-just-happened",
+    "href": "02-exploring-data.html#what-just-happened",
+    "title": "Exploring Data with AI",
+    "section": "What just happened",
+    "text": "What just happened\nBehind the scenes, the agent read the CSV into Python, wrote and ran code for each question, rendered charts with matplotlib, and synthesized findings into a memo. You never saw the code unless you asked for it.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Exploring Data with AI</span>"
+    ]
+  },
+  {
+    "objectID": "02-exploring-data.html#what-comes-next",
+    "href": "02-exploring-data.html#what-comes-next",
+    "title": "Exploring Data with AI",
+    "section": "What comes next",
+    "text": "What comes next\nThis chapter analyzed data right on your machine. Chapter 3 uses AI as a thinking partner to challenge your conclusions. Chapter 4 connects AI to databases and builds reusable skills anyone on your team can use. Chapters 5 through 7 cover agents, document-based AI, and the trust and governance framework for deploying these tools in your organization.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Exploring Data with AI</span>"
+    ]
+  },
+  {
+    "objectID": "02-exploring-data.html#exercises",
+    "href": "02-exploring-data.html#exercises",
+    "title": "Exploring Data with AI",
+    "section": "Exercises",
+    "text": "Exercises\n\n\n\n\n\n\nExercise 1: The Superstore Walkthrough\n\n\n\n\n\nThis is the core exercise for Chapter 2. Download superstore.csv and place it in a folder. Open your coding agent in that folder and work through the four steps described above.\nFirst, ask the agent to describe the data. Confirm the row count, column names, date range, and financial summary. Second, ask three decision-relevant questions tied to the marketing budget allocation decision. Third, create at least one line chart (for trends), one bar chart (for comparisons), and one scatter plot (for relationships). Iterate on at least one chart by adding annotations or improving the layout. Fourth, ask the agent to write a one-page executive memo with the recommendation and supporting charts.\nBring your dataset and memo to Chapter 3 — you will use them as thinking-partner exercises.\n\n\n\n\n\n\n\n\n\nExercise 2: Speed Analysis Challenge\n\n\n\n\n\nSet a timer for five minutes. Open your coding agent in the Superstore data folder and ask as many questions as you can. At the end, identify your single most interesting finding and state it in one sentence.\n\n\n\n\n\n\n\n\n\nExercise 3: Chart Type Matching\n\n\n\n\n\nFor each of the following questions, decide which chart type is most appropriate, then ask your coding agent to build it using the Superstore data.\nHow has revenue changed over time? Which category is most profitable? Is there a relationship between discount and profit margin? What share of revenue comes from each region? What is the distribution of order sizes?\nBuild at least three of these charts. For each, write one sentence explaining what decision the chart informs.\n\n\n\n\n\n\n\n\n\nExercise 4: Data Detective\n\n\n\n\n\nYour colleague has made several claims about the Superstore data. Use your coding agent to verify or debunk each one.\nClaim 1: Discounts over 30% always increase total profit. Claim 2: The East region has the best profit margins. Claim 3: Office Supplies is the most profitable category. Claim 4: Q4 is always the best quarter.\nPick two claims and, for each, ask the agent to test it, show the evidence, and write one sentence stating whether the claim is confirmed or debunked, with the supporting number.\n\n\n\n\n\n\n\n\n\nExercise 5: The Weekly Report\n\n\n\n\n\nIdentify a recurring report your team produces — weekly sales, monthly KPIs, quarterly review — and try to automate it.\nPlace the source data in a folder and open your coding agent. Ask it to produce the full report: charts, tables, and a narrative summary. Then compare: how long does this report normally take to produce? How long did AI take? What is missing from the AI version?\nWrite a brief note on what AI got right, what it missed, and whether you would use this approach going forward.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Exploring Data with AI</span>"
+    ]
+  },
+  {
+    "objectID": "03-thinking-partner.html",
+    "href": "03-thinking-partner.html",
+    "title": "AI as Thinking Partner",
+    "section": "",
+    "text": "Why AI is a good sparring partner\nChapter 2 showed how AI can analyze data in minutes. But many of the hardest decisions in business are not data problems — they are thinking problems. The data may be clear, but the implications are not. The options are not fully explored. The assumptions are unchallenged. The failure modes are unexamined.\nThis chapter is about using AI as a sparring partner: someone who will argue with you, challenge your preferred option, and surface the assumptions you did not know you were making.\nMost decisions are not made poorly because of missing data. They are made poorly because of unchallenged assumptions. The problem is not analytical capacity but intellectual honesty — and intellectual honesty is hard when everyone in the room has an agenda.\nAI has no agenda. Unlike colleagues, it is not protecting turf, managing up, or afraid to disagree with the boss. You can say “argue against my preferred option” and it will do so without hurt feelings, without relationship cost, and without pulling punches. It is a tireless devil’s advocate.\nThere is a subtler benefit as well. Explaining your reasoning to AI forces you to articulate assumptions you did not know you were making. The act of structuring the problem for the conversation is itself clarifying. Many executives report that the most valuable part of a thinking-partner session is not what AI says but what they realized while formulating the question.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>AI as Thinking Partner</span>"
+    ]
+  },
+  {
+    "objectID": "03-thinking-partner.html#five-conversation-moves",
+    "href": "03-thinking-partner.html#five-conversation-moves",
+    "title": "AI as Thinking Partner",
+    "section": "Five conversation moves",
+    "text": "Five conversation moves\nThere are five specific things you can say to AI to sharpen your thinking about any decision.\nThe first is to expand options. Ask: “What options am I not considering?” Most decisions are presented as A-vs-B when there are options C, D, and E that nobody has named.\nThe second is to challenge. Ask: “Argue against my preferred choice.” This is the classic devil’s-advocate move. Tell AI which option you are leaning toward and ask it to make the strongest case against it.\nThe third is to surface assumptions. Ask: “What would need to be true for Option B to win?” This reframes the debate from arguing about preferences to identifying testable conditions. It turns a subjective disagreement into an empirical question.\nThe fourth is the pre-mortem. Ask: “If this decision fails, what is the most likely reason?” Pre-mortems are well-studied in decision science; they reliably surface risks that optimism bias would otherwise hide.\nThe fifth is to reframe. Ask: “How would a CFO / customer / regulator see this?” Shifting perspective changes what the “real” question is. A question about pricing looks different from the sales team’s perspective than from the finance team’s.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>AI as Thinking Partner</span>"
+    ]
+  },
+  {
+    "objectID": "03-thinking-partner.html#example-should-we-cut-our-price",
+    "href": "03-thinking-partner.html#example-should-we-cut-our-price",
+    "title": "AI as Thinking Partner",
+    "section": "Example: should we cut our price?",
+    "text": "Example: should we cut our price?\nTo see these moves in action, consider a scenario. You are a VP at a mid-size SaaS company. Your product is $99/month. A competitor just launched a similar product at $79. Your CEO wants a recommendation by Friday.\nInstead of opening a spreadsheet, you open a conversation.\n“We’re thinking about dropping our price from $99 to $79 to match a new competitor. Help me think through whether that’s the right move.”\nClaude does not answer yes or no. It reframes the decision. Matching the price is not the only option — what about a new $79 tier with fewer features while keeping the $99 tier? Have you considered adding value at $99 instead of cutting price? A third path: hold the price publicly but offer selective retention discounts to at-risk accounts. Three options instead of two, and the conversation is thirty seconds old.\n“I hadn’t considered the tiered approach. What are the risks of just matching their price?”\nClaude lays out the risks. A 20% price cut requires 25% more customers just to break even on revenue, and your cost structure does not shrink. It signals to the market that your product was not worth $99. And competitors can cut again — you have entered a race you cannot win on price alone.\n“OK, argue the other side. What would need to be true for matching the price to be the right call?”\nClaude identifies the conditions. Matching makes sense if price is the primary reason prospects choose the competitor — not features or brand. It also makes sense if your churn data shows price-sensitive customers are already leaving. And if your margins can absorb it: at $79, are you still above breakeven per customer?\n“One more thing. If we hold the price and it turns out to be wrong, what’s the most likely reason?”\nClaude runs the pre-mortem. The most likely failure mode is that the competitor’s price resets buyer expectations across the market. Six months from now, every sales call opens with “Why are you more expensive?” and close rates drop 15%. The damage is slow and invisible — you do not lose customers in a rush; you just stop winning new ones.\nFive minutes of conversation has produced three options instead of two, the risks of each, the conditions that determine which is right, and a failure scenario to monitor. No data was harmed in the making of this decision.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>AI as Thinking Partner</span>"
+    ]
+  },
+  {
+    "objectID": "03-thinking-partner.html#second-order-thinking",
+    "href": "03-thinking-partner.html#second-order-thinking",
+    "title": "AI as Thinking Partner",
+    "section": "Second-order thinking",
+    "text": "Second-order thinking\nMost decisions are evaluated on their immediate outcome. Second-order thinking asks: what happens after the first effect?\nThe prompt is straightforward: “If we do X and it works, what happens next? And after that?”\nIn the pricing example, the first-order effect of cutting prices is that volume increases. The second-order effect is that competitors respond and margins compress industry-wide. The third-order effect is that customers expect low prices permanently and the brand is repositioned downmarket.\nAI makes this easy because it can generate the chain of consequences in seconds. You can also ask for the chain in the opposite direction — “If we do X and it fails, what happens next?” — and compare the two trajectories to find the earliest signal that tells you which path you are on.\nThe best decision-makers routinely think two moves ahead. AI does not replace that instinct, but it automates the generation of consequences so you can focus on evaluating them.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>AI as Thinking Partner</span>"
+    ]
+  },
+  {
+    "objectID": "03-thinking-partner.html#steelmanning",
+    "href": "03-thinking-partner.html#steelmanning",
+    "title": "AI as Thinking Partner",
+    "section": "Steelmanning",
+    "text": "Steelmanning\nSteelmanning is the opposite of straw-manning. Instead of constructing a weak version of the opposing argument in order to knock it down, you construct the strongest possible version.\nThe prompt: “Make the strongest possible case for the option I like least.”\nIf the steelman is weak, your preferred option is stronger than you thought. If the steelman is compelling, you have discovered a genuine risk. Either way, you learn something. The technique works because AI has no emotional investment in any option — it will argue for the position you dislike just as vigorously as it argues for the one you favor.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>AI as Thinking Partner</span>"
+    ]
+  },
+  {
+    "objectID": "03-thinking-partner.html#scenario-planning",
+    "href": "03-thinking-partner.html#scenario-planning",
+    "title": "AI as Thinking Partner",
+    "section": "Scenario planning",
+    "text": "Scenario planning\nScenario planning structures uncertainty into a small number of concrete futures.\nThe prompt: “Give me three scenarios — optimistic, base case, pessimistic — with probabilities and specific trigger events.”\nThe key is specificity. A good scenario is not “things go well” but “the competitor’s product launch underperforms because their enterprise features are six months behind, and we capture 30% of their early adopters by Q3.” Each scenario should name a trigger event that you can monitor. If the trigger fires, you know which scenario you are in and can act accordingly.\nScenario planning is particularly valuable when combined with the pre-mortem. The pessimistic scenario is essentially a pre-mortem with a probability attached.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>AI as Thinking Partner</span>"
+    ]
+  },
+  {
+    "objectID": "03-thinking-partner.html#combining-data-and-thinking",
+    "href": "03-thinking-partner.html#combining-data-and-thinking",
+    "title": "AI as Thinking Partner",
+    "section": "Combining data and thinking",
+    "text": "Combining data and thinking\nThe most powerful conversations blend Chapter 2 analysis with Chapter 3 thinking moves.\n“Here’s my Chapter 2 memo. Find the three weakest claims.” This takes the Superstore recommendation you built in the previous chapter and subjects it to adversarial scrutiny.\n“The data says the West region has the highest margin. What alternative explanations fit the same data?” This is the scientific method applied to business analysis: generating alternative hypotheses for the same evidence.\n“I recommended expanding product line X. Run a pre-mortem on that recommendation.” This applies the pre-mortem not to a hypothetical scenario but to your own work.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>AI as Thinking Partner</span>"
+    ]
+  },
+  {
+    "objectID": "03-thinking-partner.html#challenging-your-own-analysis",
+    "href": "03-thinking-partner.html#challenging-your-own-analysis",
+    "title": "AI as Thinking Partner",
+    "section": "Challenging your own analysis",
+    "text": "Challenging your own analysis\nBring your Chapter 2 analysis and ask AI to poke holes in it. Open your recommendation memo and ask:\n\nRead this memo. What are the three weakest claims? What data would strengthen or disprove each one?\n\n\nWhat did I miss? What alternative explanations fit the same data?\n\nAI catches common blind spots: correlation treated as causation, survivorship bias in the sample, missing context from external events or seasonality. The output is not a new memo but a sharper understanding of the old one. You can then strengthen weak claims with additional data, acknowledge limitations explicitly, or revise the recommendation if warranted.\nThe memo does not change. Your confidence in it does.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>AI as Thinking Partner</span>"
+    ]
+  },
+  {
+    "objectID": "03-thinking-partner.html#from-analysis-to-action",
+    "href": "03-thinking-partner.html#from-analysis-to-action",
+    "title": "AI as Thinking Partner",
+    "section": "From analysis to action",
+    "text": "From analysis to action\nA thinking-partner conversation should end with clarity, not more questions.\nClose the conversation with prompts like: “Summarize the three strongest arguments for my recommendation.” “What are the two biggest risks I should name when I present this?” “Write a one-paragraph executive summary that acknowledges the limitations.”\nYou leave with a recommendation you have stress-tested, risks you can name before someone else does, and language ready for the meeting or memo. The thinking partner does not decide for you. It makes you harder to argue against.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>AI as Thinking Partner</span>"
+    ]
+  },
+  {
+    "objectID": "03-thinking-partner.html#exercises",
+    "href": "03-thinking-partner.html#exercises",
+    "title": "AI as Thinking Partner",
+    "section": "Exercises",
+    "text": "Exercises\n\n\n\n\n\n\nExercise 1: The Five-Move Workout\n\n\n\n\n\nPick a real decision you are currently facing — work or personal. Have a thinking-partner conversation with Claude in which you use each of the five moves exactly once: expand options, challenge, surface assumptions, pre-mortem, and reframe.\nAfter each move, write one sentence describing what the move revealed. At the end, reflect: did AI change your mind? Did it surface something you had not considered?\nThe deliverable is the conversation transcript plus a five-sentence reflection, one per move.\n\n\n\n\n\n\n\n\n\nExercise 2: Challenge Your Chapter 2 Analysis\n\n\n\n\n\nOpen the recommendation memo you wrote in Chapter 2 (or re-run the Superstore analysis using superstore.csv). Give the memo to Claude and ask it to find the three weakest claims.\nFor each weak claim, ask what data you would need to strengthen it. Then ask Claude to rewrite the executive summary to acknowledge the limitations it identified.\nCompare the original and revised summaries. Which one would survive tougher scrutiny in a meeting?\n\n\n\n\n\n\n\n\n\nExercise 3: Scenario Swap\n\n\n\n\n\nIf you are working through this book with a colleague, write down a real business decision you are facing in one or two sentences. Swap scenarios. Have a thinking-partner conversation about your colleague’s scenario using at least three of the five conversation moves.\nShare back: “Here’s what AI surfaced about your decision.” It is often easier to be objective about someone else’s problem. The deliverable is two key insights for your partner.\n\n\n\n\n\n\n\n\n\nExercise 4: Second-Order Thinking Practice\n\n\n\n\n\nConsider the following decision: “We are going to require all employees to return to the office five days a week.”\nAsk Claude to trace three levels of consequences if this decision works as intended. Then ask it to trace three levels of consequences if it does not work as intended.\nCompare the two chains. Where do they diverge? What is the earliest signal that tells you which path you are on?\n\n\n\n\n\n\n\n\n\nExercise 5: Stakeholder Simulation\n\n\n\n\n\nWrite a one-paragraph proposal — a new initiative, a policy change, or a budget request.\nAsk Claude to react to the proposal as four different stakeholders: your CEO, your CFO, a skeptical board member, and a front-line employee. For each persona, note the main concern and what would win them over.\nRevise the proposal to address the top two concerns. The deliverable is the original proposal, the stakeholder reactions, and the revised proposal.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>AI as Thinking Partner</span>"
+    ]
+  },
+  {
+    "objectID": "04-connecting-databases.html",
+    "href": "04-connecting-databases.html",
+    "title": "Connecting AI to Databases",
+    "section": "",
+    "text": "The dashboard trap\nThe first three chapters worked with individual files — a CSV placed in a folder, a memo pasted into a conversation. Most real business data does not live in spreadsheets. It lives in databases: structured collections of related tables, hosted on servers, queried with SQL.\nThis chapter connects AI to those databases. By the end, you will have built a reusable “skill” that lets anyone on your team query a database in plain English — no SQL required.\nOrganizations spend millions building dashboards that answer yesterday’s questions. The cycle is familiar: a user requests a report, an analyst builds it, IT deploys it to Tableau or Power BI, and then the user asks a follow-up question — which starts the cycle over.\nThe cost is measured in three dimensions. Time: weeks to months per dashboard. Rigidity: fixed views of fixed data that cannot adapt to a new question. Adoption: according to Gartner (2023), fewer than half of data and analytics teams effectively provide value to their organizations.\nThe dashboard was a workaround for the fact that databases do not speak English. Now they do. With natural language AI, you skip the entire build cycle and go straight from question to answer. Ask in plain English instead of writing SQL. Get answers in seconds instead of weeks. Follow-up questions are free — just type the next sentence.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Connecting AI to Databases</span>"
+    ]
+  },
+  {
+    "objectID": "04-connecting-databases.html#mcp-the-universal-connector",
+    "href": "04-connecting-databases.html#mcp-the-universal-connector",
+    "title": "Connecting AI to Databases",
+    "section": "MCP: the universal connector",
+    "text": "MCP: the universal connector\nOut of the box, AI chatbots can only read and write text. They cannot query your database, pull data from the web, or update a spreadsheet. The Model Context Protocol (MCP) solves this problem.\nMCP is an open standard that lets AI connect to external tools — think of it as USB for AI. An AI assistant acts as the MCP client and connects to MCP servers that wrap databases, browsers, calendars, CRMs, and anything else with an API. You can connect as many tools as you want, and the AI sees all their capabilities and can use them together.\nThe practical implication is that the same AI that analyzed your spreadsheet in Chapter 2 can now query your PostgreSQL database, pull records from Salesforce, check your calendar, and update a Jira ticket — all in the same conversation.\nAnthropic launched official plugins on January 30, 2026, bundling skills, MCP connectors, and slash commands into installable packages. The market reaction was dramatic: $285 billion in market cap evaporated from enterprise software companies in days, with LegalZoom dropping 20%, Thomson Reuters 16%, and Intuit more than 10%. The plugins were research previews, not production-ready tools, but the direction of travel was clear enough to spook the market.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Connecting AI to Databases</span>"
+    ]
+  },
+  {
+    "objectID": "04-connecting-databases.html#from-spreadsheets-to-databases",
+    "href": "04-connecting-databases.html#from-spreadsheets-to-databases",
+    "title": "Connecting AI to Databases",
+    "section": "From spreadsheets to databases",
+    "text": "From spreadsheets to databases\nIn Chapter 2 you analyzed a spreadsheet — a single table of rows and columns living in a file on your machine. Most real business data lives in databases: many related tables linked by keys, hosted on a server, queried with SQL.\nSQL is the language databases understand. You do not need to learn it. AI writes the SQL for you. But you do need to tell the AI what is in the database — which tables exist, what the columns mean, and how the tables relate to each other. That is what a skill does.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Connecting AI to Databases</span>"
+    ]
+  },
+  {
+    "objectID": "04-connecting-databases.html#the-sample-database-chinook",
+    "href": "04-connecting-databases.html#the-sample-database-chinook",
+    "title": "Connecting AI to Databases",
+    "section": "The sample database: Chinook",
+    "text": "The sample database: Chinook\nThe exercises in this chapter use the Chinook sample database, which you can download here: chinook.db. It represents a music retailer’s operations and contains 11 related tables.\nThe key tables are employees (8 staff members), customers (59 customers across 24 countries), invoices and invoice_items (412 transactions), and tracks, albums, artists, and genres (a product catalog of more than 3,500 tracks). It is a publicly available SQLite file that requires no setup — just place it in a folder and point your coding agent at it. The same skill pattern you learn here works with any database.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Connecting AI to Databases</span>"
+    ]
+  },
+  {
+    "objectID": "04-connecting-databases.html#what-is-a-skill",
+    "href": "04-connecting-databases.html#what-is-a-skill",
+    "title": "Connecting AI to Databases",
+    "section": "What is a skill?",
+    "text": "What is a skill?\nA skill is a set of instructions that specializes a general-purpose AI for a specific task. Every AI customization works the same way: additional text is added to the prompt. A skill provides three things: domain knowledge (what the data means), workflow instructions (how to do the task), and output format specifications (how to present results).\nSkills are not limited to databases. You could build a skill for weekly report generation, customer support analysis, or any recurring task where AI benefits from domain context. But the database query skill is the most common and the most immediately useful, so that is what we build here.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Connecting AI to Databases</span>"
+    ]
+  },
+  {
+    "objectID": "04-connecting-databases.html#the-skill.md-file",
+    "href": "04-connecting-databases.html#the-skill.md-file",
+    "title": "Connecting AI to Databases",
+    "section": "The SKILL.md file",
+    "text": "The SKILL.md file\nThe skill is a markdown file that the coding agent reads when you invoke it. The structure has three parts.\nThe first part is the description and location: what the skill does and the path to the database file.\nThe second part is the schema and relationships: every table, its columns, data types, and how tables link to each other. This is the most important part. The more precisely you describe the schema, the better the AI’s queries will be. Include column descriptions (“status is one of: active, completed, on-hold”), explain join paths (“invoices link to customers via CustomerId”), and note any business logic (“revenue means invoice_items.UnitPrice times Quantity”).\nThe third part is the instructions: query style, output format, and chart preferences. For example: “Always show the SQL query before showing results. Use Plotly for interactive charts. Annotate the highest and lowest values.”\nThe skill file is just text. Anyone can edit it. No programming is required — just clear descriptions of your data.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Connecting AI to Databases</span>"
+    ]
+  },
+  {
+    "objectID": "04-connecting-databases.html#creating-the-skill-step-by-step",
+    "href": "04-connecting-databases.html#creating-the-skill-step-by-step",
+    "title": "Connecting AI to Databases",
+    "section": "Creating the skill step by step",
+    "text": "Creating the skill step by step\nCreate a project folder with the SQLite database file and a file called SKILL.md. Write the schema, describing each table, its columns, and its relationships. Then test by asking questions and refining based on what Claude gets wrong.\nYour first draft will not be perfect, and that is fine. The skill improves through iteration. Every time Claude misinterprets a question or uses the wrong join path, you add a clarification to the SKILL.md. After a few rounds of testing, the skill handles the most common questions reliably.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Connecting AI to Databases</span>"
+    ]
+  },
+  {
+    "objectID": "04-connecting-databases.html#building-the-chinook-skill",
+    "href": "04-connecting-databases.html#building-the-chinook-skill",
+    "title": "Connecting AI to Databases",
+    "section": "Building the Chinook skill",
+    "text": "Building the Chinook skill\nTo make this concrete, consider a scenario. You are an operations director at a music retailer. The CEO wants a recommendation by Friday: which markets to invest in, which product lines to promote, and how to improve per-customer revenue.\nThe data lives in the Chinook database. The answer requires joining customer, invoice, and catalog data across multiple tables. There is no time to wait for an analyst.\nThe solution: build a skill that knows the Chinook schema, then ask questions in plain English. The agent writes SQL, runs it, and returns charts.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Connecting AI to Databases</span>"
+    ]
+  },
+  {
+    "objectID": "04-connecting-databases.html#decision-driven-queries",
+    "href": "04-connecting-databases.html#decision-driven-queries",
+    "title": "Connecting AI to Databases",
+    "section": "Decision-driven queries",
+    "text": "Decision-driven queries\nWith the skill active, every question should connect to the CEO’s decision.\n“Top five countries by revenue, bar chart, sorted” produces a bar chart comparing categories. “Monthly revenue trend line — is the business growing?” produces a line chart showing trends over time. “Plot average order value versus number of orders by country” produces a scatter plot that reveals clusters of high-value versus high-frequency markets.\nYou can go deeper. “Correlation heatmap of all numeric columns” shows which metrics move together. “Make that chart interactive so I can hover for details” switches from matplotlib to Plotly, saving the result as an HTML file. “Annotate the outlier country on the scatter plot” adds context to the visualization.\nEach question is a different lens on the same decision. The skill ensures that every query uses the correct tables, joins, and business logic.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Connecting AI to Databases</span>"
+    ]
+  },
+  {
+    "objectID": "04-connecting-databases.html#sql-transparency",
+    "href": "04-connecting-databases.html#sql-transparency",
+    "title": "Connecting AI to Databases",
+    "section": "SQL transparency",
+    "text": "SQL transparency\nOne of the most important features of this workflow is that you can always see the SQL. When you ask “Which country generates the most revenue? Show a bar chart of the top 10,” Claude generates a SQL query that selects country and summed revenue from the invoices and customers tables, groups by country, orders by revenue descending, and limits to ten results.\nYou can read the SQL and verify that the joins are correct, the filters make sense, and the aggregation matches your intent. Analysts can review the logic. This builds trust: AI is not a black box.\nIf you ask a follow-up — “Break down the US revenue by state” — Claude writes a new query with a WHERE clause and additional grouping. The SQL is always available for inspection.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Connecting AI to Databases</span>"
+    ]
+  },
+  {
+    "objectID": "04-connecting-databases.html#iterating-on-the-skill",
+    "href": "04-connecting-databases.html#iterating-on-the-skill",
+    "title": "Connecting AI to Databases",
+    "section": "Iterating on the skill",
+    "text": "Iterating on the skill\nCommon refinements include adding column descriptions, specifying default sorting and format rules, and setting chart preferences. You can specify whether charts should be static (matplotlib, good for reports and slides) or interactive (Plotly, with hover, zoom, and filter, saved as HTML files and shareable via email). The same prompt works for both — just add “interactive” or “Plotly.”\nSkills turn institutional knowledge into executable instructions. Instead of a procedures manual that sits on a shelf, you have a prompt that AI follows every time. The knowledge is not just documented; it is operationalized.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Connecting AI to Databases</span>"
+    ]
+  },
+  {
+    "objectID": "04-connecting-databases.html#behind-the-firewall",
+    "href": "04-connecting-databases.html#behind-the-firewall",
+    "title": "Connecting AI to Databases",
+    "section": "Behind the firewall",
+    "text": "Behind the firewall\nMCP connectors exist for Salesforce, Jira, Slack, internal databases, and anything else with an API. On a corporate network, the coding agent connects to your database behind the firewall. No data leaves your network — AI sends queries, not raw data, to the model. IT controls which databases and tools AI can access via MCP configuration.\n\n\n\n\n\n\nMCP support across coding agents\n\n\n\nClaude Code has native MCP support, and Gemini CLI also supports MCP servers. Codex uses a different tool-integration mechanism but can connect to the same databases through its own plugin system. The skill-file pattern described in this chapter works with any agent that can read a markdown file and execute SQL.\n\n\nIn this chapter we connect to a local SQLite file. In your organization, the same pattern connects to PostgreSQL, Snowflake, or any database your team uses.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Connecting AI to Databases</span>"
+    ]
+  },
+  {
+    "objectID": "04-connecting-databases.html#the-skill-as-deployment-artifact",
+    "href": "04-connecting-databases.html#the-skill-as-deployment-artifact",
+    "title": "Connecting AI to Databases",
+    "section": "The skill as deployment artifact",
+    "text": "The skill as deployment artifact\nA polished skill is what gets deployed on your intranet. The skill file encodes which tables matter, how they relate, and what the business terminology means. IT adds the infrastructure: SSO authentication, read-only database credentials, and query logging for audit.\nThe skill file is the deployment artifact. IT adds infrastructure; you provide domain knowledge. Chapter 5 covers the full deployment path in detail.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Connecting AI to Databases</span>"
+    ]
+  },
+  {
+    "objectID": "04-connecting-databases.html#exercises",
+    "href": "04-connecting-databases.html#exercises",
+    "title": "Connecting AI to Databases",
+    "section": "Exercises",
+    "text": "Exercises\n\n\n\n\n\n\nExercise 1: Build a Chinook Skill\n\n\n\n\n\nDownload chinook.db and place it in a new project folder. Create a SKILL.md file in the same folder with three sections: a description and database path, at least three table descriptions with columns and relationships, and three example questions.\nOpen your coding agent in the folder and test three decision-relevant queries. For each, ask Claude to show the SQL and verify that the joins and filters are correct. Then ask for an interactive Plotly chart and iterate on it at least once — change colors, add annotations, or improve the layout.\nThe deliverable is a working SKILL.md and one interactive chart.\n\n\n\n\n\n\n\n\n\nExercise 2: Database Schema Detective\n\n\n\n\n\nConnect your coding agent to the Chinook database without any SKILL.md — no documentation at all.\nAsk: “What tables are in this database? How are they related?” Let Claude discover the schema on its own. Then ask: “If I were the CEO of this music company, what three questions should I be asking?”\nFollow up with two questions that require joining at least two tables (for example, “Revenue by artist” requires joining invoices, invoice_items, tracks, albums, and artists).\nThe deliverable is Claude’s relationship summary and two multi-table query results.\n\n\n\n\n\n\n\n\n\nExercise 3: Decision Scenario Queries\n\n\n\n\n\nYou are the Chinook CEO. The board wants you to cut two of the five lowest-performing genres from the catalog to reduce licensing costs.\nUsing your Chinook skill (or a bare connection to chinook.db), answer these questions in sequence: Which genres contribute the least revenue? For those two genres, how many unique customers would be affected? Are any of those customers high-value customers who also buy other genres?\nWrite one sentence stating which two genres you would cut and why.\n\n\n\n\n\n\n\n\n\nExercise 4: Skill for Your Own Data\n\n\n\n\n\nTake a CSV from your work (anonymize if needed) or a public dataset you care about. Ask the agent to convert it to a SQLite database. Then write a SKILL.md describing the tables, columns, relationships, and five example questions.\nTest five queries and refine the skill until all five return correct results. The deliverable is your SKILL.md and the SQLite database file.\n\n\n\n\n\n\n\n\n\nExercise 5: The Monday Morning Report\n\n\n\n\n\nIdentify a recurring report your team produces — weekly sales summary, monthly KPIs, pipeline report. Write a SKILL.md that includes the database schema, the specific queries needed, and the output format.\nAdd an instruction to the skill: “When I say ‘Monday report,’ run these three queries and format the results as a one-page summary.” Test it. Does one command produce your entire report?\nThe deliverable is the skill file and a sample report output.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Connecting AI to Databases</span>"
+    ]
+  },
+  {
+    "objectID": "05-agents-deployment.html",
+    "href": "05-agents-deployment.html",
+    "title": "Agents and Deployment",
+    "section": "",
+    "text": "What is an agent?\nThe first four chapters built skills for querying data. AI answered questions, generated charts, and wrote memos. But in each case, you were the orchestrator — you decided what to ask next, when to generate a chart, and when to synthesize.\nThis chapter introduces agents: AI systems that can plan, execute actions, observe results, and iterate autonomously. It also covers the practical path from a prototype on your laptop to a deployed tool on your corporate intranet.\nAn agent is an AI system that pursues a goal through a loop of planning, executing, observing, and iterating. The distinction from a chatbot is autonomy. A chatbot handles a single turn: you ask, it answers, and you decide what to do next. An agent handles multiple steps: it breaks the task down, calls tools in sequence, checks the results, and adjusts its approach — all from a single instruction.\nA research agent might search for information, read the results, summarize findings, and then search deeper based on what it learned. A data pipeline agent might query a database, clean the data, generate charts, write a report, and save everything to a folder. A coding agent might read requirements, write code, run tests, and fix failures.\nThe skills you built in Chapter 4 are the building blocks. A skill answers one question. An agent chains skills and other tools together to complete a workflow.",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Agents and Deployment</span>"
+    ]
+  },
+  {
+    "objectID": "05-agents-deployment.html#the-agent-loop",
+    "href": "05-agents-deployment.html#the-agent-loop",
+    "title": "Agents and Deployment",
+    "section": "The agent loop",
+    "text": "The agent loop\nEvery agent follows the same four-step loop. First, it plans by breaking the task into steps. Second, it executes by calling tools and running code. Third, it observes by checking the results of each action. Fourth, it iterates by adjusting its plan based on what it observed. Then the loop repeats until the task is complete.\nThis is exactly what your coding agent does when you give it a complex instruction. Ask it to “analyze the Chinook database, create three charts, and write a summary report,” and it will plan the steps, execute them in sequence, check each result, and produce the final deliverable. You have been using an agent since Chapter 2 — you just did not call it that.",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Agents and Deployment</span>"
+    ]
+  },
+  {
+    "objectID": "05-agents-deployment.html#how-agents-use-tools",
+    "href": "05-agents-deployment.html#how-agents-use-tools",
+    "title": "Agents and Deployment",
+    "section": "How agents use tools",
+    "text": "How agents use tools\nThe AI does not just generate text. It decides which tool to call, formats the request, and interprets the result.\nTools can be API calls (REST endpoints, webhooks, external services), file operations (reading, writing, and organizing files on disk), or database queries (SQL via the skills from Chapter 4). The tool-use protocol works the same way regardless of the tool: the AI receives a goal from the user, selects the right tool, formats the call, and interprets the result. Then it decides whether the task is complete or whether another tool call is needed.\nConsider a concrete example. You give the agent a single prompt: “Query the Chinook database for the top ten countries by revenue. Create a bar chart and a summary table. Write a one-page PDF report with the chart, table, and a three-sentence executive summary. Save everything to the reports folder.”\nThe agent queries the database using the Chapter 4 skill, generates a matplotlib chart and saves it as a PNG, builds a PDF with the chart, table, and narrative, and saves all files to the specified folder. Four tools, one prompt. The agent orchestrated the entire pipeline.",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Agents and Deployment</span>"
+    ]
+  },
+  {
+    "objectID": "05-agents-deployment.html#agent-architectures",
+    "href": "05-agents-deployment.html#agent-architectures",
+    "title": "Agents and Deployment",
+    "section": "Agent architectures",
+    "text": "Agent architectures\nNot all agents work the same way. The architecture depends on the complexity and stakes of the task.\nA single-agent architecture uses one AI with access to multiple tools. This is what Claude Code, Gemini CLI, and Codex each provide, and it is sufficient for most workflows.\nA multi-agent architecture uses multiple specialized agents that collaborate. One agent might plan the workflow while others execute individual steps. This is useful for complex pipelines where different steps require different expertise.\nA human-in-the-loop architecture adds approval checkpoints. The agent pauses at predefined points and waits for human confirmation before continuing. This is essential for high-stakes actions where mistakes are costly or irreversible.",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Agents and Deployment</span>"
+    ]
+  },
+  {
+    "objectID": "05-agents-deployment.html#the-permission-model",
+    "href": "05-agents-deployment.html#the-permission-model",
+    "title": "Agents and Deployment",
+    "section": "The permission model",
+    "text": "The permission model\nThe most important architectural decision is the permission model: what can the agent do without asking?\nAt the read-only level, the agent can query data and generate reports but cannot modify anything. A database analyst agent would operate at this level.\nAt the write-local level, the agent can save files to a project folder. A report generator that creates PDFs and charts would operate here.\nAt the write-external level, the agent can send emails, update systems, and interact with external services. Workflow automation agents operate here and require the most careful governance.\nStart with read-only. Add permissions as trust builds. The trust spectrum from Chapter 7 applies directly: the higher the stakes, the more checkpoints.",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Agents and Deployment</span>"
+    ]
+  },
+  {
+    "objectID": "05-agents-deployment.html#containers-and-sandboxed-execution",
+    "href": "05-agents-deployment.html#containers-and-sandboxed-execution",
+    "title": "Agents and Deployment",
+    "section": "Containers and sandboxed execution",
+    "text": "Containers and sandboxed execution\nWhen AI runs code, you need to control where it runs. On your laptop during development, a coding agent runs in your environment with access to your files. That is fine for prototyping. In production, you want isolation.\n\n\n\n\n\n\nBuilt-in sandboxing\n\n\n\nCodex includes OS-level sandboxing by default — it runs generated code in an isolated environment even on your laptop. Claude Code and Gemini CLI rely on permission prompts to control what the agent can do, but do not sandbox execution. For production deployment, all three benefit from the container-based isolation described below.\n\n\nA container (Docker is the standard) is a disposable, isolated computing environment. Think of it as a virtual computer that exists only for one task and is destroyed afterward. It can only access what you explicitly allow. A bug in the AI-generated code cannot affect your other files, your database, or your network.\nThe sandbox pattern for production looks like this: a user asks a question through a web interface, the AI agent plans and orchestrates, the agent runs code inside a sandboxed Python container, the container queries the database through a read-only connection, and the results flow back to the user.\nThe user never touches the database. The agent never escapes the sandbox. This is defense in depth.",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Agents and Deployment</span>"
+    ]
+  },
+  {
+    "objectID": "05-agents-deployment.html#deploying-to-a-corporate-intranet",
+    "href": "05-agents-deployment.html#deploying-to-a-corporate-intranet",
+    "title": "Agents and Deployment",
+    "section": "Deploying to a corporate intranet",
+    "text": "Deploying to a corporate intranet\nDeploying an AI data tool on your intranet requires two contributions.\nYou provide the SKILL.md from Chapter 4 — your domain knowledge — along with test queries, expected results, and business rules.\nIT provides a web wrapper (a browser interface built with Streamlit, Flask, or an internal portal), SSO authentication so only authorized users can query, and logging so every query is recorded for compliance.\nThe skill file is the deployment artifact. IT adds infrastructure; you provide domain knowledge.",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Agents and Deployment</span>"
+    ]
+  },
+  {
+    "objectID": "05-agents-deployment.html#the-deployment-path",
+    "href": "05-agents-deployment.html#the-deployment-path",
+    "title": "Agents and Deployment",
+    "section": "The deployment path",
+    "text": "The deployment path\nThe path from prototype to production follows three phases.\nIn the sandbox phase, you build and test the skill on your laptop. This is what you did in Chapters 2 through 4.\nIn the audit phase, you red-team the skill, review the SQL it generates, and check for data leakage. This is covered in Chapter 7.\nIn the deploy phase, IT wraps the skill in a web interface with SSO, logging, and read-only credentials. The skill you built in Chapter 4 is the same artifact that powers the deployed tool. The difference is infrastructure, not intelligence.",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Agents and Deployment</span>"
+    ]
+  },
+  {
+    "objectID": "05-agents-deployment.html#sandboxed-python-on-the-intranet",
+    "href": "05-agents-deployment.html#sandboxed-python-on-the-intranet",
+    "title": "Agents and Deployment",
+    "section": "Sandboxed Python on the intranet",
+    "text": "Sandboxed Python on the intranet\nThe end state is straightforward: anyone on your team submits a question through a web interface, the agent runs code in a container, and the answer comes back. Users see a simple chat interface with no terminal and no code. The agent uses your SKILL.md to query the database correctly. All queries are logged, the database is read-only, and the container is disposable.\nThe technology exists today. The bottleneck is organizational readiness — governance, trust, and the willingness to start.",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Agents and Deployment</span>"
+    ]
+  },
+  {
+    "objectID": "05-agents-deployment.html#exercises",
+    "href": "05-agents-deployment.html#exercises",
+    "title": "Agents and Deployment",
+    "section": "Exercises",
+    "text": "Exercises\n\n\n\n\n\n\nExercise 1: Multi-Step Agent Workflow\n\n\n\n\n\nOpen your coding agent in a folder containing the Chinook database and your SKILL.md from Chapter 4. Give it a single compound instruction that requires at least three steps.\nFor example: “Query the Chinook database for the top ten artists by revenue. Create a bar chart. Write a one-paragraph summary. Save the chart and summary to a reports folder.”\nObserve the agent loop. How many distinct tool calls does the agent make? Does it check its own work? If the output is not right, refine your prompt and try again.\nThe deliverable is your multi-step prompt, the number of tool calls you observed, and the final output.\n\n\n\n\n\n\n\n\n\nExercise 2: Permission Boundary Design\n\n\n\n\n\nPick a use case from your organization: a sales report agent, a customer support analyzer, or an inventory monitor.\nList five actions the agent would need to take. Classify each as auto-approve (the agent can do it without asking), require-human-approval (the agent pauses and waits), or never-allow (the agent must not do this under any circumstances).\nDiscuss with a colleague: would you trust this agent with these permissions? What would need to change for you to feel comfortable?\nThe deliverable is your five-action permission matrix with classifications.\n\n\n\n\n\n\n\n\n\nExercise 3: Workflow Decomposition\n\n\n\n\n\nConsider the task: “Prepare the quarterly business review for the CEO.”\nList the five to seven steps a human analyst would take to complete this task. For each step, identify what tool the agent would use and what data it would need. Then write a single prompt that describes the full workflow.\nWhich steps need human approval before the agent continues? Where are the highest-risk points?\nThe deliverable is your step-by-step decomposition, the single-prompt version, and notes on which steps require human oversight.\n\n\n\n\n\n\n\n\n\nExercise 4: Agent Use Case Inventory\n\n\n\n\n\nReview your team’s recurring tasks and identify five that are multi-step, repetitive, and data-driven — good candidates for agent automation.\nFor each, describe the trigger (what starts the task), the steps (what happens), and the output (what gets delivered). Rate each on automation potential (high, medium, or low) and risk level (high, medium, or low).\nPick the highest-potential, lowest-risk workflow as your pilot candidate and write one paragraph explaining why you would start there.\n\n\n\n\n\n\n\n\n\nExercise 5: Deployment Architecture Sketch\n\n\n\n\n\nDesign the deployment architecture for your Chapter 4 skill.\nDraw a simple diagram showing the flow from user to web interface to agent to database. Annotate where SSO happens, where the sandbox boundary is, and where queries are logged.\nList three questions you would need to answer before IT would approve the deployment. Then write a one-paragraph pitch explaining why IT should invest in building this.\nThe deliverable is the architecture diagram and the pitch paragraph.",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Agents and Deployment</span>"
+    ]
+  },
+  {
+    "objectID": "06-rag.html",
+    "href": "06-rag.html",
+    "title": "Retrieval-Augmented Generation",
+    "section": "",
+    "text": "The problem: AI does not know your documents\nChapters 2 through 5 worked with structured data — spreadsheets and databases where every row has the same columns and every query returns a precise answer. But much of the knowledge in an organization lives in unstructured documents: policy handbooks, contracts, product manuals, research reports, meeting transcripts.\nThis chapter covers Retrieval-Augmented Generation, or RAG — the technique that lets AI answer questions about your documents with grounded, cited answers instead of hallucinations.\nAI models are trained on public data. They know a great deal about the world in general, but they know nothing about your company’s travel policy, your product warranty terms, or last quarter’s board report.\nWithout RAG, if you ask “What is our return policy for enterprise customers?” the AI will either make something up (confidently and plausibly) or admit it does not know. Neither response is useful. What you want is for the AI to look up the answer in your actual policy document, quote the relevant passage, and tell you where it found it.\nThat is what RAG does.",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Retrieval-Augmented Generation</span>"
+    ]
+  },
+  {
+    "objectID": "06-rag.html#the-open-book-exam-analogy",
+    "href": "06-rag.html#the-open-book-exam-analogy",
+    "title": "Retrieval-Augmented Generation",
+    "section": "The open-book exam analogy",
+    "text": "The open-book exam analogy\nThe simplest way to understand RAG is the open-book exam. Standard AI is a closed-book exam: the student answers from memory, is confident even when wrong, and cannot cite sources. RAG is an open-book exam: the student looks up the answer in the reference materials, quotes the source, and can say “this is not covered in my materials” when the answer is not there.\nThe quality of the answer depends entirely on what is in the book. If the documents are incomplete, outdated, or poorly organized, the RAG system will produce incomplete, outdated, or confused answers. The AI is only as good as the documents you give it.",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Retrieval-Augmented Generation</span>"
+    ]
+  },
+  {
+    "objectID": "06-rag.html#the-rag-pipeline",
+    "href": "06-rag.html#the-rag-pipeline",
+    "title": "Retrieval-Augmented Generation",
+    "section": "The RAG pipeline",
+    "text": "The RAG pipeline\nRAG works in three stages: ingest, retrieve, and generate.\nIn the ingest stage, documents are split into chunks — typically paragraphs or sections — and each chunk is converted into a numerical representation called an embedding. The embeddings are stored in a vector database (a searchable index optimized for similarity search).\nIn the retrieve stage, when a user asks a question, the question is also converted into an embedding. The system finds the chunks whose embeddings are most similar to the question’s embedding. These are the chunks most likely to contain the answer.\nIn the generate stage, the retrieved chunks are fed to the AI along with the user’s question. The AI reads the chunks and generates an answer, citing the sources.",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Retrieval-Augmented Generation</span>"
+    ]
+  },
+  {
+    "objectID": "06-rag.html#embeddings-and-semantic-search",
+    "href": "06-rag.html#embeddings-and-semantic-search",
+    "title": "Retrieval-Augmented Generation",
+    "section": "Embeddings and semantic search",
+    "text": "Embeddings and semantic search\nEmbeddings are what make RAG fundamentally different from keyword search.\nTraditional keyword search finds documents containing the exact words you typed. If you search for “vacation policy,” you will find documents containing those words but miss documents that say “PTO guidelines” or “time-off rules” or “leave entitlement.”\nSemantic search works on meaning. Embeddings convert text into high-dimensional numerical vectors such that texts with similar meanings point in similar directions. When you search for “vacation policy,” semantic search finds all of those variations because they have similar embeddings. It understands meaning, not just words.\nThis is why RAG can answer questions in natural language. You do not need to know the exact terminology used in the document. You ask the question in your own words and the system finds the relevant passages regardless of how they are phrased.",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Retrieval-Augmented Generation</span>"
+    ]
+  },
+  {
+    "objectID": "06-rag.html#citations-and-source-attribution",
+    "href": "06-rag.html#citations-and-source-attribution",
+    "title": "Retrieval-Augmented Generation",
+    "section": "Citations and source attribution",
+    "text": "Citations and source attribution\nRAG does not just answer — it shows where the answer came from.\nEach answer includes references to the source documents and, when possible, page numbers or section headings. Users can click through to verify the original text. If the answer is not in the documents, a well-built RAG system says so instead of hallucinating.\nCitations transform AI from “trust me” to “here’s the evidence.” This is what makes RAG suitable for high-stakes use cases where accuracy matters and where someone will eventually ask “where did you get that number?”",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Retrieval-Augmented Generation</span>"
+    ]
+  },
+  {
+    "objectID": "06-rag.html#when-to-use-rag",
+    "href": "06-rag.html#when-to-use-rag",
+    "title": "Retrieval-Augmented Generation",
+    "section": "When to use RAG",
+    "text": "When to use RAG\nRAG is not always the right approach. The choice depends on the type of data.\nFor structured data (spreadsheets, databases, tables of numbers), a skill that writes SQL queries is more appropriate. This is what you built in Chapter 4.\nFor unstructured documents (policies, contracts, manuals, reports), RAG is the right tool.\nFor small texts that fit within the AI’s context window (fewer than about 100 pages), you can skip the RAG pipeline entirely and just give the document directly to the AI. A coding agent does this naturally when you point it at a folder containing documents.\n\n\n\n\n\n\nContext window sizes\n\n\n\nThe amount of text an agent can process in one session varies. Gemini CLI supports up to one million tokens (roughly 3,000 pages). Codex supports 192,000 tokens. Claude Code’s limit depends on the model, ranging from 200,000 to over 1,000,000 tokens. For most business documents, any of these is sufficient for direct reading without RAG.\n\n\nFor situations where you need both structured queries and document context, you can combine a skill with RAG — querying the database for numbers and the documents for context.",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Retrieval-Augmented Generation</span>"
+    ]
+  },
+  {
+    "objectID": "06-rag.html#why-chunk-size-matters",
+    "href": "06-rag.html#why-chunk-size-matters",
+    "title": "Retrieval-Augmented Generation",
+    "section": "Why chunk size matters",
+    "text": "Why chunk size matters\nDocuments are split into chunks before embedding. The size of these chunks determines what the system can find and what it misses.\nChunks that are too small (individual sentences) lose context. A sentence alone may be meaningless without the paragraph around it. The system retrieves fragments instead of answers.\nChunks that are too large (entire chapters) include too much irrelevant content. The signal is diluted by noise. The AI may struggle to identify which part of the chunk actually answers the question.\nThe sweet spot is usually a few paragraphs — enough context to be meaningful, small enough to be relevant. Overlapping chunks (where each chunk shares some text with its neighbors) help ensure that nothing falls through the cracks.",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Retrieval-Augmented Generation</span>"
+    ]
+  },
+  {
+    "objectID": "06-rag.html#common-failure-modes",
+    "href": "06-rag.html#common-failure-modes",
+    "title": "Retrieval-Augmented Generation",
+    "section": "Common failure modes",
+    "text": "Common failure modes\nRAG is not perfect. Understanding the failure modes helps you spot and fix problems.\nOn the retrieval side, the system may retrieve the wrong chunk (semantically similar but irrelevant), miss the right chunk entirely (the answer exists but was not retrieved), or retrieve chunks that contradict each other.\nOn the generation side, the AI may hallucinate a citation (citing a page that does not contain the claim), over-generalize (drawing a conclusion the source does not support), or give an incomplete answer (using one chunk when the full answer spans multiple documents).\nThe most dangerous failure is the hallucinated citation. The answer looks grounded — it has a source reference — but when you check the cited passage, it does not say what the AI claims. This creates false confidence, which is worse than no citation at all.",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Retrieval-Augmented Generation</span>"
+    ]
+  },
+  {
+    "objectID": "06-rag.html#hands-on-querying-your-documents",
+    "href": "06-rag.html#hands-on-querying-your-documents",
+    "title": "Retrieval-Augmented Generation",
+    "section": "Hands-on: querying your documents",
+    "text": "Hands-on: querying your documents\nThe simplest way to experience RAG is to point your coding agent at a folder of documents and start asking questions.\nDownload the sample company handbook and place it in a folder. Open your coding agent in that folder. Then ask questions:\n\nWhat is our return policy for enterprise customers?\n\n\nWhat are the eligibility requirements for the bonus program?\n\n\nHow many days of PTO do employees with five years of service receive?\n\nFor each answer, evaluate three things. Is it relevant — did it find the right section of the document? Is it faithful — does the answer accurately represent what the source says? Is it complete — did it find all the relevant passages, or did it miss something?\nThen test the boundaries. Ask a question the document cannot answer: “What is our competitor’s market share?” Does AI admit the information is not in the document, or does it hallucinate an answer?",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Retrieval-Augmented Generation</span>"
+    ]
+  },
+  {
+    "objectID": "06-rag.html#evaluating-rag-quality",
+    "href": "06-rag.html#evaluating-rag-quality",
+    "title": "Retrieval-Augmented Generation",
+    "section": "Evaluating RAG quality",
+    "text": "Evaluating RAG quality\nThere are three dimensions for judging whether a RAG answer is good.\nRelevance measures whether the retrieved passages are on-topic. Did the system find the right sections? Would a human reading the document have picked the same passages?\nFaithfulness measures whether the generated answer accurately represents the source material. Does the answer match what the cited passage actually says? Are there any added claims that go beyond the source?\nCompleteness measures whether the system found everything relevant. Did it retrieve all the passages that bear on the question? Would adding more context from the document change the answer?\nUse these three questions to evaluate every RAG answer: is it relevant, faithful, and complete?",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Retrieval-Augmented Generation</span>"
+    ]
+  },
+  {
+    "objectID": "06-rag.html#rag-in-production",
+    "href": "06-rag.html#rag-in-production",
+    "title": "Retrieval-Augmented Generation",
+    "section": "RAG in production",
+    "text": "RAG in production\nIn production, RAG has a document pipeline that runs continuously. New documents are automatically chunked and embedded. A vector store (Pinecone, Weaviate, Chroma, or similar) maintains a searchable index of all document chunks. When a user asks a question, the system retrieves the most relevant chunks, feeds them to the AI, and returns a cited answer.\nProduction RAG requires ongoing maintenance. Documents need refresh schedules so that updated policies replace outdated ones. Access controls ensure that users can only query documents they are authorized to see. Versioning tracks changes so that when a policy is updated, the old version expires from the index.\nQuality assurance means maintaining a test suite of known question-answer pairs to validate accuracy, monitoring retrieval quality over time, and building a feedback loop where users can flag incorrect answers for improvement.\nThe same sandbox-audit-deploy pattern from Chapter 5 applies. RAG is a system, not a feature, and it needs the same care as any production system.",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Retrieval-Augmented Generation</span>"
+    ]
+  },
+  {
+    "objectID": "06-rag.html#exercises",
+    "href": "06-rag.html#exercises",
+    "title": "Retrieval-Augmented Generation",
+    "section": "Exercises",
+    "text": "Exercises\n\n\n\n\n\n\nExercise 1: Document Querying\n\n\n\n\n\nDownload the company handbook and place it in a folder. Open your coding agent in that folder and ask five questions about the content.\nFor each answer, evaluate relevance (did it find the right section?), faithfulness (does the answer match the source?), and completeness (did it find everything relevant?). Rate each dimension on a 1-to-5 scale.\nThen ask two questions the document cannot answer. Does AI admit it does not know, or does it hallucinate?\nThe deliverable is your five questions with evaluation ratings and your two out-of-scope test results.\n\n\n\n\n\n\n\n\n\nExercise 2: Citation Verification\n\n\n\n\n\nAsk three questions about the company handbook and get answers with citations.\nFor each answer, locate every cited passage in the original document. Rate each citation: accurate (the passage says what the AI claims), partially accurate (the passage is related but the AI stretched or paraphrased), or hallucinated (the passage does not support the claim).\nIf any citation is inaccurate, rephrase the question and see if the citation improves.\nThe deliverable is three answers with citation verification notes.\n\n\n\n\n\n\n\n\n\nExercise 3: Conflicting Sources\n\n\n\n\n\nCreate a second version of the company handbook in which you change one or two facts (for example, change the PTO accrual rates or the return policy window). Place both versions in the same folder.\nAsk a question where the two versions disagree. Does AI cite both? Pick one? Acknowledge the conflict?\nThis simulates a common production problem: stale documents coexisting with current ones. The deliverable is the question, AI’s answer, and your assessment of how it handled the conflict.\n\n\n\n\n\n\n\n\n\nExercise 4: RAG vs. Direct Reading\n\n\n\n\n\nAsk your coding agent to read the entire company handbook as one document and answer a question (this is the direct-context approach). Then ask the same question in a way that forces chunked retrieval (for example, by placing many documents in the folder so the handbook is too large for the context window to hold in full).\nCompare the two answers. Which is more complete? Does the direct-reading approach catch context that chunked retrieval misses?\nThis exercise illustrates the tradeoff: direct context is better for small document sets, while RAG scales to thousands of documents.\n\n\n\n\n\n\n\n\n\nExercise 5: RAG Use Case Proposal\n\n\n\n\n\nWrite a one-page proposal for deploying RAG in your organization.\nIdentify the document set (employee handbook, product documentation, compliance policies, or whatever is most relevant to your work). Describe the users and their typical questions. Outline the architecture: how documents would be ingested, where the vector store would live, and how users would interact with the system.\nList three risks and how you would mitigate them. The most common risks are hallucinated citations (mitigated by citation verification workflows), stale documents (mitigated by refresh schedules), and unauthorized access (mitigated by document-level permissions).\nThe deliverable is the one-page proposal.",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Retrieval-Augmented Generation</span>"
+    ]
+  },
+  {
+    "objectID": "07-trust.html",
+    "href": "07-trust.html",
+    "title": "Can I Trust It?",
+    "section": "",
+    "text": "The trust spectrum\nThe previous six chapters built an increasingly powerful toolkit: coding tools, data analysis, thinking-partner conversations, database skills, agent workflows, and document-based AI. Before any of this is deployed, leadership will ask one question: can we trust it?\nThis chapter provides the answer, which is yes — with the right verification. You will learn a repeatable protocol for validating AI outputs, stress-testing skills and RAG systems, and building the governance framework your organization needs.\nAI with code execution is like a fast junior analyst — capable but in need of oversight. The appropriate level of oversight depends on the stakes.\nFor low-stakes work (exploratory charts, directional trends, internal brainstorming), a quick sanity check is sufficient. Glance at the numbers, confirm they are in the right ballpark, and move on.\nFor medium-stakes work (team skills from Chapter 4, recurring reports, RAG-based Q&A from Chapter 6), test with known answers before relying on the results. Run queries where you already know the answer and confirm that AI matches.\nFor high-stakes work (board presentations, budget recommendations, external reporting), apply the full verification protocol described later in this chapter. Every number, every chart, every claim should be independently verified.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Can I Trust It?</span>"
+    ]
+  },
+  {
+    "objectID": "07-trust.html#hallucination-the-core-risk",
+    "href": "07-trust.html#hallucination-the-core-risk",
+    "title": "Can I Trust It?",
+    "section": "Hallucination: the core risk",
+    "text": "Hallucination: the core risk\n“How do I know the AI isn’t making things up?”\nAI in code-execution mode does not invent facts the way a chatbot might. It reads real data and runs real computations. But it makes silent analytical errors: wrong filters, dropped rows, incorrect joins, misinterpreted column names. In RAG mode, it can also hallucinate citations — citing a page that does not actually contain the claim.\nThese errors are dangerous precisely because the output looks professional. Charts render cleanly even when the underlying data is wrong. Memos read smoothly even when the conclusion does not follow from the evidence. A polished result inspires confidence, and confidence without verification is the real risk.\nYou have seen examples throughout this book. Date or currency parsing surprises in Chapter 2. Incorrect join paths in Chapter 4. Hallucinated citations in Chapter 6. Each error was fixable, but only if someone checked.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Can I Trust It?</span>"
+    ]
+  },
+  {
+    "objectID": "07-trust.html#the-verification-protocol",
+    "href": "07-trust.html#the-verification-protocol",
+    "title": "Can I Trust It?",
+    "section": "The verification protocol",
+    "text": "The verification protocol\nA three-step process you can apply to any AI-generated analysis.\nThe first step is to sanity-check with known answers. Ask questions where you already know the result: row count, column names, a total you can verify in Excel. “How many rows are in this dataset?” “What is the total revenue?” If AI’s answer does not match your independently verified number, stop and investigate before proceeding.\nThe second step is to inspect the methodology. Ask “show me the code” or “show me the SQL.” Read the logic, not just the output. Check that the joins are correct, the filters make sense, and the aggregation matches your intent. Then rephrase the question and run it again. If the answers agree, you have confirmation. If they differ, one approach is wrong.\nThe third step is to spot-check edge cases. Test the smallest group, zero values, null fields, and boundary dates. Errors hide at the edges. A query that works perfectly for the top ten countries may break for the bottom three.\nIf you would spot-check a human analyst’s work, spot-check AI’s.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Can I Trust It?</span>"
+    ]
+  },
+  {
+    "objectID": "07-trust.html#catching-silent-errors",
+    "href": "07-trust.html#catching-silent-errors",
+    "title": "Can I Trust It?",
+    "section": "Catching silent errors",
+    "text": "Catching silent errors\nTo make this concrete, consider a deliberately tricky prompt.\n“What’s the average profit margin by sub-category? Exclude any sub-categories with negative total profit.”\nThe trap is in the filter logic. Does AI filter before or after aggregating? Does it drop individual rows with negative profit, or sub-categories whose total profit is negative? The order matters, and AI often gets it wrong.\nTo catch it, ask three follow-up questions. “Show me the code” — inspect the filter logic. “How many rows are in the result?” — does the count match your expectation? “List the excluded sub-categories” — are they the right ones?\nThe more specific the filter logic, the more likely AI misinterprets it.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Can I Trust It?</span>"
+    ]
+  },
+  {
+    "objectID": "07-trust.html#trusting-rag-answers",
+    "href": "07-trust.html#trusting-rag-answers",
+    "title": "Can I Trust It?",
+    "section": "Trusting RAG answers",
+    "text": "Trusting RAG answers\nRAG (Chapter 6) grounds AI in your documents, but grounding does not guarantee correctness.\nRAG introduces three specific risks. The first is hallucinated citations: AI cites a page or section that does not actually contain the claim. The citation looks authoritative, but when you check the source, the passage says something different or does not address the question at all.\nThe second is stale documents. If a policy changed but the old version is still in the index, RAG will retrieve and cite the outdated version. The answer is grounded — just in the wrong version of the truth.\nThe third is wrong-chunk retrieval. The retrieved passage is semantically similar to the question but does not actually answer it. This happens when the document contains multiple sections that use similar language for different purposes.\nThe verification approach is the same: click through every citation and confirm that the cited passage actually says what the AI claims. Check document dates to ensure you are getting the current version. Ask the same question in different words to see if the citation changes.\nA citation that looks right but is not is worse than no citation at all. It creates false confidence.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Can I Trust It?</span>"
+    ]
+  },
+  {
+    "objectID": "07-trust.html#red-teaming-rag",
+    "href": "07-trust.html#red-teaming-rag",
+    "title": "Can I Trust It?",
+    "section": "Red-teaming RAG",
+    "text": "Red-teaming RAG\nTest your RAG system the way an adversary would.\nAsk out-of-scope questions: “What is our competitor’s revenue?” when no competitor data is in the documents. Does AI admit it does not know, or does it hallucinate an answer?\nUpload two documents that disagree on a fact and ask about the disputed point. Does AI cite both? Pick one? Acknowledge the conflict?\nAsk boundary questions about topics at the edge of what is documented. These are the questions most likely to produce hallucinated citations, because the system retrieves a passage that is close but not quite on point.\nEvery failure you find now is one your team will not encounter in production.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Can I Trust It?</span>"
+    ]
+  },
+  {
+    "objectID": "07-trust.html#red-teaming-your-skill",
+    "href": "07-trust.html#red-teaming-your-skill",
+    "title": "Can I Trust It?",
+    "section": "Red-teaming your skill",
+    "text": "Red-teaming your skill\nThe database skill from Chapter 4 is the kind of tool people stop questioning once it is deployed. Test it like any tool your team depends on.\nValidate with known answers by running queries where you already know the result (total invoices, number of customers). Compare AI’s SQL to a hand-written query. Ask the same question multiple times and check for consistency.\nStress-test with edge cases. Ask for revenue from a nonexistent country. Query boundary dates (the first and last month in the dataset). Use ambiguous column names (“show me the name” when multiple tables have a name column).\nFor each failure, diagnose the root cause (bad SQL, missing context, or wrong table), fix the SKILL.md, and retest. This is how production skills get hardened. Every failure makes the skill better.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Can I Trust It?</span>"
+    ]
+  },
+  {
+    "objectID": "07-trust.html#three-layers-of-auditability",
+    "href": "07-trust.html#three-layers-of-auditability",
+    "title": "Can I Trust It?",
+    "section": "Three layers of auditability",
+    "text": "Three layers of auditability\nProduction AI systems should have multiple layers of verification.\nThe first layer is RAG: the AI answers based on your documents, with citations. This grounds responses in source material. You verify by checking citations against the original text.\nThe second layer is code transparency: the AI displays the SQL or Python it used. Analysts review the logic, not just the answer. This is what you practiced in Chapters 2 through 4.\nThe third layer is guardrails: read-only database access, restricted tables, and every query logged for audit. The system prevents mistakes, not just detects them.\nThe more layers you add, the harder it is for errors to reach your team. Defense in depth — the same principle as cybersecurity.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Can I Trust It?</span>"
+    ]
+  },
+  {
+    "objectID": "07-trust.html#security-and-governance",
+    "href": "07-trust.html#security-and-governance",
+    "title": "Can I Trust It?",
+    "section": "Security and governance",
+    "text": "Security and governance\nBefore deploying AI with your data, three questions need clear answers.\nFirst, data privacy: what data can AI access, and where is it processed? Cloud APIs send data to the provider’s servers. On-premise models keep everything internal. Most organizations need a mix: cloud APIs for non-sensitive work and on-premise solutions for confidential data.\nSecond, model selection: cloud APIs are more capable but require sending data externally. On-premise models offer maximum control but lag in capability. The choice depends on the sensitivity of the data and the regulatory environment.\nThird, audit requirements: SOX, GDPR, HIPAA, and industry-specific regulations all impose requirements on how data is processed and by whom. AI interactions are data processing events and must be treated accordingly.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Can I Trust It?</span>"
+    ]
+  },
+  {
+    "objectID": "07-trust.html#data-policies-training-and-retention",
+    "href": "07-trust.html#data-policies-training-and-retention",
+    "title": "Can I Trust It?",
+    "section": "Data policies: training and retention",
+    "text": "Data policies: training and retention\nBefore sending data to any AI provider, know the answers to two questions.\nWill they train on your data? Consumer tiers (free ChatGPT, free Claude) may use your input to improve their models. API and enterprise tiers typically do not. Check your agreement and confirm that any opt-out is active.\nHow long do they retain it? Providers retain prompts for a window (often 30 days) for safety monitoring. Enterprise contracts may offer zero retention. Know the policy before you send sensitive data.\nAsk your vendor three things: Do you train on our data? How long do you retain it? Can we request deletion?",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Can I Trust It?</span>"
+    ]
+  },
+  {
+    "objectID": "07-trust.html#compliance-in-practice",
+    "href": "07-trust.html#compliance-in-practice",
+    "title": "Can I Trust It?",
+    "section": "Compliance in practice",
+    "text": "Compliance in practice\nFERPA protects student education records. HIPAA protects health information. SOX governs financial reporting. GDPR regulates personal data in the EU. Every regulated industry has its version of the same concern: where does the data go, and who can see it?\nAI can analyze sensitive data without ever reading the actual records. The technique from Chapter 4 applies: describe the table structure in the SKILL.md (table names, column names, data types), and the agent writes SQL from the schema alone, never seeing the actual records. The script runs locally, and the output stays on your server.\nTable metadata is not PII. The actual records stay behind the firewall. AI produces the tool, not the output. This pattern — send the schema, keep the data — works for any regulated environment.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Can I Trust It?</span>"
+    ]
+  },
+  {
+    "objectID": "07-trust.html#session-log-auditing",
+    "href": "07-trust.html#session-log-auditing",
+    "title": "Can I Trust It?",
+    "section": "Session log auditing",
+    "text": "Session log auditing\nEvery AI conversation can be exported as a transcript. The transcript contains the user’s questions, the AI’s responses, the code it generated, and the results it produced. This is the paper trail your compliance team needs.\nReview session logs for three things: PII or proprietary data that should stay internal, SQL or Python logic errors in the generated code, and RAG citations that do not match the source.\nExport logs, archive them, and review them periodically. Session logs are not just a compliance requirement; they are a learning tool. Reviewing what AI got wrong in past sessions tells you exactly what to improve in your SKILL.md or RAG configuration.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Can I Trust It?</span>"
+    ]
+  },
+  {
+    "objectID": "07-trust.html#the-sandbox-audit-deploy-pattern",
+    "href": "07-trust.html#the-sandbox-audit-deploy-pattern",
+    "title": "Can I Trust It?",
+    "section": "The sandbox-audit-deploy pattern",
+    "text": "The sandbox-audit-deploy pattern\nBefore deploying any AI workflow to your team, follow three phases.\nIn the sandbox phase, run the full workflow with synthetic or test data. Test edge cases. Break it on purpose. This is where you discover the failure modes described throughout this chapter.\nIn the audit phase, export session logs and review the generated code. Verify SQL logic. Check RAG citations. Look for data leakage. Have a colleague who did not build the system try to break it.\nIn the deploy phase, roll out to users with monitoring. Review logs weekly. Set up alerting for anomalies. Treat the first month as a soft launch.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Can I Trust It?</span>"
+    ]
+  },
+  {
+    "objectID": "07-trust.html#the-adoption-roadmap",
+    "href": "07-trust.html#the-adoption-roadmap",
+    "title": "Can I Trust It?",
+    "section": "The adoption roadmap",
+    "text": "The adoption roadmap\nEach stage of AI adoption maps to a trust level.\nQuick wins, achievable in weeks, require only light verification. Using AI for research, summarization, and email drafting. Analyzing local data with a coding agent (Chapter 2). Having thinking-partner conversations (Chapter 3).\nMedium-term adoption, taking months, requires test-before-deploy discipline. Skills for recurring database workflows (Chapter 4). Agent-powered reports and pipelines (Chapter 5). RAG for document-based Q&A (Chapter 6).\nStrategic adoption, measured in quarters, requires a full audit trail. Production apps with authentication and audit trails. An AI usage policy, compliance review, and governance framework. Organization-wide adoption with monitoring.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Can I Trust It?</span>"
+    ]
+  },
+  {
+    "objectID": "07-trust.html#exercises",
+    "href": "07-trust.html#exercises",
+    "title": "Can I Trust It?",
+    "section": "Exercises",
+    "text": "Exercises\n\n\n\n\n\n\nExercise 1: The Verification Protocol\n\n\n\n\n\nRun the complete three-step verification protocol on a real analysis.\nFirst, sanity-check: open the Superstore data in your coding agent and ask three questions where you know the answer (row count, total revenue, number of unique customers). Does AI match?\nSecond, inspect methodology: for three queries, ask “show me the code.” Read each script. Is the logic correct? Then rephrase each question and run it again. Do the answers agree?\nThird, spot-check edge cases: test three edge cases (empty results, boundary dates, null values). Does AI handle them gracefully?\nThe deliverable is a one-page verification report with pass or fail for each step.\n\n\n\n\n\n\n\n\n\nExercise 2: Red-Team Your Skill\n\n\n\n\n\nOpen your coding agent with the Chinook database and your SKILL.md from Chapter 4.\nRun five adversarial queries designed to break the skill: a query about nonexistent data (“Sales in 2025”), a complex multi-table join (“Revenue by artist by country”), a request for data not in the schema (“Customer satisfaction scores”), an ambiguous column name, and a boundary date query.\nFor each failure, diagnose the root cause, fix the SKILL.md, and retest. The deliverable is a hardened SKILL.md and a log of your five adversarial queries with outcomes.\n\n\n\n\n\n\n\n\n\nExercise 3: RAG Citation Audit\n\n\n\n\n\nOpen your coding agent with the company handbook from Chapter 6 and ask five factual questions.\nFor each answer, locate every cited passage in the original document. Rate each citation as accurate, partially accurate, or hallucinated.\nThen ask three questions the document cannot answer. Does AI admit it does not know, or does it hallucinate?\nThe deliverable is your citation audit log with ratings and your out-of-scope test results.\n\n\n\n\n\n\n\n\n\nExercise 4: Draft an AI Usage Policy\n\n\n\n\n\nWrite a one-page AI usage policy for your organization (or a hypothetical one).\nCover four areas. First, what data can and cannot be sent to AI providers, classified by sensitivity level. Second, which AI tools are approved for which use cases. Third, when human review is required before acting on AI output. Fourth, how RAG citations should be verified before sharing results externally.\nThe deliverable is the one-page policy.\n\n\n\n\n\n\n\n\n\nExercise 5: Compliance Scenario Analysis\n\n\n\n\n\nIdentify the primary data regulation in your industry (HIPAA, SOX, GDPR, PCI-DSS, FERPA, or another).\nDescribe a specific use case: what data would AI access, and what questions would it answer? Design the compliant workflow: what information goes to AI (schema only, or actual data)? What stays local? Where are the audit points?\nList three guardrails you would add to enforce compliance.\nThe deliverable is a one-page compliance scenario analysis.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Can I Trust It?</span>"
+    ]
+  }
+]

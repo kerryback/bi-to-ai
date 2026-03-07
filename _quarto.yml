@@ -1,0 +1,30 @@
+project:
+  type: book
+  output-dir: docs
+  resources:
+    - data/superstore.csv
+    - data/chinook.db
+    - data/company-handbook.md
+
+book:
+  title: "From BI to AI"
+  subtitle: "Data-Driven Decision Making with Agentic AI"
+  author: "Kerry Back"
+  date: today
+  chapters:
+    - index.qmd
+    - 01-coding-tools.qmd
+    - 02-exploring-data.qmd
+    - 03-thinking-partner.qmd
+    - 04-connecting-databases.qmd
+    - 05-agents-deployment.qmd
+    - 06-rag.qmd
+    - 07-trust.qmd
+
+format:
+  html:
+    theme: cosmo
+    toc: true
+    toc-depth: 3
+    number-sections: false
+    code-overflow: wrap

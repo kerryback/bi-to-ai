@@ -1,0 +1,169 @@
+# Retrieval-Augmented Generation
+
+Chapters 2 through 5 worked with structured data --- spreadsheets and databases where every row has the same columns and every query returns a precise answer.  But much of the knowledge in an organization lives in unstructured documents: policy handbooks, contracts, product manuals, research reports, meeting transcripts.
+
+This chapter covers Retrieval-Augmented Generation, or RAG --- the technique that lets AI answer questions about your documents with grounded, cited answers instead of hallucinations.
+
+## The problem: AI does not know your documents
+
+AI models are trained on public data.  They know a great deal about the world in general, but they know nothing about your company's travel policy, your product warranty terms, or last quarter's board report.
+
+Without RAG, if you ask "What is our return policy for enterprise customers?" the AI will either make something up (confidently and plausibly) or admit it does not know.  Neither response is useful.  What you want is for the AI to look up the answer in your actual policy document, quote the relevant passage, and tell you where it found it.
+
+That is what RAG does.
+
+## The open-book exam analogy
+
+The simplest way to understand RAG is the open-book exam.  Standard AI is a closed-book exam: the student answers from memory, is confident even when wrong, and cannot cite sources.  RAG is an open-book exam: the student looks up the answer in the reference materials, quotes the source, and can say "this is not covered in my materials" when the answer is not there.
+
+The quality of the answer depends entirely on what is in the book.  If the documents are incomplete, outdated, or poorly organized, the RAG system will produce incomplete, outdated, or confused answers.  The AI is only as good as the documents you give it.
+
+## The RAG pipeline
+
+RAG works in three stages: ingest, retrieve, and generate.
+
+In the ingest stage, documents are split into chunks --- typically paragraphs or sections --- and each chunk is converted into a numerical representation called an embedding.  The embeddings are stored in a vector database (a searchable index optimized for similarity search).
+
+In the retrieve stage, when a user asks a question, the question is also converted into an embedding.  The system finds the chunks whose embeddings are most similar to the question's embedding.  These are the chunks most likely to contain the answer.
+
+In the generate stage, the retrieved chunks are fed to the AI along with the user's question.  The AI reads the chunks and generates an answer, citing the sources.
+
+## Embeddings and semantic search
+
+Embeddings are what make RAG fundamentally different from keyword search.
+
+Traditional keyword search finds documents containing the exact words you typed.  If you search for "vacation policy," you will find documents containing those words but miss documents that say "PTO guidelines" or "time-off rules" or "leave entitlement."
+
+Semantic search works on meaning.  Embeddings convert text into high-dimensional numerical vectors such that texts with similar meanings point in similar directions.  When you search for "vacation policy," semantic search finds all of those variations because they have similar embeddings.  It understands meaning, not just words.
+
+This is why RAG can answer questions in natural language.  You do not need to know the exact terminology used in the document.  You ask the question in your own words and the system finds the relevant passages regardless of how they are phrased.
+
+## Citations and source attribution
+
+RAG does not just answer --- it shows where the answer came from.
+
+Each answer includes references to the source documents and, when possible, page numbers or section headings.  Users can click through to verify the original text.  If the answer is not in the documents, a well-built RAG system says so instead of hallucinating.
+
+Citations transform AI from "trust me" to "here's the evidence."  This is what makes RAG suitable for high-stakes use cases where accuracy matters and where someone will eventually ask "where did you get that number?"
+
+## When to use RAG
+
+RAG is not always the right approach.  The choice depends on the type of data.
+
+For structured data (spreadsheets, databases, tables of numbers), a skill that writes SQL queries is more appropriate.  This is what you built in Chapter 4.
+
+For unstructured documents (policies, contracts, manuals, reports), RAG is the right tool.
+
+For small texts that fit within the AI's context window (fewer than about 100 pages), you can skip the RAG pipeline entirely and just give the document directly to the AI.  A coding agent does this naturally when you point it at a folder containing documents.
+
+::: {.callout-tip title="Context window sizes"}
+The amount of text an agent can process in one session varies.  Gemini CLI supports up to one million tokens (roughly 3,000 pages).  Codex supports 192,000 tokens.  Claude Code's limit depends on the model, ranging from 200,000 to over 1,000,000 tokens.  For most business documents, any of these is sufficient for direct reading without RAG.
+:::
+
+For situations where you need both structured queries and document context, you can combine a skill with RAG --- querying the database for numbers and the documents for context.
+
+## Why chunk size matters
+
+Documents are split into chunks before embedding.  The size of these chunks determines what the system can find and what it misses.
+
+Chunks that are too small (individual sentences) lose context.  A sentence alone may be meaningless without the paragraph around it.  The system retrieves fragments instead of answers.
+
+Chunks that are too large (entire chapters) include too much irrelevant content.  The signal is diluted by noise.  The AI may struggle to identify which part of the chunk actually answers the question.
+
+The sweet spot is usually a few paragraphs --- enough context to be meaningful, small enough to be relevant.  Overlapping chunks (where each chunk shares some text with its neighbors) help ensure that nothing falls through the cracks.
+
+## Common failure modes
+
+RAG is not perfect.  Understanding the failure modes helps you spot and fix problems.
+
+On the retrieval side, the system may retrieve the wrong chunk (semantically similar but irrelevant), miss the right chunk entirely (the answer exists but was not retrieved), or retrieve chunks that contradict each other.
+
+On the generation side, the AI may hallucinate a citation (citing a page that does not contain the claim), over-generalize (drawing a conclusion the source does not support), or give an incomplete answer (using one chunk when the full answer spans multiple documents).
+
+The most dangerous failure is the hallucinated citation.  The answer looks grounded --- it has a source reference --- but when you check the cited passage, it does not say what the AI claims.  This creates false confidence, which is worse than no citation at all.
+
+## Hands-on: querying your documents
+
+The simplest way to experience RAG is to point your coding agent at a folder of documents and start asking questions.
+
+Download the [sample company handbook](data/company-handbook.md) and place it in a folder.  Open your coding agent in that folder.  Then ask questions:
+
+> What is our return policy for enterprise customers?
+
+> What are the eligibility requirements for the bonus program?
+
+> How many days of PTO do employees with five years of service receive?
+
+For each answer, evaluate three things.  Is it relevant --- did it find the right section of the document?  Is it faithful --- does the answer accurately represent what the source says?  Is it complete --- did it find all the relevant passages, or did it miss something?
+
+Then test the boundaries.  Ask a question the document cannot answer: "What is our competitor's market share?"  Does AI admit the information is not in the document, or does it hallucinate an answer?
+
+## Evaluating RAG quality
+
+There are three dimensions for judging whether a RAG answer is good.
+
+Relevance measures whether the retrieved passages are on-topic.  Did the system find the right sections?  Would a human reading the document have picked the same passages?
+
+Faithfulness measures whether the generated answer accurately represents the source material.  Does the answer match what the cited passage actually says?  Are there any added claims that go beyond the source?
+
+Completeness measures whether the system found everything relevant.  Did it retrieve all the passages that bear on the question?  Would adding more context from the document change the answer?
+
+Use these three questions to evaluate every RAG answer: is it relevant, faithful, and complete?
+
+## RAG in production
+
+In production, RAG has a document pipeline that runs continuously.  New documents are automatically chunked and embedded.  A vector store (Pinecone, Weaviate, Chroma, or similar) maintains a searchable index of all document chunks.  When a user asks a question, the system retrieves the most relevant chunks, feeds them to the AI, and returns a cited answer.
+
+Production RAG requires ongoing maintenance.  Documents need refresh schedules so that updated policies replace outdated ones.  Access controls ensure that users can only query documents they are authorized to see.  Versioning tracks changes so that when a policy is updated, the old version expires from the index.
+
+Quality assurance means maintaining a test suite of known question-answer pairs to validate accuracy, monitoring retrieval quality over time, and building a feedback loop where users can flag incorrect answers for improvement.
+
+The same sandbox-audit-deploy pattern from Chapter 5 applies.  RAG is a system, not a feature, and it needs the same care as any production system.
+
+## Exercises
+
+::: {.callout-note title="Exercise 1: Document Querying" collapse="true"}
+Download the [company handbook](data/company-handbook.md) and place it in a folder.  Open your coding agent in that folder and ask five questions about the content.
+
+For each answer, evaluate relevance (did it find the right section?), faithfulness (does the answer match the source?), and completeness (did it find everything relevant?).  Rate each dimension on a 1-to-5 scale.
+
+Then ask two questions the document cannot answer.  Does AI admit it does not know, or does it hallucinate?
+
+The deliverable is your five questions with evaluation ratings and your two out-of-scope test results.
+:::
+
+::: {.callout-note title="Exercise 2: Citation Verification" collapse="true"}
+Ask three questions about the [company handbook](data/company-handbook.md) and get answers with citations.
+
+For each answer, locate every cited passage in the original document.  Rate each citation: accurate (the passage says what the AI claims), partially accurate (the passage is related but the AI stretched or paraphrased), or hallucinated (the passage does not support the claim).
+
+If any citation is inaccurate, rephrase the question and see if the citation improves.
+
+The deliverable is three answers with citation verification notes.
+:::
+
+::: {.callout-note title="Exercise 3: Conflicting Sources" collapse="true"}
+Create a second version of the [company handbook](data/company-handbook.md) in which you change one or two facts (for example, change the PTO accrual rates or the return policy window).  Place both versions in the same folder.
+
+Ask a question where the two versions disagree.  Does AI cite both?  Pick one?  Acknowledge the conflict?
+
+This simulates a common production problem: stale documents coexisting with current ones.  The deliverable is the question, AI's answer, and your assessment of how it handled the conflict.
+:::
+
+::: {.callout-note title="Exercise 4: RAG vs. Direct Reading" collapse="true"}
+Ask your coding agent to read the entire [company handbook](data/company-handbook.md) as one document and answer a question (this is the direct-context approach).  Then ask the same question in a way that forces chunked retrieval (for example, by placing many documents in the folder so the handbook is too large for the context window to hold in full).
+
+Compare the two answers.  Which is more complete?  Does the direct-reading approach catch context that chunked retrieval misses?
+
+This exercise illustrates the tradeoff: direct context is better for small document sets, while RAG scales to thousands of documents.
+:::
+
+::: {.callout-note title="Exercise 5: RAG Use Case Proposal" collapse="true"}
+Write a one-page proposal for deploying RAG in your organization.
+
+Identify the document set (employee handbook, product documentation, compliance policies, or whatever is most relevant to your work).  Describe the users and their typical questions.  Outline the architecture: how documents would be ingested, where the vector store would live, and how users would interact with the system.
+
+List three risks and how you would mitigate them.  The most common risks are hallucinated citations (mitigated by citation verification workflows), stale documents (mitigated by refresh schedules), and unauthorized access (mitigated by document-level permissions).
+
+The deliverable is the one-page proposal.
+:::
