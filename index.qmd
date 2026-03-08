@@ -20,7 +20,7 @@ Chapter 7 addresses reliability and compliance issues.  You will validate AI out
 
 ## Data files
 
-The exercises in this book use two datasets.
+The exercises in this book use three datasets.
 
 The [Superstore CSV](data/superstore.csv) contains roughly 10,000 retail orders across four U.S. regions with columns for sales, profit, discount, product category, and customer segment.^[The Sample Superstore dataset is published on Kaggle at <https://www.kaggle.com/datasets/vivek468/superstore-dataset-final>.  It is widely used in data-visualization tutorials and Tableau exercises.]  It is used throughout Chapters 2, 3, and 7.
 
