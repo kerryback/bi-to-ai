@@ -234,9 +234,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#what-the-app-sends-to-the-llm" id="toc-what-the-app-sends-to-the-llm" class="nav-link" data-scroll-target="#what-the-app-sends-to-the-llm">What the app sends to the LLM</a></li>
   <li><a href="#what-comes-back" id="toc-what-comes-back" class="nav-link" data-scroll-target="#what-comes-back">What comes back</a></li>
   <li><a href="#the-data-flow" id="toc-the-data-flow" class="nav-link" data-scroll-target="#the-data-flow">The data flow</a></li>
+  </ul></li>
+  <li><a href="#adding-charts-and-visualizations" id="toc-adding-charts-and-visualizations" class="nav-link" data-scroll-target="#adding-charts-and-visualizations"><span class="header-section-number">4.15</span> Adding charts and visualizations</a>
+  <ul class="collapse">
+  <li><a href="#the-changed-system-prompt" id="toc-the-changed-system-prompt" class="nav-link" data-scroll-target="#the-changed-system-prompt">The changed system prompt</a></li>
+  <li><a href="#what-comes-back-1" id="toc-what-comes-back-1" class="nav-link" data-scroll-target="#what-comes-back-1">What comes back</a></li>
+  <li><a href="#the-data-flow-is-unchanged" id="toc-the-data-flow-is-unchanged" class="nav-link" data-scroll-target="#the-data-flow-is-unchanged">The data flow is unchanged</a></li>
+  <li><a href="#a-note-on-executing-generated-code" id="toc-a-note-on-executing-generated-code" class="nav-link" data-scroll-target="#a-note-on-executing-generated-code">A note on executing generated code</a></li>
   <li><a href="#from-demo-to-production" id="toc-from-demo-to-production" class="nav-link" data-scroll-target="#from-demo-to-production">From demo to production</a></li>
   </ul></li>
-  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">4.15</span> Exercises</a></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">4.16</span> Exercises</a></li>
   </ul>
 </nav>
     </div>
@@ -411,13 +418,65 @@ Revenue = SUM(invoice_items.UnitPrice * invoice_items.Quantity).</code></pre>
 </ol>
 <p>The only things that leave your machine are the question and the schema. The actual data — customer names, revenue figures, transaction records — never goes to the cloud.</p>
 </section>
+</section>
+<section id="adding-charts-and-visualizations" class="level2" data-number="4.15">
+<h2 data-number="4.15" class="anchored" data-anchor-id="adding-charts-and-visualizations"><span class="header-section-number">4.15</span> Adding charts and visualizations</h2>
+<p>The query app returns tables, but business questions often need charts. “Show me a bar chart of revenue by country” should produce a bar chart, not a grid of numbers. With a coding agent like Claude Code, you would get the chart directly — the agent writes Python, executes it, and displays the image. But a deployed web app cannot do that unless we change what the LLM returns.</p>
+<p>The fix is straightforward: instead of asking the LLM for SQL, ask it for a short Python script that queries the database <em>and</em> produces a chart. The app executes that Python and displays whatever it creates — a matplotlib figure, a Plotly chart, a data table, or all three.</p>
+<section id="the-changed-system-prompt" class="level3">
+<h3 class="anchored" data-anchor-id="the-changed-system-prompt">The changed system prompt</h3>
+<p>The original query app’s system prompt said: <em>return ONLY a single SQLite SELECT statement.</em> The chart app replaces that with:</p>
+<pre><code>You are a Python code assistant for the Chinook music database.
+Given the schema below and a user question, return ONLY a
+Python script.
+
+Rules for the Python script:
+- Use sqlite3 to query the database. The connection is
+  already available as `conn`.
+- Use pandas for data manipulation.
+- If the question asks for a chart, use matplotlib.
+  Call st.pyplot(fig) to display it.
+- Always store query results in a DataFrame called `df`.</code></pre>
+<p>The schema description is identical — the LLM still sees only table and column names, never the actual data.</p>
+</section>
+<section id="what-comes-back-1" class="level3">
+<h3 class="anchored" data-anchor-id="what-comes-back-1">What comes back</h3>
+<p>If you ask “Bar chart of the top 5 countries by revenue,” the LLM now returns Python instead of SQL:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_sql_query(<span class="st">"""</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="st">    SELECT c.Country, SUM(ii.UnitPrice * ii.Quantity) AS Revenue</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="st">    FROM invoice_items ii</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="st">    JOIN invoices i ON ii.InvoiceId = i.InvoiceId</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="st">    JOIN customers c ON i.CustomerId = c.CustomerId</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="st">    GROUP BY c.Country</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="st">    ORDER BY Revenue DESC</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="st">    LIMIT 5</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span>, conn)</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>ax.bar(df[<span class="st">"Country"</span>], df[<span class="st">"Revenue"</span>])</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"Revenue ($)"</span>)</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">"Top 5 Countries by Revenue"</span>)</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>st.pyplot(fig)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The SQL is still there — embedded inside a <code>read_sql_query</code> call — but now the script also creates the chart. The app executes this code and displays both the chart and the underlying data table.</p>
+</section>
+<section id="the-data-flow-is-unchanged" class="level3">
+<h3 class="anchored" data-anchor-id="the-data-flow-is-unchanged">The data flow is unchanged</h3>
+<p>The security model is the same as the SQL-only app. The LLM sees only the question and the schema. The Python executes locally against the local database. No data leaves your machine. The difference is that the app now executes Python rather than a single SQL statement, which gives the LLM more expressive power — it can sort, reshape, and visualize the data in ways that raw SQL cannot.</p>
+<p>Download the chart app files here: <a href="files/code/chinook-charts/app.py">app.py</a> and <a href="files/code/chinook-charts/requirements.txt">requirements.txt</a>. Copy <code>chinook.db</code> into the same folder, install the dependencies, and run:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install <span class="at">-r</span> requirements.txt</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="ex">streamlit</span> run app.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="a-note-on-executing-generated-code" class="level3">
+<h3 class="anchored" data-anchor-id="a-note-on-executing-generated-code">A note on executing generated code</h3>
+<p>The chart app uses Python’s <code>exec()</code> to run LLM-generated code. For a local demo this is fine — you are running it on your own machine. In a production deployment, executing AI-generated code requires sandboxing: running the code in an isolated container with no network access and limited filesystem permissions. Chapter 5 discusses sandboxing and agent guardrails in detail.</p>
+</section>
 <section id="from-demo-to-production" class="level3">
 <h3 class="anchored" data-anchor-id="from-demo-to-production">From demo to production</h3>
-<p>This is a demo, not a production application. There is no authentication, no guardrails on the SQL, and no sandboxing of query execution. In a production deployment, IT would add SSO login, restrict the database connection to read-only credentials, log every query for audit, and use an enterprise LLM with a data-processing agreement. Chapter 7 covers these considerations in detail. But as a prototype that proves the concept, fifty lines of Python is all it takes.</p>
+<p>This is a demo, not a production application. There is no authentication, no guardrails on the SQL, and no sandboxing of query execution. The chart app adds another consideration: it executes LLM-generated Python, not just SQL, which makes sandboxing even more important. In a production deployment, IT would add SSO login, restrict the database connection to read-only credentials, log every query for audit, run generated code in an isolated container, and use an enterprise LLM with a data-processing agreement. Chapter 7 covers these considerations in detail. But as a prototype that proves the concept, fifty lines of Python is all it takes.</p>
 </section>
 </section>
-<section id="exercises" class="level2" data-number="4.15">
-<h2 data-number="4.15" class="anchored" data-anchor-id="exercises"><span class="header-section-number">4.15</span> Exercises</h2>
+<section id="exercises" class="level2" data-number="4.16">
+<h2 data-number="4.16" class="anchored" data-anchor-id="exercises"><span class="header-section-number">4.16</span> Exercises</h2>
 <div class="callout callout-style-default callout-note callout-titled" title="Exercise 1: Build a Chinook Skill">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
