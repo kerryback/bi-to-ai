@@ -106,7 +106,7 @@ ul.task-list li input[type="checkbox"] {
     <div class="sidebar-title mb-0 py-0">
       <a href="./">From BI to AI</a> 
         <div class="sidebar-tools-main tools-wide">
-    <a href="https://github.com/kerryback/bi-to-ai/tree/master/code" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <a href="https://github.com/kerryback/bi-to-ai/tree/master/files" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
   <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
   <div class="quarto-reader-toggle-btn">
@@ -289,7 +289,7 @@ Context window sizes
 <section id="hands-on-querying-your-documents" class="level2" data-number="6.9">
 <h2 data-number="6.9" class="anchored" data-anchor-id="hands-on-querying-your-documents"><span class="header-section-number">6.9</span> Hands-on: querying your documents</h2>
 <p>The simplest way to experience RAG is to point your coding agent at a folder of documents and start asking questions.</p>
-<p>Download the <a href="data/company-handbook.md">sample company handbook</a> and place it in a folder. Open your coding agent in that folder. Then ask questions:</p>
+<p>Download the <a href="files/data/company-handbook.md">sample company handbook</a> and place it in a folder. Open your coding agent in that folder. Then ask questions:</p>
 <blockquote class="blockquote">
 <p>What is our return policy for enterprise customers?</p>
 </blockquote>
@@ -331,7 +331,7 @@ Exercise 1: Document Querying
 </div>
 <div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Download the <a href="data/company-handbook.md">company handbook</a> and place it in a folder. Open your coding agent in that folder and ask five questions about the content.</p>
+<p>Download the <a href="files/data/company-handbook.md">company handbook</a> and place it in a folder. Open your coding agent in that folder and ask five questions about the content.</p>
 <p>For each answer, evaluate relevance (did it find the right section?), faithfulness (does the answer match the source?), and completeness (did it find everything relevant?). Rate each dimension on a 1-to-5 scale.</p>
 <p>Then ask two questions the document cannot answer. Does AI admit it does not know, or does it hallucinate?</p>
 </div>
@@ -349,7 +349,7 @@ Exercise 2: Citation Verification
 </div>
 <div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Ask three questions about the <a href="data/company-handbook.md">company handbook</a> and get answers with citations.</p>
+<p>Ask three questions about the <a href="files/data/company-handbook.md">company handbook</a> and get answers with citations.</p>
 <p>For each answer, locate every cited passage in the original document. Rate each citation: accurate (the passage says what the AI claims), partially accurate (the passage is related but the AI stretched or paraphrased), or hallucinated (the passage does not support the claim).</p>
 <p>If any citation is inaccurate, rephrase the question and see if the citation improves.</p>
 </div>
@@ -367,7 +367,7 @@ Exercise 3: Conflicting Sources
 </div>
 <div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Create a second version of the <a href="data/company-handbook.md">company handbook</a> in which you change one or two facts (for example, change the PTO accrual rates or the return policy window). Place both versions in the same folder.</p>
+<p>Create a second version of the <a href="files/data/company-handbook.md">company handbook</a> in which you change one or two facts (for example, change the PTO accrual rates or the return policy window). Place both versions in the same folder.</p>
 <p>Ask a question where the two versions disagree. Does AI cite both? Pick one? Acknowledge the conflict?</p>
 <p>This simulates a common production problem: stale documents coexisting with current ones.</p>
 </div>
@@ -385,7 +385,7 @@ Exercise 4: RAG vs.&nbsp;Direct Reading
 </div>
 <div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Ask your coding agent to read the entire <a href="data/company-handbook.md">company handbook</a> as one document and answer a question (this is the direct-context approach). Then ask the same question in a way that forces chunked retrieval (for example, by placing many documents in the folder so the handbook is too large for the context window to hold in full).</p>
+<p>Ask your coding agent to read the entire <a href="files/data/company-handbook.md">company handbook</a> as one document and answer a question (this is the direct-context approach). Then ask the same question in a way that forces chunked retrieval (for example, by placing many documents in the folder so the handbook is too large for the context window to hold in full).</p>
 <p>Compare the two answers. Which is more complete? Does the direct-reading approach catch context that chunked retrieval misses?</p>
 <p>This exercise illustrates the tradeoff: direct context is better for small document sets, while RAG scales to thousands of documents.</p>
 </div>

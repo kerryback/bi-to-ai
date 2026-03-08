@@ -34,7 +34,7 @@ All of these approaches share the same core idea: give the AI a description of y
 
 ## The sample database: Chinook
 
-The exercises in this chapter use the Chinook sample database, which you can download here: [chinook.db](data/chinook.db).  It represents a music retailer's operations and contains 11 related tables.
+The exercises in this chapter use the Chinook sample database, which you can download here: [chinook.db](files/data/chinook.db).  It represents a music retailer's operations and contains 11 related tables.
 
 The key tables are employees (8 staff members), customers (59 customers across 24 countries), invoices and invoice_items (412 transactions), and tracks, albums, artists, and genres (a product catalog of more than 3,500 tracks).  It is a publicly available SQLite file that requires no setup --- just place it in a folder and point your coding agent at it.  The same skill pattern you learn here works with any database.
 
@@ -130,7 +130,7 @@ You need a free OpenRouter API key.  Go to [openrouter.ai](https://openrouter.ai
 export OPENROUTER_API_KEY="sk-or-..."
 ```
 
-Download the app files here: [app.py](code/chinook-query/app.py) and [requirements.txt](code/chinook-query/requirements.txt).  Copy `chinook.db` into the same folder, install the dependencies, and run:
+Download the app files here: [app.py](files/code/chinook-query/app.py) and [requirements.txt](files/code/chinook-query/requirements.txt).  Copy `chinook.db` into the same folder, install the dependencies, and run:
 
 ```bash
 pip install -r requirements.txt
@@ -194,7 +194,7 @@ This is a demo, not a production application.  There is no authentication, no gu
 ## Exercises
 
 ::: {.callout-note title="Exercise 1: Build a Chinook Skill" collapse="true"}
-Download [chinook.db](data/chinook.db) and place it in a new project folder.  Create a SKILL.md file in the same folder with three sections: a description and database path, at least three table descriptions with columns and relationships, and three example questions.
+Download [chinook.db](files/data/chinook.db) and place it in a new project folder.  Create a SKILL.md file in the same folder with three sections: a description and database path, at least three table descriptions with columns and relationships, and three example questions.
 
 Open your coding agent in the folder and test three decision-relevant queries.  For each, ask Claude to show the SQL and verify that the joins and filters are correct.  Then ask for an interactive Plotly chart and iterate on it at least once --- change colors, add annotations, or improve the layout.
 
@@ -202,7 +202,7 @@ You should end up with a working SKILL.md and at least one interactive chart.
 :::
 
 ::: {.callout-note title="Exercise 2: Database Schema Detective" collapse="true"}
-Connect your coding agent to the [Chinook database](data/chinook.db) without any SKILL.md --- no documentation at all.
+Connect your coding agent to the [Chinook database](files/data/chinook.db) without any SKILL.md --- no documentation at all.
 
 Ask: "What tables are in this database?  How are they related?"  Let Claude discover the schema on its own.  Then ask: "If I were the CEO of this music company, what three questions should I be asking?"
 
@@ -214,7 +214,7 @@ Compare the agent's schema discovery to what you know from the chapter.  Did it 
 ::: {.callout-note title="Exercise 3: Decision Scenario Queries" collapse="true"}
 You are the Chinook CEO.  The board wants you to cut two of the five lowest-performing genres from the catalog to reduce licensing costs.
 
-Using your Chinook skill (or a bare connection to [chinook.db](data/chinook.db)), answer these questions in sequence: Which genres contribute the least revenue?  For those two genres, how many unique customers would be affected?  Are any of those customers high-value customers who also buy other genres?
+Using your Chinook skill (or a bare connection to [chinook.db](files/data/chinook.db)), answer these questions in sequence: Which genres contribute the least revenue?  For those two genres, how many unique customers would be affected?  Are any of those customers high-value customers who also buy other genres?
 
 Write one sentence stating which two genres you would cut and why.
 :::
@@ -240,5 +240,5 @@ Add an instruction to the skill: "When I say 'Monday report,' run these three qu
 :::
 
 ::: {.callout-note title="Exercise 6: Build Your Own Query App" collapse="true"}
-Ask your coding agent to build a natural-language query app similar to the [chinook-query demo](code/chinook-query/app.py), either from scratch or by improving the demo.  Possible extensions: add chart generation for numeric results, show query history in a sidebar, add error handling that suggests corrections when the SQL fails, or let the user choose between different databases.
+Ask your coding agent to build a natural-language query app similar to the [chinook-query demo](files/code/chinook-query/app.py), either from scratch or by improving the demo.  Possible extensions: add chart generation for numeric results, show query history in a sidebar, add error handling that suggests corrections when the SQL fails, or let the user choose between different databases.
 :::

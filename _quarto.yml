@@ -4,10 +4,10 @@ project:
   resources:
     - CNAME
     - .nojekyll
-    - data/superstore.csv
-    - data/chinook.db
-    - data/company-handbook.md
-    - code/**
+    - files/data/superstore.csv
+    - files/data/chinook.db
+    - files/data/company-handbook.md
+    - files/**
 
 number-depth: 2
 
@@ -17,7 +17,7 @@ book:
   author: "Kerry Back"
   date: today
   reader-mode: true
-  repo-url: "https://github.com/kerryback/bi-to-ai/tree/master/code"
+  repo-url: "https://github.com/kerryback/bi-to-ai/tree/master/files"
   chapters:
     - index.qmd
     - 01-coding-tools.qmd

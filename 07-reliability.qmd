@@ -184,7 +184,7 @@ Strategic adoption, measured in quarters, requires a full audit trail.  Producti
 ::: {.callout-note title="Exercise 1: The Verification Protocol" collapse="true"}
 Run the complete three-step verification protocol on a real analysis.
 
-First, sanity-check: open the [Superstore data](data/superstore.csv) in your coding agent and ask three questions where you know the answer (row count, total revenue, number of unique customers).  Does AI match?
+First, sanity-check: open the [Superstore data](files/data/superstore.csv) in your coding agent and ask three questions where you know the answer (row count, total revenue, number of unique customers).  Does AI match?
 
 Second, inspect methodology: for three queries, ask "show me the code."  Read each script.  Is the logic correct?  Then rephrase each question and run it again.  Do the answers agree?
 
@@ -193,7 +193,7 @@ Third, spot-check edge cases: test three edge cases (empty results, boundary dat
 :::
 
 ::: {.callout-note title="Exercise 2: Red-Team Your Skill" collapse="true"}
-Open your coding agent with the [Chinook database](data/chinook.db) and your SKILL.md from Chapter 4.
+Open your coding agent with the [Chinook database](files/data/chinook.db) and your SKILL.md from Chapter 4.
 
 Run five adversarial queries designed to break the skill: a query about nonexistent data ("Sales in 2025"), a complex multi-table join ("Revenue by artist by country"), a request for data not in the schema ("Customer satisfaction scores"), an ambiguous column name, and a boundary date query.
 
@@ -201,7 +201,7 @@ For each failure, diagnose the root cause, fix the SKILL.md, and retest.
 :::
 
 ::: {.callout-note title="Exercise 3: RAG Citation Audit" collapse="true"}
-Open your coding agent with the [company handbook](data/company-handbook.md) from Chapter 6 and ask five factual questions.
+Open your coding agent with the [company handbook](files/data/company-handbook.md) from Chapter 6 and ask five factual questions.
 
 For each answer, locate every cited passage in the original document.  Rate each citation as accurate, partially accurate, or hallucinated.
 

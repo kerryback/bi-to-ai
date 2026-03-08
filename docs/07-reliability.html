@@ -105,7 +105,7 @@ ul.task-list li input[type="checkbox"] {
     <div class="sidebar-title mb-0 py-0">
       <a href="./">From BI to AI</a> 
         <div class="sidebar-tools-main tools-wide">
-    <a href="https://github.com/kerryback/bi-to-ai/tree/master/code" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <a href="https://github.com/kerryback/bi-to-ai/tree/master/files" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
   <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
   <div class="quarto-reader-toggle-btn">
@@ -365,7 +365,7 @@ Exercise 1: The Verification Protocol
 <div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Run the complete three-step verification protocol on a real analysis.</p>
-<p>First, sanity-check: open the <a href="data/superstore.csv">Superstore data</a> in your coding agent and ask three questions where you know the answer (row count, total revenue, number of unique customers). Does AI match?</p>
+<p>First, sanity-check: open the <a href="files/data/superstore.csv">Superstore data</a> in your coding agent and ask three questions where you know the answer (row count, total revenue, number of unique customers). Does AI match?</p>
 <p>Second, inspect methodology: for three queries, ask “show me the code.” Read each script. Is the logic correct? Then rephrase each question and run it again. Do the answers agree?</p>
 <p>Third, spot-check edge cases: test three edge cases (empty results, boundary dates, null values). Does AI handle them gracefully?</p>
 </div>
@@ -383,7 +383,7 @@ Exercise 2: Red-Team Your Skill
 </div>
 <div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Open your coding agent with the <a href="data/chinook.db">Chinook database</a> and your SKILL.md from Chapter 4.</p>
+<p>Open your coding agent with the <a href="files/data/chinook.db">Chinook database</a> and your SKILL.md from Chapter 4.</p>
 <p>Run five adversarial queries designed to break the skill: a query about nonexistent data (“Sales in 2025”), a complex multi-table join (“Revenue by artist by country”), a request for data not in the schema (“Customer satisfaction scores”), an ambiguous column name, and a boundary date query.</p>
 <p>For each failure, diagnose the root cause, fix the SKILL.md, and retest.</p>
 </div>
@@ -401,7 +401,7 @@ Exercise 3: RAG Citation Audit
 </div>
 <div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Open your coding agent with the <a href="data/company-handbook.md">company handbook</a> from Chapter 6 and ask five factual questions.</p>
+<p>Open your coding agent with the <a href="files/data/company-handbook.md">company handbook</a> from Chapter 6 and ask five factual questions.</p>
 <p>For each answer, locate every cited passage in the original document. Rate each citation as accurate, partially accurate, or hallucinated.</p>
 <p>Then ask three questions the document cannot answer. Does AI admit it does not know, or does it hallucinate?</p>
 </div>

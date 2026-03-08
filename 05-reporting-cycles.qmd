@@ -97,7 +97,7 @@ The reporting pipeline you prototyped is the same artifact that powers the produ
 ## Exercises
 
 ::: {.callout-note title="Exercise 1: Multi-Step Agent Workflow" collapse="true"}
-Open your coding agent in a folder containing the [Chinook database](data/chinook.db) and your SKILL.md from Chapter 4.  Give it a single compound instruction that requires at least three steps.
+Open your coding agent in a folder containing the [Chinook database](files/data/chinook.db) and your SKILL.md from Chapter 4.  Give it a single compound instruction that requires at least three steps.
 
 For example: "Query the Chinook database for the top ten artists by revenue.  Create a bar chart.  Write a one-paragraph executive summary.  Save the chart and summary to a reports folder."
 

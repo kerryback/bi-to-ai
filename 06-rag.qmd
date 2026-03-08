@@ -86,7 +86,7 @@ The most dangerous failure is the hallucinated citation.  The answer looks groun
 
 The simplest way to experience RAG is to point your coding agent at a folder of documents and start asking questions.
 
-Download the [sample company handbook](data/company-handbook.md) and place it in a folder.  Open your coding agent in that folder.  Then ask questions:
+Download the [sample company handbook](files/data/company-handbook.md) and place it in a folder.  Open your coding agent in that folder.  Then ask questions:
 
 > What is our return policy for enterprise customers?
 
@@ -123,7 +123,7 @@ The same sandbox-audit-deploy pattern from Chapter 5 applies.  RAG is a system, 
 ## Exercises
 
 ::: {.callout-note title="Exercise 1: Document Querying" collapse="true"}
-Download the [company handbook](data/company-handbook.md) and place it in a folder.  Open your coding agent in that folder and ask five questions about the content.
+Download the [company handbook](files/data/company-handbook.md) and place it in a folder.  Open your coding agent in that folder and ask five questions about the content.
 
 For each answer, evaluate relevance (did it find the right section?), faithfulness (does the answer match the source?), and completeness (did it find everything relevant?).  Rate each dimension on a 1-to-5 scale.
 
@@ -132,7 +132,7 @@ Then ask two questions the document cannot answer.  Does AI admit it does not kn
 :::
 
 ::: {.callout-note title="Exercise 2: Citation Verification" collapse="true"}
-Ask three questions about the [company handbook](data/company-handbook.md) and get answers with citations.
+Ask three questions about the [company handbook](files/data/company-handbook.md) and get answers with citations.
 
 For each answer, locate every cited passage in the original document.  Rate each citation: accurate (the passage says what the AI claims), partially accurate (the passage is related but the AI stretched or paraphrased), or hallucinated (the passage does not support the claim).
 
@@ -141,7 +141,7 @@ If any citation is inaccurate, rephrase the question and see if the citation imp
 :::
 
 ::: {.callout-note title="Exercise 3: Conflicting Sources" collapse="true"}
-Create a second version of the [company handbook](data/company-handbook.md) in which you change one or two facts (for example, change the PTO accrual rates or the return policy window).  Place both versions in the same folder.
+Create a second version of the [company handbook](files/data/company-handbook.md) in which you change one or two facts (for example, change the PTO accrual rates or the return policy window).  Place both versions in the same folder.
 
 Ask a question where the two versions disagree.  Does AI cite both?  Pick one?  Acknowledge the conflict?
 
@@ -149,7 +149,7 @@ This simulates a common production problem: stale documents coexisting with curr
 :::
 
 ::: {.callout-note title="Exercise 4: RAG vs. Direct Reading" collapse="true"}
-Ask your coding agent to read the entire [company handbook](data/company-handbook.md) as one document and answer a question (this is the direct-context approach).  Then ask the same question in a way that forces chunked retrieval (for example, by placing many documents in the folder so the handbook is too large for the context window to hold in full).
+Ask your coding agent to read the entire [company handbook](files/data/company-handbook.md) as one document and answer a question (this is the direct-context approach).  Then ask the same question in a way that forces chunked retrieval (for example, by placing many documents in the folder so the handbook is too large for the context window to hold in full).
 
 Compare the two answers.  Which is more complete?  Does the direct-reading approach catch context that chunked retrieval misses?
 

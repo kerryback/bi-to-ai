@@ -22,13 +22,13 @@ Chapter 7 addresses reliability and compliance issues.  You will validate AI out
 
 The exercises in this book use three datasets.
 
-The [Superstore CSV](data/superstore.csv) contains roughly 10,000 retail orders across four U.S. regions with columns for sales, profit, discount, product category, and customer segment.^[The Sample Superstore dataset is published on Kaggle at <https://www.kaggle.com/datasets/vivek468/superstore-dataset-final>.  It is widely used in data-visualization tutorials and Tableau exercises.]  It is used throughout Chapters 2, 3, and 7.
+The [Superstore CSV](files/data/superstore.csv) contains roughly 10,000 retail orders across four U.S. regions with columns for sales, profit, discount, product category, and customer segment.^[The Sample Superstore dataset is published on Kaggle at <https://www.kaggle.com/datasets/vivek468/superstore-dataset-final>.  It is widely used in data-visualization tutorials and Tableau exercises.]  It is used throughout Chapters 2, 3, and 7.
 
-The [Employee Attrition CSV](data/employee-attrition.csv) contains 1,470 employee records with 35 attributes including department, job role, monthly income, overtime status, job satisfaction, and whether the employee left the company.^[The IBM HR Analytics Employee Attrition & Performance dataset is a fictional dataset created by IBM data scientists, published on Kaggle at <https://www.kaggle.com/datasets/pavansubhasht/ibm-hr-analytics-attrition-dataset>.]  It is used in Chapter 2 exercises.
+The [Employee Attrition CSV](files/data/employee-attrition.csv) contains 1,470 employee records with 35 attributes including department, job role, monthly income, overtime status, job satisfaction, and whether the employee left the company.^[The IBM HR Analytics Employee Attrition & Performance dataset is a fictional dataset created by IBM data scientists, published on Kaggle at <https://www.kaggle.com/datasets/pavansubhasht/ibm-hr-analytics-attrition-dataset>.]  It is used in Chapter 2 exercises.
 
-The [Chinook database](data/chinook.db) is a SQLite file representing a music retailer's operations with 11 related tables covering employees, customers, invoices, tracks, albums, artists, and genres.^[The Chinook database was created by Luis Rocha as a modern alternative to the Northwind sample database.  The source repository is at <https://github.com/lerocha/chinook-database>.]  It is the primary dataset for Chapter 4 and is revisited in Chapters 5 and 7.
+The [Chinook database](files/data/chinook.db) is a SQLite file representing a music retailer's operations with 11 related tables covering employees, customers, invoices, tracks, albums, artists, and genres.^[The Chinook database was created by Luis Rocha as a modern alternative to the Northwind sample database.  The source repository is at <https://github.com/lerocha/chinook-database>.]  It is the primary dataset for Chapter 4 and is revisited in Chapters 5 and 7.
 
-Chapter 6 uses a [sample company handbook](data/company-handbook.md) for RAG exercises.
+Chapter 6 uses a [sample company handbook](files/data/company-handbook.md) for RAG exercises.
 
 ## Prerequisites
 

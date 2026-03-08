@@ -123,7 +123,7 @@ Write up the conversation transcript and a five-sentence reflection, one per mov
 :::
 
 ::: {.callout-note title="Exercise 2: Challenge Your Chapter 2 Analysis" collapse="true"}
-Open the recommendation memo you wrote in Chapter 2 (or re-run the Superstore analysis using [superstore.csv](data/superstore.csv)).  Give the memo to Claude and ask it to find the three weakest claims.
+Open the recommendation memo you wrote in Chapter 2 (or re-run the Superstore analysis using [superstore.csv](files/data/superstore.csv)).  Give the memo to Claude and ask it to find the three weakest claims.
 
 For each weak claim, ask what data you would need to strengthen it.  Then ask Claude to rewrite the executive summary to acknowledge the limitations it identified.
 
@@ -131,7 +131,7 @@ Compare the original and revised summaries.  Which one would survive tougher scr
 :::
 
 ::: {.callout-note title="Exercise 3: Challenge Your Retention Memo" collapse="true"}
-Open the retention memo you wrote in Chapter 2 Exercise 3 (or re-run the attrition analysis using [employee-attrition.csv](data/employee-attrition.csv)).  Give the memo to Claude and work through three thinking-partner moves.
+Open the retention memo you wrote in Chapter 2 Exercise 3 (or re-run the attrition analysis using [employee-attrition.csv](files/data/employee-attrition.csv)).  Give the memo to Claude and work through three thinking-partner moves.
 
 First, ask Claude to argue against your top recommendation.  If you recommended reducing overtime, have it make the case that overtime is a symptom, not a cause.  If you recommended raising salaries, have it explain why that might not move the needle.
 

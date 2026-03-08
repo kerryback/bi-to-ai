@@ -6,7 +6,7 @@ This chapter goes from a raw spreadsheet to a written recommendation with charts
 
 You are a regional VP at a retail company.  Q4 numbers just came in.  The question on the table: which regions should get additional marketing budget, and which product lines should be expanded or cut?
 
-The data is the Kaggle "Sample Superstore" dataset --- roughly 10,000 orders across four U.S. regions, with columns for sales, profit, discount, product category, and customer segment.  You can download it here: [superstore.csv](data/superstore.csv).
+The data is the Kaggle "Sample Superstore" dataset --- roughly 10,000 orders across four U.S. regions, with columns for sales, profit, discount, product category, and customer segment.  You can download it here: [superstore.csv](files/data/superstore.csv).
 
 An analyst would take half a day to work through this.  With a coding agent, you can do it in ten minutes.
 
@@ -59,7 +59,7 @@ Behind the scenes, the agent read the CSV into Python, wrote and ran code for ea
 ## Exercises
 
 ::: {.callout-note title="Exercise 1: The Superstore Walkthrough" collapse="true"}
-This is the core exercise for Chapter 2.  Download [superstore.csv](data/superstore.csv) and place it in a folder.  Open your coding agent in that folder and work through the four steps described above.
+This is the core exercise for Chapter 2.  Download [superstore.csv](files/data/superstore.csv) and place it in a folder.  Open your coding agent in that folder and work through the four steps described above.
 
 First, ask the agent to describe the data.  Confirm the row count, column names, date range, and financial summary.  Second, ask three decision-relevant questions tied to the marketing budget allocation decision.  Third, create at least one line chart (for trends), one bar chart (for comparisons), and one scatter plot (for relationships).  Iterate on at least one chart by adding annotations or improving the layout.  Fourth, ask the agent to write a one-page executive memo with the recommendation and supporting charts.
 
@@ -78,7 +78,7 @@ For each claim, ask the agent to test it, show the evidence, and write one sente
 ::: {.callout-note title="Exercise 3: Employee Attrition Walkthrough" collapse="true"}
 You are an HR director at a mid-size company.  Employee turnover has been rising and the CEO wants to know why people are leaving and what to do about it.
 
-Download [employee-attrition.csv](data/employee-attrition.csv) and place it in a folder.  Open your coding agent and work through the same four steps from this chapter.
+Download [employee-attrition.csv](files/data/employee-attrition.csv) and place it in a folder.  Open your coding agent and work through the same four steps from this chapter.
 
 First, ask the agent to describe the data.  How many employees are in the dataset?  What is the overall attrition rate?  What departments and job roles are represented?
 
