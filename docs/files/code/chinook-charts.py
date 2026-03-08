@@ -10,6 +10,7 @@
 # streamlit (st): builds the web interface from this single script
 # anthropic: official Python client for the Anthropic API (Claude)
 
+import io
 import json
 import os
 import sqlite3
@@ -150,6 +151,14 @@ if question:
         }
         exec(code, namespace)  # noqa: S102
         conn.close()
+
+        # If a matplotlib figure was created, offer a PNG download
+        fig = namespace.get("fig")
+        if fig is not None and isinstance(fig, plt.Figure):
+            buf = io.BytesIO()
+            fig.savefig(buf, format="png", dpi=150, bbox_inches="tight")
+            buf.seek(0)
+            st.download_button("Download chart as PNG", buf, "chart.png", "image/png")
 
         # If the code created a DataFrame but no chart, display the table
         if "df" in namespace and isinstance(namespace["df"], pd.DataFrame):
