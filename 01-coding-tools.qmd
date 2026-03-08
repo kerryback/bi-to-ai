@@ -56,7 +56,7 @@ Codex displays its reasoning by default --- you can see the agent's thought proc
 
 The coding agents write Python behind the scenes, but the demo apps in later chapters need Python installed on your machine so you can run them yourself.
 
-Download Python 3.10 or later from [python.org](https://www.python.org/downloads/).  On Windows, check **"Add Python to PATH"** during installation.  On Mac, you can also install via Homebrew with `brew install python`.  After installing, verify by opening a terminal and running:
+Download Python 3.10 or later from [python.org](https://www.python.org/downloads/).  On Windows, check **"Add Python to PATH"** during installation.  This is *in small print on the bottom of the very first installation screen*.  On Mac, you can also install via Homebrew with `brew install python`.  After installing, verify by opening a terminal and running:
 
 ```bash
 python --version
@@ -135,7 +135,7 @@ Claude Desktop is a GUI chat application from Anthropic.  It supports file attac
 
 Google Antigravity is an agent-first IDE --- a fork of VS Code designed around AI collaboration.  It is currently in free preview.  Rather than adding AI to an existing editor, it was built from the ground up for agent-driven workflows, with the agent able to navigate files, run code, and iterate on changes directly in the editor.
 
-VS Code with AI extensions is the most common setup for developers who already use VS Code.  Extensions like GitHub Copilot, Cline, and Roo Code add AI assistance ranging from autocomplete to full agentic coding.  The experience is less unified than a purpose-built tool but integrates into an existing workflow.
+VS Code with AI extensions is the most common setup for developers who already use VS Code.  All three terminal agents --- Claude Code, Gemini CLI, and Codex --- have VS Code extensions that embed the same agent directly in the editor.  The experience integrates into an existing workflow without leaving the IDE.
 
 ::: {.callout-note title="Exercise 1: Install and Test" collapse="true"}
 Install one of the three coding agents (Claude Code, Gemini CLI, or Codex) on your machine.  Launch it, authenticate, and confirm it is working by asking it to print "Hello, world" in Python.
