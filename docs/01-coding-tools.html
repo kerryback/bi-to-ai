@@ -261,22 +261,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="setting-up-claude-code" class="level2" data-number="1.2">
 <h2 data-number="1.2" class="anchored" data-anchor-id="setting-up-claude-code"><span class="header-section-number">1.2</span> Setting up Claude Code</h2>
-<p>Claude Code is Anthropic’s terminal-based coding agent. It requires Node.js version 18 or higher. To install it, open a terminal and run:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">npm</span> install <span class="at">-g</span> @anthropic-ai/claude-code</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Claude Code is Anthropic’s terminal-based coding agent. Install it by opening a terminal and running:<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<p><strong>Mac / Linux:</strong></p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-fsSL</span> https://claude.ai/install.sh <span class="kw">|</span> <span class="fu">bash</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Windows</strong> (PowerShell):</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">irm</span> https<span class="op">://</span>claude<span class="op">.</span><span class="fu">ai</span><span class="op">/</span>install<span class="op">.</span><span class="fu">ps1</span> <span class="op">|</span> <span class="fu">iex</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>The first time you launch it by typing <code>claude</code>, the tool opens a browser window for OAuth authentication with your Anthropic account. Claude Code requires either a Pro subscription at $20 per month (which includes a generous usage allowance) or an Anthropic API key with credits. Once authenticated, the agent is ready to use in any folder on your machine.</p>
 <p>Claude Code reads a file called <code>CLAUDE.md</code> in the project directory for persistent instructions. This is where you store context about your data, preferred output formats, and any domain-specific guidance the agent should follow every session. You can also enable verbose output by pressing Ctrl+O during a conversation, which shows every step the agent takes: reading files, writing Python, running code, and interpreting results.</p>
 </section>
 <section id="setting-up-gemini-cli" class="level2" data-number="1.3">
 <h2 data-number="1.3" class="anchored" data-anchor-id="setting-up-gemini-cli"><span class="header-section-number">1.3</span> Setting up Gemini CLI</h2>
-<p>Gemini CLI is Google’s terminal-based coding agent. It also requires Node.js 18 or higher. Install it with:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">npm</span> install <span class="at">-g</span> @google/gemini-cli</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Gemini CLI is Google’s terminal-based coding agent. It requires <a href="https://nodejs.org/">Node.js</a> version 18 or higher. Install it with:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">npm</span> install <span class="at">-g</span> @google/gemini-cli</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Launch it by typing <code>gemini</code>. On first run, it opens a browser window for Google account authentication. Gemini CLI offers a free tier with 60 requests per minute and 1,000 requests per day — enough for an entire working day of analysis without spending anything. Paid tiers are available through the Google AI API for heavier usage.</p>
 <p>Gemini CLI reads a <code>GEMINI.md</code> file for project-level instructions, serving the same purpose as Claude Code’s <code>CLAUDE.md</code>. Verbose output is available by launching with <code>--verbosity=verbose</code>, which displays the agent’s internal reasoning and every tool call in real time.</p>
 </section>
 <section id="setting-up-openai-codex" class="level2" data-number="1.4">
 <h2 data-number="1.4" class="anchored" data-anchor-id="setting-up-openai-codex"><span class="header-section-number">1.4</span> Setting up OpenAI Codex</h2>
-<p>OpenAI Codex is an open-source terminal agent that connects to OpenAI’s models. Install it with:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">npm</span> install <span class="at">-g</span> @openai/codex</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>OpenAI Codex is an open-source terminal agent that connects to OpenAI’s models. There are several ways to install it. On Mac, <code>brew install --cask codex</code> is the simplest. On any platform with <a href="https://nodejs.org/">Node.js</a> 22 or higher, run:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">npm</span> install <span class="at">-g</span> @openai/codex</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>OpenAI also offers a native desktop app for Windows and Mac, available at <a href="https://openai.com/codex">openai.com/codex</a>.</p>
 <p>Launch it by typing <code>codex</code>. Codex requires either a ChatGPT Plus subscription or an OpenAI API key. Set your API key as an environment variable (<code>OPENAI_API_KEY</code>) before launching, or the tool will prompt you to authenticate.</p>
 <p>Codex displays its reasoning by default — you can see the agent’s thought process without enabling any special mode. It reads project instructions from a <code>AGENTS.md</code> file in the working directory.</p>
 </section>
@@ -284,13 +288,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 data-number="1.5" class="anchored" data-anchor-id="installing-python"><span class="header-section-number">1.5</span> Installing Python</h2>
 <p>The coding agents write Python behind the scenes, but the demo apps in later chapters need Python installed on your machine so you can run them yourself.</p>
 <p>Download Python 3.10 or later from <a href="https://www.python.org/downloads/">python.org</a>. On Windows, check <strong>“Add Python to PATH”</strong> during installation. This is <em>in small print on the bottom of the very first installation screen</em>. On Mac, you can also install via Homebrew with <code>brew install python</code>. After installing, verify by opening a terminal and running:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">--version</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">--version</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>You should see something like <code>Python 3.12.4</code>. If the command is not found, restart your terminal or check that Python was added to your PATH.</p>
 </section>
 <section id="installing-libraries" class="level2" data-number="1.6">
 <h2 data-number="1.6" class="anchored" data-anchor-id="installing-libraries"><span class="header-section-number">1.6</span> Installing libraries</h2>
 <p>Two Python packages are needed for the demo apps in later chapters:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install streamlit anthropic</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install streamlit anthropic</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Streamlit builds simple web apps from Python scripts — you write a short script and Streamlit turns it into an interactive page. The <code>anthropic</code> package is the official Python client for the Anthropic API, which powers the Claude family of models. Later chapters mention additional packages as needed.</p>
 </section>
 <section id="setting-up-the-anthropic-api" class="level2" data-number="1.7">
@@ -301,22 +305,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p>Create an API key under <strong>Settings → API Keys</strong>.</p></li>
 <li><p>Set the key as an environment variable so the demo apps can find it:</p>
 <p><strong>Mac / Linux</strong> — add to your shell profile (<code>.bashrc</code> or <code>.zshrc</code>) to persist:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">ANTHROPIC_API_KEY</span><span class="op">=</span><span class="st">"sk-ant-..."</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">ANTHROPIC_API_KEY</span><span class="op">=</span><span class="st">"sk-ant-..."</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><strong>Windows</strong> — run once in a terminal, then restart the terminal:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">setx</span> ANTHROPIC_API_KEY <span class="st">"sk-ant-..."</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">setx</span> ANTHROPIC_API_KEY <span class="st">"sk-ant-..."</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 </ol>
 <p>The cost is minimal — Claude Sonnet costs a few cents per thousand queries, so typical exercise usage adds up to pennies. To verify your key works, save this as <code>test_anthropic.py</code> and run it with <code>python test_anthropic.py</code>:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> anthropic <span class="im">import</span> Anthropic</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>client <span class="op">=</span> Anthropic()</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>response <span class="op">=</span> client.messages.create(</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    model<span class="op">=</span><span class="st">"claude-sonnet-4-20250514"</span>,</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    max_tokens<span class="op">=</span><span class="dv">100</span>,</span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    messages<span class="op">=</span>[{<span class="st">"role"</span>: <span class="st">"user"</span>, <span class="st">"content"</span>: <span class="st">"Say hello in one sentence."</span>}],</span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(response.content[<span class="dv">0</span>].text)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> anthropic <span class="im">import</span> Anthropic</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>client <span class="op">=</span> Anthropic()</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>response <span class="op">=</span> client.messages.create(</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    model<span class="op">=</span><span class="st">"claude-sonnet-4-20250514"</span>,</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    max_tokens<span class="op">=</span><span class="dv">100</span>,</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    messages<span class="op">=</span>[{<span class="st">"role"</span>: <span class="st">"user"</span>, <span class="st">"content"</span>: <span class="st">"Say hello in one sentence."</span>}],</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(response.content[<span class="dv">0</span>].text)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>If you see a greeting, the key is working and you are ready for the demo apps in Chapters 4 and beyond.</p>
 </section>
 <section id="significant-differences" class="level2" data-number="1.8">
@@ -386,6 +390,12 @@ Exercise 3: Instruction Files
 </div>
 
 
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>You can also install Claude Code via npm if you have Node.js 18 or higher: <code>npm install -g @anthropic-ai/claude-code</code>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
 </section>
 
 </main> <!-- /main -->

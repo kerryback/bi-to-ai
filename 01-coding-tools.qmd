@@ -18,11 +18,21 @@ The key takeaway is that AI does not need a special platform to analyze your dat
 
 ## Setting up Claude Code
 
-Claude Code is Anthropic's terminal-based coding agent.  It requires Node.js version 18 or higher.  To install it, open a terminal and run:
+Claude Code is Anthropic's terminal-based coding agent.  Install it by opening a terminal and running:[^claude-npm]
+
+**Mac / Linux:**
 
 ```bash
-npm install -g @anthropic-ai/claude-code
+curl -fsSL https://claude.ai/install.sh | bash
 ```
+
+**Windows** (PowerShell):
+
+```powershell
+irm https://claude.ai/install.ps1 | iex
+```
+
+[^claude-npm]: You can also install Claude Code via npm if you have Node.js 18 or higher: `npm install -g @anthropic-ai/claude-code`.
 
 The first time you launch it by typing `claude`, the tool opens a browser window for OAuth authentication with your Anthropic account.  Claude Code requires either a Pro subscription at \$20 per month (which includes a generous usage allowance) or an Anthropic API key with credits.  Once authenticated, the agent is ready to use in any folder on your machine.
 
@@ -30,7 +40,7 @@ Claude Code reads a file called `CLAUDE.md` in the project directory for persist
 
 ## Setting up Gemini CLI
 
-Gemini CLI is Google's terminal-based coding agent.  It also requires Node.js 18 or higher.  Install it with:
+Gemini CLI is Google's terminal-based coding agent.  It requires [Node.js](https://nodejs.org/) version 18 or higher.  Install it with:
 
 ```bash
 npm install -g @google/gemini-cli
@@ -42,11 +52,13 @@ Gemini CLI reads a `GEMINI.md` file for project-level instructions, serving the 
 
 ## Setting up OpenAI Codex
 
-OpenAI Codex is an open-source terminal agent that connects to OpenAI's models.  Install it with:
+OpenAI Codex is an open-source terminal agent that connects to OpenAI's models.  There are several ways to install it.  On Mac, `brew install --cask codex` is the simplest.  On any platform with [Node.js](https://nodejs.org/) 22 or higher, run:
 
 ```bash
 npm install -g @openai/codex
 ```
+
+OpenAI also offers a native desktop app for Windows and Mac, available at [openai.com/codex](https://openai.com/codex).
 
 Launch it by typing `codex`.  Codex requires either a ChatGPT Plus subscription or an OpenAI API key.  Set your API key as an environment variable (`OPENAI_API_KEY`) before launching, or the tool will prompt you to authenticate.
 
