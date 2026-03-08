@@ -1,5 +1,15 @@
 """Chinook chart app — ask questions and get charts, not just tables."""
 
+# --- Import libraries --------------------------------------------------------
+# json: read/write structured data    os: access environment variables & paths
+# sqlite3: connect to the SQLite database file
+# datetime: timestamp each query for the log
+# matplotlib (plt): creates static charts (bar, line, scatter, etc.)
+# pandas (pd): tabular data manipulation
+# plotly (px, go): creates interactive charts with hover/zoom
+# streamlit (st): builds the web interface from this single script
+# anthropic: official Python client for the Anthropic API (Claude)
+
 import json
 import os
 import sqlite3
@@ -11,9 +21,14 @@ import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 import streamlit as st
-from openai import OpenAI
+from anthropic import Anthropic
 
-matplotlib.use("Agg")
+matplotlib.use("Agg")  # use a non-interactive backend (no pop-up windows)
+
+# --- Schema description -------------------------------------------------------
+# This text tells Claude what tables and columns exist in the database.
+# The LLM never sees the actual data — only these table/column names.
+# Arrows (→) show foreign-key relationships between tables.
 
 SCHEMA = """
 The Chinook database has these tables:
@@ -32,6 +47,12 @@ invoice_items(InvoiceLineId, InvoiceId, TrackId, UnitPrice, Quantity) → invoic
 
 Revenue = SUM(invoice_items.UnitPrice * invoice_items.Quantity).
 """
+
+# --- System prompt ------------------------------------------------------------
+# Unlike the query app (which asks for SQL), this prompt asks Claude to return
+# a complete Python script that queries the database AND produces a chart.
+# The rules tell Claude which libraries are already loaded and how to display
+# results inside Streamlit.
 
 SYSTEM_PROMPT = (
     "You are a Python code assistant for the Chinook music database. "
@@ -53,13 +74,20 @@ SYSTEM_PROMPT = (
     + SCHEMA
 )
 
+# --- File paths ---------------------------------------------------------------
+# DB_PATH:  location of the Chinook SQLite database (same folder as this script)
+# LOG_PATH: every question/answer pair is appended here for auditing
+
 DB_PATH = os.path.join(os.path.dirname(__file__), "chinook.db")
 LOG_PATH = os.path.join(os.path.dirname(__file__), "llm_log.jsonl")
 
-client = OpenAI(
-    base_url="https://openrouter.ai/api/v1",
-    api_key=os.environ.get("OPENROUTER_API_KEY", ""),
-)
+# --- Anthropic client ---------------------------------------------------------
+# Reads the ANTHROPIC_API_KEY environment variable automatically.
+
+client = Anthropic()
+
+# --- Build the web page -------------------------------------------------------
+# Streamlit turns these function calls into HTML elements in the browser.
 
 st.title("Chinook Charts")
 st.caption(
@@ -68,17 +96,18 @@ st.caption(
 
 question = st.text_input("Your question")
 
+# --- When the user submits a question ----------------------------------------
+
 if question:
+    # 1. Send the question to Claude and get back a Python script
     with st.spinner("Generating Python code…"):
-        messages = [
-            {"role": "system", "content": SYSTEM_PROMPT},
-            {"role": "user", "content": question},
-        ]
-        response = client.chat.completions.create(
-            model="google/gemini-2.0-flash-exp:free",
-            messages=messages,
+        response = client.messages.create(
+            model="claude-sonnet-4-20250514",
+            max_tokens=1024,
+            system=SYSTEM_PROMPT,                           # schema + instructions
+            messages=[{"role": "user", "content": question}],  # the user's question
         )
-        code = response.choices[0].message.content.strip()
+        code = response.content[0].text.strip()  # extract the Python code
 
         # Strip markdown fences if the LLM includes them anyway
         if code.startswith("```"):
@@ -86,23 +115,30 @@ if question:
         if code.endswith("```"):
             code = code.rsplit("```", 1)[0]
 
+        # Save the question and response to a log file
         with open(LOG_PATH, "a") as f:
             json.dump(
                 {
                     "timestamp": datetime.now(timezone.utc).isoformat(),
                     "model": response.model,
-                    "messages": messages,
+                    "question": question,
                     "response": code,
                 },
                 f,
             )
             f.write("\n")
 
+    # 2. Show the generated code so the user can inspect it
     st.subheader("Generated Python")
     st.code(code, language="python")
 
+    # 3. Execute the generated Python against the local database
     try:
         conn = sqlite3.connect(DB_PATH)
+
+        # Build a namespace with the libraries the generated code expects.
+        # exec() runs the code string as if it were typed into this script,
+        # giving it access to the database connection and all the libraries.
         namespace = {
             "conn": conn,
             "pd": pd,
@@ -115,7 +151,7 @@ if question:
         exec(code, namespace)  # noqa: S102
         conn.close()
 
-        # Display the DataFrame if one was created and no chart was shown
+        # If the code created a DataFrame but no chart, display the table
         if "df" in namespace and isinstance(namespace["df"], pd.DataFrame):
             st.subheader("Results")
             st.dataframe(namespace["df"], use_container_width=True)

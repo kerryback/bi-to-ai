@@ -69,48 +69,45 @@ You should see something like `Python 3.12.4`.  If the command is not found, res
 Two Python packages are needed for the demo apps in later chapters:
 
 ```bash
-pip install streamlit openai
+pip install streamlit anthropic
 ```
 
-Streamlit builds simple web apps from Python scripts --- you write a short script and Streamlit turns it into an interactive page.  The `openai` package is a Python client for OpenAI-compatible APIs, which includes OpenRouter (described next).  Later chapters mention additional packages as needed.
+Streamlit builds simple web apps from Python scripts --- you write a short script and Streamlit turns it into an interactive page.  The `anthropic` package is the official Python client for the Anthropic API, which powers the Claude family of models.  Later chapters mention additional packages as needed.
 
-## Setting up OpenRouter
+## Setting up the Anthropic API
 
-Later chapters include demo apps that call a large language model via API.  OpenRouter provides free access to open-source models --- no credit card required.
+Later chapters include demo apps that call Claude Sonnet via the Anthropic API.  You will need an API key.
 
-1. Sign up at [openrouter.ai](https://openrouter.ai) using a Google or GitHub account.
-2. Create an API key at [openrouter.ai/keys](https://openrouter.ai/keys).
+1. Sign up at [console.anthropic.com](https://console.anthropic.com) and add a payment method.
+2. Create an API key under **Settings → API Keys**.
 3. Set the key as an environment variable so the demo apps can find it:
 
    **Mac / Linux** --- add to your shell profile (`.bashrc` or `.zshrc`) to persist:
 
    ```bash
-   export OPENROUTER_API_KEY="sk-or-..."
+   export ANTHROPIC_API_KEY="sk-ant-..."
    ```
 
    **Windows** --- run once in a terminal, then restart the terminal:
 
    ```bash
-   setx OPENROUTER_API_KEY "sk-or-..."
+   setx ANTHROPIC_API_KEY "sk-ant-..."
    ```
 
-The free tier allows roughly 20 requests per minute and 200 per day --- more than enough for the exercises.  To verify your key works, save this as `test_openrouter.py` and run it with `python test_openrouter.py`:
+The cost is minimal --- Claude Sonnet costs a few cents per thousand queries, so typical exercise usage adds up to pennies.  To verify your key works, save this as `test_anthropic.py` and run it with `python test_anthropic.py`:
 
 ```python
-import os
-from openai import OpenAI
+from anthropic import Anthropic
 
-client = OpenAI(
-    base_url="https://openrouter.ai/api/v1",
-    api_key=os.environ["OPENROUTER_API_KEY"],
-)
+client = Anthropic()
 
-response = client.chat.completions.create(
-    model="google/gemini-2.0-flash-exp:free",
+response = client.messages.create(
+    model="claude-sonnet-4-20250514",
+    max_tokens=100,
     messages=[{"role": "user", "content": "Say hello in one sentence."}],
 )
 
-print(response.choices[0].message.content)
+print(response.content[0].text)
 ```
 
 If you see a greeting, the key is working and you are ready for the demo apps in Chapters 4 and beyond.
