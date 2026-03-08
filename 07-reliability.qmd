@@ -53,13 +53,13 @@ The more specific the filter logic, the more likely AI misinterprets it.
 
 RAG (Chapter 6) grounds AI in your documents, but grounding does not guarantee correctness.
 
-RAG introduces three specific risks.  The first is hallucinated citations: AI cites a page or section that does not actually contain the claim.  The citation looks authoritative, but when you check the source, the passage says something different or does not address the question at all.
+RAG introduces three specific risks.  The first is hallucinated citations: the LLM cites a page or section that does not actually contain the claim.  The citation looks authoritative, but when you check the source, the passage says something different or does not address the question at all.
 
 The second is stale documents.  If a policy changed but the old version is still in the index, RAG will retrieve and cite the outdated version.  The answer is grounded --- just in the wrong version of the truth.
 
 The third is wrong-chunk retrieval.  The retrieved passage is semantically similar to the question but does not actually answer it.  This happens when the document contains multiple sections that use similar language for different purposes.
 
-The verification approach is the same: click through every citation and confirm that the cited passage actually says what the AI claims.  Check document dates to ensure you are getting the current version.  Ask the same question in different words to see if the citation changes.
+The verification approach is the same: click through every citation and confirm that the cited passage actually says what the LLM claims.  Check document dates to ensure you are getting the current version.  Ask the same question in different words to see if the citation changes.
 
 A citation that looks right but is not is worse than no citation at all.  It creates false confidence.
 
@@ -89,9 +89,9 @@ For each failure, diagnose the root cause (bad SQL, missing context, or wrong ta
 
 Production AI systems should have multiple layers of verification.
 
-The first layer is RAG: the AI answers based on your documents, with citations.  This grounds responses in source material.  You verify by checking citations against the original text.
+The first layer is RAG: the LLM answers based on your documents, with citations.  This grounds responses in source material.  You verify by checking citations against the original text.
 
-The second layer is code transparency: the AI displays the SQL or Python it used.  Analysts review the logic, not just the answer.  This is what you practiced in Chapters 2 through 4.
+The second layer is code transparency: the agent displays the SQL or Python it ran.  Analysts review the logic, not just the answer.  This is what you practiced in Chapters 2 through 4.
 
 The third layer is guardrails: read-only database access, restricted tables, and every query logged for audit.  The system prevents mistakes, not just detects them.
 
@@ -99,13 +99,37 @@ The more layers you add, the harder it is for errors to reach your team.  Defens
 
 ## Security and governance
 
-Before deploying AI with your data, three questions need clear answers.
+Before deploying AI with your data, three questions need clear answers: what data leaves your network, where does inference happen, and what audit trail exists?
 
-First, data privacy: what data can AI access, and where is it processed?  Cloud APIs send data to the provider's servers.  On-premise models keep everything internal.  Most organizations need a mix: cloud APIs for non-sensitive work and on-premise solutions for confidential data.
+### Cloud inference
 
-Second, model selection: cloud APIs are more capable but require sending data externally.  On-premise models offer maximum control but lag in capability.  The choice depends on the sensitivity of the data and the regulatory environment.
+When you call a cloud API --- OpenAI, Anthropic, Google --- your application sends a prompt to the provider's servers, the LLM runs inference there, and the response comes back.  The key question is what is in that prompt.
 
-Third, audit requirements: SOX, GDPR, HIPAA, and industry-specific regulations all impose requirements on how data is processed and by whom.  AI interactions are data processing events and must be treated accordingly.
+As Chapter 4 showed, you often need to send only a schema description and a user question.  The LLM returns SQL or code, and your application executes it locally against your own database.  The actual data --- customer names, revenue figures, health records --- never leaves your network.  In this pattern, cloud inference is compatible with most data policies because the sensitive data stays behind your firewall.
+
+However, some use cases do require sending data to the LLM.  RAG prompts include document chunks.  Summarization tasks send the full text to be summarized.  In these cases, the data does travel to the provider's servers, and the provider's data-processing agreement governs what happens to it.
+
+Enterprise API tiers from Anthropic, OpenAI, and Google typically guarantee that your data is not used for training, offer short or zero retention windows, and provide contractual commitments on data handling.  Consumer tiers (free ChatGPT, free Claude) may not offer these guarantees.  Always confirm the terms before sending sensitive data.
+
+### On-premise inference
+
+On-premise means running the LLM on servers your organization owns or controls --- in your data center or in a private cloud tenancy (AWS, Azure, or GCP instances dedicated to your organization).  Nothing leaves your network.  You control the hardware, the model weights, and the logs.
+
+For open-source models (Llama, Mistral, DeepSeek), you download the model weights and run inference on your own GPU servers.  There is no vendor relationship for the model itself --- you manage everything.
+
+For closed-source models (Claude, GPT), the providers offer private deployment options.  Anthropic offers Claude on Amazon Bedrock and Google Cloud Vertex AI, where inference runs in your cloud tenancy under your security controls.  OpenAI offers Azure OpenAI Service, where GPT models run in your Azure subscription.  These are enterprise licensing arrangements: you pay for compute and per-token usage, and the provider guarantees that your data stays within your tenancy and is not used for training.
+
+On-premise models give maximum control but require GPU infrastructure and operational expertise.  They may also lag behind the latest cloud-hosted models in capability.
+
+### Choosing the right deployment
+
+Most organizations need a mix.  Cloud APIs work well for non-sensitive tasks where only schema or public information is sent.  On-premise or private-cloud deployment is appropriate for workloads involving confidential data, regulated records, or proprietary documents.
+
+The deciding factor is not the model but the data.  Ask: does this prompt contain information that cannot leave our network?  If yes, run inference on-premise or in a private cloud tenancy.  If no, a cloud API with an enterprise data-processing agreement is typically sufficient.
+
+### Audit requirements
+
+SOX, GDPR, HIPAA, and industry-specific regulations all impose requirements on how data is processed and by whom.  Every prompt sent to an LLM is a data-processing event and must be treated accordingly --- logged, governed, and reviewed.
 
 ## Data policies: training and retention
 
@@ -123,7 +147,7 @@ FERPA protects student education records.  HIPAA protects health information.  S
 
 AI can analyze sensitive data without ever reading the actual records.  The technique from Chapter 4 applies: describe the table structure in the SKILL.md (table names, column names, data types), and the agent writes SQL from the schema alone, never seeing the actual records.  The script runs locally, and the output stays on your server.
 
-Table metadata is not PII.  The actual records stay behind the firewall.  AI produces the tool, not the output.  This pattern --- send the schema, keep the data --- works for any regulated environment.
+Table metadata is not PII.  The actual records stay behind the firewall.  The LLM produces the code, not the output.  This pattern --- send the schema, keep the data --- works for any regulated environment.
 
 ## Session log auditing
 
@@ -131,7 +155,7 @@ Every AI conversation can be exported as a transcript.  The transcript contains 
 
 Review session logs for three things: PII or proprietary data that should stay internal, SQL or Python logic errors in the generated code, and RAG citations that do not match the source.
 
-Export logs, archive them, and review them periodically.  Session logs are not just a compliance requirement; they are a learning tool.  Reviewing what AI got wrong in past sessions tells you exactly what to improve in your SKILL.md or RAG configuration.
+Export logs, archive them, and review them periodically.  Session logs are not just a compliance requirement; they are a learning tool.  Reviewing what went wrong in past sessions tells you exactly what to improve in your SKILL.md or RAG configuration.
 
 ## The sandbox-audit-deploy pattern
 

@@ -1,6 +1,6 @@
 # Automating Reporting Cycles
 
-Chapter 4 connected AI to a database.  You typed a question, the AI wrote SQL, and you got an answer.  That works for one-off questions, but real work rarely stops at a single query.
+Chapter 4 connected a coding agent to a database.  You typed a question, the LLM wrote SQL, and you got an answer.  That works for one-off questions, but real work rarely stops at a single query.
 
 A weekly sales report requires pulling data, charting it, writing a narrative, and assembling a deck.  A quarterly review adds trend analysis, comparisons to targets, and an executive summary.  Each step depends on the one before it.  Doing this manually every week is exactly the kind of repetitive, multi-step work that AI can automate.
 
@@ -31,9 +31,11 @@ The loop repeats until the task is complete.  A reporting pipeline is a natural 
 
 ## How agents use tools
 
-The AI does not just generate text.  It decides which tool to call, formats the request, and interprets the result.
+An agent is two things working together: an LLM and an execution layer.  The LLM does not run code or call databases directly.  Instead, when the LLM decides a tool is needed, it returns a structured JSON message --- something like `{"tool": "sql_query", "query": "SELECT ..."}`.  The agent's execution layer reads that JSON, runs the actual tool (executes the SQL, writes the file, calls the API), and sends the result back to the LLM.  The LLM reads the result and decides what to do next: call another tool, or respond to the user.
 
-Tools can be database queries, file operations, API calls, or code execution.  The tool-use protocol is the same regardless: the AI receives a goal, selects the right tool, formats the call, interprets the result, and decides whether the task is complete or another tool call is needed.
+This loop --- LLM plans, execution layer acts, LLM observes --- is what makes an agent more than a chatbot.  The LLM never touches your database or file system directly.  It only writes instructions; the agent carries them out.
+
+Tools can be database queries, file operations, API calls, or code execution.  The protocol is the same regardless: the LLM receives a goal, selects the right tool, formats the call as JSON, the execution layer runs it, the LLM interprets the result, and the cycle repeats until the task is complete.
 
 For a reporting pipeline, the tools might be:
 
@@ -70,11 +72,11 @@ This prompt is specific enough that a coding agent can execute it end to end.  I
 
 Your job is not to write the code.  Your job is to test the result, refine the prompt, and iterate until the output meets your standards.  If the charts are ugly, tell the agent to improve the styling.  If the summaries are too generic, tell it to include specific numbers.  If a report query is wrong, describe the correct logic.  Prompt engineering is the skill; the agent is the labor.
 
-Notice the last line of the prompt: logging.  Every LLM request and response is written to a JSONL file with timestamps.  This creates an audit trail --- you can see exactly what the AI was asked and what it said.  Chapter 7 will use these logs for verification and governance.
+Notice the last line of the prompt: logging.  Every LLM request and response is written to a JSONL file with timestamps.  This creates an audit trail --- you can see exactly what the LLM was asked and what it returned.  Chapter 7 will use these logs for verification and governance.
 
 ## Sandboxed execution
 
-When AI runs code, you need to control where it runs.  On your laptop during development, a coding agent runs in your environment with access to your files.  That is fine for prototyping.  In production, you want isolation.
+When an agent runs code, you need to control where it runs.  On your laptop during development, a coding agent runs in your environment with access to your files.  That is fine for prototyping.  In production, you want isolation.
 
 ::: {.callout-tip title="Built-in sandboxing"}
 Codex includes OS-level sandboxing by default --- it runs generated code in an isolated environment even on your laptop.  Claude Code and Gemini CLI rely on permission prompts to control what the agent can do, but do not sandbox execution.  For production deployment, all three benefit from the container-based isolation described below.

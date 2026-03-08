@@ -8,7 +8,7 @@ This chapter covers Retrieval-Augmented Generation, or RAG --- the technique tha
 
 AI models are trained on public data.  They know a great deal about the world in general, but they know nothing about your company's travel policy, your product warranty terms, or last quarter's board report.
 
-Without RAG, if you ask "What is our return policy for enterprise customers?" the AI will either make something up (confidently and plausibly) or admit it does not know.  Neither response is useful.  What you want is for the AI to look up the answer in your actual policy document, quote the relevant passage, and tell you where it found it.
+Without RAG, if you ask "What is our return policy for enterprise customers?" the LLM will either make something up (confidently and plausibly) or admit it does not know.  Neither response is useful.  What you want is for the system to look up the answer in your actual policy document, quote the relevant passage, and tell you where it found it.
 
 That is what RAG does.
 
@@ -26,7 +26,7 @@ In the ingest stage, documents are split into chunks --- typically paragraphs or
 
 In the retrieve stage, when a user asks a question, the question is also converted into an embedding.  The system finds the chunks whose embeddings are most similar to the question's embedding.  These are the chunks most likely to contain the answer.
 
-In the generate stage, the retrieved chunks are fed to the AI along with the user's question.  The AI reads the chunks and generates an answer, citing the sources.
+In the generate stage, the retrieved chunks are fed to the LLM along with the user's question.  The LLM reads the chunks and generates an answer, citing the sources.
 
 ## Embeddings and semantic search
 
@@ -78,9 +78,9 @@ RAG is not perfect.  Understanding the failure modes helps you spot and fix prob
 
 On the retrieval side, the system may retrieve the wrong chunk (semantically similar but irrelevant), miss the right chunk entirely (the answer exists but was not retrieved), or retrieve chunks that contradict each other.
 
-On the generation side, the AI may hallucinate a citation (citing a page that does not contain the claim), over-generalize (drawing a conclusion the source does not support), or give an incomplete answer (using one chunk when the full answer spans multiple documents).
+On the generation side, the LLM may hallucinate a citation (citing a page that does not contain the claim), over-generalize (drawing a conclusion the source does not support), or give an incomplete answer (using one chunk when the full answer spans multiple documents).
 
-The most dangerous failure is the hallucinated citation.  The answer looks grounded --- it has a source reference --- but when you check the cited passage, it does not say what the AI claims.  This creates false confidence, which is worse than no citation at all.
+The most dangerous failure is the hallucinated citation.  The answer looks grounded --- it has a source reference --- but when you check the cited passage, it does not say what the LLM claims.  This creates false confidence, which is worse than no citation at all.
 
 ## Hands-on: querying your documents
 

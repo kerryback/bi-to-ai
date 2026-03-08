@@ -223,7 +223,7 @@ ul.task-list li input[type="checkbox"] {
 <section id="the-problem-ai-does-not-know-your-documents" class="level2" data-number="6.1">
 <h2 data-number="6.1" class="anchored" data-anchor-id="the-problem-ai-does-not-know-your-documents"><span class="header-section-number">6.1</span> The problem: AI does not know your documents</h2>
 <p>AI models are trained on public data. They know a great deal about the world in general, but they know nothing about your company’s travel policy, your product warranty terms, or last quarter’s board report.</p>
-<p>Without RAG, if you ask “What is our return policy for enterprise customers?” the AI will either make something up (confidently and plausibly) or admit it does not know. Neither response is useful. What you want is for the AI to look up the answer in your actual policy document, quote the relevant passage, and tell you where it found it.</p>
+<p>Without RAG, if you ask “What is our return policy for enterprise customers?” the LLM will either make something up (confidently and plausibly) or admit it does not know. Neither response is useful. What you want is for the system to look up the answer in your actual policy document, quote the relevant passage, and tell you where it found it.</p>
 <p>That is what RAG does.</p>
 </section>
 <section id="the-open-book-exam-analogy" class="level2" data-number="6.2">
@@ -236,7 +236,7 @@ ul.task-list li input[type="checkbox"] {
 <p>RAG works in three stages: ingest, retrieve, and generate.</p>
 <p>In the ingest stage, documents are split into chunks — typically paragraphs or sections — and each chunk is converted into a numerical representation called an embedding. The embeddings are stored in a vector database (a searchable index optimized for similarity search).</p>
 <p>In the retrieve stage, when a user asks a question, the question is also converted into an embedding. The system finds the chunks whose embeddings are most similar to the question’s embedding. These are the chunks most likely to contain the answer.</p>
-<p>In the generate stage, the retrieved chunks are fed to the AI along with the user’s question. The AI reads the chunks and generates an answer, citing the sources.</p>
+<p>In the generate stage, the retrieved chunks are fed to the LLM along with the user’s question. The LLM reads the chunks and generates an answer, citing the sources.</p>
 </section>
 <section id="embeddings-and-semantic-search" class="level2" data-number="6.4">
 <h2 data-number="6.4" class="anchored" data-anchor-id="embeddings-and-semantic-search"><span class="header-section-number">6.4</span> Embeddings and semantic search</h2>
@@ -283,8 +283,8 @@ Context window sizes
 <h2 data-number="6.8" class="anchored" data-anchor-id="common-failure-modes"><span class="header-section-number">6.8</span> Common failure modes</h2>
 <p>RAG is not perfect. Understanding the failure modes helps you spot and fix problems.</p>
 <p>On the retrieval side, the system may retrieve the wrong chunk (semantically similar but irrelevant), miss the right chunk entirely (the answer exists but was not retrieved), or retrieve chunks that contradict each other.</p>
-<p>On the generation side, the AI may hallucinate a citation (citing a page that does not contain the claim), over-generalize (drawing a conclusion the source does not support), or give an incomplete answer (using one chunk when the full answer spans multiple documents).</p>
-<p>The most dangerous failure is the hallucinated citation. The answer looks grounded — it has a source reference — but when you check the cited passage, it does not say what the AI claims. This creates false confidence, which is worse than no citation at all.</p>
+<p>On the generation side, the LLM may hallucinate a citation (citing a page that does not contain the claim), over-generalize (drawing a conclusion the source does not support), or give an incomplete answer (using one chunk when the full answer spans multiple documents).</p>
+<p>The most dangerous failure is the hallucinated citation. The answer looks grounded — it has a source reference — but when you check the cited passage, it does not say what the LLM claims. This creates false confidence, which is worse than no citation at all.</p>
 </section>
 <section id="hands-on-querying-your-documents" class="level2" data-number="6.9">
 <h2 data-number="6.9" class="anchored" data-anchor-id="hands-on-querying-your-documents"><span class="header-section-number">6.9</span> Hands-on: querying your documents</h2>

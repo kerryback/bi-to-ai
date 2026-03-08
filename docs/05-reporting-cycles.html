@@ -215,7 +215,7 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Chapter 4 connected AI to a database. You typed a question, the AI wrote SQL, and you got an answer. That works for one-off questions, but real work rarely stops at a single query.</p>
+<p>Chapter 4 connected a coding agent to a database. You typed a question, the LLM wrote SQL, and you got an answer. That works for one-off questions, but real work rarely stops at a single query.</p>
 <p>A weekly sales report requires pulling data, charting it, writing a narrative, and assembling a deck. A quarterly review adds trend analysis, comparisons to targets, and an executive summary. Each step depends on the one before it. Doing this manually every week is exactly the kind of repetitive, multi-step work that AI can automate.</p>
 <p>This chapter shows how agents chain those steps into a reporting pipeline — and how you can use your coding agent to build the whole thing.</p>
 <section id="from-query-to-report" class="level2" data-number="5.1">
@@ -241,8 +241,9 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="how-agents-use-tools" class="level2" data-number="5.4">
 <h2 data-number="5.4" class="anchored" data-anchor-id="how-agents-use-tools"><span class="header-section-number">5.4</span> How agents use tools</h2>
-<p>The AI does not just generate text. It decides which tool to call, formats the request, and interprets the result.</p>
-<p>Tools can be database queries, file operations, API calls, or code execution. The tool-use protocol is the same regardless: the AI receives a goal, selects the right tool, formats the call, interprets the result, and decides whether the task is complete or another tool call is needed.</p>
+<p>An agent is two things working together: an LLM and an execution layer. The LLM does not run code or call databases directly. Instead, when the LLM decides a tool is needed, it returns a structured JSON message — something like <code>{"tool": "sql_query", "query": "SELECT ..."}</code>. The agent’s execution layer reads that JSON, runs the actual tool (executes the SQL, writes the file, calls the API), and sends the result back to the LLM. The LLM reads the result and decides what to do next: call another tool, or respond to the user.</p>
+<p>This loop — LLM plans, execution layer acts, LLM observes — is what makes an agent more than a chatbot. The LLM never touches your database or file system directly. It only writes instructions; the agent carries them out.</p>
+<p>Tools can be database queries, file operations, API calls, or code execution. The protocol is the same regardless: the LLM receives a goal, selects the right tool, formats the call as JSON, the execution layer runs it, the LLM interprets the result, and the cycle repeats until the task is complete.</p>
 <p>For a reporting pipeline, the tools might be:</p>
 <ul>
 <li><strong>SQL query</strong> to pull revenue data from the database.</li>
@@ -270,11 +271,11 @@ ul.task-list li input[type="checkbox"] {
 </blockquote>
 <p>This prompt is specific enough that a coding agent can execute it end to end. It names the database, the reports, the tools (matplotlib, python-pptx, OpenRouter), the output format, and the logging requirement.</p>
 <p>Your job is not to write the code. Your job is to test the result, refine the prompt, and iterate until the output meets your standards. If the charts are ugly, tell the agent to improve the styling. If the summaries are too generic, tell it to include specific numbers. If a report query is wrong, describe the correct logic. Prompt engineering is the skill; the agent is the labor.</p>
-<p>Notice the last line of the prompt: logging. Every LLM request and response is written to a JSONL file with timestamps. This creates an audit trail — you can see exactly what the AI was asked and what it said. Chapter 7 will use these logs for verification and governance.</p>
+<p>Notice the last line of the prompt: logging. Every LLM request and response is written to a JSONL file with timestamps. This creates an audit trail — you can see exactly what the LLM was asked and what it returned. Chapter 7 will use these logs for verification and governance.</p>
 </section>
 <section id="sandboxed-execution" class="level2" data-number="5.7">
 <h2 data-number="5.7" class="anchored" data-anchor-id="sandboxed-execution"><span class="header-section-number">5.7</span> Sandboxed execution</h2>
-<p>When AI runs code, you need to control where it runs. On your laptop during development, a coding agent runs in your environment with access to your files. That is fine for prototyping. In production, you want isolation.</p>
+<p>When an agent runs code, you need to control where it runs. On your laptop during development, a coding agent runs in your environment with access to your files. That is fine for prototyping. In production, you want isolation.</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Built-in sandboxing">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
