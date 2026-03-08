@@ -7,6 +7,7 @@ project:
     - data/superstore.csv
     - data/chinook.db
     - data/company-handbook.md
+    - code/**
 
 number-depth: 2
 
@@ -16,8 +17,7 @@ book:
   author: "Kerry Back"
   date: today
   reader-mode: true
-  repo-url: "https://github.com/kerryback/bi-to-ai.git"
-  repo-actions: [source]
+  repo-url: "https://github.com/kerryback/bi-to-ai/tree/master/code"
   chapters:
     - index.qmd
     - 01-coding-tools.qmd

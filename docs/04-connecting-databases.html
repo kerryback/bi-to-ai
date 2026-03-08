@@ -140,7 +140,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div class="sidebar-title mb-0 py-0">
       <a href="./">From BI to AI</a> 
         <div class="sidebar-tools-main tools-wide">
-    <a href="https://github.com/kerryback/bi-to-ai.git" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <a href="https://github.com/kerryback/bi-to-ai/tree/master/code" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
   <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
   <div class="quarto-reader-toggle-btn">
@@ -238,7 +238,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">4.15</span> Exercises</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/kerryback/bi-to-ai.git/blob/main/04-connecting-databases.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></nav>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -365,7 +365,7 @@ MCP support across coding agents
 <h3 class="anchored" data-anchor-id="setting-up-the-demo">Setting up the demo</h3>
 <p>You need a free OpenRouter API key. Go to <a href="https://openrouter.ai">openrouter.ai</a>, create an account, and generate an API key from your dashboard. Set it as an environment variable:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">OPENROUTER_API_KEY</span><span class="op">=</span><span class="st">"sk-or-..."</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Download the app files here: <a href="data/demos/chinook-query/app.py">app.py</a> and <a href="data/demos/chinook-query/requirements.txt">requirements.txt</a>. Copy <code>chinook.db</code> into the same folder, install the dependencies, and run:</p>
+<p>Download the app files here: <a href="code/chinook-query/app.py">app.py</a> and <a href="code/chinook-query/requirements.txt">requirements.txt</a>. Copy <code>chinook.db</code> into the same folder, install the dependencies, and run:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install <span class="at">-r</span> requirements.txt</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">streamlit</span> run app.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
@@ -526,7 +526,7 @@ Exercise 6: Build Your Own Query App
 </div>
 <div id="callout-7" class="callout-7-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Ask your coding agent to build a natural-language query app similar to the <a href="data/demos/chinook-query/app.py">chinook-query demo</a>, either from scratch or by improving the demo. Possible extensions: add chart generation for numeric results, show query history in a sidebar, add error handling that suggests corrections when the SQL fails, or let the user choose between different databases.</p>
+<p>Ask your coding agent to build a natural-language query app similar to the <a href="code/chinook-query/app.py">chinook-query demo</a>, either from scratch or by improving the demo. Possible extensions: add chart generation for numeric results, show query history in a sidebar, add error handling that suggests corrections when the SQL fails, or let the user choose between different databases.</p>
 </div>
 </div>
 </div>
@@ -1113,4 +1113,4 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/kerryback/bi-to-ai.git/blob/main/04-connecting-databases.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></div></div></footer></body></html>
+</body></html>
