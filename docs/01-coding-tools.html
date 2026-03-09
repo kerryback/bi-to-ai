@@ -224,10 +224,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#setting-up-openai-codex" id="toc-setting-up-openai-codex" class="nav-link" data-scroll-target="#setting-up-openai-codex"><span class="header-section-number">1.4</span> Setting up OpenAI Codex</a></li>
   <li><a href="#installing-skills" id="toc-installing-skills" class="nav-link" data-scroll-target="#installing-skills"><span class="header-section-number">1.5</span> Installing skills</a></li>
   <li><a href="#installing-python" id="toc-installing-python" class="nav-link" data-scroll-target="#installing-python"><span class="header-section-number">1.6</span> Installing Python</a></li>
-  <li><a href="#installing-libraries" id="toc-installing-libraries" class="nav-link" data-scroll-target="#installing-libraries"><span class="header-section-number">1.7</span> Installing libraries</a></li>
-  <li><a href="#setting-up-the-anthropic-api" id="toc-setting-up-the-anthropic-api" class="nav-link" data-scroll-target="#setting-up-the-anthropic-api"><span class="header-section-number">1.8</span> Setting up the Anthropic API</a></li>
-  <li><a href="#significant-differences" id="toc-significant-differences" class="nav-link" data-scroll-target="#significant-differences"><span class="header-section-number">1.9</span> Significant differences</a></li>
-  <li><a href="#other-interfaces" id="toc-other-interfaces" class="nav-link" data-scroll-target="#other-interfaces"><span class="header-section-number">1.10</span> Other interfaces</a></li>
+  <li><a href="#setting-up-the-anthropic-api" id="toc-setting-up-the-anthropic-api" class="nav-link" data-scroll-target="#setting-up-the-anthropic-api"><span class="header-section-number">1.7</span> Setting up the Anthropic API</a></li>
+  <li><a href="#significant-differences" id="toc-significant-differences" class="nav-link" data-scroll-target="#significant-differences"><span class="header-section-number">1.8</span> Significant differences</a></li>
+  <li><a href="#other-interfaces" id="toc-other-interfaces" class="nav-link" data-scroll-target="#other-interfaces"><span class="header-section-number">1.9</span> Other interfaces</a></li>
   </ul>
 </nav>
     </div>
@@ -367,49 +366,44 @@ Skills in Gemini CLI and Codex
 <p>Download Python 3.10 or later from <a href="https://www.python.org/downloads/">python.org</a>. On Windows, check <strong>“Add Python to PATH”</strong> during installation. This is <em>in small print on the bottom of the very first installation screen</em>. On Mac, you can also install via Homebrew with <code>brew install python</code>. After installing, verify by opening a terminal and running:</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">--version</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>You should see something like <code>Python 3.12.4</code>. If the command is not found, restart your terminal or check that Python was added to your PATH.</p>
+<p>Installing Python gives you the base language, but in practice most work relies on additional libraries — code packages for data analysis, charting, web apps, and more. Your coding agent can install them when needed. At various points in this book, we will ask you to tell the agent to install specific libraries. If you skip that step, the agent will notice when it tries to run code that requires them and will ask you for permission to install what it needs. Just grant permission if that happens.</p>
 </section>
-<section id="installing-libraries" class="level2" data-number="1.7">
-<h2 data-number="1.7" class="anchored" data-anchor-id="installing-libraries"><span class="header-section-number">1.7</span> Installing libraries</h2>
-<p>Two Python packages are needed for the demo apps in later chapters:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install streamlit anthropic</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Streamlit builds simple web apps from Python scripts — you write a short script and Streamlit turns it into an interactive page. The <code>anthropic</code> package is the official Python client for the Anthropic API, which powers the Claude family of models. Later chapters mention additional packages as needed.</p>
-</section>
-<section id="setting-up-the-anthropic-api" class="level2" data-number="1.8">
-<h2 data-number="1.8" class="anchored" data-anchor-id="setting-up-the-anthropic-api"><span class="header-section-number">1.8</span> Setting up the Anthropic API</h2>
+<section id="setting-up-the-anthropic-api" class="level2" data-number="1.7">
+<h2 data-number="1.7" class="anchored" data-anchor-id="setting-up-the-anthropic-api"><span class="header-section-number">1.7</span> Setting up the Anthropic API</h2>
 <p>Later chapters include demo apps that call Claude Sonnet via the Anthropic API. You will need an API key.</p>
 <ol type="1">
 <li><p>Sign up at <a href="https://console.anthropic.com">console.anthropic.com</a> and add a payment method.</p></li>
 <li><p>Create an API key under <strong>Settings → API Keys</strong>.</p></li>
 <li><p>Set the key as an environment variable so the demo apps can find it:</p>
 <p><strong>Mac / Linux</strong> — add to your shell profile (<code>.bashrc</code> or <code>.zshrc</code>) to persist:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">ANTHROPIC_API_KEY</span><span class="op">=</span><span class="st">"sk-ant-..."</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">ANTHROPIC_API_KEY</span><span class="op">=</span><span class="st">"sk-ant-..."</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><strong>Windows</strong> — run once in a terminal, then restart the terminal:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">setx</span> ANTHROPIC_API_KEY <span class="st">"sk-ant-..."</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">setx</span> ANTHROPIC_API_KEY <span class="st">"sk-ant-..."</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 </ol>
 <p>API calls are billed per token. A short request like the test below costs a fraction of a cent; a longer coding-agent session analyzing a dataset might cost a few cents to a few dollars depending on the length of the conversation. Current prices are listed at <a href="https://www.anthropic.com/pricing">anthropic.com/pricing</a>. To verify your key works, save this as <code>test_anthropic.py</code> and run it with <code>python test_anthropic.py</code>:</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> anthropic <span class="im">import</span> Anthropic</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>client <span class="op">=</span> Anthropic()</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>response <span class="op">=</span> client.messages.create(</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    model<span class="op">=</span><span class="st">"claude-sonnet-4-20250514"</span>,</span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    max_tokens<span class="op">=</span><span class="dv">100</span>,</span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    messages<span class="op">=</span>[{<span class="st">"role"</span>: <span class="st">"user"</span>, <span class="st">"content"</span>: <span class="st">"Say hello in one sentence."</span>}],</span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(response.content[<span class="dv">0</span>].text)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> anthropic <span class="im">import</span> Anthropic</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>client <span class="op">=</span> Anthropic()</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>response <span class="op">=</span> client.messages.create(</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    model<span class="op">=</span><span class="st">"claude-sonnet-4-20250514"</span>,</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    max_tokens<span class="op">=</span><span class="dv">100</span>,</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    messages<span class="op">=</span>[{<span class="st">"role"</span>: <span class="st">"user"</span>, <span class="st">"content"</span>: <span class="st">"Say hello in one sentence."</span>}],</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(response.content[<span class="dv">0</span>].text)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>If you see a greeting, the key is working and you are ready for the demo apps in Chapters 4 and beyond.</p>
 </section>
-<section id="significant-differences" class="level2" data-number="1.9">
-<h2 data-number="1.9" class="anchored" data-anchor-id="significant-differences"><span class="header-section-number">1.9</span> Significant differences</h2>
+<section id="significant-differences" class="level2" data-number="1.8">
+<h2 data-number="1.8" class="anchored" data-anchor-id="significant-differences"><span class="header-section-number">1.8</span> Significant differences</h2>
 <p>All three agents read local files, write Python, and return results in the conversation. The workflows in this book apply to all of them, and you should pick whichever fits your budget and preferences. That said, several differences are worth noting.</p>
 <p>Sandboxing is the most visible difference. Codex runs generated code in an OS-level sandbox by default, isolating it from the rest of your system even during development. Claude Code and Gemini CLI rely on permission prompts instead — they ask before executing potentially destructive operations, but the code runs directly in your environment. For production deployment, all three benefit from container-based isolation (covered in Chapter 5).</p>
 <p>Context windows determine how much text the agent can process in a single session. Gemini CLI supports up to one million tokens (roughly 3,000 pages of text). Claude Code ranges from 200,000 to over one million tokens depending on the model. Codex supports 192,000 tokens. For most business datasets and documents, any of these is more than sufficient.</p>
 <p>Instruction files differ in name but serve the same purpose: <code>CLAUDE.md</code> for Claude Code, <code>GEMINI.md</code> for Gemini CLI, and <code>AGENTS.md</code> for Codex. Each file stores project-level context that persists across sessions.</p>
 <p>Cost varies. Claude Code requires a $20/month subscription or API credits. Gemini CLI’s free tier covers most individual use. Codex is open source and free to run, but the OpenAI API calls it makes are billed per token.</p>
 </section>
-<section id="other-interfaces" class="level2" data-number="1.10">
-<h2 data-number="1.10" class="anchored" data-anchor-id="other-interfaces"><span class="header-section-number">1.10</span> Other interfaces</h2>
+<section id="other-interfaces" class="level2" data-number="1.9">
+<h2 data-number="1.9" class="anchored" data-anchor-id="other-interfaces"><span class="header-section-number">1.9</span> Other interfaces</h2>
 <p>The terminal agents are not the only way to work with AI on code and data. Several other interfaces are worth knowing about, even though this book focuses on the terminal workflow.</p>
 <p>Claude Desktop is a GUI chat application from Anthropic. It supports file attachments, image analysis, and recently added an agentic mode that can execute multi-step tasks. It is convenient for one-off conversations and for users who prefer a graphical interface to a terminal.</p>
 <p>Google Antigravity is an agent-first IDE — a fork of VS Code designed around AI collaboration. It is currently in free preview. Rather than adding AI to an existing editor, it was built from the ground up for agent-driven workflows, with the agent able to navigate files, run code, and iterate on changes directly in the editor.</p>
