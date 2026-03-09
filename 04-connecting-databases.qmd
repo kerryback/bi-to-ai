@@ -32,6 +32,23 @@ There are several ways to give AI access to your data, ranging from simple to so
 
 All of these approaches share the same core idea: give the AI a description of your data and let it write the query.  The differences are in how the description is delivered, who runs the query, and how much infrastructure is involved.  We start with skill files because they require no setup and teach the underlying pattern that every other approach builds on.
 
+```{mermaid}
+%%| label: fig-connection-spectrum
+%%| fig-cap: "Four ways to connect AI to your data — from simplest to most integrated."
+%%| fig-width: 100%
+flowchart LR
+    A["📄 Skill File\n_Markdown + agent_\nNo setup needed"]
+    B["🐍 Direct API\n_Python app + LLM_\nLight infrastructure"]
+    C["🔌 MCP\n_Standardized protocol_\nMulti-tool integration"]
+    D["🏢 Vendor Platform\n_Snowflake, Salesforce_\nBuilt-in AI features"]
+    A -->|"more infrastructure →"| B -->|"more infrastructure →"| C -->|"more infrastructure →"| D
+
+    style A fill:#e8f5e9,stroke:#4caf50
+    style B fill:#e3f2fd,stroke:#2196f3
+    style C fill:#fff3e0,stroke:#ff9800
+    style D fill:#fce4ec,stroke:#e91e63
+```
+
 ## The sample database: Chinook
 
 The exercises in this chapter use the Chinook sample database, which you can download here: [chinook.db](files/data/chinook.db).  It represents a music retailer's operations and contains 11 related tables.
@@ -187,6 +204,32 @@ The complete round trip looks like this:
 
 The only things that leave your machine are the question and the schema.  The actual data --- customer names, revenue figures, transaction records --- never goes to the cloud.
 
+```{mermaid}
+%%| label: fig-data-flow
+%%| fig-cap: "The data flow round-trip — only the question and schema leave your network."
+%%| fig-width: 100%
+flowchart LR
+    Browser["🌐 Browser\n_You type a question_"]
+    App["⚙️ App\n_Streamlit on\nyour machine_"]
+    LLM["☁️ LLM\n_Cloud inference_"]
+    DB["🗄️ Local Database\n_Your data stays here_"]
+
+    Browser -- "question" --> App
+    App -- "question +\nschema only" --> LLM
+    LLM -- "SQL / code" --> App
+    App -- "runs query\nlocally" --> DB
+    DB -- "results" --> App
+    App -- "displays\nresults" --> Browser
+
+    style LLM fill:#fff3e0,stroke:#ff9800
+    style DB fill:#e8f5e9,stroke:#4caf50
+    style Browser fill:#e3f2fd,stroke:#2196f3
+    style App fill:#e3f2fd,stroke:#2196f3
+
+    linkStyle 1 stroke:#ff9800,stroke-dasharray:5
+    linkStyle 2 stroke:#ff9800,stroke-dasharray:5
+```
+
 ## Adding charts and visualizations
 
 The query app returns tables, but business questions often need charts.  "Show me a bar chart of revenue by country" should produce a bar chart, not a grid of numbers.  With a coding agent like Claude Code, you would get the chart directly --- the agent writes Python, executes it, and displays the image.  But a deployed web app cannot do that unless we change what the LLM returns.
@@ -250,7 +293,7 @@ streamlit run chinook-charts.py
 
 ### A note on executing generated code
 
-The chart app uses Python's `exec()` to run LLM-generated code.  For a local demo this is fine --- you are running it on your own machine.  In a production deployment, executing AI-generated code requires sandboxing: running the code in an isolated container with no network access and limited filesystem permissions.  Chapter 5 discusses sandboxing and agent guardrails in detail.
+The chart app uses Python's `exec()` to run LLM-generated code.  For a local demo this is fine --- you are running it on your own machine.  In a production deployment, executing AI-generated code requires sandboxing: running the code in an isolated container with no network access and limited filesystem permissions.  Chapter 5 discusses sandboxing in more detail, and Chapter 7 covers the broader governance framework.
 
 ### From demo to production
 

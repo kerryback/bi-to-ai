@@ -110,6 +110,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     document.body.classList.add('hypothesis-enabled');
   });
 </script>
+<script src="site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
 
 </head>
@@ -290,6 +293,33 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><strong>MCP (Model Context Protocol).</strong> An open standard that lets AI connect to external tools — databases, CRMs, calendars, anything with an API. Think of it as USB for AI. The AI assistant acts as an MCP client and connects to MCP servers that wrap external systems. MCP is most useful when you need to connect to many different tools in a single conversation or when IT wants a standardized way to manage AI’s access to corporate systems.</p>
 <p><strong>Vendor platforms.</strong> Salesforce, Snowflake, Databricks, and others are embedding natural-language query directly into their products. If your data already lives in one of these platforms, you may not need to build anything — just enable the feature.</p>
 <p>All of these approaches share the same core idea: give the AI a description of your data and let it write the query. The differences are in how the description is delivered, who runs the query, and how much infrastructure is involved. We start with skill files because they require no setup and teach the underlying pattern that every other approach builds on.</p>
+<div class="cell" data-fig-width="100%" data-layout-align="default">
+<div class="cell-output-display">
+<div id="fig-connection-spectrum" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-connection-spectrum-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div>
+<pre class="mermaid mermaid-js" data-label="fig-connection-spectrum">flowchart LR
+    A["📄 Skill File\n_Markdown + agent_\nNo setup needed"]
+    B["🐍 Direct API\n_Python app + LLM_\nLight infrastructure"]
+    C["🔌 MCP\n_Standardized protocol_\nMulti-tool integration"]
+    D["🏢 Vendor Platform\n_Snowflake, Salesforce_\nBuilt-in AI features"]
+    A --&gt;|"more infrastructure →"| B --&gt;|"more infrastructure →"| C --&gt;|"more infrastructure →"| D
+
+    style A fill:#e8f5e9,stroke:#4caf50
+    style B fill:#e3f2fd,stroke:#2196f3
+    style C fill:#fff3e0,stroke:#ff9800
+    style D fill:#fce4ec,stroke:#e91e63
+</pre>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-connection-spectrum-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4.1: Four ways to connect AI to your data — from simplest to most integrated.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
 </section>
 <section id="the-sample-database-chinook" class="level2" data-number="4.4">
 <h2 data-number="4.4" class="anchored" data-anchor-id="the-sample-database-chinook"><span class="header-section-number">4.4</span> The sample database: Chinook</h2>
@@ -417,6 +447,42 @@ Revenue = SUM(invoice_items.UnitPrice * invoice_items.Quantity).</code></pre>
 <li>The app displays the results in your browser (entirely local).</li>
 </ol>
 <p>The only things that leave your machine are the question and the schema. The actual data — customer names, revenue figures, transaction records — never goes to the cloud.</p>
+<div class="cell" data-fig-width="100%" data-layout-align="default">
+<div class="cell-output-display">
+<div id="fig-data-flow" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-data-flow-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div>
+<pre class="mermaid mermaid-js" data-label="fig-data-flow">flowchart LR
+    Browser["🌐 Browser\n_You type a question_"]
+    App["⚙️ App\n_Streamlit on\nyour machine_"]
+    LLM["☁️ LLM\n_Cloud inference_"]
+    DB["🗄️ Local Database\n_Your data stays here_"]
+
+    Browser -- "question" --&gt; App
+    App -- "question +\nschema only" --&gt; LLM
+    LLM -- "SQL / code" --&gt; App
+    App -- "runs query\nlocally" --&gt; DB
+    DB -- "results" --&gt; App
+    App -- "displays\nresults" --&gt; Browser
+
+    style LLM fill:#fff3e0,stroke:#ff9800
+    style DB fill:#e8f5e9,stroke:#4caf50
+    style Browser fill:#e3f2fd,stroke:#2196f3
+    style App fill:#e3f2fd,stroke:#2196f3
+
+    linkStyle 1 stroke:#ff9800,stroke-dasharray:5
+    linkStyle 2 stroke:#ff9800,stroke-dasharray:5
+</pre>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-data-flow-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4.2: The data flow round-trip — only the question and schema leave your network.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
 </section>
 </section>
 <section id="adding-charts-and-visualizations" class="level2" data-number="4.15">
@@ -468,7 +534,7 @@ Rules for the Python script:
 </section>
 <section id="a-note-on-executing-generated-code" class="level3">
 <h3 class="anchored" data-anchor-id="a-note-on-executing-generated-code">A note on executing generated code</h3>
-<p>The chart app uses Python’s <code>exec()</code> to run LLM-generated code. For a local demo this is fine — you are running it on your own machine. In a production deployment, executing AI-generated code requires sandboxing: running the code in an isolated container with no network access and limited filesystem permissions. Chapter 5 discusses sandboxing and agent guardrails in detail.</p>
+<p>The chart app uses Python’s <code>exec()</code> to run LLM-generated code. For a local demo this is fine — you are running it on your own machine. In a production deployment, executing AI-generated code requires sandboxing: running the code in an isolated container with no network access and limited filesystem permissions. Chapter 5 discusses sandboxing in more detail, and Chapter 7 covers the broader governance framework.</p>
 </section>
 <section id="from-demo-to-production" class="level3">
 <h3 class="anchored" data-anchor-id="from-demo-to-production">From demo to production</h3>

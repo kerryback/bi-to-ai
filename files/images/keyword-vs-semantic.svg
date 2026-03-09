@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 340" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <!-- Left panel: Keyword Search -->
+  <rect x="10" y="10" width="340" height="320" rx="12" fill="#fce4ec" stroke="#e91e63" stroke-width="2"/>
+  <text x="180" y="42" text-anchor="middle" font-size="17" font-weight="bold" fill="#c62828">Keyword Search</text>
+  <text x="180" y="64" text-anchor="middle" font-size="13" fill="#666">Matches exact words only</text>
+
+  <rect x="30" y="85" width="300" height="32" rx="6" fill="white" stroke="#e0e0e0"/>
+  <text x="42" y="106" font-size="13" fill="#333">🔍 Search: "vacation policy"</text>
+
+  <!-- Results -->
+  <rect x="30" y="130" width="300" height="40" rx="6" fill="#e8f5e9" stroke="#4caf50"/>
+  <text x="42" y="148" font-size="12" font-weight="bold" fill="#2e7d32">✅ Found</text>
+  <text x="42" y="163" font-size="11" fill="#333">"Our vacation policy allows 15 days..."</text>
+
+  <rect x="30" y="180" width="300" height="40" rx="6" fill="#ffebee" stroke="#e57373"/>
+  <text x="42" y="198" font-size="12" font-weight="bold" fill="#c62828">❌ Missed</text>
+  <text x="42" y="213" font-size="11" fill="#333">"PTO guidelines grant 15 days..."</text>
+
+  <rect x="30" y="230" width="300" height="40" rx="6" fill="#ffebee" stroke="#e57373"/>
+  <text x="42" y="248" font-size="12" font-weight="bold" fill="#c62828">❌ Missed</text>
+  <text x="42" y="263" font-size="11" fill="#333">"Time-off rules: employees receive..."</text>
+
+  <rect x="30" y="280" width="300" height="40" rx="6" fill="#ffebee" stroke="#e57373"/>
+  <text x="42" y="298" font-size="12" font-weight="bold" fill="#c62828">❌ Missed</text>
+  <text x="42" y="313" font-size="11" fill="#333">"Leave entitlement for full-time staff..."</text>
+
+  <!-- Right panel: Semantic Search -->
+  <rect x="370" y="10" width="340" height="320" rx="12" fill="#e8f5e9" stroke="#4caf50" stroke-width="2"/>
+  <text x="540" y="42" text-anchor="middle" font-size="17" font-weight="bold" fill="#2e7d32">Semantic Search</text>
+  <text x="540" y="64" text-anchor="middle" font-size="13" fill="#666">Matches meaning</text>
+
+  <rect x="390" y="85" width="300" height="32" rx="6" fill="white" stroke="#e0e0e0"/>
+  <text x="402" y="106" font-size="13" fill="#333">🔍 Search: "vacation policy"</text>
+
+  <!-- Results -->
+  <rect x="390" y="130" width="300" height="40" rx="6" fill="#e8f5e9" stroke="#4caf50"/>
+  <text x="402" y="148" font-size="12" font-weight="bold" fill="#2e7d32">✅ Found</text>
+  <text x="402" y="163" font-size="11" fill="#333">"Our vacation policy allows 15 days..."</text>
+
+  <rect x="390" y="180" width="300" height="40" rx="6" fill="#e8f5e9" stroke="#4caf50"/>
+  <text x="402" y="198" font-size="12" font-weight="bold" fill="#2e7d32">✅ Found</text>
+  <text x="402" y="213" font-size="11" fill="#333">"PTO guidelines grant 15 days..."</text>
+
+  <rect x="390" y="230" width="300" height="40" rx="6" fill="#e8f5e9" stroke="#4caf50"/>
+  <text x="402" y="248" font-size="12" font-weight="bold" fill="#2e7d32">✅ Found</text>
+  <text x="402" y="263" font-size="11" fill="#333">"Time-off rules: employees receive..."</text>
+
+  <rect x="390" y="280" width="300" height="40" rx="6" fill="#e8f5e9" stroke="#4caf50"/>
+  <text x="402" y="298" font-size="12" font-weight="bold" fill="#2e7d32">✅ Found</text>
+  <text x="402" y="313" font-size="11" fill="#333">"Leave entitlement for full-time staff..."</text>
+</svg>

@@ -76,6 +76,9 @@ ul.task-list li input[type="checkbox"] {
     document.body.classList.add('hypothesis-enabled');
   });
 </script>
+<script src="site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
 
 </head>
@@ -237,6 +240,42 @@ ul.task-list li input[type="checkbox"] {
 <p>In the ingest stage, documents are split into chunks — typically paragraphs or sections — and each chunk is converted into a numerical representation called an embedding. The embeddings are stored in a vector database (a searchable index optimized for similarity search).</p>
 <p>In the retrieve stage, when a user asks a question, the question is also converted into an embedding. The system finds the chunks whose embeddings are most similar to the question’s embedding. These are the chunks most likely to contain the answer.</p>
 <p>In the generate stage, the retrieved chunks are fed to the LLM along with the user’s question. The LLM reads the chunks and generates an answer, citing the sources.</p>
+<div class="cell" data-fig-width="100%" data-layout-align="default">
+<div class="cell-output-display">
+<div id="fig-rag-pipeline" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-rag-pipeline-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div>
+<pre class="mermaid mermaid-js" data-label="fig-rag-pipeline">flowchart LR
+    subgraph Ingest["1. Ingest"]
+        direction TB
+        Docs["📄 Documents"] --&gt; Chunk["✂️ Chunk"] --&gt; Embed1["🔢 Embed"] --&gt; Store["🗃️ Vector\nStore"]
+    end
+    subgraph Retrieve["2. Retrieve"]
+        direction TB
+        Question["❓ Question"] --&gt; Embed2["🔢 Embed"] --&gt; Search["🔍 Similarity\nSearch"] --&gt; Chunks["📋 Relevant\nChunks"]
+    end
+    subgraph Generate["3. Generate"]
+        direction TB
+        Input["📋 Chunks +\n❓ Question"] --&gt; LLM["🧠 LLM"] --&gt; Answer["✅ Cited\nAnswer"]
+    end
+
+    Store -. "indexed\nchunks" .-&gt; Search
+    Chunks --&gt; Input
+
+    style Ingest fill:#e3f2fd,stroke:#2196f3
+    style Retrieve fill:#fff3e0,stroke:#ff9800
+    style Generate fill:#e8f5e9,stroke:#4caf50
+</pre>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-rag-pipeline-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6.1: The three stages of RAG: ingest documents, retrieve relevant chunks, generate a cited answer.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
 </section>
 <section id="embeddings-and-semantic-search" class="level2" data-number="6.4">
 <h2 data-number="6.4" class="anchored" data-anchor-id="embeddings-and-semantic-search"><span class="header-section-number">6.4</span> Embeddings and semantic search</h2>
@@ -244,6 +283,16 @@ ul.task-list li input[type="checkbox"] {
 <p>Traditional keyword search finds documents containing the exact words you typed. If you search for “vacation policy,” you will find documents containing those words but miss documents that say “PTO guidelines” or “time-off rules” or “leave entitlement.”</p>
 <p>Semantic search works on meaning. Embeddings convert text into high-dimensional numerical vectors such that texts with similar meanings point in similar directions. When you search for “vacation policy,” semantic search finds all of those variations because they have similar embeddings. It understands meaning, not just words.</p>
 <p>This is why RAG can answer questions in natural language. You do not need to know the exact terminology used in the document. You ask the question in your own words and the system finds the relevant passages regardless of how they are phrased.</p>
+<div id="fig-keyword-vs-semantic" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-keyword-vs-semantic-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="files/images/keyword-vs-semantic.svg" class="img-fluid quarto-figure quarto-figure-center figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-keyword-vs-semantic-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6.2: Keyword search finds only exact word matches. Semantic search finds all passages with the same meaning — even when the wording differs.
+</figcaption>
+</figure>
+</div>
 </section>
 <section id="citations-and-source-attribution" class="level2" data-number="6.5">
 <h2 data-number="6.5" class="anchored" data-anchor-id="citations-and-source-attribution"><span class="header-section-number">6.5</span> Citations and source attribution</h2>
@@ -271,6 +320,45 @@ Context window sizes
 </div>
 </div>
 <p>For situations where you need both structured queries and document context, you can combine a skill with RAG — querying the database for numbers and the documents for context.</p>
+<div class="cell" data-fig-width="80%" data-layout-align="default">
+<div class="cell-output-display">
+<div id="fig-rag-decision" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-rag-decision-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div>
+<pre class="mermaid mermaid-js" data-label="fig-rag-decision">flowchart TD
+    Start["What kind of data?"]
+    Structured["Structured?\n_Tables, databases_"]
+    Small["Small document set?\n_&lt; ~100 pages_"]
+    Large["Large document set?\n_Hundreds of pages+_"]
+
+    SQL["→ SQL skill\n_Chapter 4_"]
+    Direct["→ Direct context\n_Give it to the agent_"]
+    RAG["→ RAG pipeline\n_Chunk, embed, retrieve_"]
+    Both["→ Skill + RAG\n_SQL for numbers,\nRAG for context_"]
+
+    Start --&gt;|"Yes"| Structured
+    Start --&gt;|"No — documents"| Small
+    Structured --&gt;|"Only numbers"| SQL
+    Structured --&gt;|"Numbers + documents"| Both
+    Small --&gt;|"Yes"| Direct
+    Small --&gt;|"No"| Large
+    Large --&gt; RAG
+
+    style SQL fill:#e3f2fd,stroke:#2196f3
+    style Direct fill:#e8f5e9,stroke:#4caf50
+    style RAG fill:#fff3e0,stroke:#ff9800
+    style Both fill:#f3e5f5,stroke:#9c27b0
+</pre>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-rag-decision-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6.3: Choosing the right approach depends on what kind of data you are working with.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
 </section>
 <section id="why-chunk-size-matters" class="level2" data-number="6.7">
 <h2 data-number="6.7" class="anchored" data-anchor-id="why-chunk-size-matters"><span class="header-section-number">6.7</span> Why chunk size matters</h2>

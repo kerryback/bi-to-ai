@@ -28,6 +28,32 @@ In the retrieve stage, when a user asks a question, the question is also convert
 
 In the generate stage, the retrieved chunks are fed to the LLM along with the user's question.  The LLM reads the chunks and generates an answer, citing the sources.
 
+```{mermaid}
+%%| label: fig-rag-pipeline
+%%| fig-cap: "The three stages of RAG: ingest documents, retrieve relevant chunks, generate a cited answer."
+%%| fig-width: 100%
+flowchart LR
+    subgraph Ingest["1. Ingest"]
+        direction TB
+        Docs["📄 Documents"] --> Chunk["✂️ Chunk"] --> Embed1["🔢 Embed"] --> Store["🗃️ Vector\nStore"]
+    end
+    subgraph Retrieve["2. Retrieve"]
+        direction TB
+        Question["❓ Question"] --> Embed2["🔢 Embed"] --> Search["🔍 Similarity\nSearch"] --> Chunks["📋 Relevant\nChunks"]
+    end
+    subgraph Generate["3. Generate"]
+        direction TB
+        Input["📋 Chunks +\n❓ Question"] --> LLM["🧠 LLM"] --> Answer["✅ Cited\nAnswer"]
+    end
+
+    Store -. "indexed\nchunks" .-> Search
+    Chunks --> Input
+
+    style Ingest fill:#e3f2fd,stroke:#2196f3
+    style Retrieve fill:#fff3e0,stroke:#ff9800
+    style Generate fill:#e8f5e9,stroke:#4caf50
+```
+
 ## Embeddings and semantic search
 
 Embeddings are what make RAG fundamentally different from keyword search.
@@ -37,6 +63,8 @@ Traditional keyword search finds documents containing the exact words you typed.
 Semantic search works on meaning.  Embeddings convert text into high-dimensional numerical vectors such that texts with similar meanings point in similar directions.  When you search for "vacation policy," semantic search finds all of those variations because they have similar embeddings.  It understands meaning, not just words.
 
 This is why RAG can answer questions in natural language.  You do not need to know the exact terminology used in the document.  You ask the question in your own words and the system finds the relevant passages regardless of how they are phrased.
+
+![Keyword search finds only exact word matches. Semantic search finds all passages with the same meaning — even when the wording differs.](files/images/keyword-vs-semantic.svg){#fig-keyword-vs-semantic fig-align="center"}
 
 ## Citations and source attribution
 
@@ -61,6 +89,35 @@ The amount of text an agent can process in one session varies.  Gemini CLI suppo
 :::
 
 For situations where you need both structured queries and document context, you can combine a skill with RAG --- querying the database for numbers and the documents for context.
+
+```{mermaid}
+%%| label: fig-rag-decision
+%%| fig-cap: "Choosing the right approach depends on what kind of data you are working with."
+%%| fig-width: 80%
+flowchart TD
+    Start["What kind of data?"]
+    Structured["Structured?\n_Tables, databases_"]
+    Small["Small document set?\n_< ~100 pages_"]
+    Large["Large document set?\n_Hundreds of pages+_"]
+
+    SQL["→ SQL skill\n_Chapter 4_"]
+    Direct["→ Direct context\n_Give it to the agent_"]
+    RAG["→ RAG pipeline\n_Chunk, embed, retrieve_"]
+    Both["→ Skill + RAG\n_SQL for numbers,\nRAG for context_"]
+
+    Start -->|"Yes"| Structured
+    Start -->|"No — documents"| Small
+    Structured -->|"Only numbers"| SQL
+    Structured -->|"Numbers + documents"| Both
+    Small -->|"Yes"| Direct
+    Small -->|"No"| Large
+    Large --> RAG
+
+    style SQL fill:#e3f2fd,stroke:#2196f3
+    style Direct fill:#e8f5e9,stroke:#4caf50
+    style RAG fill:#fff3e0,stroke:#ff9800
+    style Both fill:#f3e5f5,stroke:#9c27b0
+```
 
 ## Why chunk size matters
 

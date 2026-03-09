@@ -76,6 +76,9 @@ ul.task-list li input[type="checkbox"] {
     document.body.classList.add('hypothesis-enabled');
   });
 </script>
+<script src="site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
 
 </head>
@@ -266,6 +269,42 @@ ul.task-list li input[type="checkbox"] {
 <section id="what-just-happened" class="level2" data-number="2.6">
 <h2 data-number="2.6" class="anchored" data-anchor-id="what-just-happened"><span class="header-section-number">2.6</span> What just happened</h2>
 <p>Behind the scenes, the agent read the CSV into Python, wrote and ran code for each question, rendered charts with Python, and synthesized findings into a memo. You never see the code unless you ask for it.</p>
+<div class="cell" data-fig-width="100%" data-layout-align="default">
+<div class="cell-output-display">
+<div id="fig-workflow" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-workflow-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div>
+<pre class="mermaid mermaid-js" data-label="fig-workflow">flowchart LR
+    subgraph You["You"]
+        direction TB
+        Y1["Provide the\ndata file"]
+        Y2["Ask decision-\nrelevant questions"]
+        Y3["Request\nspecific charts"]
+        Y4["Ask for a\nrecommendation"]
+    end
+    subgraph Agent["Agent"]
+        direction TB
+        A1["1. Orient\nRead &amp; describe data"]
+        A2["2. Ask\nRun queries &amp; stats"]
+        A3["3. Visualize\nRender charts"]
+        A4["4. Synthesize\nWrite the memo"]
+    end
+    Y1 --&gt; A1
+    Y2 --&gt; A2
+    Y3 --&gt; A3
+    Y4 --&gt; A4
+    A1 --&gt; A2 --&gt; A3 --&gt; A4
+</pre>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-workflow-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2.1: The four-step analysis workflow — you provide direction, the agent does the work.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
 </section>
 <section id="exercises" class="level2" data-number="2.7">
 <h2 data-number="2.7" class="anchored" data-anchor-id="exercises"><span class="header-section-number">2.7</span> Exercises</h2>

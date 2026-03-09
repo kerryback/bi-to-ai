@@ -56,6 +56,32 @@ In ten minutes you have gone from a raw CSV to a written recommendation backed b
 
 Behind the scenes, the agent read the CSV into Python, wrote and ran code for each question, rendered charts with Python, and synthesized findings into a memo.  You never see the code unless you ask for it.
 
+```{mermaid}
+%%| label: fig-workflow
+%%| fig-cap: "The four-step analysis workflow — you provide direction, the agent does the work."
+%%| fig-width: 100%
+flowchart LR
+    subgraph You["You"]
+        direction TB
+        Y1["Provide the\ndata file"]
+        Y2["Ask decision-\nrelevant questions"]
+        Y3["Request\nspecific charts"]
+        Y4["Ask for a\nrecommendation"]
+    end
+    subgraph Agent["Agent"]
+        direction TB
+        A1["1. Orient\nRead & describe data"]
+        A2["2. Ask\nRun queries & stats"]
+        A3["3. Visualize\nRender charts"]
+        A4["4. Synthesize\nWrite the memo"]
+    end
+    Y1 --> A1
+    Y2 --> A2
+    Y3 --> A3
+    Y4 --> A4
+    A1 --> A2 --> A3 --> A4
+```
+
 ## Exercises
 
 ::: {.callout-note title="Exercise 1: The Superstore Walkthrough" collapse="true"}

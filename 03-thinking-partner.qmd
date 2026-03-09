@@ -16,6 +16,8 @@ There is a subtler benefit as well.  Explaining your reasoning to AI forces you 
 
 There are five specific things you can say to AI to sharpen your thinking about any decision.
 
+![The five thinking-partner moves — each one reveals a different blind spot.](files/images/five-moves.svg){#fig-five-moves width=70% fig-align="center"}
+
 The first is to expand options.  Ask: "What options am I not considering?"  Most decisions are presented as A-vs-B when there are options C, D, and E that nobody has named.
 
 The second is to challenge.  Ask: "Argue against my preferred choice."  This is the classic devil's-advocate move.  Tell AI which option you are leaning toward and ask it to make the strongest case against it.

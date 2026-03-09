@@ -110,6 +110,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     document.body.classList.add('hypothesis-enabled');
   });
 </script>
+<script src="site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
 
 </head>
@@ -258,6 +261,42 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>A virtual machine is a sandboxed environment that runs on your own computer. Claude Cowork is an example: it spins up a VM locally, giving AI a full computing environment with file access and persistence across sessions. Virtual machines are good for longer batch work, and because they run on your machine, your data stays local.</p>
 <p>A local environment runs directly in your terminal. Claude Code, Gemini CLI, and OpenAI Codex are examples. The agent writes code that executes right on your machine, with full access to your files, databases, and network. Nothing is uploaded. This is what we use throughout this book.</p>
 <p>The key takeaway is that AI does not need a special platform to analyze your data. It runs where you already work — in the terminal, on your laptop, with your files. The rest of this chapter shows how to set that up.</p>
+<div class="cell" data-fig-width="100%" data-layout-align="default">
+<div class="cell-output-display">
+<div id="fig-environments" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-environments-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div>
+<pre class="mermaid mermaid-js" data-label="fig-environments">flowchart LR
+    subgraph Cloud["☁️ Cloud Sandbox"]
+        direction TB
+        C1["Code runs on\nprovider's servers"]
+        C2["Data uploaded\ntemporarily"]
+        C3["⚠️ Data leaves\nyour machine"]
+    end
+    subgraph VM["💻 Virtual Machine"]
+        direction TB
+        V1["Code runs in\nlocal VM"]
+        V2["Files accessible\nwithin VM"]
+        V3["✅ Data stays\non your machine"]
+    end
+    subgraph Local["🖥️ Local Terminal"]
+        direction TB
+        L1["Code runs\ndirectly in terminal"]
+        L2["Full access to\nfiles &amp; databases"]
+        L3["✅ Nothing\nuploaded"]
+    end
+    Cloud --&gt; VM --&gt; Local
+</pre>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-environments-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1.1: Three code execution environments, from most isolated to most integrated.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
 </section>
 <section id="setting-up-claude-code" class="level2" data-number="1.2">
 <h2 data-number="1.2" class="anchored" data-anchor-id="setting-up-claude-code"><span class="header-section-number">1.2</span> Setting up Claude Code</h2>

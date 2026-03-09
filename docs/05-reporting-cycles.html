@@ -76,6 +76,9 @@ ul.task-list li input[type="checkbox"] {
     document.body.classList.add('hypothesis-enabled');
   });
 </script>
+<script src="site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
 
 </head>
@@ -238,12 +241,74 @@ ul.task-list li input[type="checkbox"] {
 <li><strong>Iterate</strong> — adjust the plan based on what was observed.</li>
 </ol>
 <p>The loop repeats until the task is complete. A reporting pipeline is a natural fit: query the database (execute), check that the data looks right (observe), generate a chart (execute), verify the chart matches the data (observe), write a summary (execute), and so on.</p>
+<div class="cell" data-fig-width="60%" data-layout-align="default">
+<div class="cell-output-display">
+<div id="fig-agent-loop" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-agent-loop-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div>
+<pre class="mermaid mermaid-js" data-label="fig-agent-loop">flowchart TB
+    Plan["🎯 Plan\nBreak task into steps"]
+    Execute["⚡ Execute\nRun code, call tools"]
+    Observe["👁️ Observe\nCheck results"]
+    Iterate["🔄 Iterate\nAdjust the plan"]
+
+    Plan --&gt; Execute --&gt; Observe --&gt; Iterate --&gt; Plan
+
+    style Plan fill:#e3f2fd,stroke:#2196f3
+    style Execute fill:#fff3e0,stroke:#ff9800
+    style Observe fill:#e8f5e9,stroke:#4caf50
+    style Iterate fill:#f3e5f5,stroke:#9c27b0
+</pre>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-agent-loop-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5.1: The agent loop — plan, execute, observe, iterate — repeats until the task is done.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
 </section>
 <section id="how-agents-use-tools" class="level2" data-number="5.4">
 <h2 data-number="5.4" class="anchored" data-anchor-id="how-agents-use-tools"><span class="header-section-number">5.4</span> How agents use tools</h2>
 <p>An agent is two things working together: an LLM and an execution layer. The LLM does not run code or call databases directly. Instead, when the LLM decides a tool is needed, it returns a structured JSON message — something like <code>{"tool": "sql_query", "query": "SELECT ..."}</code>. The agent’s execution layer reads that JSON, runs the actual tool (executes the SQL, writes the file, calls the API), and sends the result back to the LLM. The LLM reads the result and decides what to do next: call another tool, or respond to the user.</p>
 <p>This loop — LLM plans, execution layer acts, LLM observes — is what makes an agent more than a chatbot. The LLM never touches your database or file system directly. It only writes instructions; the agent carries them out.</p>
 <p>Tools can be database queries, file operations, API calls, or code execution. The protocol is the same regardless: the LLM receives a goal, selects the right tool, formats the call as JSON, the execution layer runs it, the LLM interprets the result, and the cycle repeats until the task is complete.</p>
+<div class="cell" data-fig-width="100%" data-layout-align="default">
+<div class="cell-output-display">
+<div id="fig-llm-execution" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-llm-execution-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div>
+<pre class="mermaid mermaid-js" data-label="fig-llm-execution">flowchart LR
+    LLM["🧠 LLM\n_Reads goal,\nselects tools,\ninterprets results_"]
+    EL["⚙️ Execution Layer\n_Runs tools,\nreturns results_"]
+
+    LLM -- 'JSON tool call\n{"tool": "sql_query", ...}' --&gt; EL
+    EL -- "tool result\n(data, files, status)" --&gt; LLM
+
+    EL --- SQL["🗄️ SQL\nQuery"]
+    EL --- File["📁 File\nOps"]
+    EL --- API["🌐 API\nCalls"]
+    EL --- Code["🐍 Code\nExecution"]
+
+    style LLM fill:#e3f2fd,stroke:#2196f3
+    style EL fill:#fff3e0,stroke:#ff9800
+    style SQL fill:#f5f5f5,stroke:#9e9e9e
+    style File fill:#f5f5f5,stroke:#9e9e9e
+    style API fill:#f5f5f5,stroke:#9e9e9e
+    style Code fill:#f5f5f5,stroke:#9e9e9e
+</pre>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-llm-execution-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5.2: The LLM plans; the execution layer acts. The LLM never directly touches databases or files.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
 <p>For a reporting pipeline, the tools might be:</p>
 <ul>
 <li><strong>SQL query</strong> to pull revenue data from the database.</li>
@@ -262,6 +327,36 @@ ul.task-list li input[type="checkbox"] {
 <p><strong>Step 4: Assemble the deck.</strong> The agent uses python-pptx to build a three-slide PowerPoint: a title slide with the report name and date, a slide with the chart, and a slide with the key findings. The deck is saved as a <code>.pptx</code> file.</p>
 <p><strong>Step 5: Deliver.</strong> In a Streamlit app, the chart and summary appear on screen, and a download button lets the user grab the PowerPoint file. The same pattern from Chapter 4 — Streamlit as the web wrapper — but the output is a document instead of a table.</p>
 <p>Each step is straightforward. The value of the agent is chaining them together so the user clicks one button and gets a finished report.</p>
+<div class="cell" data-fig-width="100%" data-layout-align="default">
+<div class="cell-output-display">
+<div id="fig-reporting-pipeline" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-reporting-pipeline-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div>
+<pre class="mermaid mermaid-js" data-label="fig-reporting-pipeline">flowchart LR
+    Q["🗄️ Query DB\n_→ DataFrame_"]
+    C["📊 Render Chart\n_→ PNG image_"]
+    N["✍️ Write Narrative\n_→ executive summary_"]
+    P["📑 Assemble Deck\n_→ .pptx file_"]
+    D["🚀 Deliver\n_→ screen + download_"]
+
+    Q --&gt; C --&gt; N --&gt; P --&gt; D
+
+    style Q fill:#e3f2fd,stroke:#2196f3
+    style C fill:#e8f5e9,stroke:#4caf50
+    style N fill:#fff3e0,stroke:#ff9800
+    style P fill:#f3e5f5,stroke:#9c27b0
+    style D fill:#fce4ec,stroke:#e91e63
+</pre>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-reporting-pipeline-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5.3: The reporting pipeline — five steps from query to delivered report.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
 </section>
 <section id="building-it-with-your-coding-agent" class="level2" data-number="5.6">
 <h2 data-number="5.6" class="anchored" data-anchor-id="building-it-with-your-coding-agent"><span class="header-section-number">5.6</span> Building it with your coding agent</h2>
@@ -291,6 +386,41 @@ Built-in sandboxing
 </div>
 <p>A container (Docker is the standard) is a disposable, isolated computing environment. Think of it as a virtual computer that exists only for one task and is destroyed afterward. It can only access what you explicitly allow. A bug in the AI-generated code cannot affect your other files, your database, or your network.</p>
 <p>The sandbox pattern for production: a user asks for a report through a web interface, the agent plans and orchestrates, code runs inside a sandboxed container, the container queries the database through a read-only connection, and the finished report flows back to the user. The user never touches the database. The agent never escapes the sandbox. This is defense in depth.</p>
+<div class="cell" data-fig-width="100%" data-layout-align="default">
+<div class="cell-output-display">
+<div id="fig-sandbox" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-sandbox-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div>
+<pre class="mermaid mermaid-js" data-label="fig-sandbox">flowchart LR
+    User["👤 User"]
+    UI["🌐 Web UI"]
+    Agent["🤖 Agent"]
+
+    subgraph Sandbox["🔒 Sandboxed Container"]
+        Code["🐍 Generated\nCode"]
+    end
+
+    DB["🗄️ Database\n_read-only_"]
+    Report["📊 Report"]
+
+    User --&gt; UI --&gt; Agent --&gt; Code
+    Code -- "read-only\nquery" --&gt; DB
+    DB -- "results" --&gt; Code
+    Code --&gt; Report --&gt; UI --&gt; User
+
+    style Sandbox fill:#fff3e0,stroke:#ff9800,stroke-width:2px
+    style DB fill:#e8f5e9,stroke:#4caf50
+</pre>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-sandbox-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5.4: Production sandbox architecture — the agent runs in isolation, the database is read-only.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
 </section>
 <section id="from-prototype-to-production" class="level2" data-number="5.8">
 <h2 data-number="5.8" class="anchored" data-anchor-id="from-prototype-to-production"><span class="header-section-number">5.8</span> From prototype to production</h2>

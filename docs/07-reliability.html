@@ -75,6 +75,9 @@ ul.task-list li input[type="checkbox"] {
     document.body.classList.add('hypothesis-enabled');
   });
 </script>
+<script src="site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
 
 </head>
@@ -289,6 +292,38 @@ ul.task-list li input[type="checkbox"] {
 <p>The second layer is code transparency: the agent displays the SQL or Python it ran. Analysts review the logic, not just the answer. This is what you practiced in Chapters 2 through 4.</p>
 <p>The third layer is guardrails: read-only database access, restricted tables, and every query logged for audit. The system prevents mistakes, not just detects them.</p>
 <p>The more layers you add, the harder it is for errors to reach your team. Defense in depth — the same principle as cybersecurity.</p>
+<div class="cell" data-fig-width="70%" data-layout-align="default">
+<div class="cell-output-display">
+<div id="fig-auditability" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-auditability-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div>
+<pre class="mermaid mermaid-js" data-label="fig-auditability">flowchart TB
+    subgraph Outer["Layer 3: Guardrails"]
+        direction TB
+        G["🔒 Read-only access\n📋 Query logging\n🚫 Restricted tables"]
+        subgraph Middle["Layer 2: Code Transparency"]
+            direction TB
+            T["👁️ Visible SQL / Python\n🔍 Analyst-reviewable logic"]
+            subgraph Inner["Layer 1: RAG Citations"]
+                R["📖 Answers cite sources\n✅ Verifiable against\noriginal documents"]
+            end
+        end
+    end
+
+    style Outer fill:#fce4ec,stroke:#e91e63,stroke-width:2px
+    style Middle fill:#fff3e0,stroke:#ff9800,stroke-width:2px
+    style Inner fill:#e8f5e9,stroke:#4caf50,stroke-width:2px
+</pre>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-auditability-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7.1: Three layers of auditability — each layer catches errors the previous one might miss.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
 </section>
 <section id="security-and-governance" class="level2" data-number="7.9">
 <h2 data-number="7.9" class="anchored" data-anchor-id="security-and-governance"><span class="header-section-number">7.9</span> Security and governance</h2>
@@ -342,6 +377,43 @@ ul.task-list li input[type="checkbox"] {
 <p>In the sandbox phase, run the full workflow with synthetic or test data. Test edge cases. Break it on purpose. This is where you discover the failure modes described throughout this chapter.</p>
 <p>In the audit phase, export session logs and review the generated code. Verify SQL logic. Check RAG citations. Look for data leakage. Have a colleague who did not build the system try to break it.</p>
 <p>In the deploy phase, roll out to users with monitoring. Review logs weekly. Set up alerting for anomalies. Treat the first month as a soft launch.</p>
+<div class="cell" data-fig-width="100%" data-layout-align="default">
+<div class="cell-output-display">
+<div id="fig-sandbox-audit-deploy" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-sandbox-audit-deploy-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div>
+<pre class="mermaid mermaid-js" data-label="fig-sandbox-audit-deploy">flowchart LR
+    subgraph S["1. Sandbox"]
+        S1["Run with test data"]
+        S2["Test edge cases"]
+        S3["Break it on purpose"]
+    end
+    subgraph A["2. Audit"]
+        A1["Export session logs"]
+        A2["Verify SQL &amp; citations"]
+        A3["Peer review"]
+    end
+    subgraph D["3. Deploy"]
+        D1["Roll out with monitoring"]
+        D2["Review logs weekly"]
+        D3["Soft launch (1 month)"]
+    end
+    S --&gt; A --&gt; D
+
+    style S fill:#e3f2fd,stroke:#2196f3
+    style A fill:#fff3e0,stroke:#ff9800
+    style D fill:#e8f5e9,stroke:#4caf50
+</pre>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-sandbox-audit-deploy-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7.2: Three phases before any AI workflow goes live.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
 </section>
 <section id="the-adoption-roadmap" class="level2" data-number="7.14">
 <h2 data-number="7.14" class="anchored" data-anchor-id="the-adoption-roadmap"><span class="header-section-number">7.14</span> The adoption roadmap</h2>
@@ -349,6 +421,43 @@ ul.task-list li input[type="checkbox"] {
 <p>Quick wins, achievable in weeks, require only light verification. Using AI for research, summarization, and email drafting. Analyzing local data with a coding agent (Chapter 2). Having thinking-partner conversations (Chapter 3).</p>
 <p>Medium-term adoption, taking months, requires test-before-deploy discipline. Skills for recurring database workflows (Chapter 4). Agent-powered reports and pipelines (Chapter 5). RAG for document-based Q&amp;A (Chapter 6).</p>
 <p>Strategic adoption, measured in quarters, requires a full audit trail. Production apps with authentication and audit trails. An AI usage policy, compliance review, and governance framework. Organization-wide adoption with monitoring.</p>
+<div class="cell" data-fig-width="100%" data-layout-align="default">
+<div class="cell-output-display">
+<div id="fig-adoption-roadmap" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-adoption-roadmap-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div>
+<pre class="mermaid mermaid-js" data-label="fig-adoption-roadmap">flowchart LR
+    subgraph W["⚡ Quick Wins\n_Weeks_"]
+        W1["Research &amp; summaries"]
+        W2["Data analysis\n_Ch. 2_"]
+        W3["Thinking partner\n_Ch. 3_"]
+    end
+    subgraph M["📈 Medium-Term\n_Months_"]
+        M1["Database skills\n_Ch. 4_"]
+        M2["Reporting pipelines\n_Ch. 5_"]
+        M3["Document Q&amp;A\n_Ch. 6_"]
+    end
+    subgraph Q["🏗️ Strategic\n_Quarters_"]
+        Q1["Production apps\nwith auth &amp; audit"]
+        Q2["AI usage policy\n&amp; compliance"]
+        Q3["Org-wide adoption\n&amp; monitoring"]
+    end
+    W --&gt; M --&gt; Q
+
+    style W fill:#e8f5e9,stroke:#4caf50
+    style M fill:#fff3e0,stroke:#ff9800
+    style Q fill:#e3f2fd,stroke:#2196f3
+</pre>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-adoption-roadmap-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7.3: The adoption roadmap — each stage builds trust and adds governance.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
 </section>
 <section id="exercises" class="level2" data-number="7.15">
 <h2 data-number="7.15" class="anchored" data-anchor-id="exercises"><span class="header-section-number">7.15</span> Exercises</h2>

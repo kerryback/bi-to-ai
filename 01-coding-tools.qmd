@@ -16,6 +16,32 @@ A local environment runs directly in your terminal.  Claude Code, Gemini CLI, an
 
 The key takeaway is that AI does not need a special platform to analyze your data.  It runs where you already work --- in the terminal, on your laptop, with your files.  The rest of this chapter shows how to set that up.
 
+```{mermaid}
+%%| label: fig-environments
+%%| fig-cap: "Three code execution environments, from most isolated to most integrated."
+%%| fig-width: 100%
+flowchart LR
+    subgraph Cloud["☁️ Cloud Sandbox"]
+        direction TB
+        C1["Code runs on\nprovider's servers"]
+        C2["Data uploaded\ntemporarily"]
+        C3["⚠️ Data leaves\nyour machine"]
+    end
+    subgraph VM["💻 Virtual Machine"]
+        direction TB
+        V1["Code runs in\nlocal VM"]
+        V2["Files accessible\nwithin VM"]
+        V3["✅ Data stays\non your machine"]
+    end
+    subgraph Local["🖥️ Local Terminal"]
+        direction TB
+        L1["Code runs\ndirectly in terminal"]
+        L2["Full access to\nfiles & databases"]
+        L3["✅ Nothing\nuploaded"]
+    end
+    Cloud --> VM --> Local
+```
+
 ## Setting up Claude Code
 
 Claude Code is Anthropic's terminal-based coding agent.  Install it by opening a terminal and running:[^claude-npm]
