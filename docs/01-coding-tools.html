@@ -331,13 +331,13 @@ Figure&nbsp;1.1: Three code execution environments, from most isolated to most i
 <ul>
 <li><strong>xlsx</strong> — read, create, and edit Excel spreadsheets with formulas, formatting, and charts.</li>
 <li><strong>docx</strong> — create and edit Word documents with tracked changes, comments, and formatting.</li>
-<li><strong>pdf</strong> — read, summarize, and extract information from PDF files.</li>
+<li><strong>pptx</strong> — create and edit PowerPoint presentations.</li>
 <li><strong>skill-creator</strong> — a guide for building your own skills. You will use this in Chapter 4 when you create a database skill.</li>
 </ul>
 <p>To install them, run these commands in your terminal (not inside Claude Code):</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">claude</span> skill install xlsx</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="ex">claude</span> skill install docx</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="ex">claude</span> skill install pdf</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="ex">claude</span> skill install pptx</span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="ex">claude</span> skill install skill-creator</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>After installing, you can verify by typing <code>claude</code> and then <code>/</code> — the available skills appear as slash commands.</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Skills in Gemini CLI and Codex">
@@ -350,7 +350,7 @@ Skills in Gemini CLI and Codex
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Gemini CLI and Codex do not have a dedicated skill system, but the same idea applies. You can give either agent detailed instructions for working with Excel, Word, or PDF files by writing those instructions in the project instruction file (<code>GEMINI.md</code> or <code>AGENTS.md</code>). The agent reads the instructions at the start of every session, just as Claude Code reads a skill. The difference is organizational: Claude Code packages instructions into installable, reusable skills; the other agents embed the same instructions directly in the project file. The underlying capability — an LLM following written instructions to execute a workflow — is the same.</p>
+<p>Gemini CLI and Codex do not have a dedicated skill system, but the same idea applies. You can give either agent detailed instructions for working with Excel, Word, or PowerPoint files by writing those instructions in the project instruction file (<code>GEMINI.md</code> or <code>AGENTS.md</code>). The agent reads the instructions at the start of every session, just as Claude Code reads a skill. The difference is organizational: Claude Code packages instructions into installable, reusable skills; the other agents embed the same instructions directly in the project file. The underlying capability — an LLM following written instructions to execute a workflow — is the same.</p>
 </div>
 </div>
 </section>

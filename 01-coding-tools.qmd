@@ -98,7 +98,7 @@ Claude Code has a skill system built in.  A skill is a folder containing a markd
 
 - **xlsx** --- read, create, and edit Excel spreadsheets with formulas, formatting, and charts.
 - **docx** --- create and edit Word documents with tracked changes, comments, and formatting.
-- **pdf** --- read, summarize, and extract information from PDF files.
+- **pptx** --- create and edit PowerPoint presentations.
 - **skill-creator** --- a guide for building your own skills.  You will use this in Chapter 4 when you create a database skill.
 
 To install them, run these commands in your terminal (not inside Claude Code):
@@ -106,14 +106,14 @@ To install them, run these commands in your terminal (not inside Claude Code):
 ```bash
 claude skill install xlsx
 claude skill install docx
-claude skill install pdf
+claude skill install pptx
 claude skill install skill-creator
 ```
 
 After installing, you can verify by typing `claude` and then `/` --- the available skills appear as slash commands.
 
 ::: {.callout-tip title="Skills in Gemini CLI and Codex"}
-Gemini CLI and Codex do not have a dedicated skill system, but the same idea applies.  You can give either agent detailed instructions for working with Excel, Word, or PDF files by writing those instructions in the project instruction file (`GEMINI.md` or `AGENTS.md`).  The agent reads the instructions at the start of every session, just as Claude Code reads a skill.  The difference is organizational: Claude Code packages instructions into installable, reusable skills; the other agents embed the same instructions directly in the project file.  The underlying capability --- an LLM following written instructions to execute a workflow --- is the same.
+Gemini CLI and Codex do not have a dedicated skill system, but the same idea applies.  You can give either agent detailed instructions for working with Excel, Word, or PowerPoint files by writing those instructions in the project instruction file (`GEMINI.md` or `AGENTS.md`).  The agent reads the instructions at the start of every session, just as Claude Code reads a skill.  The difference is organizational: Claude Code packages instructions into installable, reusable skills; the other agents embed the same instructions directly in the project file.  The underlying capability --- an LLM following written instructions to execute a workflow --- is the same.
 :::
 
 ## Installing Python
