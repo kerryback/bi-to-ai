@@ -162,7 +162,7 @@ Later chapters include demo apps that call Claude Sonnet via the Anthropic API. 
    setx ANTHROPIC_API_KEY "sk-ant-..."
    ```
 
-API calls are billed per token.  A short request like the test below costs a fraction of a cent; a longer coding-agent session analyzing a dataset might cost a few cents to a few dollars depending on the length of the conversation.  Current prices are listed at [anthropic.com/pricing](https://www.anthropic.com/pricing).  To verify your key works, save this as `test_anthropic.py` and run it with `python test_anthropic.py`:
+API calls are billed per token.  A short request like the test below costs a fraction of a cent; a longer coding-agent session analyzing a dataset might cost a few cents to a few dollars depending on the length of the conversation.  Current prices are listed at [anthropic.com/pricing](https://www.anthropic.com/pricing).  To verify your key works, first install the Anthropic Python library by running `pip install anthropic` in a terminal or by asking your coding agent to install it.  Then save this as `test_anthropic.py` and run it with `python test_anthropic.py`:
 
 ```python
 from anthropic import Anthropic
