@@ -82,6 +82,60 @@ flowchart LR
     A1 --> A2 --> A3 --> A4
 ```
 
+## Working with multiple files
+
+The Superstore walkthrough used a single CSV.  Real decisions rarely come from a single file.  A more common scenario: five regional managers each submit a Q1 sales spreadsheet, and you need a consolidated view.
+
+Download [aggregation.zip](files/data/aggregation.zip) and extract it into a folder.  You will find five Excel files --- one per region --- each with columns for date, product, units sold, revenue, and cost.
+
+Open your coding agent in that folder and start the same way:
+
+> Describe the data in this folder.
+
+The agent reads all five files, reports the column names and row counts for each, and flags any inconsistencies (a column named "Revenue" in one file and "Total Revenue" in another, or a date formatted as text).  It standardizes the columns and merges everything into a single dataset without you writing a line of code.
+
+Now ask cross-file questions:
+
+> Which region had the highest total revenue in Q1?
+
+> Compare profit margins across regions.
+
+> Show monthly revenue trends by region as a line chart.
+
+Every follow-up works across the combined dataset.  You can ask for comparisons, rankings, and charts exactly as you did with the single Superstore file.  The only difference is the starting point: instead of one file, you pointed the agent at a folder of files.
+
+This pattern scales.  Whether it is five files or fifty, the workflow is the same: place the files in a folder, let the agent orient itself, then ask your questions.
+
+## Combining different file types
+
+The next step up is working across file formats.  Consider an invoice reconciliation scenario: your accounting team has an Excel spreadsheet of payments, a PDF of vendor invoices, and a Word document summarizing disputed charges.
+
+Download [invoice-reconciliation.zip](files/data/invoice-reconciliation.zip) and extract it into a folder.  You will find three files:
+
+- **payments.xlsx** --- a spreadsheet listing every payment made this quarter, with vendor name, amount, date, and reference number
+- **invoices.pdf** --- a set of vendor invoices with invoice numbers, dates, amounts, and descriptions
+- **disputes.docx** --- a memo from the finance team flagging specific invoices that are under dispute, with reasons
+
+Open your coding agent in that folder and ask:
+
+> Read all files in this folder and summarize what each one contains.
+
+The agent reads Excel, PDF, and Word natively.  It will describe the structure of each file --- rows and columns for the spreadsheet, extracted tables and text from the PDF, and the narrative content of the Word document.
+
+Now ask it to reconcile:
+
+> Match each invoice to its corresponding payment.  Flag any invoices that have no matching payment and any payments that don't match an invoice.
+
+This is where the real value appears.  The agent handles the messy matching --- vendor names that are slightly different between files, date formats that don't align, reference numbers in one file that correspond to invoice numbers in another.  It produces a reconciliation table showing matched records, unmatched invoices, and unmatched payments.
+
+Then layer in the dispute information:
+
+> Which of the unmatched invoices are under dispute according to the memo?  Produce a final reconciliation summary.
+
+The agent cross-references the Word document's dispute notes with the unmatched items and produces a clean summary: invoices paid, invoices unpaid but not disputed, invoices under active dispute, and payments with no matching invoice.
+
+This pattern --- extract, match, reconcile --- is the foundation of due diligence reviews, compliance audits, and month-end close processes.  The file formats vary, but the workflow is the same: point the agent at the files, ask it to read and reconcile, then iterate until the summary is complete.
+
 ## Exercises
 
 ::: {.callout-note title="Exercise 1: The Superstore Walkthrough" collapse="true"}
@@ -127,4 +181,28 @@ For each claim, ask the agent to test it, show the evidence, and write one sente
 Identify a recurring report your team produces --- weekly sales, monthly KPIs, quarterly review --- and try to automate it.
 
 Place the source data in a folder and open your coding agent.  Ask it to produce the full report: charts, tables, and a narrative summary.  Then compare: how long does this report normally take to produce?  How long did AI take?  What is missing from the AI version?
+:::
+
+::: {.callout-note title="Exercise 6: Regional Sales Consolidation" collapse="true"}
+Download [aggregation.zip](files/data/aggregation.zip) and extract it into a folder.  You will find five Excel files, one for each region's Q1 sales data.
+
+Open your coding agent in the folder and work through these steps:
+
+1. Ask the agent to read all files and describe the data.  Confirm the column names, row counts, and any inconsistencies it finds.
+2. Ask: which region had the highest total revenue?  Which had the best profit margin?  Are there products that sell well in one region but poorly in another?
+3. Create at least two charts: a bar chart comparing total revenue by region and a chart of your choice that reveals a cross-region pattern.
+4. Ask the agent to write a short recommendation: based on Q1 results, where should the company focus Q2 marketing spend, and why?
+:::
+
+::: {.callout-note title="Exercise 7: Invoice Reconciliation" collapse="true"}
+Download [invoice-reconciliation.zip](files/data/invoice-reconciliation.zip) and extract it into a folder.  You will find three files: a payments spreadsheet (Excel), a set of vendor invoices (PDF), and a dispute memo (Word).
+
+Open your coding agent in the folder and work through these steps:
+
+1. Ask the agent to read all three files and summarize each one.
+2. Ask it to match invoices to payments and flag any that don't match.
+3. Ask it to cross-reference unmatched invoices with the dispute memo.
+4. Ask for a final reconciliation summary: invoices paid, invoices unpaid but not disputed, invoices under dispute, and payments with no matching invoice.
+
+When you are done, you should have a clean reconciliation table that an accountant could use to close out the quarter.
 :::

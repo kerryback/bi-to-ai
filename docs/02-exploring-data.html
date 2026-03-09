@@ -42,7 +42,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap-06bbe0a581982c371d7d7257fa09cfcb.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-21eba6fda6364eff178b22e017261986.min.css" rel="prefetch" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-dark-f2d2d7e27f83572caa94471900b21745.min.css" rel="prefetch" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -190,7 +190,9 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#step-3-visualize-the-tradeoffs" id="toc-step-3-visualize-the-tradeoffs" class="nav-link" data-scroll-target="#step-3-visualize-the-tradeoffs"><span class="header-section-number">2.4</span> Step 3: Visualize the tradeoffs</a></li>
   <li><a href="#step-4-build-the-recommendation" id="toc-step-4-build-the-recommendation" class="nav-link" data-scroll-target="#step-4-build-the-recommendation"><span class="header-section-number">2.5</span> Step 4: Build the recommendation</a></li>
   <li><a href="#what-just-happened" id="toc-what-just-happened" class="nav-link" data-scroll-target="#what-just-happened"><span class="header-section-number">2.6</span> What just happened</a></li>
-  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">2.7</span> Exercises</a></li>
+  <li><a href="#working-with-multiple-files" id="toc-working-with-multiple-files" class="nav-link" data-scroll-target="#working-with-multiple-files"><span class="header-section-number">2.7</span> Working with multiple files</a></li>
+  <li><a href="#combining-different-file-types" id="toc-combining-different-file-types" class="nav-link" data-scroll-target="#combining-different-file-types"><span class="header-section-number">2.8</span> Combining different file types</a></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">2.9</span> Exercises</a></li>
   </ul>
 </nav>
     </div>
@@ -306,8 +308,56 @@ Figure&nbsp;2.1: The four-step analysis workflow — you provide direction, the 
 </div>
 </div>
 </section>
-<section id="exercises" class="level2" data-number="2.7">
-<h2 data-number="2.7" class="anchored" data-anchor-id="exercises"><span class="header-section-number">2.7</span> Exercises</h2>
+<section id="working-with-multiple-files" class="level2" data-number="2.7">
+<h2 data-number="2.7" class="anchored" data-anchor-id="working-with-multiple-files"><span class="header-section-number">2.7</span> Working with multiple files</h2>
+<p>The Superstore walkthrough used a single CSV. Real decisions rarely come from a single file. A more common scenario: five regional managers each submit a Q1 sales spreadsheet, and you need a consolidated view.</p>
+<p>Download <a href="files/data/aggregation.zip">aggregation.zip</a> and extract it into a folder. You will find five Excel files — one per region — each with columns for date, product, units sold, revenue, and cost.</p>
+<p>Open your coding agent in that folder and start the same way:</p>
+<blockquote class="blockquote">
+<p>Describe the data in this folder.</p>
+</blockquote>
+<p>The agent reads all five files, reports the column names and row counts for each, and flags any inconsistencies (a column named “Revenue” in one file and “Total Revenue” in another, or a date formatted as text). It standardizes the columns and merges everything into a single dataset without you writing a line of code.</p>
+<p>Now ask cross-file questions:</p>
+<blockquote class="blockquote">
+<p>Which region had the highest total revenue in Q1?</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>Compare profit margins across regions.</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>Show monthly revenue trends by region as a line chart.</p>
+</blockquote>
+<p>Every follow-up works across the combined dataset. You can ask for comparisons, rankings, and charts exactly as you did with the single Superstore file. The only difference is the starting point: instead of one file, you pointed the agent at a folder of files.</p>
+<p>This pattern scales. Whether it is five files or fifty, the workflow is the same: place the files in a folder, let the agent orient itself, then ask your questions.</p>
+</section>
+<section id="combining-different-file-types" class="level2" data-number="2.8">
+<h2 data-number="2.8" class="anchored" data-anchor-id="combining-different-file-types"><span class="header-section-number">2.8</span> Combining different file types</h2>
+<p>The next step up is working across file formats. Consider an invoice reconciliation scenario: your accounting team has an Excel spreadsheet of payments, a PDF of vendor invoices, and a Word document summarizing disputed charges.</p>
+<p>Download <a href="files/data/invoice-reconciliation.zip">invoice-reconciliation.zip</a> and extract it into a folder. You will find three files:</p>
+<ul>
+<li><strong>payments.xlsx</strong> — a spreadsheet listing every payment made this quarter, with vendor name, amount, date, and reference number</li>
+<li><strong>invoices.pdf</strong> — a set of vendor invoices with invoice numbers, dates, amounts, and descriptions</li>
+<li><strong>disputes.docx</strong> — a memo from the finance team flagging specific invoices that are under dispute, with reasons</li>
+</ul>
+<p>Open your coding agent in that folder and ask:</p>
+<blockquote class="blockquote">
+<p>Read all files in this folder and summarize what each one contains.</p>
+</blockquote>
+<p>The agent reads Excel, PDF, and Word natively. It will describe the structure of each file — rows and columns for the spreadsheet, extracted tables and text from the PDF, and the narrative content of the Word document.</p>
+<p>Now ask it to reconcile:</p>
+<blockquote class="blockquote">
+<p>Match each invoice to its corresponding payment. Flag any invoices that have no matching payment and any payments that don’t match an invoice.</p>
+</blockquote>
+<p>This is where the real value appears. The agent handles the messy matching — vendor names that are slightly different between files, date formats that don’t align, reference numbers in one file that correspond to invoice numbers in another. It produces a reconciliation table showing matched records, unmatched invoices, and unmatched payments.</p>
+<p>Then layer in the dispute information:</p>
+<blockquote class="blockquote">
+<p>Which of the unmatched invoices are under dispute according to the memo? Produce a final reconciliation summary.</p>
+</blockquote>
+<p>The agent cross-references the Word document’s dispute notes with the unmatched items and produces a clean summary: invoices paid, invoices unpaid but not disputed, invoices under active dispute, and payments with no matching invoice.</p>
+<p>This pattern — extract, match, reconcile — is the foundation of due diligence reviews, compliance audits, and month-end close processes. The file formats vary, but the workflow is the same: point the agent at the files, ask it to read and reconcile, then iterate until the summary is complete.</p>
+</section>
+<section id="exercises" class="level2" data-number="2.9">
+<h2 data-number="2.9" class="anchored" data-anchor-id="exercises"><span class="header-section-number">2.9</span> Exercises</h2>
 <div class="callout callout-style-default callout-note callout-titled" title="Exercise 1: The Superstore Walkthrough">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -397,6 +447,53 @@ Exercise 5: The Weekly Report
 <div class="callout-body-container callout-body">
 <p>Identify a recurring report your team produces — weekly sales, monthly KPIs, quarterly review — and try to automate it.</p>
 <p>Place the source data in a folder and open your coding agent. Ask it to produce the full report: charts, tables, and a narrative summary. Then compare: how long does this report normally take to produce? How long did AI take? What is missing from the AI version?</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Exercise 6: Regional Sales Consolidation">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exercise 6: Regional Sales Consolidation
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Download <a href="files/data/aggregation.zip">aggregation.zip</a> and extract it into a folder. You will find five Excel files, one for each region’s Q1 sales data.</p>
+<p>Open your coding agent in the folder and work through these steps:</p>
+<ol type="1">
+<li>Ask the agent to read all files and describe the data. Confirm the column names, row counts, and any inconsistencies it finds.</li>
+<li>Ask: which region had the highest total revenue? Which had the best profit margin? Are there products that sell well in one region but poorly in another?</li>
+<li>Create at least two charts: a bar chart comparing total revenue by region and a chart of your choice that reveals a cross-region pattern.</li>
+<li>Ask the agent to write a short recommendation: based on Q1 results, where should the company focus Q2 marketing spend, and why?</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Exercise 7: Invoice Reconciliation">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exercise 7: Invoice Reconciliation
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Download <a href="files/data/invoice-reconciliation.zip">invoice-reconciliation.zip</a> and extract it into a folder. You will find three files: a payments spreadsheet (Excel), a set of vendor invoices (PDF), and a dispute memo (Word).</p>
+<p>Open your coding agent in the folder and work through these steps:</p>
+<ol type="1">
+<li>Ask the agent to read all three files and summarize each one.</li>
+<li>Ask it to match invoices to payments and flag any that don’t match.</li>
+<li>Ask it to cross-reference unmatched invoices with the dispute memo.</li>
+<li>Ask for a final reconciliation summary: invoices paid, invoices unpaid but not disputed, invoices under dispute, and payments with no matching invoice.</li>
+</ol>
+<p>When you are done, you should have a clean reconciliation table that an accountant could use to close out the quarter.</p>
 </div>
 </div>
 </div>

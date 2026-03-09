@@ -34,7 +34,9 @@ format:
     number-sections: true
     theme:
       light: flatly
-      dark: superhero
+      dark:
+        - superhero
+        - custom-dark.css
     toc: true
     toc-depth: 3
     toc-title: Chapter contents

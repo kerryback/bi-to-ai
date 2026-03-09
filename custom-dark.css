@@ -1,0 +1,13 @@
+/*-- scss:rules --*/
+
+/* Force dark text inside Mermaid nodes (which have light pastel fills) */
+[data-bs-theme="dark"] .mermaid text {
+  fill: #333 !important;
+}
+
+/* Give SVG images a light background so they remain legible */
+[data-bs-theme="dark"] .quarto-figure img[src$=".svg"] {
+  background: #f8f9fa;
+  border-radius: 8px;
+  padding: 1rem;
+}

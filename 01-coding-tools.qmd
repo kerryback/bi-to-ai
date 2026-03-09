@@ -113,12 +113,22 @@ claude skill install skill-creator
 After installing, you can verify by typing `claude` and then `/` --- the available skills appear as slash commands.
 
 ::: {.callout-tip title="Skills in Gemini CLI and Codex"}
-Gemini CLI and Codex do not have a dedicated skill system, but the same idea applies.  You can give either agent detailed instructions for working with Excel, Word, or PowerPoint files by writing those instructions in the project instruction file (`GEMINI.md` or `AGENTS.md`).  The agent reads the instructions at the start of every session, just as Claude Code reads a skill.  The difference is organizational: Claude Code packages instructions into installable, reusable skills; the other agents embed the same instructions directly in the project file.  The underlying capability --- an LLM following written instructions to execute a workflow --- is the same.
+Gemini CLI and Codex do not have a built-in skill installer, but you can replicate the same structure manually.  Create a `skills/` folder in your project and add a markdown file for each skill --- for example, `skills/xlsx.md` containing instructions for working with Excel files.  Then add a line to your project instruction file (`GEMINI.md` or `AGENTS.md`) telling the agent where to find them:
+
+```markdown
+## Skills
+
+When asked to create or edit an Excel file, read `skills/xlsx.md` and follow its instructions.
+When asked to create or edit a Word document, read `skills/docx.md` and follow its instructions.
+When asked to create or edit a PowerPoint file, read `skills/pptx.md` and follow its instructions.
+```
+
+This keeps skills out of the context window until the agent actually needs them.  The agent reads the project file at the start of every session, sees the pointers, and loads the right skill file on demand --- the same pattern Claude Code uses, just wired by hand.
 :::
 
 ## Installing Python
 
-The coding agents write Python behind the scenes, but the demo apps in later chapters need Python installed on your machine so you can run them yourself.
+The coding agents write and run Python behind the scenes, so Python must be installed on your machine.
 
 Download Python 3.10 or later from [python.org](https://www.python.org/downloads/).  On Windows, check **"Add Python to PATH"** during installation.  This is *in small print on the bottom of the very first installation screen*.  On Mac, you can also install via Homebrew with `brew install python`.  After installing, verify by opening a terminal and running:
 

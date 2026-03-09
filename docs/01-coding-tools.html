@@ -76,7 +76,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap-06bbe0a581982c371d7d7257fa09cfcb.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-21eba6fda6364eff178b22e017261986.min.css" rel="prefetch" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-dark-f2d2d7e27f83572caa94471900b21745.min.css" rel="prefetch" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -350,21 +350,27 @@ Skills in Gemini CLI and Codex
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Gemini CLI and Codex do not have a dedicated skill system, but the same idea applies. You can give either agent detailed instructions for working with Excel, Word, or PowerPoint files by writing those instructions in the project instruction file (<code>GEMINI.md</code> or <code>AGENTS.md</code>). The agent reads the instructions at the start of every session, just as Claude Code reads a skill. The difference is organizational: Claude Code packages instructions into installable, reusable skills; the other agents embed the same instructions directly in the project file. The underlying capability — an LLM following written instructions to execute a workflow — is the same.</p>
+<p>Gemini CLI and Codex do not have a built-in skill installer, but you can replicate the same structure manually. Create a <code>skills/</code> folder in your project and add a markdown file for each skill — for example, <code>skills/xlsx.md</code> containing instructions for working with Excel files. Then add a line to your project instruction file (<code>GEMINI.md</code> or <code>AGENTS.md</code>) telling the agent where to find them:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">## Skills</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>When asked to create or edit an Excel file, read <span class="in">`skills/xlsx.md`</span> and follow its instructions.</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>When asked to create or edit a Word document, read <span class="in">`skills/docx.md`</span> and follow its instructions.</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>When asked to create or edit a PowerPoint file, read <span class="in">`skills/pptx.md`</span> and follow its instructions.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This keeps skills out of the context window until the agent actually needs them. The agent reads the project file at the start of every session, sees the pointers, and loads the right skill file on demand — the same pattern Claude Code uses, just wired by hand.</p>
 </div>
 </div>
 </section>
 <section id="installing-python" class="level2" data-number="1.6">
 <h2 data-number="1.6" class="anchored" data-anchor-id="installing-python"><span class="header-section-number">1.6</span> Installing Python</h2>
-<p>The coding agents write Python behind the scenes, but the demo apps in later chapters need Python installed on your machine so you can run them yourself.</p>
+<p>The coding agents write and run Python behind the scenes, so Python must be installed on your machine.</p>
 <p>Download Python 3.10 or later from <a href="https://www.python.org/downloads/">python.org</a>. On Windows, check <strong>“Add Python to PATH”</strong> during installation. This is <em>in small print on the bottom of the very first installation screen</em>. On Mac, you can also install via Homebrew with <code>brew install python</code>. After installing, verify by opening a terminal and running:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">--version</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">--version</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>You should see something like <code>Python 3.12.4</code>. If the command is not found, restart your terminal or check that Python was added to your PATH.</p>
 </section>
 <section id="installing-libraries" class="level2" data-number="1.7">
 <h2 data-number="1.7" class="anchored" data-anchor-id="installing-libraries"><span class="header-section-number">1.7</span> Installing libraries</h2>
 <p>Two Python packages are needed for the demo apps in later chapters:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install streamlit anthropic</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install streamlit anthropic</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Streamlit builds simple web apps from Python scripts — you write a short script and Streamlit turns it into an interactive page. The <code>anthropic</code> package is the official Python client for the Anthropic API, which powers the Claude family of models. Later chapters mention additional packages as needed.</p>
 </section>
 <section id="setting-up-the-anthropic-api" class="level2" data-number="1.8">
@@ -375,22 +381,22 @@ Skills in Gemini CLI and Codex
 <li><p>Create an API key under <strong>Settings → API Keys</strong>.</p></li>
 <li><p>Set the key as an environment variable so the demo apps can find it:</p>
 <p><strong>Mac / Linux</strong> — add to your shell profile (<code>.bashrc</code> or <code>.zshrc</code>) to persist:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">ANTHROPIC_API_KEY</span><span class="op">=</span><span class="st">"sk-ant-..."</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">ANTHROPIC_API_KEY</span><span class="op">=</span><span class="st">"sk-ant-..."</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><strong>Windows</strong> — run once in a terminal, then restart the terminal:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">setx</span> ANTHROPIC_API_KEY <span class="st">"sk-ant-..."</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">setx</span> ANTHROPIC_API_KEY <span class="st">"sk-ant-..."</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 </ol>
 <p>The cost is minimal — Claude Sonnet costs a few cents per thousand queries, so typical exercise usage adds up to pennies. To verify your key works, save this as <code>test_anthropic.py</code> and run it with <code>python test_anthropic.py</code>:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> anthropic <span class="im">import</span> Anthropic</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>client <span class="op">=</span> Anthropic()</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>response <span class="op">=</span> client.messages.create(</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    model<span class="op">=</span><span class="st">"claude-sonnet-4-20250514"</span>,</span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    max_tokens<span class="op">=</span><span class="dv">100</span>,</span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    messages<span class="op">=</span>[{<span class="st">"role"</span>: <span class="st">"user"</span>, <span class="st">"content"</span>: <span class="st">"Say hello in one sentence."</span>}],</span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(response.content[<span class="dv">0</span>].text)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> anthropic <span class="im">import</span> Anthropic</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>client <span class="op">=</span> Anthropic()</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>response <span class="op">=</span> client.messages.create(</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    model<span class="op">=</span><span class="st">"claude-sonnet-4-20250514"</span>,</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    max_tokens<span class="op">=</span><span class="dv">100</span>,</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    messages<span class="op">=</span>[{<span class="st">"role"</span>: <span class="st">"user"</span>, <span class="st">"content"</span>: <span class="st">"Say hello in one sentence."</span>}],</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(response.content[<span class="dv">0</span>].text)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>If you see a greeting, the key is working and you are ready for the demo apps in Chapters 4 and beyond.</p>
 </section>
 <section id="significant-differences" class="level2" data-number="1.9">
