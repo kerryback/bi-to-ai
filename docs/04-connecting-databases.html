@@ -230,15 +230,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#sql-transparency" id="toc-sql-transparency" class="nav-link" data-scroll-target="#sql-transparency"><span class="header-section-number">4.10</span> SQL transparency</a></li>
   <li><a href="#iterating-on-the-skill" id="toc-iterating-on-the-skill" class="nav-link" data-scroll-target="#iterating-on-the-skill"><span class="header-section-number">4.11</span> Iterating on the skill</a></li>
   <li><a href="#behind-the-firewall" id="toc-behind-the-firewall" class="nav-link" data-scroll-target="#behind-the-firewall"><span class="header-section-number">4.12</span> Behind the firewall</a></li>
-  <li><a href="#the-skill-as-deployment-artifact" id="toc-the-skill-as-deployment-artifact" class="nav-link" data-scroll-target="#the-skill-as-deployment-artifact"><span class="header-section-number">4.13</span> The skill as deployment artifact</a></li>
-  <li><a href="#a-natural-language-query-app" id="toc-a-natural-language-query-app" class="nav-link" data-scroll-target="#a-natural-language-query-app"><span class="header-section-number">4.14</span> A natural-language query app</a>
+  <li><a href="#mcp-connecting-to-everything-else" id="toc-mcp-connecting-to-everything-else" class="nav-link" data-scroll-target="#mcp-connecting-to-everything-else"><span class="header-section-number">4.13</span> MCP: connecting to everything else</a>
+  <ul class="collapse">
+  <li><a href="#corporate-mcp-servers" id="toc-corporate-mcp-servers" class="nav-link" data-scroll-target="#corporate-mcp-servers">Corporate MCP servers</a></li>
+  </ul></li>
+  <li><a href="#the-skill-as-deployment-artifact" id="toc-the-skill-as-deployment-artifact" class="nav-link" data-scroll-target="#the-skill-as-deployment-artifact"><span class="header-section-number">4.14</span> The skill as deployment artifact</a></li>
+  <li><a href="#a-natural-language-query-app" id="toc-a-natural-language-query-app" class="nav-link" data-scroll-target="#a-natural-language-query-app"><span class="header-section-number">4.15</span> A natural-language query app</a>
   <ul class="collapse">
   <li><a href="#setting-up-the-demo" id="toc-setting-up-the-demo" class="nav-link" data-scroll-target="#setting-up-the-demo">Setting up the demo</a></li>
   <li><a href="#what-the-app-sends-to-the-llm" id="toc-what-the-app-sends-to-the-llm" class="nav-link" data-scroll-target="#what-the-app-sends-to-the-llm">What the app sends to the LLM</a></li>
   <li><a href="#what-comes-back" id="toc-what-comes-back" class="nav-link" data-scroll-target="#what-comes-back">What comes back</a></li>
   <li><a href="#the-data-flow" id="toc-the-data-flow" class="nav-link" data-scroll-target="#the-data-flow">The data flow</a></li>
   </ul></li>
-  <li><a href="#adding-charts-and-visualizations" id="toc-adding-charts-and-visualizations" class="nav-link" data-scroll-target="#adding-charts-and-visualizations"><span class="header-section-number">4.15</span> Adding charts and visualizations</a>
+  <li><a href="#adding-charts-and-visualizations" id="toc-adding-charts-and-visualizations" class="nav-link" data-scroll-target="#adding-charts-and-visualizations"><span class="header-section-number">4.16</span> Adding charts and visualizations</a>
   <ul class="collapse">
   <li><a href="#the-changed-system-prompt" id="toc-the-changed-system-prompt" class="nav-link" data-scroll-target="#the-changed-system-prompt">The changed system prompt</a></li>
   <li><a href="#what-comes-back-1" id="toc-what-comes-back-1" class="nav-link" data-scroll-target="#what-comes-back-1">What comes back</a></li>
@@ -246,7 +250,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#a-note-on-executing-generated-code" id="toc-a-note-on-executing-generated-code" class="nav-link" data-scroll-target="#a-note-on-executing-generated-code">A note on executing generated code</a></li>
   <li><a href="#from-demo-to-production" id="toc-from-demo-to-production" class="nav-link" data-scroll-target="#from-demo-to-production">From demo to production</a></li>
   </ul></li>
-  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">4.16</span> Exercises</a></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">4.17</span> Exercises</a></li>
   </ul>
 </nav>
     </div>
@@ -374,28 +378,35 @@ Figure&nbsp;4.1: Four ways to connect AI to your data — from simplest to most 
 <p>Understanding the data flow matters for security. When you use a coding agent, the flow works like this: you type a question, the agent sends your question and the schema description to the LLM (hosted in the cloud), the LLM returns SQL, and the agent executes that SQL against your database locally. The raw data never leaves your network — only your question and the schema travel to the cloud. The query results stay on your machine.</p>
 <p>In a deployed app (like the Streamlit demo), the app replaces the coding agent: the app sends the question to the LLM, receives SQL back, runs it against the database, and displays results to the user. Again, the LLM never sees the actual data — only the question and the schema.</p>
 <p>IT controls which databases the agent or app can access and can restrict connections to read-only credentials.</p>
-<p>For organizations that need to connect AI to multiple systems — databases, CRMs, ticketing tools — MCP provides a standardized way to manage those connections. MCP connectors exist for Salesforce, Jira, Slack, internal databases, and anything else with an API.</p>
-<div class="callout callout-style-default callout-tip callout-titled" title="MCP support across coding agents">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-MCP support across coding agents
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Claude Code has native MCP support, and Gemini CLI also supports MCP servers. Codex uses a different tool-integration mechanism but can connect to the same databases through its own plugin system. The skill-file pattern described in this chapter works with any agent that can read a markdown file and execute SQL.</p>
-</div>
-</div>
+<p>For organizations that need to connect AI to multiple systems — databases, CRMs, financial data providers, project management tools — MCP provides a standardized way to manage those connections. The next section explains how it works.</p>
 <p>In this chapter we connect to a local SQLite file. In your organization, the same pattern connects to PostgreSQL, Snowflake, or any database your team uses.</p>
 </section>
-<section id="the-skill-as-deployment-artifact" class="level2" data-number="4.13">
-<h2 data-number="4.13" class="anchored" data-anchor-id="the-skill-as-deployment-artifact"><span class="header-section-number">4.13</span> The skill as deployment artifact</h2>
+<section id="mcp-connecting-to-everything-else" class="level2" data-number="4.13">
+<h2 data-number="4.13" class="anchored" data-anchor-id="mcp-connecting-to-everything-else"><span class="header-section-number">4.13</span> MCP: connecting to everything else</h2>
+<p>The skill-file approach works well when AI needs access to one database. But organizations often need AI to reach many systems at once — databases, CRMs, financial data providers, project management tools. This is what MCP (Model Context Protocol) is for.</p>
+<p>MCP is an open standard — think of it as USB for AI. A coding agent acts as an MCP <strong>client</strong>. Each external system is wrapped in an MCP <strong>server</strong> — a small program that advertises the tools it offers (query a database, look up a customer, fetch a stock price). When you connect an MCP server, its tools appear automatically in the agent’s toolkit. The agent decides which tools to call based on your question. You can connect multiple servers at once, and the agent sees all of their tools in a single conversation.</p>
+<p>Each MCP server handles authentication, rate limiting, and data formatting so the agent does not have to. The agent never sees API keys or raw API responses — the server manages those details and returns clean, structured results.</p>
+<p>In Claude Desktop, MCP servers are configured in a JSON settings file or installed as one-click desktop extensions. Once configured, a server’s tools are available every time you open the Code tab.</p>
+<section id="corporate-mcp-servers" class="level3">
+<h3 class="anchored" data-anchor-id="corporate-mcp-servers">Corporate MCP servers</h3>
+<p>Major platforms and data providers now offer MCP servers. The list is growing quickly. Here is a sample of what is available:</p>
+<p><strong>Databases and data platforms</strong> — Snowflake, Databricks (Unity Catalog, Vector Search, Genie), Google BigQuery, PostgreSQL, MongoDB.</p>
+<p><strong>Financial data</strong> — FactSet (fundamentals, M&amp;A, supply chain), Bloomberg (internal adoption), LSEG/Refinitiv, Moody’s, S&amp;P Global, Nasdaq, Alpha Vantage (stock prices, options, forex, economic indicators), Financial Modeling Prep (financial statements, SEC filings).</p>
+<p><strong>CRM and ERP</strong> — Salesforce (Agentforce), HubSpot, Microsoft Dynamics 365, SAP.</p>
+<p><strong>Business intelligence</strong> — Power BI (query semantic models, create measures and relationships).</p>
+<p><strong>Cloud platforms</strong> — AWS (60+ servers spanning infrastructure, Lambda, analytics), Azure (40+ servers), Google Cloud.</p>
+<p><strong>Collaboration</strong> — GitHub, Slack, Notion, Google Drive, Asana, Jira, Linear.</p>
+<p><strong>Payments</strong> — Stripe, PayPal.</p>
+<p><strong>Universal connectors</strong> — CData Connect AI (350+ enterprise data sources through a single MCP interface), Workato (100+ pre-built servers).</p>
+<p>The MCP registry at <a href="https://registry.modelcontextprotocol.io">registry.modelcontextprotocol.io</a> lists thousands of public servers, and enterprises can run private registries for internal tools.</p>
+</section>
+</section>
+<section id="the-skill-as-deployment-artifact" class="level2" data-number="4.14">
+<h2 data-number="4.14" class="anchored" data-anchor-id="the-skill-as-deployment-artifact"><span class="header-section-number">4.14</span> The skill as deployment artifact</h2>
 <p>A polished skill is what gets deployed on your intranet. The skill file encodes which tables matter, how they relate, and what the business terminology means. IT adds the infrastructure: SSO authentication, read-only database credentials, and query logging for audit. Chapter 5 shows how to chain this skill into an automated reporting pipeline.</p>
 </section>
-<section id="a-natural-language-query-app" class="level2" data-number="4.14">
-<h2 data-number="4.14" class="anchored" data-anchor-id="a-natural-language-query-app"><span class="header-section-number">4.14</span> A natural-language query app</h2>
+<section id="a-natural-language-query-app" class="level2" data-number="4.15">
+<h2 data-number="4.15" class="anchored" data-anchor-id="a-natural-language-query-app"><span class="header-section-number">4.15</span> A natural-language query app</h2>
 <p>The skill-file approach works well with a coding agent, but what about the rest of your organization? Not everyone will use a terminal. The same pattern — send a question and schema to an LLM, get SQL back, run it — can be wrapped in a simple web app that anyone can use from a browser.</p>
 <p>In production, this app would be deployed on the corporate intranet, the database would be a PostgreSQL or Snowflake instance on the company’s servers, and the LLM would be an enterprise-licensed model (more on licensing and compliance in Chapter 7). For this demo, we run everything locally: a small Streamlit app on your laptop, the Chinook SQLite file in the same folder, and Claude Sonnet via the Anthropic API.</p>
 <section id="setting-up-the-demo" class="level3">
@@ -484,8 +495,8 @@ Figure&nbsp;4.2: The data flow round-trip — only the question and schema leave
 </div>
 </section>
 </section>
-<section id="adding-charts-and-visualizations" class="level2" data-number="4.15">
-<h2 data-number="4.15" class="anchored" data-anchor-id="adding-charts-and-visualizations"><span class="header-section-number">4.15</span> Adding charts and visualizations</h2>
+<section id="adding-charts-and-visualizations" class="level2" data-number="4.16">
+<h2 data-number="4.16" class="anchored" data-anchor-id="adding-charts-and-visualizations"><span class="header-section-number">4.16</span> Adding charts and visualizations</h2>
 <p>The query app returns tables, but business questions often need charts. “Show me a bar chart of revenue by country” should produce a bar chart, not a grid of numbers. With a coding agent like Claude Code, you would get the chart directly — the agent writes Python, executes it, and displays the image. But a deployed web app cannot do that unless we change what the LLM returns.</p>
 <p>The fix is straightforward: instead of asking the LLM for SQL, ask it for a short Python script that queries the database <em>and</em> produces a chart. The app executes that Python and displays whatever it creates — a matplotlib figure, a Plotly chart, a data table, or all three.</p>
 <section id="the-changed-system-prompt" class="level3">
@@ -539,10 +550,10 @@ Rules for the Python script:
 <p>This is a demo, not a production application. There is no authentication, no guardrails on the SQL, and no sandboxing of query execution. The chart app adds another consideration: it executes LLM-generated Python, not just SQL, which makes sandboxing even more important. In a production deployment, IT would add SSO login, restrict the database connection to read-only credentials, log every query for audit, run generated code in an isolated container, and use an enterprise LLM with a data-processing agreement. Chapter 7 covers these considerations in detail. But as a prototype that proves the concept, fifty lines of Python is all it takes.</p>
 </section>
 </section>
-<section id="exercises" class="level2" data-number="4.16">
-<h2 data-number="4.16" class="anchored" data-anchor-id="exercises"><span class="header-section-number">4.16</span> Exercises</h2>
+<section id="exercises" class="level2" data-number="4.17">
+<h2 data-number="4.17" class="anchored" data-anchor-id="exercises"><span class="header-section-number">4.17</span> Exercises</h2>
 <div class="callout callout-style-default callout-note callout-titled" title="Exercise 1: Build a Chinook Skill">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -551,7 +562,7 @@ Exercise 1: Build a Chinook Skill
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Download <a href="files/data/chinook.db">chinook.db</a> and place it in a new project folder. Create a SKILL.md file in the same folder with three sections: a description and database path, at least three table descriptions with columns and relationships, and three example questions.</p>
 <p>Open your coding agent in the folder and test three decision-relevant queries. For each, ask Claude to show the SQL and verify that the joins and filters are correct. Then ask for an interactive Plotly chart and iterate on it at least once — change colors, add annotations, or improve the layout.</p>
@@ -560,7 +571,7 @@ Exercise 1: Build a Chinook Skill
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled" title="Exercise 2: Database Schema Detective">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -569,7 +580,7 @@ Exercise 2: Database Schema Detective
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Connect your coding agent to the <a href="files/data/chinook.db">Chinook database</a> without any SKILL.md — no documentation at all.</p>
 <p>Ask: “What tables are in this database? How are they related?” Let Claude discover the schema on its own. Then ask: “If I were the CEO of this music company, what three questions should I be asking?”</p>
@@ -579,7 +590,7 @@ Exercise 2: Database Schema Detective
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled" title="Exercise 3: Decision Scenario Queries">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -588,7 +599,7 @@ Exercise 3: Decision Scenario Queries
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>You are the Chinook CEO. The board wants you to cut two of the five lowest-performing genres from the catalog to reduce licensing costs.</p>
 <p>Using your Chinook skill (or a bare connection to <a href="files/data/chinook.db">chinook.db</a>), answer these questions in sequence: Which genres contribute the least revenue? For those two genres, how many unique customers would be affected? Are any of those customers high-value customers who also buy other genres?</p>
@@ -597,7 +608,7 @@ Exercise 3: Decision Scenario Queries
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled" title="Exercise 4: Skill for Your Own Data">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -606,7 +617,7 @@ Exercise 4: Skill for Your Own Data
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Take a CSV from your work (anonymize if needed) or a public dataset you care about. Ask the agent to convert it to a SQLite database. Then write a SKILL.md describing the tables, columns, relationships, and five example questions.</p>
 <p>If you do not have a work dataset, try one of these public sources:</p>
@@ -621,7 +632,7 @@ Exercise 4: Skill for Your Own Data
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled" title="Exercise 5: The Monday Morning Report">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -630,7 +641,7 @@ Exercise 5: The Monday Morning Report
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Identify a recurring report your team produces — weekly sales summary, monthly KPIs, pipeline report. Write a SKILL.md that includes the database schema, the specific queries needed, and the output format.</p>
 <p>Add an instruction to the skill: “When I say ‘Monday report,’ run these three queries and format the results as a one-page summary.” Test it. Does one command produce your entire report?</p>
@@ -638,7 +649,7 @@ Exercise 5: The Monday Morning Report
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled" title="Exercise 6: Build Your Own Query App">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -647,7 +658,7 @@ Exercise 6: Build Your Own Query App
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Ask your coding agent to build a natural-language query app similar to the <a href="files/code/chinook-query.py">chinook-query demo</a>, either from scratch or by improving the demo. Possible extensions: add chart generation for numeric results, show query history in a sidebar, add error handling that suggests corrections when the SQL fails, or let the user choose between different databases.</p>
 </div>

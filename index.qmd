@@ -32,6 +32,6 @@ Chapter 6 uses a [sample company handbook](files/data/company-handbook.md) for R
 
 ## Prerequisites
 
-You need one of the three major coding agents installed on your machine.  Chapter 1 walks through the installation of Claude Code, Gemini CLI, and OpenAI Codex.  All three run in the terminal, read local files, and execute code.  No prior coding or data science experience is assumed.
+You need the Claude Desktop app installed on your machine.  Chapter 1 walks through installation and introduces the **Code** tab --- the interface we use throughout this book.  No prior coding or data science experience is assumed.
 
-The examples in this book use Claude Code, but the concepts and workflows apply equally to Gemini CLI and OpenAI Codex.  Where we say "Claude" or "ask Claude," you can substitute whichever agent you installed.
+The examples use Claude Code via the Desktop app, but the concepts and workflows apply equally to alternative coding agents like Gemini CLI and OpenAI Codex, which Chapter 1 also describes.

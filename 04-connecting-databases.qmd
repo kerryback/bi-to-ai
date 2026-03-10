@@ -121,13 +121,41 @@ In a deployed app (like the Streamlit demo), the app replaces the coding agent: 
 
 IT controls which databases the agent or app can access and can restrict connections to read-only credentials.
 
-For organizations that need to connect AI to multiple systems --- databases, CRMs, ticketing tools --- MCP provides a standardized way to manage those connections.  MCP connectors exist for Salesforce, Jira, Slack, internal databases, and anything else with an API.
-
-::: {.callout-tip title="MCP support across coding agents"}
-Claude Code has native MCP support, and Gemini CLI also supports MCP servers.  Codex uses a different tool-integration mechanism but can connect to the same databases through its own plugin system.  The skill-file pattern described in this chapter works with any agent that can read a markdown file and execute SQL.
-:::
+For organizations that need to connect AI to multiple systems --- databases, CRMs, financial data providers, project management tools --- MCP provides a standardized way to manage those connections.  The next section explains how it works.
 
 In this chapter we connect to a local SQLite file.  In your organization, the same pattern connects to PostgreSQL, Snowflake, or any database your team uses.
+
+## MCP: connecting to everything else
+
+The skill-file approach works well when AI needs access to one database.  But organizations often need AI to reach many systems at once --- databases, CRMs, financial data providers, project management tools.  This is what MCP (Model Context Protocol) is for.
+
+MCP is an open standard --- think of it as USB for AI.  A coding agent acts as an MCP **client**.  Each external system is wrapped in an MCP **server** --- a small program that advertises the tools it offers (query a database, look up a customer, fetch a stock price).  When you connect an MCP server, its tools appear automatically in the agent's toolkit.  The agent decides which tools to call based on your question.  You can connect multiple servers at once, and the agent sees all of their tools in a single conversation.
+
+Each MCP server handles authentication, rate limiting, and data formatting so the agent does not have to.  The agent never sees API keys or raw API responses --- the server manages those details and returns clean, structured results.
+
+In Claude Desktop, MCP servers are configured in a JSON settings file or installed as one-click desktop extensions.  Once configured, a server's tools are available every time you open the Code tab.
+
+### Corporate MCP servers
+
+Major platforms and data providers now offer MCP servers.  The list is growing quickly.  Here is a sample of what is available:
+
+**Databases and data platforms** --- Snowflake, Databricks (Unity Catalog, Vector Search, Genie), Google BigQuery, PostgreSQL, MongoDB.
+
+**Financial data** --- FactSet (fundamentals, M&A, supply chain), Bloomberg (internal adoption), LSEG/Refinitiv, Moody's, S&P Global, Nasdaq, Alpha Vantage (stock prices, options, forex, economic indicators), Financial Modeling Prep (financial statements, SEC filings).
+
+**CRM and ERP** --- Salesforce (Agentforce), HubSpot, Microsoft Dynamics 365, SAP.
+
+**Business intelligence** --- Power BI (query semantic models, create measures and relationships).
+
+**Cloud platforms** --- AWS (60+ servers spanning infrastructure, Lambda, analytics), Azure (40+ servers), Google Cloud.
+
+**Collaboration** --- GitHub, Slack, Notion, Google Drive, Asana, Jira, Linear.
+
+**Payments** --- Stripe, PayPal.
+
+**Universal connectors** --- CData Connect AI (350+ enterprise data sources through a single MCP interface), Workato (100+ pre-built servers).
+
+The MCP registry at [registry.modelcontextprotocol.io](https://registry.modelcontextprotocol.io) lists thousands of public servers, and enterprises can run private registries for internal tools.
 
 ## The skill as deployment artifact
 
