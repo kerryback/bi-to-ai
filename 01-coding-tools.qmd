@@ -12,9 +12,9 @@ A cloud sandbox is a temporary computing environment hosted by the AI provider. 
 
 A virtual machine is a sandboxed environment that runs on your own computer.  Claude Cowork is an example: it spins up a VM locally, giving AI a full computing environment with file access and persistence across sessions.  Virtual machines are good for longer batch work, and because they run on your machine, your data stays local.
 
-A local environment runs directly in your terminal.  Claude Code, Gemini CLI, and OpenAI Codex are examples.  The agent writes code that executes right on your machine, with full access to your files, databases, and network.  Nothing is uploaded.  This is what we use throughout this book.
+A local environment runs directly on your machine.  Claude Code, Gemini CLI, and OpenAI Codex are examples.  The agent writes code that executes right where you work, with full access to your files, databases, and network.  Nothing is uploaded.  You can run a local agent from the terminal or from a desktop app --- the same engine powers both.  This is what we use throughout this book.
 
-The key takeaway is that AI does not need a special platform to analyze your data.  It runs where you already work --- in the terminal, on your laptop, with your files.  The rest of this chapter shows how to set that up.
+The key takeaway is that AI does not need a special platform to analyze your data.  It runs where you already work --- on your laptop, with your files.  The rest of this chapter shows how to set that up.
 
 ```{mermaid}
 %%| label: fig-environments
@@ -42,9 +42,29 @@ flowchart LR
     Cloud --> VM --> Local
 ```
 
-## Setting up Claude Code
+## Installing Python and Claude Code
 
-Claude Code is Anthropic's terminal-based coding agent.  Install it by opening a terminal and running:[^claude-npm]
+The coding agents write and run Python behind the scenes, so both Python and a coding agent must be installed on your machine.  We provide one-step installers that handle both:
+
+**Windows** --- download [run.ps1](installers/windows/run.ps1), right-click it, and select **Run with PowerShell as Administrator**.  The script installs Python 3.12 (auto-detecting your processor architecture) and Claude Code, and adds both to your PATH.
+
+**Mac** --- download [install.sh](installers/mac/install.sh), open Terminal, and run:
+
+```bash
+bash ~/Downloads/install.sh
+```
+
+The script installs Homebrew (if needed), Python 3.12, and Claude Code.
+
+After either installer finishes, close and reopen your terminal, then type `claude`.  The first time you launch it, Claude Code opens a browser window for OAuth authentication with your Anthropic account.  Claude Code requires either a Pro subscription at \$20 per month (which includes a generous usage allowance) or an Anthropic API key with credits.  Once authenticated, the agent is ready to use in any folder on your machine.
+
+Claude Code reads a file called `CLAUDE.md` in the project directory for persistent instructions.  This is where you store context about your data, preferred output formats, and any domain-specific guidance the agent should follow every session.  You can also enable verbose output by pressing Ctrl+O during a conversation, which shows every step the agent takes: reading files, writing Python, running code, and interpreting results.
+
+Installing Python gives you the base language, but in practice most work relies on additional libraries --- code packages for data analysis, charting, web apps, and more.  At various points in this book, we will ask you to tell the coding agent to install specific libraries.  If you skip that step, the agent will notice when it tries to run code that requires them and will ask you for permission to install what it needs.  Just grant permission if that happens.
+
+### Installing Claude Code manually
+
+If the installer does not work, you can install Claude Code separately.  Open a terminal and run:[^claude-npm]
 
 **Mac / Linux:**
 
@@ -60,9 +80,33 @@ irm https://claude.ai/install.ps1 | iex
 
 [^claude-npm]: You can also install Claude Code via npm if you have Node.js 18 or higher: `npm install -g @anthropic-ai/claude-code`.
 
-The first time you launch it by typing `claude`, the tool opens a browser window for OAuth authentication with your Anthropic account.  Claude Code requires either a Pro subscription at \$20 per month (which includes a generous usage allowance) or an Anthropic API key with credits.  Once authenticated, the agent is ready to use in any folder on your machine.
+### Installing Python manually
 
-Claude Code reads a file called `CLAUDE.md` in the project directory for persistent instructions.  This is where you store context about your data, preferred output formats, and any domain-specific guidance the agent should follow every session.  You can also enable verbose output by pressing Ctrl+O during a conversation, which shows every step the agent takes: reading files, writing Python, running code, and interpreting results.
+If the installer does not work, you can install Python separately.  Download Python 3.10 or later from [python.org](https://www.python.org/downloads/).  On Windows, check **"Add Python to PATH"** during installation --- this is *in small print on the bottom of the very first installation screen*.  On Mac, you can also install via Homebrew with `brew install python`.  After installing, verify by opening a terminal and running:
+
+```bash
+python --version
+```
+
+You should see something like `Python 3.12.4`.  If the command is not found, restart your terminal or check that Python was added to your PATH.
+
+## Claude Code in the Desktop app
+
+If you prefer a graphical interface to a terminal, you can run the same Claude Code engine inside the Claude Desktop app.  Download it from [claude.com/download](https://claude.com/download) and log in with your Anthropic account.  The app has three tabs in the sidebar: **Chat**, **Cowork**, and **Code**.  Click the **Code** tab.
+
+The Code tab is not a separate product --- it runs the identical Claude Code engine that powers the terminal.  It reads the same `CLAUDE.md` files, uses the same skills, and has the same access to your files.  The difference is the interface: a visual conversation window instead of a terminal prompt, with clickable file diffs, inline image previews, and drag-and-drop file attachments.
+
+To get started, click **Code** in the sidebar, then select a folder as your working directory.  Choose a model (Sonnet is fast and capable; Opus is more thorough) and a permission mode.  For the exercises in this book, **"auto-accept"** is the most convenient permission mode --- it lets the agent run code without asking for approval on every step.
+
+Try a quick test.  Type:
+
+> Create a CSV file with five rows of sample sales data --- columns for date, product, revenue, and profit.  Then describe the data back to me.
+
+The agent writes a Python script, creates the file in your working directory, reads it back, and reports the contents.  You will see the file appear in your folder.  That single exchange --- natural language in, working file out --- is the pattern for everything in this book.
+
+::: {.callout-tip title="Terminal or Desktop?"}
+Every exercise in this book works in both the terminal and the Desktop app.  When we say "open your coding agent in that folder," use whichever interface you prefer.  The Desktop app is easier to get started with and better for viewing charts and files inline.  The terminal is faster for experienced users and supports advanced features like scripting and automation.  You can switch between them at any time --- they share the same configuration and project files.
+:::
 
 ## Setting up Gemini CLI
 
@@ -128,20 +172,6 @@ This keeps skills out of the context window until the agent actually needs them.
 For the skill files themselves, you do not need to write them from scratch.  Anthropic publishes the same markdown files that Claude Code uses at [github.com/anthropics/skills](https://github.com/anthropics/skills).  Copy the relevant files into your `skills/` folder and they will work with any agent.
 :::
 
-## Installing Python
-
-The coding agents write and run Python behind the scenes, so Python must be installed on your machine.
-
-Download Python 3.10 or later from [python.org](https://www.python.org/downloads/).  On Windows, check **"Add Python to PATH"** during installation.  This is *in small print on the bottom of the very first installation screen*.  On Mac, you can also install via Homebrew with `brew install python`.  After installing, verify by opening a terminal and running:
-
-```bash
-python --version
-```
-
-You should see something like `Python 3.12.4`.  If the command is not found, restart your terminal or check that Python was added to your PATH.
-
-Installing Python gives you the base language, but in practice most work relies on additional libraries --- code packages for data analysis, charting, web apps, and more.  At various points in this book, we will ask you to tell the coding agent to install specific libraries.  If you skip that step, the agent will notice when it tries to run code that requires them and will ask you for permission to install what it needs.  Just grant permission if that happens.
-
 ## Setting up the Anthropic API
 
 Later chapters include demo apps that call Claude Sonnet via the Anthropic API.  You will need an API key.
@@ -194,9 +224,9 @@ Cost varies.  Claude Code requires a \$20/month subscription or API credits.  Ge
 
 ## Other interfaces
 
-The terminal agents are not the only way to work with AI on code and data.  Several other interfaces are worth knowing about, even though this book focuses on the terminal workflow.
+The terminal and the Claude Desktop Code tab are the two interfaces used in this book.  Several other interfaces are worth knowing about.
 
-Claude Desktop is a GUI chat application from Anthropic.  It supports file attachments, image analysis, and recently added an agentic mode that can execute multi-step tasks.  It is convenient for one-off conversations and for users who prefer a graphical interface to a terminal.
+The **Chat** and **Cowork** tabs in Claude Desktop serve different purposes.  Chat is a standard conversation interface for questions, writing, and image analysis --- no code execution.  Cowork runs tasks in a sandboxed virtual machine: it can organize files, draft reports, and process documents, but in a more isolated environment than the Code tab.  Cowork is useful for batch knowledge work where you want an extra layer of safety.
 
 Google Antigravity is an agent-first IDE --- a fork of VS Code designed around AI collaboration.  It is currently in free preview.  Rather than adding AI to an existing editor, it was built from the ground up for agent-driven workflows, with the agent able to navigate files, run code, and iterate on changes directly in the editor.
 

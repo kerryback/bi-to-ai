@@ -8,6 +8,7 @@ project:
     - files/data/chinook.db
     - files/data/company-handbook.md
     - files/**
+    - installers/**
 
 number-depth: 2
 
