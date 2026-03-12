@@ -4,6 +4,29 @@ Large language models are impressive conversationalists, but without the ability
 
 This chapter walks through installation, introduces the interface we use throughout the book --- the Code tab in Claude Desktop --- and describes alternative coding agents from Google and OpenAI.
 
+```{mermaid}
+%%| label: fig-chatbot-vs-agent
+%%| fig-cap: "A chatbot relays messages to the LLM.  An agent also has tools — it can run code, read files, and take action."
+%%| fig-width: 100%
+flowchart LR
+    subgraph Chatbot["💬 Chatbot"]
+        direction LR
+        U1["👤 User"] -- "question" --> CB["🤖 Chatbot"] -- "prompt +\nhistory" --> LLM1["🧠 LLM"]
+        LLM1 -- "text reply" --> CB -- "answer" --> U1
+    end
+
+    subgraph Agent["🛠️ Coding Agent"]
+        direction LR
+        U2["👤 User"] -- "question" --> AG["🤖 Agent"] -- "prompt +\nhistory" --> LLM2["🧠 LLM"]
+        LLM2 -- "text or\ntool call" --> AG
+        AG <-- "run code,\nread files" --> Tools["⚙️ Tools"]
+        AG -- "answer +\nartifacts" --> U2
+    end
+
+    style Chatbot fill:#e3f2fd,stroke:#2196f3
+    style Agent fill:#e8f5e9,stroke:#4caf50
+```
+
 ## Code execution environments
 
 AI can write and run code in three different environments, each with different strengths.

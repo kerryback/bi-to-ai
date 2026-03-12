@@ -228,6 +228,46 @@ ul.task-list li input[type="checkbox"] {
 <p>AI models are trained on public data. They know a great deal about the world in general, but they know nothing about your company’s travel policy, your product warranty terms, or last quarter’s board report.</p>
 <p>Without RAG, if you ask “What is our return policy for enterprise customers?” the LLM will either make something up (confidently and plausibly) or admit it does not know. Neither response is useful. What you want is for the system to look up the answer in your actual policy document, quote the relevant passage, and tell you where it found it.</p>
 <p>That is what RAG does.</p>
+<p>RAG is one of several ways to give AI knowledge it was not trained on. The choice depends on how much control you need and how much effort you can invest.</p>
+<div class="cell" data-fig-width="90%" data-layout-align="default">
+<div class="cell-output-display">
+<div id="fig-knowledge-approaches" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-knowledge-approaches-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div>
+<pre class="mermaid mermaid-js" data-label="fig-knowledge-approaches">flowchart TD
+    subgraph RAG["📄 RAG"]
+        R1["Feed documents at query time"]
+        R2["Best when facts change often\nor data is proprietary"]
+        R3["_Least effort — no model changes_"]
+    end
+    subgraph FT["🔧 Fine-Tuning"]
+        F1["Retrain the model on your data"]
+        F2["Best for specialized tone,\nformat, or domain expertise"]
+        F3["_Moderate effort — needs training data_"]
+    end
+    subgraph SLM["🏠 Small Language Model"]
+        S1["Run a private model on your hardware"]
+        S2["Best for full control,\nprivacy, or niche tasks"]
+        S3["_Most effort — full infrastructure_"]
+    end
+
+    RAG --- FT --- SLM
+
+    style RAG fill:#e8f5e9,stroke:#4caf50
+    style FT fill:#fff3e0,stroke:#ff9800
+    style SLM fill:#fce4ec,stroke:#e91e63
+</pre>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-knowledge-approaches-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6.1: Three ways to give AI knowledge it was not trained on — from least effort to most control.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>This chapter focuses on RAG — the lightest-weight option and the one most accessible to business teams without machine-learning infrastructure.</p>
 </section>
 <section id="the-open-book-exam-analogy" class="level2" data-number="6.2">
 <h2 data-number="6.2" class="anchored" data-anchor-id="the-open-book-exam-analogy"><span class="header-section-number">6.2</span> The open-book exam analogy</h2>
@@ -270,7 +310,7 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-rag-pipeline-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;6.1: The three stages of RAG: ingest documents, retrieve relevant chunks, generate a cited answer.
+Figure&nbsp;6.2: The three stages of RAG: ingest documents, retrieve relevant chunks, generate a cited answer.
 </figcaption>
 </figure>
 </div>
@@ -289,7 +329,7 @@ Figure&nbsp;6.1: The three stages of RAG: ingest documents, retrieve relevant ch
 <img src="files/images/keyword-vs-semantic.svg" class="img-fluid quarto-figure quarto-figure-center figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-keyword-vs-semantic-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;6.2: Keyword search finds only exact word matches. Semantic search finds all passages with the same meaning — even when the wording differs.
+Figure&nbsp;6.3: Keyword search finds only exact word matches. Semantic search finds all passages with the same meaning — even when the wording differs.
 </figcaption>
 </figure>
 </div>
@@ -353,7 +393,7 @@ Context window sizes
 </div>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-rag-decision-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;6.3: Choosing the right approach depends on what kind of data you are working with.
+Figure&nbsp;6.4: Choosing the right approach depends on what kind of data you are working with.
 </figcaption>
 </figure>
 </div>

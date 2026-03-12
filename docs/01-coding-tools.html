@@ -256,6 +256,39 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <p>Large language models are impressive conversationalists, but without the ability to run code they can only describe how to analyze your data. They can outline the steps, suggest the formulas, and draft the chart specifications — but you still have to do the work. When you attach a code-execution tool, the dynamic changes completely. A coding agent loads your data into a Python dataframe, writes and runs the analysis, renders the charts, and synthesizes the findings into a memo. You provide the questions; the agent provides the answers. The result is not a plan for an analysis but the analysis itself — complete with numbers, visualizations, and narrative.</p>
 <p>This chapter walks through installation, introduces the interface we use throughout the book — the Code tab in Claude Desktop — and describes alternative coding agents from Google and OpenAI.</p>
+<div class="cell" data-fig-width="100%" data-layout-align="default">
+<div class="cell-output-display">
+<div id="fig-chatbot-vs-agent" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-chatbot-vs-agent-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div>
+<pre class="mermaid mermaid-js" data-label="fig-chatbot-vs-agent">flowchart LR
+    subgraph Chatbot["💬 Chatbot"]
+        direction LR
+        U1["👤 User"] -- "question" --&gt; CB["🤖 Chatbot"] -- "prompt +\nhistory" --&gt; LLM1["🧠 LLM"]
+        LLM1 -- "text reply" --&gt; CB -- "answer" --&gt; U1
+    end
+
+    subgraph Agent["🛠️ Coding Agent"]
+        direction LR
+        U2["👤 User"] -- "question" --&gt; AG["🤖 Agent"] -- "prompt +\nhistory" --&gt; LLM2["🧠 LLM"]
+        LLM2 -- "text or\ntool call" --&gt; AG
+        AG &lt;-- "run code,\nread files" --&gt; Tools["⚙️ Tools"]
+        AG -- "answer +\nartifacts" --&gt; U2
+    end
+
+    style Chatbot fill:#e3f2fd,stroke:#2196f3
+    style Agent fill:#e8f5e9,stroke:#4caf50
+</pre>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-chatbot-vs-agent-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1.1: A chatbot relays messages to the LLM. An agent also has tools — it can run code, read files, and take action.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
 <section id="code-execution-environments" class="level2" data-number="1.1">
 <h2 data-number="1.1" class="anchored" data-anchor-id="code-execution-environments"><span class="header-section-number">1.1</span> Code execution environments</h2>
 <p>AI can write and run code in three different environments, each with different strengths.</p>
@@ -293,7 +326,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-environments-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1.1: Three code execution environments, from most isolated to most integrated.
+Figure&nbsp;1.2: Three code execution environments, from most isolated to most integrated.
 </figcaption>
 </figure>
 </div>

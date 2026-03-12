@@ -12,6 +12,38 @@ Without RAG, if you ask "What is our return policy for enterprise customers?" th
 
 That is what RAG does.
 
+RAG is one of several ways to give AI knowledge it was not trained on.  The choice depends on how much control you need and how much effort you can invest.
+
+```{mermaid}
+%%| label: fig-knowledge-approaches
+%%| fig-cap: "Three ways to give AI knowledge it was not trained on — from least effort to most control."
+%%| fig-width: 90%
+flowchart TD
+    subgraph RAG["📄 RAG"]
+        R1["Feed documents at query time"]
+        R2["Best when facts change often\nor data is proprietary"]
+        R3["_Least effort — no model changes_"]
+    end
+    subgraph FT["🔧 Fine-Tuning"]
+        F1["Retrain the model on your data"]
+        F2["Best for specialized tone,\nformat, or domain expertise"]
+        F3["_Moderate effort — needs training data_"]
+    end
+    subgraph SLM["🏠 Small Language Model"]
+        S1["Run a private model on your hardware"]
+        S2["Best for full control,\nprivacy, or niche tasks"]
+        S3["_Most effort — full infrastructure_"]
+    end
+
+    RAG --- FT --- SLM
+
+    style RAG fill:#e8f5e9,stroke:#4caf50
+    style FT fill:#fff3e0,stroke:#ff9800
+    style SLM fill:#fce4ec,stroke:#e91e63
+```
+
+This chapter focuses on RAG --- the lightest-weight option and the one most accessible to business teams without machine-learning infrastructure.
+
 ## The open-book exam analogy
 
 The simplest way to understand RAG is the open-book exam.  Standard AI is a closed-book exam: the student answers from memory, is confident even when wrong, and cannot cite sources.  RAG is an open-book exam: the student looks up the answer in the reference materials, quotes the source, and can say "this is not covered in my materials" when the answer is not there.

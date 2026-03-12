@@ -385,6 +385,40 @@ Figure&nbsp;4.1: Four ways to connect AI to your data — from simplest to most 
 <h2 data-number="4.13" class="anchored" data-anchor-id="mcp-connecting-to-everything-else"><span class="header-section-number">4.13</span> MCP: connecting to everything else</h2>
 <p>The skill-file approach works well when AI needs access to one database. But organizations often need AI to reach many systems at once — databases, CRMs, financial data providers, project management tools. This is what MCP (Model Context Protocol) is for.</p>
 <p>MCP is an open standard — think of it as USB for AI. A coding agent acts as an MCP <strong>client</strong>. Each external system is wrapped in an MCP <strong>server</strong> — a small program that advertises the tools it offers (query a database, look up a customer, fetch a stock price). When you connect an MCP server, its tools appear automatically in the agent’s toolkit. The agent decides which tools to call based on your question. You can connect multiple servers at once, and the agent sees all of their tools in a single conversation.</p>
+<div class="cell" data-fig-width="90%" data-layout-align="default">
+<div class="cell-output-display">
+<div id="fig-mcp-hub" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-mcp-hub-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div>
+<pre class="mermaid mermaid-js" data-label="fig-mcp-hub">flowchart LR
+    Client["🤖 AI Agent\n_(MCP Client)_"]
+
+    DB["🗄️ Database Server\n_Snowflake, PostgreSQL_"]
+    FIN["📊 Financial Data\n_FactSet, Bloomberg_"]
+    CRM["👥 CRM Server\n_Salesforce, HubSpot_"]
+    COLLAB["💬 Collaboration\n_Slack, GitHub, Drive_"]
+
+    Client &lt;-- "MCP" --&gt; DB
+    Client &lt;-- "MCP" --&gt; FIN
+    Client &lt;-- "MCP" --&gt; CRM
+    Client &lt;-- "MCP" --&gt; COLLAB
+
+    style Client fill:#e3f2fd,stroke:#2196f3
+    style DB fill:#e8f5e9,stroke:#4caf50
+    style FIN fill:#fff3e0,stroke:#ff9800
+    style CRM fill:#f3e5f5,stroke:#9c27b0
+    style COLLAB fill:#fce4ec,stroke:#e91e63
+</pre>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-mcp-hub-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4.2: MCP connects one AI client to many servers — each wrapping a different external system.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
 <p>Each MCP server handles authentication, rate limiting, and data formatting so the agent does not have to. The agent never sees API keys or raw API responses — the server manages those details and returns clean, structured results.</p>
 <p>In Claude Desktop, MCP servers are configured in a JSON settings file or installed as one-click desktop extensions. Once configured, a server’s tools are available every time you open the Code tab.</p>
 <section id="corporate-mcp-servers" class="level3">
@@ -487,7 +521,7 @@ Revenue = SUM(invoice_items.UnitPrice * invoice_items.Quantity).</code></pre>
 </div>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-data-flow-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;4.2: The data flow round-trip — only the question and schema leave your network.
+Figure&nbsp;4.3: The data flow round-trip — only the question and schema leave your network.
 </figcaption>
 </figure>
 </div>

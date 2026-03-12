@@ -131,6 +131,30 @@ The skill-file approach works well when AI needs access to one database.  But or
 
 MCP is an open standard --- think of it as USB for AI.  A coding agent acts as an MCP **client**.  Each external system is wrapped in an MCP **server** --- a small program that advertises the tools it offers (query a database, look up a customer, fetch a stock price).  When you connect an MCP server, its tools appear automatically in the agent's toolkit.  The agent decides which tools to call based on your question.  You can connect multiple servers at once, and the agent sees all of their tools in a single conversation.
 
+```{mermaid}
+%%| label: fig-mcp-hub
+%%| fig-cap: "MCP connects one AI client to many servers — each wrapping a different external system."
+%%| fig-width: 90%
+flowchart LR
+    Client["🤖 AI Agent\n_(MCP Client)_"]
+
+    DB["🗄️ Database Server\n_Snowflake, PostgreSQL_"]
+    FIN["📊 Financial Data\n_FactSet, Bloomberg_"]
+    CRM["👥 CRM Server\n_Salesforce, HubSpot_"]
+    COLLAB["💬 Collaboration\n_Slack, GitHub, Drive_"]
+
+    Client <-- "MCP" --> DB
+    Client <-- "MCP" --> FIN
+    Client <-- "MCP" --> CRM
+    Client <-- "MCP" --> COLLAB
+
+    style Client fill:#e3f2fd,stroke:#2196f3
+    style DB fill:#e8f5e9,stroke:#4caf50
+    style FIN fill:#fff3e0,stroke:#ff9800
+    style CRM fill:#f3e5f5,stroke:#9c27b0
+    style COLLAB fill:#fce4ec,stroke:#e91e63
+```
+
 Each MCP server handles authentication, rate limiting, and data formatting so the agent does not have to.  The agent never sees API keys or raw API responses --- the server manages those details and returns clean, structured results.
 
 In Claude Desktop, MCP servers are configured in a JSON settings file or installed as one-click desktop extensions.  Once configured, a server's tools are available every time you open the Code tab.
