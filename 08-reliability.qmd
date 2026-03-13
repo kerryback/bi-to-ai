@@ -149,6 +149,14 @@ Most organizations need a mix.  Cloud APIs work well for non-sensitive tasks whe
 
 The deciding factor is not the model but the data.  Ask: does this prompt contain information that cannot leave our network?  If yes, run inference on-premise or in a private cloud tenancy.  If no, a cloud API with an enterprise data-processing agreement is typically sufficient.
 
+### Data sovereignty
+
+Data sovereignty is the legal and organizational requirement that data remain under the jurisdiction and governance controls of a specific country or entity.  It goes beyond the cloud-vs.-on-prem deployment choice: even data stored in a cloud provider's data center may violate sovereignty requirements if that data center is in another country or subject to another government's laws.
+
+GDPR requires that EU residents' personal data be processed under EU-adequate protections.  U.S. defense agencies require air-gapped environments --- infrastructure with no internet connectivity --- for classified workloads.  Financial regulators in many countries require that customer records stay within national borders.  When you connect an AI agent to enterprise data, these constraints determine not just *how* inference runs but *where* it runs.
+
+The pattern emerging across industries is **hybrid**: sensitive and regulated workloads run on private infrastructure (on-premises or sovereign cloud), while non-sensitive tasks use public cloud APIs.  The U.S. Department of Defense awarded a $931 million contract to modernize its data centers with on-premise private cloud.  Barclays migrated over 50,000 workloads to private cloud infrastructure for regulatory compliance.  New Zealand telecom provider 2degrees built a sovereign AI platform to ensure customer data stays under New Zealand jurisdiction.  These are not edge cases --- they reflect the standard enterprise pattern for AI deployment with sensitive data.
+
 ### Audit requirements
 
 SOX, GDPR, HIPAA, and industry-specific regulations all impose requirements on how data is processed and by whom.  Every prompt sent to an LLM is a data-processing event and must be treated accordingly --- logged, governed, and reviewed.
@@ -170,6 +178,8 @@ FERPA protects student education records.  HIPAA protects health information.  S
 AI can analyze sensitive data without ever reading the actual records.  The technique from Module 5 applies: describe the table structure in the SKILL.md (table names, column names, data types), and the agent writes SQL from the schema alone, never seeing the actual records.  The script runs locally, and the output stays on your server.
 
 Table metadata is not PII.  The actual records stay behind the firewall.  The LLM produces the code, not the output.  This pattern --- send the schema, keep the data --- works for any regulated environment.
+
+You can improve the quality of the generated SQL by including a few synthetic rows alongside the schema.  Databricks found that adding approximately three sample rows per table raises SQL accuracy by about six percentage points on standard benchmarks compared to schema alone.  The sample rows reveal data formatting patterns (is the status column stored as `Active`/`Inactive` or `1`/`0`?), disambiguate column semantics (is `code` a country code or a product code?), and help the model write correct WHERE clauses with properly formatted literal values.  The key is that the rows are synthetic --- fabricated to match the real data's formats and value ranges without containing any actual records.  Three rows is the sweet spot; more than that tends to distract the model rather than help it.  Keep the synthetic data in sync with your schema: when you add a column or change a data type in production, update the synthetic rows to match.
 
 ## Session log auditing
 
