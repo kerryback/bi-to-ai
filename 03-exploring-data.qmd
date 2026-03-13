@@ -1,6 +1,8 @@
 # Exploring Data with AI
 
-This chapter goes from a raw spreadsheet to a written recommendation with charts in under ten minutes --- using nothing but plain-English conversation.  We use a spreadsheet as an example, but other data sources can be used similarly.  Chapter 4 discusses databases.
+Chapter 1 described how agents replace dashboards by letting you query data in plain English. This chapter puts that into practice. You will go from a raw spreadsheet to a written recommendation with charts in under ten minutes --- using nothing but plain-English conversation. The agent reads your data, writes and runs Python, renders charts, and synthesizes findings --- the full agent loop in action.
+
+This chapter goes from a raw spreadsheet to a written recommendation with charts in under ten minutes --- using nothing but plain-English conversation.  We use a spreadsheet as an example, but other data sources can be used similarly.  Chapter 5 discusses databases.
 
 ## The scenario
 
@@ -139,11 +141,11 @@ This pattern --- extract, match, reconcile --- is the foundation of due diligenc
 ## Exercises
 
 ::: {.callout-note title="Exercise 1: The Superstore Walkthrough" collapse="true"}
-This is the core exercise for Chapter 2.  Download [superstore.csv](files/data/superstore.csv) and place it in a folder.  Open your coding agent in that folder and work through the four steps described above.
+This is the core exercise for Chapter 3.  Download [superstore.csv](files/data/superstore.csv) and place it in a folder.  Open your coding agent in that folder and work through the four steps described above.
 
 First, ask the agent to describe the data.  Confirm the row count, column names, date range, and financial summary.  Second, ask three decision-relevant questions tied to the marketing budget allocation decision.  Third, create at least one line chart (for trends), one bar chart (for comparisons), and one scatter plot (for relationships).  Iterate on at least one chart by adding annotations or improving the layout.  Fourth, ask the agent to write a one-page executive memo with the recommendation and supporting charts.
 
-Bring your dataset and memo to Chapter 3 --- you will use them as thinking-partner exercises.
+Bring your dataset and memo to Chapter 4 --- you will use them as thinking-partner exercises.
 :::
 
 

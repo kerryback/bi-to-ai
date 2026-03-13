@@ -21,13 +21,14 @@ book:
   repo-url: "https://github.com/kerryback/bi-to-ai/tree/master/files"
   chapters:
     - index.qmd
-    - 01-coding-tools.qmd
-    - 02-exploring-data.qmd
-    - 03-thinking-partner.qmd
-    - 04-connecting-databases.qmd
-    - 05-reporting-cycles.qmd
-    - 06-rag.qmd
-    - 07-reliability.qmd
+    - 01-agents-and-dashboards.qmd
+    - 02-getting-started.qmd
+    - 03-exploring-data.qmd
+    - 04-thinking-partner.qmd
+    - 05-connecting-databases.qmd
+    - 06-reporting-pipelines.qmd
+    - 07-rag.qmd
+    - 08-reliability.qmd
 
 format:
   html:

@@ -1,8 +1,6 @@
 # Retrieval-Augmented Generation
 
-Chapters 2 through 5 worked with structured data --- spreadsheets and databases where every row has the same columns and every query returns a precise answer.  But much of the knowledge in an organization lives in unstructured documents: policy handbooks, contracts, product manuals, research reports, meeting transcripts.
-
-This chapter covers Retrieval-Augmented Generation, or RAG --- the technique that lets AI answer questions about your documents with grounded, cited answers instead of hallucinations.
+The previous chapters worked with structured data --- spreadsheets and databases where every row has the same columns.  But much of the knowledge in an organization lives in unstructured documents: policy handbooks, contracts, product manuals, research reports, meeting transcripts.  This chapter covers Retrieval-Augmented Generation, or RAG --- the technique that lets AI answer questions about your documents with grounded, cited answers instead of hallucinations.
 
 ## The problem: AI does not know your documents
 
@@ -110,7 +108,7 @@ Citations transform AI from "trust me" to "here's the evidence."  This is what m
 
 RAG is not always the right approach.  The choice depends on the type of data.
 
-For structured data (spreadsheets, databases, tables of numbers), a skill that writes SQL queries is more appropriate.  This is what you built in Chapter 4.
+For structured data (spreadsheets, databases, tables of numbers), a skill that writes SQL queries is more appropriate.  This is what you built in Chapter 5.
 
 For unstructured documents (policies, contracts, manuals, reports), RAG is the right tool.
 
@@ -132,7 +130,7 @@ flowchart TD
     Small["Small document set?\n_< ~100 pages_"]
     Large["Large document set?\n_Hundreds of pages+_"]
 
-    SQL["→ SQL skill\n_Chapter 4_"]
+    SQL["→ SQL skill\n_Chapter 5_"]
     Direct["→ Direct context\n_Give it to the agent_"]
     RAG["→ RAG pipeline\n_Chunk, embed, retrieve_"]
     Both["→ Skill + RAG\n_SQL for numbers,\nRAG for context_"]
@@ -207,7 +205,7 @@ Production RAG requires ongoing maintenance.  Documents need refresh schedules s
 
 Quality assurance means maintaining a test suite of known question-answer pairs to validate accuracy, monitoring retrieval quality over time, and building a feedback loop where users can flag incorrect answers for improvement.
 
-The same sandbox-audit-deploy pattern from Chapter 5 applies.  RAG is a system, not a feature, and it needs the same care as any production system.
+The same sandbox-audit-deploy pattern from Chapter 6 applies.  RAG is a system, not a feature, and it needs the same care as any production system.
 
 ## Exercises
 

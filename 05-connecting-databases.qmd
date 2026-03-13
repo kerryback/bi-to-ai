@@ -1,20 +1,14 @@
 # Connecting Databases
 
+Chapter 1 described the vision: replacing dashboards with natural-language queries.  This chapter makes it real.  You will connect a coding agent to a database and build the tools that let anyone query it in plain English --- no SQL required.
+
 The first three chapters worked with individual files --- a CSV placed in a folder, a memo pasted into a conversation.  Most real business data does not live in spreadsheets.  It lives in databases: structured collections of related tables, hosted on servers, queried with SQL.
 
 This chapter connects AI to those databases.  By the end, you will understand how your organization can create tools so that everyone can query a database in plain English --- no SQL required.  As throughout this book, the examples use Claude Code, but the same workflows apply to Gemini CLI and OpenAI Codex.
 
-## The dashboard trap
-
-Organizations spend millions building dashboards that answer yesterday's questions.  The cycle is familiar: a user requests a report, an analyst builds it, IT deploys it to Tableau or Power BI, and then the user asks a follow-up question --- which starts the cycle over.
-
-The cost is measured in three dimensions.  Time: weeks to months per dashboard.  Rigidity: fixed views of fixed data that cannot adapt to a new question.  Adoption: according to Gartner (2023), fewer than half of data and analytics teams effectively provide value to their organizations.
-
-The dashboard was a workaround for the fact that databases do not speak English.  Now they do.  With natural language AI, you skip the entire build cycle and go straight from question to answer.  Ask in plain English instead of writing SQL and ask whatever you want instead of being limited to dashboard views.  Get answers in seconds instead of weeks.  Follow-up questions are free --- just type the next sentence.
-
 ## From spreadsheets to databases
 
-In Chapter 2 you analyzed a spreadsheet --- a single table of rows and columns living in a file on your machine.  Most real business data lives in databases: many related tables linked by keys, hosted on a server, queried with SQL.
+In Chapter 3 you analyzed a spreadsheet --- a single table of rows and columns living in a file on your machine.  Most real business data lives in databases: many related tables linked by keys, hosted on a server, queried with SQL.
 
 SQL is the language databases understand.  You do not need to learn it.  AI writes the SQL for you.  But you do need to tell the AI what is in the database --- which tables exist, what the columns mean, and how the tables relate to each other.
 
@@ -59,7 +53,7 @@ The key tables are employees (8 staff members), customers (59 customers across 2
 
 A skill is a set of instructions that specializes a general-purpose AI for a specific task.  Every AI customization works the same way: additional text is added to the prompt.  A skill provides three things: domain knowledge (what the data means), workflow instructions (how to do the task), and output format specifications (how to present results).
 
-Skills are not limited to databases.  You could build a skill for weekly report generation, customer support analysis, or any recurring task where AI benefits from domain context.  
+Skills are not limited to databases.  You could build a skill for weekly report generation, customer support analysis, or any recurring task where AI benefits from domain context.
 
 ## The SKILL.md file
 
@@ -183,17 +177,17 @@ The MCP registry at [registry.modelcontextprotocol.io](https://registry.modelcon
 
 ## The skill as deployment artifact
 
-A polished skill is what gets deployed on your intranet.  The skill file encodes which tables matter, how they relate, and what the business terminology means.  IT adds the infrastructure: SSO authentication, read-only database credentials, and query logging for audit.  Chapter 5 shows how to chain this skill into an automated reporting pipeline.
+A polished skill is what gets deployed on your intranet.  The skill file encodes which tables matter, how they relate, and what the business terminology means.  IT adds the infrastructure: SSO authentication, read-only database credentials, and query logging for audit.  Chapter 6 shows how to chain this skill into an automated reporting pipeline.
 
 ## A natural-language query app
 
 The skill-file approach works well with a coding agent, but what about the rest of your organization?  Not everyone will use a terminal.  The same pattern --- send a question and schema to an LLM, get SQL back, run it --- can be wrapped in a simple web app that anyone can use from a browser.
 
-In production, this app would be deployed on the corporate intranet, the database would be a PostgreSQL or Snowflake instance on the company's servers, and the LLM would be an enterprise-licensed model (more on licensing and compliance in Chapter 7).  For this demo, we run everything locally: a small Streamlit app on your laptop, the Chinook SQLite file in the same folder, and Claude Sonnet via the Anthropic API.
+In production, this app would be deployed on the corporate intranet, the database would be a PostgreSQL or Snowflake instance on the company's servers, and the LLM would be an enterprise-licensed model (more on licensing and compliance in Chapter 8).  For this demo, we run everything locally: a small Streamlit app on your laptop, the Chinook SQLite file in the same folder, and Claude Sonnet via the Anthropic API.
 
 ### Setting up the demo
 
-The demo apps call Claude Sonnet through the Anthropic API.  If you have not already set up your API key, follow the instructions in Chapter 1 ("Setting up the Anthropic API").  The key must be available as an environment variable:
+The demo apps call Claude Sonnet through the Anthropic API.  If you have not already set up your API key, follow the instructions in Chapter 2 ("Setting up the Anthropic API").  The key must be available as an environment variable:
 
 ```bash
 export ANTHROPIC_API_KEY="sk-ant-..."
@@ -343,11 +337,11 @@ streamlit run chinook-charts.py
 
 ### A note on executing generated code
 
-The chart app uses Python's `exec()` to run LLM-generated code.  For a local demo this is fine --- you are running it on your own machine.  In a production deployment, executing AI-generated code requires sandboxing: running the code in an isolated container with no network access and limited filesystem permissions.  Chapter 5 discusses sandboxing in more detail, and Chapter 7 covers the broader governance framework.
+The chart app uses Python's `exec()` to run LLM-generated code.  For a local demo this is fine --- you are running it on your own machine.  In a production deployment, executing AI-generated code requires sandboxing: running the code in an isolated container with no network access and limited filesystem permissions.  Chapter 6 discusses sandboxing in more detail, and Chapter 8 covers the broader governance framework.
 
 ### From demo to production
 
-This is a demo, not a production application.  There is no authentication, no guardrails on the SQL, and no sandboxing of query execution.  The chart app adds another consideration: it executes LLM-generated Python, not just SQL, which makes sandboxing even more important.  In a production deployment, IT would add SSO login, restrict the database connection to read-only credentials, log every query for audit, run generated code in an isolated container, and use an enterprise LLM with a data-processing agreement.  Chapter 7 covers these considerations in detail.  But as a prototype that proves the concept, fifty lines of Python is all it takes.
+This is a demo, not a production application.  There is no authentication, no guardrails on the SQL, and no sandboxing of query execution.  The chart app adds another consideration: it executes LLM-generated Python, not just SQL, which makes sandboxing even more important.  In a production deployment, IT would add SSO login, restrict the database connection to read-only credentials, log every query for audit, run generated code in an isolated container, and use an enterprise LLM with a data-processing agreement.  Chapter 8 covers these considerations in detail.  But as a prototype that proves the concept, fifty lines of Python is all it takes.
 
 ## Exercises
 

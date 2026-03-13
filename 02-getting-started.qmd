@@ -1,31 +1,6 @@
-# Get Started with AI Coding Tools
+# Getting Started
 
-Large language models are impressive conversationalists, but without the ability to run code they can only describe how to analyze your data.  They can outline the steps, suggest the formulas, and draft the chart specifications --- but you still have to do the work.  When you attach a code-execution tool, the dynamic changes completely.  A coding agent loads your data into a Python dataframe, writes and runs the analysis, renders the charts, and synthesizes the findings into a memo.  You provide the questions; the agent provides the answers.  The result is not a plan for an analysis but the analysis itself --- complete with numbers, visualizations, and narrative.
-
-This chapter walks through installation, introduces the interface we use throughout the book --- the Code tab in Claude Desktop --- and describes alternative coding agents from Google and OpenAI.
-
-```{mermaid}
-%%| label: fig-chatbot-vs-agent
-%%| fig-cap: "A chatbot relays messages to the LLM.  An agent also has tools — it can run code, read files, and take action."
-%%| fig-width: 100%
-flowchart LR
-    subgraph Chatbot["💬 Chatbot"]
-        direction LR
-        U1["👤 User"] -- "question" --> CB["🤖 Chatbot"] -- "prompt +\nhistory" --> LLM1["🧠 LLM"]
-        LLM1 -- "text reply" --> CB -- "answer" --> U1
-    end
-
-    subgraph Agent["🛠️ Coding Agent"]
-        direction LR
-        U2["👤 User"] -- "question" --> AG["🤖 Agent"] -- "prompt +\nhistory" --> LLM2["🧠 LLM"]
-        LLM2 -- "text or\ntool call" --> AG
-        AG <-- "run code,\nread files" --> Tools["⚙️ Tools"]
-        AG -- "answer +\nartifacts" --> U2
-    end
-
-    style Chatbot fill:#e3f2fd,stroke:#2196f3
-    style Agent fill:#e8f5e9,stroke:#4caf50
-```
+Chapter 1 explained what AI agents are and why they are transforming business intelligence.  This chapter gets you set up to use one.  By the end, you will have a coding agent running on your machine, ready to analyze data, write code, and produce documents from plain-English conversation.
 
 ## Code execution environments
 
@@ -44,23 +19,23 @@ The key takeaway is that AI does not need a special platform to analyze your dat
 %%| fig-cap: "Three code execution environments, from most isolated to most integrated."
 %%| fig-width: 100%
 flowchart LR
-    subgraph Cloud["☁️ Cloud Sandbox"]
+    subgraph Cloud["Cloud Sandbox"]
         direction TB
         C1["Code runs on\nprovider's servers"]
         C2["Data uploaded\ntemporarily"]
-        C3["⚠️ Data leaves\nyour machine"]
+        C3["Data leaves\nyour machine"]
     end
-    subgraph VM["💻 Virtual Machine"]
+    subgraph VM["Virtual Machine"]
         direction TB
         V1["Code runs in\nlocal VM"]
         V2["Files accessible\nwithin VM"]
-        V3["✅ Data stays\non your machine"]
+        V3["Data stays\non your machine"]
     end
-    subgraph Local["🖥️ Local App"]
+    subgraph Local["Local App"]
         direction TB
         L1["Code runs\ndirectly on your machine"]
         L2["Full access to\nfiles & databases"]
-        L3["✅ Nothing\nuploaded"]
+        L3["Nothing\nuploaded"]
     end
     Cloud --> VM --> Local
 ```
@@ -100,7 +75,7 @@ If the installer does not work for Claude Desktop, download it directly from [cl
 
 The Claude Desktop app has three tabs in the sidebar: **Chat**, **Cowork**, and **Code**.  Click the **Code** tab.  This is where you will do all of the work in this book.
 
-The Code tab runs the Claude Code engine --- a coding agent with full access to your local files, databases, and network.  It reads files, writes and runs Python, renders charts, and produces documents, all from plain-English conversation.  It also supports clickable file diffs, inline image previews, and drag-and-drop file attachments.
+The Code tab runs the Claude Code engine --- a coding agent with full access to your local files, databases, and network.  This is the agent architecture described in Chapter 1: an LLM connected to tools through an execution layer, running the plan-execute-observe-iterate loop autonomously.  It reads files, writes and runs Python, renders charts, and produces documents, all from plain-English conversation.
 
 To get started, click **Code** in the sidebar, then select a folder as your working directory.  Choose a model (Sonnet is fast and capable; Opus is more thorough) and a permission mode.  For the exercises in this book, **"auto-accept"** is the most convenient permission mode --- it lets the agent run code without asking for approval on every step.
 
@@ -133,7 +108,7 @@ Claude Code has a skill system built in.  A skill is a folder containing a markd
 - **xlsx** --- read, create, and edit Excel spreadsheets with formulas, formatting, and charts.
 - **docx** --- create and edit Word documents with tracked changes, comments, and formatting.
 - **pptx** --- create and edit PowerPoint presentations.
-- **skill-creator** --- a guide for building your own skills.  You will use this in Chapter 4 when you create a database skill.
+- **skill-creator** --- a guide for building your own skills.  You will use this in Chapter 5 when you create a database skill.
 
 You can verify the skills are installed by opening the Code tab and typing `/` --- the available skills appear as slash commands.
 
@@ -173,7 +148,7 @@ response = client.messages.create(
 print(response.content[0].text)
 ```
 
-If you see a greeting, the key is working and you are ready for the demo apps in Chapters 4 and beyond.
+If you see a greeting, the key is working and you are ready for the demo apps in Chapters 5 and beyond.
 
 ## Other interfaces
 
