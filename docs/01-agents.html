@@ -6,10 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Kerry Back">
-<meta name="dcterms.date" content="2026-03-13">
 
-<title>From BI to AI</title>
+<title>1&nbsp; From Dashboards to AI Agents – From BI to AI</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -32,7 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./01-agents.html" rel="next">
+<link href="./02-getting-started.html" rel="next">
+<link href="./index.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -77,6 +76,9 @@ ul.task-list li input[type="checkbox"] {
     document.body.classList.add('hypothesis-enabled');
   });
 </script>
+<script src="site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
 
 </head>
@@ -90,7 +92,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Preface</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01-agents.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">From Dashboards to AI Agents</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -126,13 +128,13 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Preface</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./01-agents.html" class="sidebar-item-text sidebar-link">
+  <a href="./01-agents.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">From Dashboards to AI Agents</span></span></a>
   </div>
 </li>
@@ -188,11 +190,20 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Module contents</h2>
    
   <ul>
-  <li><a href="#preface" id="toc-preface" class="nav-link active" data-scroll-target="#preface">Preface</a>
+  <li><a href="#the-evolution-of-the-user-interface" id="toc-the-evolution-of-the-user-interface" class="nav-link active" data-scroll-target="#the-evolution-of-the-user-interface"><span class="header-section-number">1.1</span> The evolution of the user interface</a></li>
+  <li><a href="#what-is-an-ai-agent" id="toc-what-is-an-ai-agent" class="nav-link" data-scroll-target="#what-is-an-ai-agent"><span class="header-section-number">1.2</span> What is an AI agent?</a></li>
+  <li><a href="#how-agents-work-the-agent-loop" id="toc-how-agents-work-the-agent-loop" class="nav-link" data-scroll-target="#how-agents-work-the-agent-loop"><span class="header-section-number">1.3</span> How agents work: the agent loop</a>
   <ul class="collapse">
-  <li><a href="#data-files" id="toc-data-files" class="nav-link" data-scroll-target="#data-files">Data files</a></li>
-  <li><a href="#prerequisites" id="toc-prerequisites" class="nav-link" data-scroll-target="#prerequisites">Prerequisites</a></li>
+  <li><a href="#tools-an-agent-can-use" id="toc-tools-an-agent-can-use" class="nav-link" data-scroll-target="#tools-an-agent-can-use">Tools an agent can use</a></li>
   </ul></li>
+  <li><a href="#the-dashboard-trap" id="toc-the-dashboard-trap" class="nav-link" data-scroll-target="#the-dashboard-trap"><span class="header-section-number">1.4</span> The dashboard trap</a></li>
+  <li><a href="#natural-language-as-the-query-interface" id="toc-natural-language-as-the-query-interface" class="nav-link" data-scroll-target="#natural-language-as-the-query-interface"><span class="header-section-number">1.5</span> Natural language as the query interface</a></li>
+  <li><a href="#the-database-agent-pattern" id="toc-the-database-agent-pattern" class="nav-link" data-scroll-target="#the-database-agent-pattern"><span class="header-section-number">1.6</span> The database agent pattern</a></li>
+  <li><a href="#case-study-hpes-alfred" id="toc-case-study-hpes-alfred" class="nav-link" data-scroll-target="#case-study-hpes-alfred"><span class="header-section-number">1.7</span> Case study: HPE’s “Alfred”</a></li>
+  <li><a href="#what-agents-replace-and-what-they-dont" id="toc-what-agents-replace-and-what-they-dont" class="nav-link" data-scroll-target="#what-agents-replace-and-what-they-dont"><span class="header-section-number">1.8</span> What agents replace — and what they don’t</a></li>
+  <li><a href="#the-reporting-pipeline" id="toc-the-reporting-pipeline" class="nav-link" data-scroll-target="#the-reporting-pipeline"><span class="header-section-number">1.9</span> The reporting pipeline</a></li>
+  <li><a href="#what-this-course-covers" id="toc-what-this-course-covers" class="nav-link" data-scroll-target="#what-this-course-covers"><span class="header-section-number">1.10</span> What this course covers</a></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">1.11</span> Exercises</a></li>
   </ul>
 </nav>
     </div>
@@ -201,27 +212,14 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">From BI to AI</h1>
-<p class="subtitle lead">Data-Driven Decision Making with Agentic AI</p>
+<h1 class="title"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">From Dashboards to AI Agents</span></h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Kerry Back </p>
-          </div>
-  </div>
     
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">March 13, 2026</p>
-    </div>
-  </div>
   
     
   </div>
@@ -231,40 +229,315 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="preface" class="level1 unnumbered">
-<h1 class="unnumbered">Preface</h1>
-<p>Traditional business intelligence — dashboards, static reports, and fixed queries — is being replaced by AI agents that understand your questions, query your data, and deliver answers in seconds. This course gives professionals from any background a hands-on understanding of how agentic AI transforms analysis, reporting, and decision-making. No coding experience is required.</p>
-<p>Module 1 explains what AI agents are and why they are displacing dashboards as the primary interface between decision-makers and data. It lays out the conceptual foundation — the agent loop, tool use, and the shift from fixed reports to conversational intelligence — that the rest of the course builds on.</p>
-<p>Module 2 introduces the tools. You will install a coding agent, learn how the major options differ, and understand the environments where AI can execute code.</p>
-<p>Module 3 shows how to query data and generate visualizations and reports with plain English. You will open a coding agent in a folder containing a spreadsheet and go from raw data to a written recommendation with charts in under ten minutes.</p>
-<p>Module 4 shows how AI can help you think through decisions. You will use AI as a sparring partner — challenging assumptions, running pre-mortems, and stress-testing your own analysis from Module 3.</p>
-<p>Module 5 shows how AI can be connected to your company’s databases, so anyone with proper credentials can query them in plain English. You will learn about MCP connectors, build a reusable “skill” that encodes a database schema, and build a demo web app that anyone can use from a browser.</p>
-<p>Module 6 shows how to automate multi-step workflows. You will build a reporting pipeline that queries a database, generates charts, writes summaries, and assembles a PowerPoint deck — all from a single instruction.</p>
-<p>Module 7 shows how to use AI to query your company’s documents and return answers grounded in your documents (with citations) rather than relying on its general knowledge. This is called Retrieval-Augmented Generation (RAG).</p>
-<p>Module 8 addresses reliability and compliance. You will validate AI outputs, red-team skills and RAG systems, and build the governance framework your organization needs before deploying any of this.</p>
-<section id="data-files" class="level2">
-<h2 class="anchored" data-anchor-id="data-files">Data files</h2>
-<p>The exercises in this course use three datasets.</p>
-<p>The <a href="files/data/superstore.csv">Superstore CSV</a> contains roughly 10,000 retail orders across four U.S. regions with columns for sales, profit, discount, product category, and customer segment.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> It is used throughout Modules 3, 4, and 8.</p>
-<p>The <a href="files/data/employee-attrition.csv">Employee Attrition CSV</a> contains 1,470 employee records with 35 attributes including department, job role, monthly income, overtime status, job satisfaction, and whether the employee left the company.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> It is used in Module 3 exercises.</p>
-<p>The <a href="files/data/chinook.db">Chinook database</a> is a SQLite file representing a music retailer’s operations with 11 related tables covering employees, customers, invoices, tracks, albums, artists, and genres.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> It is the primary dataset for Module 5 and is revisited in Modules 6 and 8.</p>
-<p>Module 7 uses a <a href="files/data/company-handbook.md">sample company handbook</a> for RAG exercises.</p>
+<p>Something big is happening in how organizations use data. For decades, business intelligence meant dashboards — fixed views of fixed data, built by specialists, delivered weeks after the question was asked. That era is ending. AI agents are replacing dashboards with a fundamentally different model: you ask a question in plain English, and an intelligent system queries your data, runs the analysis, and delivers the answer in seconds.</p>
+<p>This module explains what AI agents are, why they are displacing traditional BI, and what the shift means for anyone who makes decisions with data. The rest of the course shows you how to do it.</p>
+<section id="the-evolution-of-the-user-interface" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="the-evolution-of-the-user-interface"><span class="header-section-number">1.1</span> The evolution of the user interface</h2>
+<p>The way humans interact with computers has changed in waves. Each wave made technology accessible to a larger audience by removing a layer of technical skill.</p>
+<div id="fig-ui-evolution" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ui-evolution-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="files/images/ui-evolution-monitors.png" class="img-fluid quarto-figure quarto-figure-center figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ui-evolution-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1.1: The evolution of user interfaces — from command lines to natural language.
+</figcaption>
+</figure>
+</div>
+<p>Command-line interfaces required users to memorize syntax. Graphical interfaces replaced syntax with point-and-click. Dashboards replaced raw queries with pre-built visualizations. Now, natural language is replacing all of them. You describe what you want in ordinary English, and the AI figures out how to get it.</p>
+<p>Each transition expanded who could use computers productively. The current transition — from dashboards to conversational AI — is the most consequential for business, because it removes the last barrier between a decision-maker and the data they need.</p>
 </section>
-<section id="prerequisites" class="level2">
-<h2 class="anchored" data-anchor-id="prerequisites">Prerequisites</h2>
-<p>You need the Claude Desktop app installed on your machine. Module 2 walks through installation and introduces the <strong>Code</strong> tab — the interface we use throughout this course. No prior coding or data science experience is assumed.</p>
-<p>The examples use Claude Code via the Desktop app, but the concepts and workflows apply equally to alternative coding agents like Gemini CLI and OpenAI Codex, which Module 2 also describes.</p>
+<section id="what-is-an-ai-agent" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="what-is-an-ai-agent"><span class="header-section-number">1.2</span> What is an AI agent?</h2>
+<p>To understand why agents are replacing dashboards, you first need to understand what an agent is and how it differs from a chatbot.</p>
+<p>A <strong>chatbot</strong> is a relay. You type a question, the chatbot sends it to a large language model (LLM), and the LLM sends back a text reply. The conversation is purely verbal — the chatbot cannot take action, look things up, or run code. It can only talk.</p>
+<p>An <strong>agent</strong> adds tools. Like a chatbot, it communicates with an LLM. But the agent also has an execution layer — it can run code, read and write files, query databases, call APIs, and take action in the real world. The LLM decides <em>what</em> to do; the execution layer <em>does</em> it.</p>
+<div class="cell" data-fig-width="100%" data-layout-align="default">
+<div class="cell-output-display">
+<div id="fig-chatbot-vs-agent" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-chatbot-vs-agent-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div>
+<pre class="mermaid mermaid-js" data-label="fig-chatbot-vs-agent">flowchart LR
+    subgraph Chatbot["Chatbot"]
+        direction LR
+        U1["User"] -- "question" --&gt; CB["Chatbot"] -- "prompt +\nhistory" --&gt; LLM1["LLM"]
+        LLM1 -- "text reply" --&gt; CB -- "answer" --&gt; U1
+    end
 
+    subgraph Agent["Coding Agent"]
+        direction LR
+        U2["User"] -- "question" --&gt; AG["Agent"] -- "prompt +\nhistory" --&gt; LLM2["LLM"]
+        LLM2 -- "text or\ntool call" --&gt; AG
+        AG &lt;-- "run code,\nread files" --&gt; Tools["Tools"]
+        AG -- "answer +\nartifacts" --&gt; U2
+    end
 
+    style Chatbot fill:#e3f2fd,stroke:#2196f3
+    style Agent fill:#e8f5e9,stroke:#4caf50
+</pre>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-chatbot-vs-agent-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1.2: A chatbot relays messages to the LLM. An agent also has tools — it can run code, read files, and take action.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>This distinction matters enormously. A chatbot can <em>describe</em> how to analyze your sales data. An agent <em>does</em> the analysis — it reads the spreadsheet, writes Python, computes the metrics, renders the charts, and writes the memo. You get results, not instructions.</p>
 </section>
-</section>
-<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
-<hr>
-<ol>
-<li id="fn1"><p>The Sample Superstore dataset is published on Kaggle at <a href="https://www.kaggle.com/datasets/vivek468/superstore-dataset-final" class="uri">https://www.kaggle.com/datasets/vivek468/superstore-dataset-final</a>. It is widely used in data-visualization tutorials and Tableau exercises.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>The IBM HR Analytics Employee Attrition &amp; Performance dataset is a fictional dataset created by IBM data scientists, published on Kaggle at <a href="https://www.kaggle.com/datasets/pavansubhasht/ibm-hr-analytics-attrition-dataset" class="uri">https://www.kaggle.com/datasets/pavansubhasht/ibm-hr-analytics-attrition-dataset</a>.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn3"><p>The Chinook database was created by Luis Rocha as a modern alternative to the Northwind sample database. The source repository is at <a href="https://github.com/lerocha/chinook-database" class="uri">https://github.com/lerocha/chinook-database</a>.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<section id="how-agents-work-the-agent-loop" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="how-agents-work-the-agent-loop"><span class="header-section-number">1.3</span> How agents work: the agent loop</h2>
+<p>Every agent follows a loop: <strong>plan, execute, observe, iterate.</strong></p>
+<ol type="1">
+<li><strong>Plan</strong> — the LLM reads your request and breaks it into steps.</li>
+<li><strong>Execute</strong> — the agent calls a tool (runs code, queries a database, writes a file).</li>
+<li><strong>Observe</strong> — the agent checks the result of the action.</li>
+<li><strong>Iterate</strong> — if the result is not satisfactory, the agent adjusts its plan and tries again.</li>
 </ol>
+<p>The loop repeats until the task is complete. Multiple rounds of communication occur between the LLM and the tools before the agent returns output to you.</p>
+<div class="cell" data-fig-width="60%" data-layout-align="default">
+<div class="cell-output-display">
+<div id="fig-agent-loop" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-agent-loop-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div>
+<pre class="mermaid mermaid-js" data-label="fig-agent-loop">flowchart TB
+    Plan["Plan\nBreak task into steps"]
+    Execute["Execute\nRun code, call tools"]
+    Observe["Observe\nCheck results"]
+    Iterate["Iterate\nAdjust the plan"]
+
+    Plan --&gt; Execute --&gt; Observe --&gt; Iterate --&gt; Plan
+
+    style Plan fill:#e3f2fd,stroke:#2196f3
+    style Execute fill:#fff3e0,stroke:#ff9800
+    style Observe fill:#e8f5e9,stroke:#4caf50
+    style Iterate fill:#f3e5f5,stroke:#9c27b0
+</pre>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-agent-loop-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1.3: The agent loop — plan, execute, observe, iterate — repeats until the task is done.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>When an agent encounters an error — a SQL query that returns no results, a chart that renders incorrectly, a file that does not exist — it does not stop and ask you what to do. It diagnoses the problem, revises its approach, and tries again. This autonomous problem-solving is what separates agents from simple automation scripts.</p>
+<section id="tools-an-agent-can-use" class="level3">
+<h3 class="anchored" data-anchor-id="tools-an-agent-can-use">Tools an agent can use</h3>
+<p>The LLM does not run code or call databases directly. When it decides a tool is needed, it returns a structured message — something like <code>{"tool": "sql_query", "query": "SELECT ..."}</code>. The agent’s execution layer reads that message, runs the actual tool, and sends the result back to the LLM. The LLM reads the result and decides what to do next.</p>
+<p>Common agent tools include:</p>
+<ul>
+<li><strong>Python environment</strong> — for data analysis, charting, and computation</li>
+<li><strong>Database connections</strong> — for querying SQL databases</li>
+<li><strong>File system</strong> — for reading, writing, and editing files</li>
+<li><strong>Web search and APIs</strong> — for fetching external data</li>
+<li><strong>Document creation</strong> — for producing Excel, Word, and PowerPoint files</li>
+</ul>
+<p>An agent can use multiple tools in sequence. For example: query a database, pass the results to Python for analysis, generate a chart, write a narrative summary, and assemble everything into a PowerPoint deck — all from a single instruction.</p>
+</section>
+</section>
+<section id="the-dashboard-trap" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="the-dashboard-trap"><span class="header-section-number">1.4</span> The dashboard trap</h2>
+<p>Organizations spend millions building dashboards. When a new question arises, the cycle restarts.</p>
+<ol type="1">
+<li>A business user requests a report.</li>
+<li>A team builds the queries, charts, and filters and deploys them.</li>
+<li>The user asks a follow-up — <strong>back to step 1.</strong></li>
+</ol>
+<p>The cost is measured in three dimensions. <strong>Time</strong>: weeks to months per dashboard. <strong>Money</strong>: BI licenses, engineering hours, maintenance. <strong>Rigidity</strong>: fixed views of fixed data that cannot adapt to a new question.</p>
+<p>According to Gartner, fewer than half of data and analytics teams effectively provide value to their organizations. The reason is not lack of data — it is that dashboards answer <em>yesterday’s</em> questions. The most valuable analysis comes from ad-hoc questions that arise in the moment:</p>
+<ul>
+<li>“What happened to margins in the Southeast last quarter?”</li>
+<li>“Show me our top 10 customers by growth rate, excluding one-time orders.”</li>
+<li>“Compare Q3 headcount vs.&nbsp;budget by department, and flag anyone over 110%.”</li>
+</ul>
+<p>These are simple questions. Getting answers should not require a development cycle.</p>
+</section>
+<section id="natural-language-as-the-query-interface" class="level2" data-number="1.5">
+<h2 data-number="1.5" class="anchored" data-anchor-id="natural-language-as-the-query-interface"><span class="header-section-number">1.5</span> Natural language as the query interface</h2>
+<p>The dashboard was a <em>workaround</em> for the fact that databases do not speak English. Now they do.</p>
+<p>With a natural-language AI agent, you skip the entire dashboard build cycle and go straight from question to answer.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>Traditional Dashboard</th>
+<th>AI Agent</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>How you ask</strong></td>
+<td>Click filters, select dates</td>
+<td>Type in plain English</td>
+</tr>
+<tr class="even">
+<td><strong>Response time</strong></td>
+<td>Minutes to weeks</td>
+<td>Seconds</td>
+</tr>
+<tr class="odd">
+<td><strong>Follow-ups</strong></td>
+<td>New dashboard request</td>
+<td>Next sentence</td>
+</tr>
+<tr class="even">
+<td><strong>What you need to know</strong></td>
+<td>Dashboard layout, filter options</td>
+<td>What questions to ask</td>
+</tr>
+</tbody>
+</table>
+<p>Consider what this looks like in practice. You say: <em>“Show me monthly revenue by product line for 2025.”</em> The agent writes SQL, queries the database, and produces a grouped bar chart. You say: <em>“Break out Enterprise by region.”</em> The agent refines the query and updates the chart. Behind the scenes, four different SQL queries were written and three visualizations produced. You needed to know nothing except what questions to ask.</p>
+</section>
+<section id="the-database-agent-pattern" class="level2" data-number="1.6">
+<h2 data-number="1.6" class="anchored" data-anchor-id="the-database-agent-pattern"><span class="header-section-number">1.6</span> The database agent pattern</h2>
+<p>The most powerful dashboard replacement is an AI agent connected to your database.</p>
+<ol type="1">
+<li>Connect the database (via a schema description, an API, or a protocol like MCP).</li>
+<li>Give the AI the schema: table names, columns, relationships, and business context.</li>
+<li>Start asking questions.</li>
+</ol>
+<p>The agent writes and executes SQL queries, computes derived metrics (growth rates, ratios, variance decompositions), and generates charts — all from plain English. It can export results to Excel or assemble a PowerPoint deck.</p>
+<p>Each of these tasks would take a BI team <strong>days to build</strong> as a dashboard. With a database agent, they take <strong>seconds</strong>.</p>
+</section>
+<section id="case-study-hpes-alfred" class="level2" data-number="1.7">
+<h2 data-number="1.7" class="anchored" data-anchor-id="case-study-hpes-alfred"><span class="header-section-number">1.7</span> Case study: HPE’s “Alfred”</h2>
+<p>The shift from dashboards to agents is not theoretical. It is already happening at scale.</p>
+<p>Marie Myers, CFO of Hewlett Packard Enterprise (#143 on Fortune 500), described the transformation in <em>Fortune</em> (February 2026). HPE’s weekly operational review required 100+ slides and hundreds of hours of preparation across business units. There was no time left for forward-looking analysis.</p>
+<p>HPE built “Alfred” — AI agents that pull, reconcile, and analyze data automatically. The result: 90% of manual preparation eliminated, cycle time reduced 40%, costs down 25%. Three thousand finance employees are being reskilled to build their own agents.</p>
+<p>“The goal is for finance professionals to become <em>masters of their own destiny</em> rather than casualties of automation,” Myers said.</p>
+<p>Derek Waldron, JP Morgan’s Chief Analytics Officer, described the same trajectory: workers shift from being <em>creators</em> of reports to <em>checkers</em> or managers of AI agents doing that work. The Deloitte Q4 2025 CFO Signals survey of 200 CFOs at $1B+ companies found that 87% say AI will be extremely or very important to finance operations in 2026, and 54% prioritize integrating AI agents in their finance departments.</p>
+</section>
+<section id="what-agents-replace-and-what-they-dont" class="level2" data-number="1.8">
+<h2 data-number="1.8" class="anchored" data-anchor-id="what-agents-replace-and-what-they-dont"><span class="header-section-number">1.8</span> What agents replace — and what they don’t</h2>
+<p>AI agents replace the <strong>mechanical work</strong> of pulling data, building charts, formatting slides, and writing boilerplate narrative. They do not replace judgment, domain expertise, or accountability.</p>
+<p>A weekly ops review that took a data team 6+ hours to prepare and a manager 3 hours to review can be generated by an agent pipeline in under a minute. But someone still needs to interpret the results, decide what to act on, and present to stakeholders.</p>
+<p>The agent does not replace the analyst’s judgment — it replaces the grunt work that keeps analysts from exercising their judgment.</p>
+</section>
+<section id="the-reporting-pipeline" class="level2" data-number="1.9">
+<h2 data-number="1.9" class="anchored" data-anchor-id="the-reporting-pipeline"><span class="header-section-number">1.9</span> The reporting pipeline</h2>
+<p>When an agent chains multiple steps together, the result is a <strong>reporting pipeline</strong>. A typical pipeline:</p>
+<ol type="1">
+<li><strong>Query the database</strong> — pull the relevant data.</li>
+<li><strong>Transform and compute</strong> — calculate metrics, growth rates, variances.</li>
+<li><strong>Generate charts</strong> — render visualizations from the data.</li>
+<li><strong>Write narrative</strong> — generate an executive summary grounded in the numbers.</li>
+<li><strong>Assemble output</strong> — produce a PowerPoint deck, Word document, or web page.</li>
+</ol>
+<div class="cell" data-fig-width="100%" data-layout-align="default">
+<div class="cell-output-display">
+<div id="fig-reporting-pipeline" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-reporting-pipeline-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div>
+<pre class="mermaid mermaid-js" data-label="fig-reporting-pipeline">flowchart LR
+    Q["Query DB\n_DataFrame_"]
+    C["Render Chart\n_PNG image_"]
+    N["Write Narrative\n_summary_"]
+    P["Assemble Deck\n_.pptx file_"]
+    D["Deliver\n_screen + download_"]
+
+    Q --&gt; C --&gt; N --&gt; P --&gt; D
+
+    style Q fill:#e3f2fd,stroke:#2196f3
+    style C fill:#e8f5e9,stroke:#4caf50
+    style N fill:#fff3e0,stroke:#ff9800
+    style P fill:#f3e5f5,stroke:#9c27b0
+    style D fill:#fce4ec,stroke:#e91e63
+</pre>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-reporting-pipeline-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1.4: From raw data to polished report — no copy-paste, no formatting, no manual writing.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>You do not need to build this by hand. You describe what you want to a coding agent, and it builds the pipeline for you. Your job is to test the result, refine the prompt, and iterate until the output meets your standards. Modules 4 through 6 show how.</p>
+</section>
+<section id="what-this-course-covers" class="level2" data-number="1.10">
+<h2 data-number="1.10" class="anchored" data-anchor-id="what-this-course-covers"><span class="header-section-number">1.10</span> What this course covers</h2>
+<p>This course is a hands-on guide to building the capabilities just described. Each module adds a layer of skill, from basic data analysis to production-ready AI systems.</p>
+<p><strong>Module 2: Getting Started</strong> walks through installation and introduces the coding agent you will use throughout the course.</p>
+<p><strong>Module 3: Exploring Data</strong> goes from a raw spreadsheet to a written recommendation with charts in under ten minutes — using nothing but plain-English conversation.</p>
+<p><strong>Module 4: AI as Thinking Partner</strong> shows how to use AI as a sparring partner for decisions — challenging assumptions, running pre-mortems, and stress-testing your own analysis.</p>
+<p><strong>Module 5: Connecting Databases</strong> shows how to connect AI to your company’s databases so anyone can query them in plain English. You will build a reusable skill and a demo web app.</p>
+<p><strong>Module 6: Automating with Agents</strong> chains database queries, charts, narratives, and document assembly into reporting pipelines that run from a single instruction.</p>
+<p><strong>Module 7: Retrieval-Augmented Generation</strong> shows how to give AI knowledge of your company’s documents — policies, contracts, manuals — and get answers grounded in those documents with citations.</p>
+<p><strong>Module 8: Reliability and Compliance</strong> provides the verification protocols, governance frameworks, and deployment patterns your organization needs before any of this goes to production.</p>
+<p>No coding experience is required. The AI writes the code. You provide the questions, the judgment, and the domain expertise.</p>
+</section>
+<section id="exercises" class="level2" data-number="1.11">
+<h2 data-number="1.11" class="anchored" data-anchor-id="exercises"><span class="header-section-number">1.11</span> Exercises</h2>
+<div class="callout callout-style-default callout-note callout-titled" title="Exercise 1: Dashboard Inventory">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exercise 1: Dashboard Inventory
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>List three dashboards or recurring reports your team uses. For each one, answer: How long does it take to produce? How often is it updated? When was the last time someone asked a question the dashboard could not answer?</p>
+<p>Identify the one that would benefit most from being replaced by a natural-language agent. Write one paragraph explaining why.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Exercise 2: Agent vs. Dashboard Comparison">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exercise 2: Agent vs.&nbsp;Dashboard Comparison
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Pick one of the dashboards from Exercise 1. Write down three questions you would ask if you could query the underlying data in plain English — questions the dashboard cannot currently answer.</p>
+<p>Then write down the steps a human analyst would take to answer each question: which data sources to pull, what joins or calculations are needed, and how to present the result. This is the work an agent would automate.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Exercise 3: The AI Landscape">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exercise 3: The AI Landscape
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Using Claude or another AI, research the current state of AI adoption in your industry. Ask:</p>
+<ul>
+<li>What companies in your industry have deployed AI agents for data analysis or reporting?</li>
+<li>What use cases are most common?</li>
+<li>What barriers to adoption are most frequently cited?</li>
+</ul>
+<p>Write a one-page summary of the landscape and identify the three most promising use cases for your organization.</p>
+</div>
+</div>
+</div>
+
+
 </section>
 
 </main> <!-- /main -->
@@ -831,10 +1104,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="./index.html" class="pagination-link" aria-label="Preface">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Preface</span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./01-agents.html" class="pagination-link" aria-label="From Dashboards to AI Agents">
-        <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">From Dashboards to AI Agents</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./02-getting-started.html" class="pagination-link" aria-label="Getting Started">
+        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Getting Started</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

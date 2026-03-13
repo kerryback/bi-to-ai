@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>3&nbsp; AI as Thinking Partner – From BI to AI</title>
+<title>7&nbsp; Retrieval-Augmented Generation – From BI to AI</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,8 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./04-connecting-databases.html" rel="next">
-<link href="./02-exploring-data.html" rel="prev">
+<link href="./08-reliability.html" rel="next">
+<link href="./06-reporting-pipelines.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -76,6 +76,9 @@ ul.task-list li input[type="checkbox"] {
     document.body.classList.add('hypothesis-enabled');
   });
 </script>
+<script src="site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
 
 </head>
@@ -89,7 +92,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./03-thinking-partner.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">AI as Thinking Partner</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./07-rag.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Retrieval-Augmented Generation</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -131,44 +134,50 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./01-coding-tools.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Get Started with AI Coding Tools</span></span></a>
+  <a href="./01-agents.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">From Dashboards to AI Agents</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./02-exploring-data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Exploring Data with AI</span></span></a>
+  <a href="./02-getting-started.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Getting Started</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./03-thinking-partner.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">AI as Thinking Partner</span></span></a>
+  <a href="./03-exploring-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Exploring Data with AI</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./04-connecting-databases.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Connecting Databases</span></span></a>
+  <a href="./04-thinking-partner.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">AI as Thinking Partner</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./05-reporting-cycles.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Automating Reporting Cycles</span></span></a>
+  <a href="./05-connecting-databases.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Connecting Databases</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./06-rag.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Retrieval-Augmented Generation</span></span></a>
+  <a href="./06-reporting-pipelines.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Automating with Agents</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./07-reliability.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Reliability and Compliance</span></span></a>
+  <a href="./07-rag.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Retrieval-Augmented Generation</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-reliability.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Reliability and Compliance</span></span></a>
   </div>
 </li>
     </ul>
@@ -178,19 +187,21 @@ ul.task-list li input[type="checkbox"] {
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Chapter contents</h2>
+    <h2 id="toc-title">Module contents</h2>
    
   <ul>
-  <li><a href="#why-ai-is-a-good-sparring-partner" id="toc-why-ai-is-a-good-sparring-partner" class="nav-link active" data-scroll-target="#why-ai-is-a-good-sparring-partner"><span class="header-section-number">3.1</span> Why AI is a good sparring partner</a></li>
-  <li><a href="#five-conversation-moves" id="toc-five-conversation-moves" class="nav-link" data-scroll-target="#five-conversation-moves"><span class="header-section-number">3.2</span> Five conversation moves</a></li>
-  <li><a href="#example-should-we-cut-our-price" id="toc-example-should-we-cut-our-price" class="nav-link" data-scroll-target="#example-should-we-cut-our-price"><span class="header-section-number">3.3</span> Example: should we cut our price?</a></li>
-  <li><a href="#second-order-thinking" id="toc-second-order-thinking" class="nav-link" data-scroll-target="#second-order-thinking"><span class="header-section-number">3.4</span> Second-order thinking</a></li>
-  <li><a href="#steelmanning" id="toc-steelmanning" class="nav-link" data-scroll-target="#steelmanning"><span class="header-section-number">3.5</span> Steelmanning</a></li>
-  <li><a href="#scenario-planning" id="toc-scenario-planning" class="nav-link" data-scroll-target="#scenario-planning"><span class="header-section-number">3.6</span> Scenario planning</a></li>
-  <li><a href="#combining-data-and-thinking" id="toc-combining-data-and-thinking" class="nav-link" data-scroll-target="#combining-data-and-thinking"><span class="header-section-number">3.7</span> Combining data and thinking</a></li>
-  <li><a href="#challenging-your-own-analysis" id="toc-challenging-your-own-analysis" class="nav-link" data-scroll-target="#challenging-your-own-analysis"><span class="header-section-number">3.8</span> Challenging your own analysis</a></li>
-  <li><a href="#from-analysis-to-action" id="toc-from-analysis-to-action" class="nav-link" data-scroll-target="#from-analysis-to-action"><span class="header-section-number">3.9</span> From analysis to action</a></li>
-  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">3.10</span> Exercises</a></li>
+  <li><a href="#the-problem-ai-does-not-know-your-documents" id="toc-the-problem-ai-does-not-know-your-documents" class="nav-link active" data-scroll-target="#the-problem-ai-does-not-know-your-documents"><span class="header-section-number">7.1</span> The problem: AI does not know your documents</a></li>
+  <li><a href="#the-open-book-exam-analogy" id="toc-the-open-book-exam-analogy" class="nav-link" data-scroll-target="#the-open-book-exam-analogy"><span class="header-section-number">7.2</span> The open-book exam analogy</a></li>
+  <li><a href="#the-rag-pipeline" id="toc-the-rag-pipeline" class="nav-link" data-scroll-target="#the-rag-pipeline"><span class="header-section-number">7.3</span> The RAG pipeline</a></li>
+  <li><a href="#embeddings-and-semantic-search" id="toc-embeddings-and-semantic-search" class="nav-link" data-scroll-target="#embeddings-and-semantic-search"><span class="header-section-number">7.4</span> Embeddings and semantic search</a></li>
+  <li><a href="#citations-and-source-attribution" id="toc-citations-and-source-attribution" class="nav-link" data-scroll-target="#citations-and-source-attribution"><span class="header-section-number">7.5</span> Citations and source attribution</a></li>
+  <li><a href="#when-to-use-rag" id="toc-when-to-use-rag" class="nav-link" data-scroll-target="#when-to-use-rag"><span class="header-section-number">7.6</span> When to use RAG</a></li>
+  <li><a href="#why-chunk-size-matters" id="toc-why-chunk-size-matters" class="nav-link" data-scroll-target="#why-chunk-size-matters"><span class="header-section-number">7.7</span> Why chunk size matters</a></li>
+  <li><a href="#common-failure-modes" id="toc-common-failure-modes" class="nav-link" data-scroll-target="#common-failure-modes"><span class="header-section-number">7.8</span> Common failure modes</a></li>
+  <li><a href="#hands-on-querying-your-documents" id="toc-hands-on-querying-your-documents" class="nav-link" data-scroll-target="#hands-on-querying-your-documents"><span class="header-section-number">7.9</span> Hands-on: querying your documents</a></li>
+  <li><a href="#evaluating-rag-quality" id="toc-evaluating-rag-quality" class="nav-link" data-scroll-target="#evaluating-rag-quality"><span class="header-section-number">7.10</span> Evaluating RAG quality</a></li>
+  <li><a href="#rag-in-production" id="toc-rag-in-production" class="nav-link" data-scroll-target="#rag-in-production"><span class="header-section-number">7.11</span> RAG in production</a></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">7.12</span> Exercises</a></li>
   </ul>
 </nav>
     </div>
@@ -199,7 +210,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">AI as Thinking Partner</span></h1>
+<h1 class="title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Retrieval-Augmented Generation</span></h1>
 </div>
 
 
@@ -216,201 +227,318 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Chapter 2 showed how AI can analyze data in minutes. But many of the hardest decisions in business are not data problems — they are thinking problems. The data may be clear, but the implications are not. The options are not fully explored. The assumptions are unchallenged. The failure modes are unexamined.</p>
-<p>This chapter is about using AI as a sparring partner: someone who will argue with you, challenge your preferred option, and surface the assumptions you did not know you were making.</p>
-<section id="why-ai-is-a-good-sparring-partner" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="why-ai-is-a-good-sparring-partner"><span class="header-section-number">3.1</span> Why AI is a good sparring partner</h2>
-<p>Most decisions are not made poorly because of missing data. They are made poorly because of unchallenged assumptions. The problem is not analytical capacity but intellectual honesty — and intellectual honesty is hard when everyone in the room has an agenda.</p>
-<p>AI has no agenda. Unlike colleagues, it is not protecting turf, managing up, or afraid to disagree with the boss. You can say “argue against my preferred option” and it will do so without hurt feelings, without relationship cost, and without pulling punches. It is a tireless devil’s advocate.</p>
-<p>There is a subtler benefit as well. Explaining your reasoning to AI forces you to articulate assumptions you did not know you were making. The act of structuring the problem for the conversation is itself clarifying. Many executives report that the most valuable part of a thinking-partner session is not what AI says but what they realized while formulating the question.</p>
-</section>
-<section id="five-conversation-moves" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="five-conversation-moves"><span class="header-section-number">3.2</span> Five conversation moves</h2>
-<p>There are five specific things you can say to AI to sharpen your thinking about any decision.</p>
-<div id="fig-five-moves" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<p>The previous modules worked with structured data — spreadsheets and databases where every row has the same columns. But much of the knowledge in an organization lives in unstructured documents: policy handbooks, contracts, product manuals, research reports, meeting transcripts. This module covers Retrieval-Augmented Generation, or RAG — the technique that lets AI answer questions about your documents with grounded, cited answers instead of hallucinations.</p>
+<section id="the-problem-ai-does-not-know-your-documents" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="the-problem-ai-does-not-know-your-documents"><span class="header-section-number">7.1</span> The problem: AI does not know your documents</h2>
+<p>AI models are trained on public data. They know a great deal about the world in general, but they know nothing about your company’s travel policy, your product warranty terms, or last quarter’s board report.</p>
+<p>Without RAG, if you ask “What is our return policy for enterprise customers?” the LLM will either make something up (confidently and plausibly) or admit it does not know. Neither response is useful. What you want is for the system to look up the answer in your actual policy document, quote the relevant passage, and tell you where it found it.</p>
+<p>That is what RAG does.</p>
+<p>RAG is one of several ways to give AI knowledge it was not trained on. The choice depends on how much control you need and how much effort you can invest.</p>
+<div class="cell" data-fig-width="90%" data-layout-align="default">
+<div class="cell-output-display">
+<div id="fig-knowledge-approaches" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-five-moves-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="files/images/five-moves.svg" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:70.0%">
+<div aria-describedby="fig-knowledge-approaches-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div>
+<pre class="mermaid mermaid-js" data-label="fig-knowledge-approaches">flowchart TD
+    subgraph RAG["📄 RAG"]
+        R1["Feed documents at query time"]
+        R2["Best when facts change often\nor data is proprietary"]
+        R3["_Least effort — no model changes_"]
+    end
+    subgraph FT["🔧 Fine-Tuning"]
+        F1["Retrain the model on your data"]
+        F2["Best for specialized tone,\nformat, or domain expertise"]
+        F3["_Moderate effort — needs training data_"]
+    end
+    subgraph SLM["🏠 Small Language Model"]
+        S1["Run a private model on your hardware"]
+        S2["Best for full control,\nprivacy, or niche tasks"]
+        S3["_Most effort — full infrastructure_"]
+    end
+
+    RAG --- FT --- SLM
+
+    style RAG fill:#e8f5e9,stroke:#4caf50
+    style FT fill:#fff3e0,stroke:#ff9800
+    style SLM fill:#fce4ec,stroke:#e91e63
+</pre>
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-five-moves-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;3.1: The five thinking-partner moves — each one reveals a different blind spot.
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-knowledge-approaches-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7.1: Three ways to give AI knowledge it was not trained on — from least effort to most control.
 </figcaption>
 </figure>
 </div>
-<p>The first is to expand options. Ask: “What options am I not considering?” Most decisions are presented as A-vs-B when there are options C, D, and E that nobody has named.</p>
-<p>The second is to challenge. Ask: “Argue against my preferred choice.” This is the classic devil’s-advocate move. Tell AI which option you are leaning toward and ask it to make the strongest case against it.</p>
-<p>The third is to surface assumptions. Ask: “What would need to be true for Option B to win?” This reframes the debate from arguing about preferences to identifying testable conditions. It turns a subjective disagreement into an empirical question.</p>
-<p>The fourth is the pre-mortem. Ask: “If this decision fails, what is the most likely reason?” Pre-mortems are well-studied in decision science; they reliably surface risks that optimism bias would otherwise hide.</p>
-<p>The fifth is to reframe. Ask: “How would a CFO / customer / regulator see this?” Shifting perspective changes what the “real” question is. A question about pricing looks different from the sales team’s perspective than from the finance team’s.</p>
+</div>
+</div>
+<p>This module focuses on RAG — the lightest-weight option and the one most accessible to business teams without machine-learning infrastructure.</p>
 </section>
-<section id="example-should-we-cut-our-price" class="level2" data-number="3.3">
-<h2 data-number="3.3" class="anchored" data-anchor-id="example-should-we-cut-our-price"><span class="header-section-number">3.3</span> Example: should we cut our price?</h2>
-<p>To see these moves in action, consider a scenario. You are a VP at a mid-size SaaS company. Your product is $99/month. A competitor just launched a similar product at $79. Your CEO wants a recommendation by Friday.</p>
-<p>Instead of opening a spreadsheet, you open a conversation.</p>
-<p>“We’re thinking about dropping our price from $99 to $79 to match a new competitor. Help me think through whether that’s the right move.”</p>
-<p>Claude does not answer yes or no. It reframes the decision. Matching the price is not the only option — what about a new $79 tier with fewer features while keeping the $99 tier? Have you considered adding value at $99 instead of cutting price? A third path: hold the price publicly but offer selective retention discounts to at-risk accounts. Three options instead of two, and the conversation is thirty seconds old.</p>
-<p>“I hadn’t considered the tiered approach. What are the risks of just matching their price?”</p>
-<p>Claude lays out the risks. A 20% price cut requires 25% more customers just to break even on revenue, and your cost structure does not shrink. It signals to the market that your product was not worth $99. And competitors can cut again — you have entered a race you cannot win on price alone.</p>
-<p>“OK, argue the other side. What would need to be true for matching the price to be the right call?”</p>
-<p>Claude identifies the conditions. Matching makes sense if price is the primary reason prospects choose the competitor — not features or brand. It also makes sense if your churn data shows price-sensitive customers are already leaving. And if your margins can absorb it: at $79, are you still above breakeven per customer?</p>
-<p>“One more thing. If we hold the price and it turns out to be wrong, what’s the most likely reason?”</p>
-<p>Claude runs the pre-mortem. The most likely failure mode is that the competitor’s price resets buyer expectations across the market. Six months from now, every sales call opens with “Why are you more expensive?” and close rates drop 15%. The damage is slow and invisible — you do not lose customers in a rush; you just stop winning new ones.</p>
-<p>Five minutes of conversation has produced three options instead of two, the risks of each, the conditions that determine which is right, and a failure scenario to monitor. No data was harmed in the making of this decision.</p>
+<section id="the-open-book-exam-analogy" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="the-open-book-exam-analogy"><span class="header-section-number">7.2</span> The open-book exam analogy</h2>
+<p>The simplest way to understand RAG is the open-book exam. Standard AI is a closed-book exam: the student answers from memory, is confident even when wrong, and cannot cite sources. RAG is an open-book exam: the student looks up the answer in the reference materials, quotes the source, and can say “this is not covered in my materials” when the answer is not there.</p>
+<p>The quality of the answer depends entirely on what is in the book. If the documents are incomplete, outdated, or poorly organized, the RAG system will produce incomplete, outdated, or confused answers. The AI is only as good as the documents you give it.</p>
 </section>
-<section id="second-order-thinking" class="level2" data-number="3.4">
-<h2 data-number="3.4" class="anchored" data-anchor-id="second-order-thinking"><span class="header-section-number">3.4</span> Second-order thinking</h2>
-<p>Most decisions are evaluated on their immediate outcome. Second-order thinking asks: what happens <em>after</em> the first effect?</p>
-<p>The prompt is straightforward: “If we do X and it works, what happens next? And after that?”</p>
-<p>In the pricing example, the first-order effect of cutting prices is that volume increases. The second-order effect is that competitors respond and margins compress industry-wide. The third-order effect is that customers expect low prices permanently and the brand is repositioned downmarket.</p>
-<p>AI makes this easy because it can generate the chain of consequences in seconds. You can also ask for the chain in the opposite direction — “If we do X and it fails, what happens next?” — and compare the two trajectories to find the earliest signal that tells you which path you are on.</p>
-<p>The best decision-makers routinely think two moves ahead. AI does not replace that instinct, but it automates the generation of consequences so you can focus on evaluating them.</p>
+<section id="the-rag-pipeline" class="level2" data-number="7.3">
+<h2 data-number="7.3" class="anchored" data-anchor-id="the-rag-pipeline"><span class="header-section-number">7.3</span> The RAG pipeline</h2>
+<p>RAG works in three stages: ingest, retrieve, and generate.</p>
+<p>In the ingest stage, documents are split into chunks — typically paragraphs or sections — and each chunk is converted into a numerical representation called an embedding. The embeddings are stored in a vector database (a searchable index optimized for similarity search).</p>
+<p>In the retrieve stage, when a user asks a question, the question is also converted into an embedding. The system finds the chunks whose embeddings are most similar to the question’s embedding. These are the chunks most likely to contain the answer.</p>
+<p>In the generate stage, the retrieved chunks are fed to the LLM along with the user’s question. The LLM reads the chunks and generates an answer, citing the sources.</p>
+<div class="cell" data-fig-width="100%" data-layout-align="default">
+<div class="cell-output-display">
+<div id="fig-rag-pipeline" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-rag-pipeline-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div>
+<pre class="mermaid mermaid-js" data-label="fig-rag-pipeline">flowchart LR
+    subgraph Ingest["1. Ingest"]
+        direction TB
+        Docs["📄 Documents"] --&gt; Chunk["✂️ Chunk"] --&gt; Embed1["🔢 Embed"] --&gt; Store["🗃️ Vector\nStore"]
+    end
+    subgraph Retrieve["2. Retrieve"]
+        direction TB
+        Question["❓ Question"] --&gt; Embed2["🔢 Embed"] --&gt; Search["🔍 Similarity\nSearch"] --&gt; Chunks["📋 Relevant\nChunks"]
+    end
+    subgraph Generate["3. Generate"]
+        direction TB
+        Input["📋 Chunks +\n❓ Question"] --&gt; LLM["🧠 LLM"] --&gt; Answer["✅ Cited\nAnswer"]
+    end
+
+    Store -. "indexed\nchunks" .-&gt; Search
+    Chunks --&gt; Input
+
+    style Ingest fill:#e3f2fd,stroke:#2196f3
+    style Retrieve fill:#fff3e0,stroke:#ff9800
+    style Generate fill:#e8f5e9,stroke:#4caf50
+</pre>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-rag-pipeline-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7.2: The three stages of RAG: ingest documents, retrieve relevant chunks, generate a cited answer.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
 </section>
-<section id="steelmanning" class="level2" data-number="3.5">
-<h2 data-number="3.5" class="anchored" data-anchor-id="steelmanning"><span class="header-section-number">3.5</span> Steelmanning</h2>
-<p>Steelmanning is the opposite of straw-manning. Instead of constructing a weak version of the opposing argument in order to knock it down, you construct the strongest possible version.</p>
-<p>The prompt: “Make the strongest possible case for the option I like least.”</p>
-<p>If the steelman is weak, your preferred option is stronger than you thought. If the steelman is compelling, you have discovered a genuine risk. Either way, you learn something. The technique works because AI has no emotional investment in any option — it will argue for the position you dislike just as vigorously as it argues for the one you favor.</p>
+<section id="embeddings-and-semantic-search" class="level2" data-number="7.4">
+<h2 data-number="7.4" class="anchored" data-anchor-id="embeddings-and-semantic-search"><span class="header-section-number">7.4</span> Embeddings and semantic search</h2>
+<p>Embeddings are what make RAG fundamentally different from keyword search.</p>
+<p>Traditional keyword search finds documents containing the exact words you typed. If you search for “vacation policy,” you will find documents containing those words but miss documents that say “PTO guidelines” or “time-off rules” or “leave entitlement.”</p>
+<p>Semantic search works on meaning. Embeddings convert text into high-dimensional numerical vectors such that texts with similar meanings point in similar directions. When you search for “vacation policy,” semantic search finds all of those variations because they have similar embeddings. It understands meaning, not just words.</p>
+<p>This is why RAG can answer questions in natural language. You do not need to know the exact terminology used in the document. You ask the question in your own words and the system finds the relevant passages regardless of how they are phrased.</p>
+<div id="fig-keyword-vs-semantic" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-keyword-vs-semantic-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="files/images/keyword-vs-semantic.svg" class="img-fluid quarto-figure quarto-figure-center figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-keyword-vs-semantic-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7.3: Keyword search finds only exact word matches. Semantic search finds all passages with the same meaning — even when the wording differs.
+</figcaption>
+</figure>
+</div>
 </section>
-<section id="scenario-planning" class="level2" data-number="3.6">
-<h2 data-number="3.6" class="anchored" data-anchor-id="scenario-planning"><span class="header-section-number">3.6</span> Scenario planning</h2>
-<p>Scenario planning structures uncertainty into a small number of concrete futures.</p>
-<p>The prompt: “Give me three scenarios — optimistic, base case, pessimistic — with probabilities and specific trigger events.”</p>
-<p>The key is specificity. A good scenario is not “things go well” but “the competitor’s product launch underperforms because their enterprise features are six months behind, and we capture 30% of their early adopters by Q3.” Each scenario should name a trigger event that you can monitor. If the trigger fires, you know which scenario you are in and can act accordingly.</p>
-<p>Scenario planning is particularly valuable when combined with the pre-mortem. The pessimistic scenario is essentially a pre-mortem with a probability attached.</p>
+<section id="citations-and-source-attribution" class="level2" data-number="7.5">
+<h2 data-number="7.5" class="anchored" data-anchor-id="citations-and-source-attribution"><span class="header-section-number">7.5</span> Citations and source attribution</h2>
+<p>RAG does not just answer — it shows where the answer came from.</p>
+<p>Each answer includes references to the source documents and, when possible, page numbers or section headings. Users can click through to verify the original text. If the answer is not in the documents, a well-built RAG system says so instead of hallucinating.</p>
+<p>Citations transform AI from “trust me” to “here’s the evidence.” This is what makes RAG suitable for high-stakes use cases where accuracy matters and where someone will eventually ask “where did you get that number?”</p>
 </section>
-<section id="combining-data-and-thinking" class="level2" data-number="3.7">
-<h2 data-number="3.7" class="anchored" data-anchor-id="combining-data-and-thinking"><span class="header-section-number">3.7</span> Combining data and thinking</h2>
-<p>The most powerful conversations blend Chapter 2 analysis with Chapter 3 thinking moves.</p>
-<p>“Here’s my Chapter 2 memo. Find the three weakest claims.” This takes the Superstore recommendation you built in the previous chapter and subjects it to adversarial scrutiny.</p>
-<p>“The data says the West region has the highest margin. What alternative explanations fit the same data?” This is the scientific method applied to business analysis: generating alternative hypotheses for the same evidence.</p>
-<p>“I recommended expanding product line X. Run a pre-mortem on that recommendation.” This applies the pre-mortem not to a hypothetical scenario but to your own work.</p>
-</section>
-<section id="challenging-your-own-analysis" class="level2" data-number="3.8">
-<h2 data-number="3.8" class="anchored" data-anchor-id="challenging-your-own-analysis"><span class="header-section-number">3.8</span> Challenging your own analysis</h2>
-<p>Bring your Chapter 2 analysis and ask AI to poke holes in it. Open your recommendation memo and ask:</p>
-<blockquote class="blockquote">
-<p>Read this memo. What are the three weakest claims? What data would strengthen or disprove each one?</p>
-</blockquote>
-<blockquote class="blockquote">
-<p>What did I miss? What alternative explanations fit the same data?</p>
-</blockquote>
-<p>AI catches common blind spots: correlation treated as causation, survivorship bias in the sample, missing context from external events or seasonality. The output is not a new memo but a sharper understanding of the old one. You can then strengthen weak claims with additional data, acknowledge limitations explicitly, or revise the recommendation if warranted.</p>
-<p>The memo does not change. Your confidence in it does.</p>
-</section>
-<section id="from-analysis-to-action" class="level2" data-number="3.9">
-<h2 data-number="3.9" class="anchored" data-anchor-id="from-analysis-to-action"><span class="header-section-number">3.9</span> From analysis to action</h2>
-<p>A thinking-partner conversation should end with clarity, not more questions.</p>
-<p>Close the conversation with prompts like: “Summarize the three strongest arguments for my recommendation.” “What are the two biggest risks I should name when I present this?” “Write a one-paragraph executive summary that acknowledges the limitations.”</p>
-<p>You leave with a recommendation you have stress-tested, risks you can name before someone else does, and language ready for the meeting or memo. The thinking partner does not decide for you. It makes you harder to argue against.</p>
-</section>
-<section id="exercises" class="level2" data-number="3.10">
-<h2 data-number="3.10" class="anchored" data-anchor-id="exercises"><span class="header-section-number">3.10</span> Exercises</h2>
-<div class="callout callout-style-default callout-note callout-titled" title="Exercise 1: The Five-Move Workout">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<section id="when-to-use-rag" class="level2" data-number="7.6">
+<h2 data-number="7.6" class="anchored" data-anchor-id="when-to-use-rag"><span class="header-section-number">7.6</span> When to use RAG</h2>
+<p>RAG is not always the right approach. The choice depends on the type of data.</p>
+<p>For structured data (spreadsheets, databases, tables of numbers), a skill that writes SQL queries is more appropriate. This is what you built in Module 5.</p>
+<p>For unstructured documents (policies, contracts, manuals, reports), RAG is the right tool.</p>
+<p>For small texts that fit within the AI’s context window (fewer than about 100 pages), you can skip the RAG pipeline entirely and just give the document directly to the AI. A coding agent does this naturally when you point it at a folder containing documents.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Context window sizes">
+<div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Exercise 1: The Five-Move Workout
+Context window sizes
 </div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Pick a real decision you are currently facing — work or personal. Have a thinking-partner conversation with Claude in which you use each of the five moves exactly once: expand options, challenge, surface assumptions, pre-mortem, and reframe.</p>
-<p>After each move, write one sentence describing what the move revealed. At the end, reflect: did AI change your mind? Did it surface something you had not considered?</p>
-<p>Write up the conversation transcript and a five-sentence reflection, one per move.</p>
+<p>The amount of text an agent can process in one session varies. Gemini CLI supports up to one million tokens (roughly 3,000 pages). Codex supports 192,000 tokens. Claude Code’s limit depends on the model, ranging from 200,000 to over 1,000,000 tokens. For most business documents, any of these is sufficient for direct reading without RAG.</p>
+</div>
+</div>
+<p>For situations where you need both structured queries and document context, you can combine a skill with RAG — querying the database for numbers and the documents for context.</p>
+<div class="cell" data-fig-width="80%" data-layout-align="default">
+<div class="cell-output-display">
+<div id="fig-rag-decision" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-rag-decision-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div>
+<pre class="mermaid mermaid-js" data-label="fig-rag-decision">flowchart TD
+    Start["What kind of data?"]
+    Structured["Structured?\n_Tables, databases_"]
+    Small["Small document set?\n_&lt; ~100 pages_"]
+    Large["Large document set?\n_Hundreds of pages+_"]
+
+    SQL["→ SQL skill\n_Module 5_"]
+    Direct["→ Direct context\n_Give it to the agent_"]
+    RAG["→ RAG pipeline\n_Chunk, embed, retrieve_"]
+    Both["→ Skill + RAG\n_SQL for numbers,\nRAG for context_"]
+
+    Start --&gt;|"Yes"| Structured
+    Start --&gt;|"No — documents"| Small
+    Structured --&gt;|"Only numbers"| SQL
+    Structured --&gt;|"Numbers + documents"| Both
+    Small --&gt;|"Yes"| Direct
+    Small --&gt;|"No"| Large
+    Large --&gt; RAG
+
+    style SQL fill:#e3f2fd,stroke:#2196f3
+    style Direct fill:#e8f5e9,stroke:#4caf50
+    style RAG fill:#fff3e0,stroke:#ff9800
+    style Both fill:#f3e5f5,stroke:#9c27b0
+</pre>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-rag-decision-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7.4: Choosing the right approach depends on what kind of data you are working with.
+</figcaption>
+</figure>
 </div>
 </div>
 </div>
-<div class="callout callout-style-default callout-note callout-titled" title="Exercise 2: Challenge Your Chapter 2 Analysis">
+</section>
+<section id="why-chunk-size-matters" class="level2" data-number="7.7">
+<h2 data-number="7.7" class="anchored" data-anchor-id="why-chunk-size-matters"><span class="header-section-number">7.7</span> Why chunk size matters</h2>
+<p>Documents are split into chunks before embedding. The size of these chunks determines what the system can find and what it misses.</p>
+<p>Chunks that are too small (individual sentences) lose context. A sentence alone may be meaningless without the paragraph around it. The system retrieves fragments instead of answers.</p>
+<p>Chunks that are too large (entire chapters) include too much irrelevant content. The signal is diluted by noise. The AI may struggle to identify which part of the chunk actually answers the question.</p>
+<p>The sweet spot is usually a few paragraphs — enough context to be meaningful, small enough to be relevant. Overlapping chunks (where each chunk shares some text with its neighbors) help ensure that nothing falls through the cracks.</p>
+</section>
+<section id="common-failure-modes" class="level2" data-number="7.8">
+<h2 data-number="7.8" class="anchored" data-anchor-id="common-failure-modes"><span class="header-section-number">7.8</span> Common failure modes</h2>
+<p>RAG is not perfect. Understanding the failure modes helps you spot and fix problems.</p>
+<p>On the retrieval side, the system may retrieve the wrong chunk (semantically similar but irrelevant), miss the right chunk entirely (the answer exists but was not retrieved), or retrieve chunks that contradict each other.</p>
+<p>On the generation side, the LLM may hallucinate a citation (citing a page that does not contain the claim), over-generalize (drawing a conclusion the source does not support), or give an incomplete answer (using one chunk when the full answer spans multiple documents).</p>
+<p>The most dangerous failure is the hallucinated citation. The answer looks grounded — it has a source reference — but when you check the cited passage, it does not say what the LLM claims. This creates false confidence, which is worse than no citation at all.</p>
+</section>
+<section id="hands-on-querying-your-documents" class="level2" data-number="7.9">
+<h2 data-number="7.9" class="anchored" data-anchor-id="hands-on-querying-your-documents"><span class="header-section-number">7.9</span> Hands-on: querying your documents</h2>
+<p>The simplest way to experience RAG is to point your coding agent at a folder of documents and start asking questions.</p>
+<p>Download the <a href="files/data/company-handbook.md">sample company handbook</a> and place it in a folder. Open your coding agent in that folder. Then ask questions:</p>
+<blockquote class="blockquote">
+<p>What is our return policy for enterprise customers?</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>What are the eligibility requirements for the bonus program?</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>How many days of PTO do employees with five years of service receive?</p>
+</blockquote>
+<p>For each answer, evaluate three things. Is it relevant — did it find the right section of the document? Is it faithful — does the answer accurately represent what the source says? Is it complete — did it find all the relevant passages, or did it miss something?</p>
+<p>Then test the boundaries. Ask a question the document cannot answer: “What is our competitor’s market share?” Does AI admit the information is not in the document, or does it hallucinate an answer?</p>
+</section>
+<section id="evaluating-rag-quality" class="level2" data-number="7.10">
+<h2 data-number="7.10" class="anchored" data-anchor-id="evaluating-rag-quality"><span class="header-section-number">7.10</span> Evaluating RAG quality</h2>
+<p>There are three dimensions for judging whether a RAG answer is good.</p>
+<p>Relevance measures whether the retrieved passages are on-topic. Did the system find the right sections? Would a human reading the document have picked the same passages?</p>
+<p>Faithfulness measures whether the generated answer accurately represents the source material. Does the answer match what the cited passage actually says? Are there any added claims that go beyond the source?</p>
+<p>Completeness measures whether the system found everything relevant. Did it retrieve all the passages that bear on the question? Would adding more context from the document change the answer?</p>
+<p>Use these three questions to evaluate every RAG answer: is it relevant, faithful, and complete?</p>
+</section>
+<section id="rag-in-production" class="level2" data-number="7.11">
+<h2 data-number="7.11" class="anchored" data-anchor-id="rag-in-production"><span class="header-section-number">7.11</span> RAG in production</h2>
+<p>In production, RAG has a document pipeline that runs continuously. New documents are automatically chunked and embedded. A vector store (Pinecone, Weaviate, Chroma, or similar) maintains a searchable index of all document chunks. When a user asks a question, the system retrieves the most relevant chunks, feeds them to the AI, and returns a cited answer.</p>
+<p>Production RAG requires ongoing maintenance. Documents need refresh schedules so that updated policies replace outdated ones. Access controls ensure that users can only query documents they are authorized to see. Versioning tracks changes so that when a policy is updated, the old version expires from the index.</p>
+<p>Quality assurance means maintaining a test suite of known question-answer pairs to validate accuracy, monitoring retrieval quality over time, and building a feedback loop where users can flag incorrect answers for improvement.</p>
+<p>The same sandbox-audit-deploy pattern from Module 6 applies. RAG is a system, not a feature, and it needs the same care as any production system.</p>
+</section>
+<section id="exercises" class="level2" data-number="7.12">
+<h2 data-number="7.12" class="anchored" data-anchor-id="exercises"><span class="header-section-number">7.12</span> Exercises</h2>
+<div class="callout callout-style-default callout-note callout-titled" title="Exercise 1: Document Querying">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Exercise 2: Challenge Your Chapter 2 Analysis
+Exercise 1: Document Querying
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Open the recommendation memo you wrote in Chapter 2 (or re-run the Superstore analysis using <a href="files/data/superstore.csv">superstore.csv</a>). Give the memo to Claude and ask it to find the three weakest claims.</p>
-<p>For each weak claim, ask what data you would need to strengthen it. Then ask Claude to rewrite the executive summary to acknowledge the limitations it identified.</p>
-<p>Compare the original and revised summaries. Which one would survive tougher scrutiny in a meeting?</p>
+<p>Download the <a href="files/data/company-handbook.md">company handbook</a> and place it in a folder. Open your coding agent in that folder and ask five questions about the content.</p>
+<p>For each answer, evaluate relevance (did it find the right section?), faithfulness (does the answer match the source?), and completeness (did it find everything relevant?). Rate each dimension on a 1-to-5 scale.</p>
+<p>Then ask two questions the document cannot answer. Does AI admit it does not know, or does it hallucinate?</p>
 </div>
 </div>
 </div>
-<div class="callout callout-style-default callout-note callout-titled" title="Exercise 3: Challenge Your Retention Memo">
+<div class="callout callout-style-default callout-note callout-titled" title="Exercise 2: Citation Verification">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Exercise 3: Challenge Your Retention Memo
+Exercise 2: Citation Verification
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Open the retention memo you wrote in Chapter 2 Exercise 3 (or re-run the attrition analysis using <a href="files/data/employee-attrition.csv">employee-attrition.csv</a>). Give the memo to Claude and work through three thinking-partner moves.</p>
-<p>First, ask Claude to argue against your top recommendation. If you recommended reducing overtime, have it make the case that overtime is a symptom, not a cause. If you recommended raising salaries, have it explain why that might not move the needle.</p>
-<p>Second, ask: “What would need to be true for my recommendations to fail?” Identify the assumptions your memo depends on.</p>
-<p>Third, run a pre-mortem: “We implemented all three interventions and attrition got worse. What happened?”</p>
-<p>Revise your memo to acknowledge the strongest counterargument.</p>
+<p>Ask three questions about the <a href="files/data/company-handbook.md">company handbook</a> and get answers with citations.</p>
+<p>For each answer, locate every cited passage in the original document. Rate each citation: accurate (the passage says what the AI claims), partially accurate (the passage is related but the AI stretched or paraphrased), or hallucinated (the passage does not support the claim).</p>
+<p>If any citation is inaccurate, rephrase the question and see if the citation improves.</p>
 </div>
 </div>
 </div>
-<div class="callout callout-style-default callout-note callout-titled" title="Exercise 4: Scenario Swap">
+<div class="callout callout-style-default callout-note callout-titled" title="Exercise 3: Conflicting Sources">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Exercise 4: Scenario Swap
+Exercise 3: Conflicting Sources
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>If you are working through this book with a colleague, write down a real business decision you are facing in one or two sentences. Swap scenarios. Have a thinking-partner conversation about your colleague’s scenario using at least three of the five conversation moves.</p>
-<p>Share back: “Here’s what AI surfaced about your decision.” It is often easier to be objective about someone else’s problem.</p>
+<p>Create a second version of the <a href="files/data/company-handbook.md">company handbook</a> in which you change one or two facts (for example, change the PTO accrual rates or the return policy window). Place both versions in the same folder.</p>
+<p>Ask a question where the two versions disagree. Does AI cite both? Pick one? Acknowledge the conflict?</p>
+<p>This simulates a common production problem: stale documents coexisting with current ones.</p>
 </div>
 </div>
 </div>
-<div class="callout callout-style-default callout-note callout-titled" title="Exercise 5: Second-Order Thinking Practice">
+<div class="callout callout-style-default callout-note callout-titled" title="Exercise 4: RAG vs. Direct Reading">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Exercise 5: Second-Order Thinking Practice
+Exercise 4: RAG vs.&nbsp;Direct Reading
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Consider the following decision: “We are going to require all employees to return to the office five days a week.”</p>
-<p>Ask Claude to trace three levels of consequences if this decision works as intended. Then ask it to trace three levels of consequences if it does not work as intended.</p>
-<p>Compare the two chains. Where do they diverge? What is the earliest signal that tells you which path you are on?</p>
+<p>Ask your coding agent to read the entire <a href="files/data/company-handbook.md">company handbook</a> as one document and answer a question (this is the direct-context approach). Then ask the same question in a way that forces chunked retrieval (for example, by placing many documents in the folder so the handbook is too large for the context window to hold in full).</p>
+<p>Compare the two answers. Which is more complete? Does the direct-reading approach catch context that chunked retrieval misses?</p>
+<p>This exercise illustrates the tradeoff: direct context is better for small document sets, while RAG scales to thousands of documents.</p>
 </div>
 </div>
 </div>
-<div class="callout callout-style-default callout-note callout-titled" title="Exercise 6: Stakeholder Simulation">
+<div class="callout callout-style-default callout-note callout-titled" title="Exercise 5: RAG Use Case Proposal">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Exercise 6: Stakeholder Simulation
+Exercise 5: RAG Use Case Proposal
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Write a one-paragraph proposal — a new initiative, a policy change, or a budget request.</p>
-<p>Ask Claude to react to the proposal as four different stakeholders: your CEO, your CFO, a skeptical board member, and a front-line employee. For each persona, note the main concern and what would win them over.</p>
-<p>Revise the proposal to address the top two concerns.</p>
+<p>Write a one-page proposal for deploying RAG in your organization.</p>
+<p>Identify the document set (employee handbook, product documentation, compliance policies, or whatever is most relevant to your work). Describe the users and their typical questions. Outline the architecture: how documents would be ingested, where the vector store would live, and how users would interact with the system.</p>
+<p>List three risks and how you would mitigate them. The most common risks are hallucinated citations (mitigated by citation verification workflows), stale documents (mitigated by refresh schedules), and unauthorized access (mitigated by document-level permissions).</p>
 </div>
 </div>
 </div>
@@ -982,13 +1110,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./02-exploring-data.html" class="pagination-link" aria-label="Exploring Data with AI">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Exploring Data with AI</span></span>
+      <a href="./06-reporting-pipelines.html" class="pagination-link" aria-label="Automating with Agents">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Automating with Agents</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./04-connecting-databases.html" class="pagination-link" aria-label="Connecting Databases">
-        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Connecting Databases</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./08-reliability.html" class="pagination-link" aria-label="Reliability and Compliance">
+        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Reliability and Compliance</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

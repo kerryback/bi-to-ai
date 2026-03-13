@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>1&nbsp; Get Started with AI Coding Tools – From BI to AI</title>
+<title>6&nbsp; Automating with Agents – From BI to AI</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,40 +20,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
@@ -64,8 +30,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./02-exploring-data.html" rel="next">
-<link href="./index.html" rel="prev">
+<link href="./07-rag.html" rel="next">
+<link href="./05-connecting-databases.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -126,7 +92,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01-coding-tools.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Get Started with AI Coding Tools</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./06-reporting-pipelines.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Automating with Agents</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -168,44 +134,50 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./01-coding-tools.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Get Started with AI Coding Tools</span></span></a>
+  <a href="./01-agents.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">From Dashboards to AI Agents</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./02-exploring-data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Exploring Data with AI</span></span></a>
+  <a href="./02-getting-started.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Getting Started</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./03-thinking-partner.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">AI as Thinking Partner</span></span></a>
+  <a href="./03-exploring-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Exploring Data with AI</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./04-connecting-databases.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Connecting Databases</span></span></a>
+  <a href="./04-thinking-partner.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">AI as Thinking Partner</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./05-reporting-cycles.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Automating Reporting Cycles</span></span></a>
+  <a href="./05-connecting-databases.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Connecting Databases</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./06-rag.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Retrieval-Augmented Generation</span></span></a>
+  <a href="./06-reporting-pipelines.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Automating with Agents</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./07-reliability.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Reliability and Compliance</span></span></a>
+  <a href="./07-rag.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Retrieval-Augmented Generation</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-reliability.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Reliability and Compliance</span></span></a>
   </div>
 </li>
     </ul>
@@ -215,20 +187,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Chapter contents</h2>
+    <h2 id="toc-title">Module contents</h2>
    
   <ul>
-  <li><a href="#code-execution-environments" id="toc-code-execution-environments" class="nav-link active" data-scroll-target="#code-execution-environments"><span class="header-section-number">1.1</span> Code execution environments</a></li>
-  <li><a href="#installing-python-and-claude-desktop" id="toc-installing-python-and-claude-desktop" class="nav-link" data-scroll-target="#installing-python-and-claude-desktop"><span class="header-section-number">1.2</span> Installing Python and Claude Desktop</a>
-  <ul class="collapse">
-  <li><a href="#installing-python-manually" id="toc-installing-python-manually" class="nav-link" data-scroll-target="#installing-python-manually">Installing Python manually</a></li>
-  <li><a href="#installing-claude-desktop-manually" id="toc-installing-claude-desktop-manually" class="nav-link" data-scroll-target="#installing-claude-desktop-manually">Installing Claude Desktop manually</a></li>
-  </ul></li>
-  <li><a href="#using-the-code-tab" id="toc-using-the-code-tab" class="nav-link" data-scroll-target="#using-the-code-tab"><span class="header-section-number">1.3</span> Using the Code tab</a></li>
-  <li><a href="#alternative-coding-agents" id="toc-alternative-coding-agents" class="nav-link" data-scroll-target="#alternative-coding-agents"><span class="header-section-number">1.4</span> Alternative coding agents</a></li>
-  <li><a href="#skills" id="toc-skills" class="nav-link" data-scroll-target="#skills"><span class="header-section-number">1.5</span> Skills</a></li>
-  <li><a href="#setting-up-the-anthropic-api" id="toc-setting-up-the-anthropic-api" class="nav-link" data-scroll-target="#setting-up-the-anthropic-api"><span class="header-section-number">1.6</span> Setting up the Anthropic API</a></li>
-  <li><a href="#other-interfaces" id="toc-other-interfaces" class="nav-link" data-scroll-target="#other-interfaces"><span class="header-section-number">1.7</span> Other interfaces</a></li>
+  <li><a href="#from-query-to-report" id="toc-from-query-to-report" class="nav-link active" data-scroll-target="#from-query-to-report"><span class="header-section-number">6.1</span> From query to report</a></li>
+  <li><a href="#the-reporting-pipeline" id="toc-the-reporting-pipeline" class="nav-link" data-scroll-target="#the-reporting-pipeline"><span class="header-section-number">6.2</span> The reporting pipeline</a></li>
+  <li><a href="#building-it-with-your-coding-agent" id="toc-building-it-with-your-coding-agent" class="nav-link" data-scroll-target="#building-it-with-your-coding-agent"><span class="header-section-number">6.3</span> Building it with your coding agent</a></li>
+  <li><a href="#sandboxed-execution" id="toc-sandboxed-execution" class="nav-link" data-scroll-target="#sandboxed-execution"><span class="header-section-number">6.4</span> Sandboxed execution</a></li>
+  <li><a href="#from-prototype-to-production" id="toc-from-prototype-to-production" class="nav-link" data-scroll-target="#from-prototype-to-production"><span class="header-section-number">6.5</span> From prototype to production</a></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">6.6</span> Exercises</a></li>
   </ul>
 </nav>
     </div>
@@ -237,7 +204,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Get Started with AI Coding Tools</span></h1>
+<h1 class="title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Automating with Agents</span></h1>
 </div>
 
 
@@ -254,199 +221,211 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>Large language models are impressive conversationalists, but without the ability to run code they can only describe how to analyze your data. They can outline the steps, suggest the formulas, and draft the chart specifications — but you still have to do the work. When you attach a code-execution tool, the dynamic changes completely. A coding agent loads your data into a Python dataframe, writes and runs the analysis, renders the charts, and synthesizes the findings into a memo. You provide the questions; the agent provides the answers. The result is not a plan for an analysis but the analysis itself — complete with numbers, visualizations, and narrative.</p>
-<p>This chapter walks through installation, introduces the interface we use throughout the book — the Code tab in Claude Desktop — and describes alternative coding agents from Google and OpenAI.</p>
+<p>Module 1 introduced the agent loop — plan, execute, observe, iterate — and the concept of agents chaining tools together. This module puts that pattern to work. You will build a reporting pipeline that queries a database, generates charts, writes narrative, and assembles a PowerPoint deck, all from a single instruction.</p>
+<section id="from-query-to-report" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="from-query-to-report"><span class="header-section-number">6.1</span> From query to report</h2>
+<p>In Module 5, the Chinook query app answered questions one at a time. You asked “What are the top ten countries by revenue?” and got a table. Useful, but a stakeholder does not want a table — they want a slide deck with a chart, key findings, and a recommendation.</p>
+<p>Getting from a raw query to a finished report means executing a sequence of steps: run the SQL, transform the results, generate a visualization, write a summary, and assemble the output document. That sequence is a pipeline, and automating it is what agents do.</p>
+</section>
+<section id="the-reporting-pipeline" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="the-reporting-pipeline"><span class="header-section-number">6.2</span> The reporting pipeline</h2>
+<p>Here is the workflow, step by step.</p>
+<p><strong>Step 1: Query the database.</strong> The agent runs a SQL query against the Chinook database — the same kind of query the Module 5 app generates. The result is a pandas DataFrame: rows of data ready for analysis.</p>
+<p><strong>Step 2: Render a chart.</strong> The agent passes the DataFrame to matplotlib (or Plotly) and generates a visualization — a bar chart, line chart, or whatever fits the data. The chart is saved as a PNG image.</p>
+<p><strong>Step 3: Generate a narrative.</strong> The agent sends the data to an LLM and asks for a concise executive summary. The prompt includes the numbers so the summary is grounded in facts, not hallucinated.</p>
+<p><strong>Step 4: Assemble the deck.</strong> The agent uses python-pptx to build a three-slide PowerPoint: a title slide with the report name and date, a slide with the chart, and a slide with the key findings. The deck is saved as a <code>.pptx</code> file.</p>
+<p><strong>Step 5: Deliver.</strong> In a Streamlit app, the chart and summary appear on screen, and a download button lets the user grab the PowerPoint file. The same pattern from Module 5 — Streamlit as the web wrapper — but the output is a document instead of a table.</p>
+<p>Each step is straightforward. The value of the agent is chaining them together so the user clicks one button and gets a finished report.</p>
 <div class="cell" data-fig-width="100%" data-layout-align="default">
 <div class="cell-output-display">
-<div id="fig-chatbot-vs-agent" class="quarto-float quarto-figure quarto-figure-center anchored">
+<div id="fig-reporting-pipeline" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-chatbot-vs-agent-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div aria-describedby="fig-reporting-pipeline-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div>
-<pre class="mermaid mermaid-js" data-label="fig-chatbot-vs-agent">flowchart LR
-    subgraph Chatbot["💬 Chatbot"]
-        direction LR
-        U1["👤 User"] -- "question" --&gt; CB["🤖 Chatbot"] -- "prompt +\nhistory" --&gt; LLM1["🧠 LLM"]
-        LLM1 -- "text reply" --&gt; CB -- "answer" --&gt; U1
-    end
+<pre class="mermaid mermaid-js" data-label="fig-reporting-pipeline">flowchart LR
+    Q["🗄️ Query DB\n_→ DataFrame_"]
+    C["📊 Render Chart\n_→ PNG image_"]
+    N["✍️ Write Narrative\n_→ executive summary_"]
+    P["📑 Assemble Deck\n_→ .pptx file_"]
+    D["🚀 Deliver\n_→ screen + download_"]
 
-    subgraph Agent["🛠️ Coding Agent"]
-        direction LR
-        U2["👤 User"] -- "question" --&gt; AG["🤖 Agent"] -- "prompt +\nhistory" --&gt; LLM2["🧠 LLM"]
-        LLM2 -- "text or\ntool call" --&gt; AG
-        AG &lt;-- "run code,\nread files" --&gt; Tools["⚙️ Tools"]
-        AG -- "answer +\nartifacts" --&gt; U2
-    end
+    Q --&gt; C --&gt; N --&gt; P --&gt; D
 
-    style Chatbot fill:#e3f2fd,stroke:#2196f3
-    style Agent fill:#e8f5e9,stroke:#4caf50
+    style Q fill:#e3f2fd,stroke:#2196f3
+    style C fill:#e8f5e9,stroke:#4caf50
+    style N fill:#fff3e0,stroke:#ff9800
+    style P fill:#f3e5f5,stroke:#9c27b0
+    style D fill:#fce4ec,stroke:#e91e63
 </pre>
 </div>
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-chatbot-vs-agent-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1.1: A chatbot relays messages to the LLM. An agent also has tools — it can run code, read files, and take action.
-</figcaption>
-</figure>
-</div>
-</div>
-</div>
-<section id="code-execution-environments" class="level2" data-number="1.1">
-<h2 data-number="1.1" class="anchored" data-anchor-id="code-execution-environments"><span class="header-section-number">1.1</span> Code execution environments</h2>
-<p>AI can write and run code in three different environments, each with different strengths.</p>
-<p>A cloud sandbox is a temporary computing environment hosted by the AI provider. Claude Chat and ChatGPT both offer this: you upload a file, the chatbot processes it on a remote server, and you download the results. Cloud sandboxes are convenient for quick, ad-hoc analysis, but your data leaves your machine and the session is ephemeral.</p>
-<p>A virtual machine is a sandboxed environment that runs on your own computer. Claude Cowork is an example: it spins up a VM locally, giving AI a full computing environment with file access and persistence across sessions. Virtual machines are good for longer batch work, and because they run on your machine, your data stays local.</p>
-<p>A local environment runs directly on your machine. The Claude Desktop app is the primary example: the agent writes code that executes right where you work, with full access to your files, databases, and network. Nothing is uploaded. This is what we use throughout this book.</p>
-<p>The key takeaway is that AI does not need a special platform to analyze your data. It runs where you already work — on your laptop, with your files. The rest of this chapter shows how to set that up.</p>
-<div class="cell" data-fig-width="100%" data-layout-align="default">
-<div class="cell-output-display">
-<div id="fig-environments" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-environments-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div>
-<pre class="mermaid mermaid-js" data-label="fig-environments">flowchart LR
-    subgraph Cloud["☁️ Cloud Sandbox"]
-        direction TB
-        C1["Code runs on\nprovider's servers"]
-        C2["Data uploaded\ntemporarily"]
-        C3["⚠️ Data leaves\nyour machine"]
-    end
-    subgraph VM["💻 Virtual Machine"]
-        direction TB
-        V1["Code runs in\nlocal VM"]
-        V2["Files accessible\nwithin VM"]
-        V3["✅ Data stays\non your machine"]
-    end
-    subgraph Local["🖥️ Local App"]
-        direction TB
-        L1["Code runs\ndirectly on your machine"]
-        L2["Full access to\nfiles &amp; databases"]
-        L3["✅ Nothing\nuploaded"]
-    end
-    Cloud --&gt; VM --&gt; Local
-</pre>
-</div>
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-environments-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1.2: Three code execution environments, from most isolated to most integrated.
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-reporting-pipeline-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6.1: The reporting pipeline — five steps from query to delivered report.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
 </section>
-<section id="installing-python-and-claude-desktop" class="level2" data-number="1.2">
-<h2 data-number="1.2" class="anchored" data-anchor-id="installing-python-and-claude-desktop"><span class="header-section-number">1.2</span> Installing Python and Claude Desktop</h2>
-<p>The coding agent writes and runs Python behind the scenes, so both Python and the Claude Desktop app must be installed on your machine. We provide installers that handle everything — Python, Claude Desktop, and skills:</p>
-<p><strong>Windows</strong> — download the <a href="install/windows/INSTALL.bat">Windows installer</a>. Right-click <code>INSTALL.bat</code> and select <strong>Run as administrator</strong>. The script installs Python 3.12 (auto-detecting your processor architecture), Claude Desktop, and the skills used in this book.</p>
-<p><strong>Mac</strong> — download the <a href="install/mac/install.sh">Mac installer</a>. Open Terminal and run:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> +x ~/Downloads/install.sh</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">~/Downloads/install.sh</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>The script installs Homebrew (if needed), Python 3.12, Claude Desktop, and skills.</p>
-<p>After either installer finishes, open Claude Desktop and sign in with your Anthropic account. Claude Code requires either a Pro subscription at $20 per month (which includes a generous usage allowance) or an Anthropic API key with credits.</p>
-<section id="installing-python-manually" class="level3">
-<h3 class="anchored" data-anchor-id="installing-python-manually">Installing Python manually</h3>
-<p>If the installer does not work for Python, you can install it separately. Download Python 3.10 or later from <a href="https://www.python.org/downloads/">python.org</a>. On Windows, check <strong>“Add Python to PATH”</strong> during installation — this is <em>in small print on the bottom of the very first installation screen</em>. On Mac, you can also install via Homebrew with <code>brew install python</code>. After installing, verify by opening a terminal and running:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">--version</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>You should see something like <code>Python 3.12.4</code>. If the command is not found, restart your terminal or check that Python was added to your PATH.</p>
-</section>
-<section id="installing-claude-desktop-manually" class="level3">
-<h3 class="anchored" data-anchor-id="installing-claude-desktop-manually">Installing Claude Desktop manually</h3>
-<p>If the installer does not work for Claude Desktop, download it directly from <a href="https://claude.com/download">claude.com/download</a> and run the installer.</p>
-</section>
-</section>
-<section id="using-the-code-tab" class="level2" data-number="1.3">
-<h2 data-number="1.3" class="anchored" data-anchor-id="using-the-code-tab"><span class="header-section-number">1.3</span> Using the Code tab</h2>
-<p>The Claude Desktop app has three tabs in the sidebar: <strong>Chat</strong>, <strong>Cowork</strong>, and <strong>Code</strong>. Click the <strong>Code</strong> tab. This is where you will do all of the work in this book.</p>
-<p>The Code tab runs the Claude Code engine — a coding agent with full access to your local files, databases, and network. It reads files, writes and runs Python, renders charts, and produces documents, all from plain-English conversation. It also supports clickable file diffs, inline image previews, and drag-and-drop file attachments.</p>
-<p>To get started, click <strong>Code</strong> in the sidebar, then select a folder as your working directory. Choose a model (Sonnet is fast and capable; Opus is more thorough) and a permission mode. For the exercises in this book, <strong>“auto-accept”</strong> is the most convenient permission mode — it lets the agent run code without asking for approval on every step.</p>
-<p>Try a quick test. Type:</p>
+<section id="building-it-with-your-coding-agent" class="level2" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="building-it-with-your-coding-agent"><span class="header-section-number">6.3</span> Building it with your coding agent</h2>
+<p>You do not need to write this app by hand. Your coding agent can build it for you. Here is an example prompt you can give it:</p>
 <blockquote class="blockquote">
-<p>Create a CSV file with five rows of sample sales data — columns for date, product, revenue, and profit. Then describe the data back to me.</p>
+<p>Build a Streamlit app that connects to chinook.db. Add a dropdown with five pre-defined reports: Revenue by Country, Monthly Revenue Trend, Top 10 Artists, Genre Breakdown, and Customer Spending. When the user selects a report and clicks Generate, run the SQL query, create a chart with matplotlib, call OpenRouter to write a three-sentence executive summary, and assemble a three-slide PowerPoint (title, chart, findings) using python-pptx. Show the chart and summary on screen with a download button for the PowerPoint file. Log every LLM request and response to llm_log.jsonl with timestamps.</p>
 </blockquote>
-<p>The agent writes a Python script, creates the file in your working directory, reads it back, and reports the contents. You will see the file appear in your folder. That single exchange — natural language in, working file out — is the pattern for everything in this book.</p>
-<p>Claude Code reads a file called <code>CLAUDE.md</code> in the project directory for persistent instructions. This is where you store context about your data, preferred output formats, and any domain-specific guidance the agent should follow every session.</p>
-<p>Installing Python gives you the base language, but in practice most work relies on additional libraries — code packages for data analysis, charting, web apps, and more. At various points in this book, we will ask you to tell the coding agent to install specific libraries. If you skip that step, the agent will notice when it tries to run code that requires them and will ask you for permission to install what it needs. Just grant permission if that happens.</p>
+<p>This prompt is specific enough that a coding agent can execute it end to end. It names the database, the reports, the tools (matplotlib, python-pptx, OpenRouter), the output format, and the logging requirement.</p>
+<p>Your job is not to write the code. Your job is to test the result, refine the prompt, and iterate until the output meets your standards. If the charts are ugly, tell the agent to improve the styling. If the summaries are too generic, tell it to include specific numbers. If a report query is wrong, describe the correct logic. Prompt engineering is the skill; the agent is the labor.</p>
+<p>Notice the last line of the prompt: logging. Every LLM request and response is written to a JSONL file with timestamps. This creates an audit trail — you can see exactly what the LLM was asked and what it returned. Module 8 will use these logs for verification and governance.</p>
 </section>
-<section id="alternative-coding-agents" class="level2" data-number="1.4">
-<h2 data-number="1.4" class="anchored" data-anchor-id="alternative-coding-agents"><span class="header-section-number">1.4</span> Alternative coding agents</h2>
-<p>The Code tab in Claude Desktop is what we use in this course. Under the hood it runs Claude Code — Anthropic’s coding agent engine. Claude Code is also available as a standalone terminal tool for users who prefer a command-line interface. Google and OpenAI offer similar terminal-based coding agents:</p>
-<p><strong>Gemini CLI</strong> is Google’s equivalent. It requires <a href="https://nodejs.org/">Node.js</a> version 18 or higher and is installed with <code>npm install -g @google/gemini-cli</code>. It offers a free tier with 60 requests per minute and 1,000 requests per day. It reads a <code>GEMINI.md</code> file for project-level instructions, serving the same purpose as Claude Code’s <code>CLAUDE.md</code>.</p>
-<p><strong>OpenAI Codex</strong> is an open-source terminal agent that connects to OpenAI’s models. It is installed with <code>npm install -g @openai/codex</code> (requires <a href="https://nodejs.org/">Node.js</a> 22 or higher). OpenAI also offers a native desktop app at <a href="https://openai.com/codex">openai.com/codex</a>. Codex requires a ChatGPT Plus subscription or an OpenAI API key. It reads project instructions from an <code>AGENTS.md</code> file.</p>
-<p>All three agents read local files, write Python, and return results in conversation. The workflows in this book apply to any of them. The key differences are cost (Claude Code requires a $20/month subscription or API credits; Gemini CLI’s free tier covers most individual use; Codex is open source but OpenAI API calls are billed per token), context windows (Gemini supports up to one million tokens; Claude Code ranges from 200,000 to over one million; Codex supports 192,000), and sandboxing (Codex uses an OS-level sandbox by default; Claude Code and Gemini CLI rely on permission prompts).</p>
-</section>
-<section id="skills" class="level2" data-number="1.5">
-<h2 data-number="1.5" class="anchored" data-anchor-id="skills"><span class="header-section-number">1.5</span> Skills</h2>
-<p>Out of the box, the coding agent can read files, write code, and run it. But you can extend what it knows how to do by installing <em>skills</em> — packaged instructions that teach the agent a specific workflow.</p>
-<p>Claude Code has a skill system built in. A skill is a folder containing a markdown file that describes the task, the steps, and the output format. When you invoke a skill, Claude Code reads the instructions and follows them. The installer already set up four skills that are particularly useful for business work:</p>
-<ul>
-<li><strong>xlsx</strong> — read, create, and edit Excel spreadsheets with formulas, formatting, and charts.</li>
-<li><strong>docx</strong> — create and edit Word documents with tracked changes, comments, and formatting.</li>
-<li><strong>pptx</strong> — create and edit PowerPoint presentations.</li>
-<li><strong>skill-creator</strong> — a guide for building your own skills. You will use this in Chapter 4 when you create a database skill.</li>
-</ul>
-<p>You can verify the skills are installed by opening the Code tab and typing <code>/</code> — the available skills appear as slash commands.</p>
-</section>
-<section id="setting-up-the-anthropic-api" class="level2" data-number="1.6">
-<h2 data-number="1.6" class="anchored" data-anchor-id="setting-up-the-anthropic-api"><span class="header-section-number">1.6</span> Setting up the Anthropic API</h2>
-<p>Later chapters include demo apps that call Claude Sonnet via the Anthropic API. You will need an API key.</p>
-<ol type="1">
-<li><p>Sign up at <a href="https://console.anthropic.com">console.anthropic.com</a> and add a payment method.</p></li>
-<li><p>Create an API key under <strong>Settings → API Keys</strong>.</p></li>
-<li><p>Set the key as an environment variable so the demo apps can find it:</p>
-<p><strong>Mac / Linux</strong> — add to your shell profile (<code>.bashrc</code> or <code>.zshrc</code>) to persist:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">ANTHROPIC_API_KEY</span><span class="op">=</span><span class="st">"sk-ant-..."</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><strong>Windows</strong> — run once in a terminal, then restart the terminal:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">setx</span> ANTHROPIC_API_KEY <span class="st">"sk-ant-..."</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
-</ol>
-<p>API calls are billed per token. A short request like the test below costs a fraction of a cent; a longer coding-agent session analyzing a dataset might cost a few cents to a few dollars depending on the length of the conversation. Current prices are listed at <a href="https://www.anthropic.com/pricing">anthropic.com/pricing</a>. To verify your key works, first install the Anthropic Python library by running <code>pip install anthropic</code> in a terminal or by asking your coding agent to install it. Then save this as <code>test_anthropic.py</code> and run it with <code>python test_anthropic.py</code>:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> anthropic <span class="im">import</span> Anthropic</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>client <span class="op">=</span> Anthropic()</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>response <span class="op">=</span> client.messages.create(</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    model<span class="op">=</span><span class="st">"claude-sonnet-4-20250514"</span>,</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    max_tokens<span class="op">=</span><span class="dv">100</span>,</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    messages<span class="op">=</span>[{<span class="st">"role"</span>: <span class="st">"user"</span>, <span class="st">"content"</span>: <span class="st">"Say hello in one sentence."</span>}],</span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(response.content[<span class="dv">0</span>].text)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>If you see a greeting, the key is working and you are ready for the demo apps in Chapters 4 and beyond.</p>
-</section>
-<section id="other-interfaces" class="level2" data-number="1.7">
-<h2 data-number="1.7" class="anchored" data-anchor-id="other-interfaces"><span class="header-section-number">1.7</span> Other interfaces</h2>
-<p>The <strong>Chat</strong> and <strong>Cowork</strong> tabs in Claude Desktop serve different purposes from the Code tab. Chat is a standard conversation interface for questions, writing, and image analysis — no code execution. Cowork runs tasks in a sandboxed virtual machine: it can organize files, draft reports, and process documents, but in a more isolated environment than the Code tab. Cowork is useful for batch knowledge work where you want an extra layer of safety.</p>
-<p>Google Antigravity is an agent-first IDE — a fork of VS Code designed around AI collaboration. It is currently in free preview. Rather than adding AI to an existing editor, it was built from the ground up for agent-driven workflows, with the agent able to navigate files, run code, and iterate on changes directly in the editor.</p>
-<p>VS Code with AI extensions is the most common setup for developers who already use VS Code. Claude Code, Gemini CLI, and Codex all have VS Code extensions that embed the agent directly in the editor.</p>
-<div class="callout callout-style-default callout-note callout-titled" title="Exercise 1: Install and Test">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<section id="sandboxed-execution" class="level2" data-number="6.4">
+<h2 data-number="6.4" class="anchored" data-anchor-id="sandboxed-execution"><span class="header-section-number">6.4</span> Sandboxed execution</h2>
+<p>When an agent runs code, you need to control where it runs. On your laptop during development, a coding agent runs in your environment with access to your files. That is fine for prototyping. In production, you want isolation.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Built-in sandboxing">
+<div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Exercise 1: Install and Test
+Built-in sandboxing
 </div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Run the installer for your platform and open Claude Desktop. Sign in, click the <strong>Code</strong> tab, select a folder, and confirm it is working by asking it to print “Hello, world” in Python.</p>
-<p>Then ask it to create a simple CSV file with five rows of sample sales data (date, product, revenue, profit) and describe the data back to you. Verify that the file was created in your folder and that the description is accurate.</p>
+<p>Codex includes OS-level sandboxing by default — it runs generated code in an isolated environment even on your laptop. Claude Code and Gemini CLI rely on permission prompts to control what the agent can do, but do not sandbox execution. For production deployment, all three benefit from the container-based isolation described below.</p>
+</div>
+</div>
+<p>A container (Docker is the standard) is a disposable, isolated computing environment. Think of it as a virtual computer that exists only for one task and is destroyed afterward. It can only access what you explicitly allow. A bug in the AI-generated code cannot affect your other files, your database, or your network.</p>
+<p>The sandbox pattern for production: a user asks for a report through a web interface, the agent plans and orchestrates, code runs inside a sandboxed container, the container queries the database through a read-only connection, and the finished report flows back to the user. The user never touches the database. The agent never escapes the sandbox. This is defense in depth.</p>
+<div class="cell" data-fig-width="100%" data-layout-align="default">
+<div class="cell-output-display">
+<div id="fig-sandbox" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-sandbox-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div>
+<pre class="mermaid mermaid-js" data-label="fig-sandbox">flowchart LR
+    User["👤 User"]
+    UI["🌐 Web UI"]
+    Agent["🤖 Agent"]
+
+    subgraph Sandbox["🔒 Sandboxed Container"]
+        Code["🐍 Generated\nCode"]
+    end
+
+    DB["🗄️ Database\n_read-only_"]
+    Report["📊 Report"]
+
+    User --&gt; UI --&gt; Agent --&gt; Code
+    Code -- "read-only\nquery" --&gt; DB
+    DB -- "results" --&gt; Code
+    Code --&gt; Report --&gt; UI --&gt; User
+
+    style Sandbox fill:#fff3e0,stroke:#ff9800,stroke-width:2px
+    style DB fill:#e8f5e9,stroke:#4caf50
+</pre>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-sandbox-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6.2: Production sandbox architecture — the agent runs in isolation, the database is read-only.
+</figcaption>
+</figure>
 </div>
 </div>
 </div>
-<div class="callout callout-style-default callout-note callout-titled" title="Exercise 2: Instruction Files">
+</section>
+<section id="from-prototype-to-production" class="level2" data-number="6.5">
+<h2 data-number="6.5" class="anchored" data-anchor-id="from-prototype-to-production"><span class="header-section-number">6.5</span> From prototype to production</h2>
+<p>The reporting app on your laptop is a prototype. Moving it to production adds infrastructure, not intelligence.</p>
+<p>Production adds SSO authentication so only authorized users can generate reports, scheduled runs so weekly reports are generated automatically, logging so every query and LLM call is recorded for compliance, and read-only database credentials so the agent cannot modify data.</p>
+<p>The reporting pipeline you prototyped is the same artifact that powers the production tool. IT wraps it in infrastructure; you provide the domain knowledge and the prompt.</p>
+</section>
+<section id="exercises" class="level2" data-number="6.6">
+<h2 data-number="6.6" class="anchored" data-anchor-id="exercises"><span class="header-section-number">6.6</span> Exercises</h2>
+<div class="callout callout-style-default callout-note callout-titled" title="Exercise 1: Multi-Step Agent Workflow">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Exercise 2: Instruction Files
+Exercise 1: Multi-Step Agent Workflow
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Create a <code>CLAUDE.md</code> file in a folder containing the sample CSV from Exercise 1. Add two instructions: a preferred chart style (for example, “use a dark background with white text for all charts”) and a default analysis behavior (for example, “always show the code you run”).</p>
-<p>Open the Code tab in that folder and ask the agent to create a chart. Does it follow your instructions? Modify the instruction file and ask again.</p>
+<p>Open your coding agent in a folder containing the <a href="files/data/chinook.db">Chinook database</a> and your SKILL.md from Module 5. Give it a single compound instruction that requires at least three steps.</p>
+<p>For example: “Query the Chinook database for the top ten artists by revenue. Create a bar chart. Write a one-paragraph executive summary. Save the chart and summary to a reports folder.”</p>
+<p>Observe the agent loop. How many distinct tool calls does the agent make? Does it check its own work? If the output is not right, refine your prompt and try again.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Exercise 2: Build the Report App">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exercise 2: Build the Report App
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Use the example prompt from the “Building it with your coding agent” section to build the reporting app. Give the prompt to your coding agent and let it generate the app.</p>
+<p>Test all five reports. For each, verify that the SQL returns correct data, the chart matches the data, the executive summary references actual numbers, and the PowerPoint has three slides.</p>
+<p>If anything is wrong, refine your prompt and regenerate. Keep notes on what you changed and why.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Exercise 3: Workflow Decomposition">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exercise 3: Workflow Decomposition
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Consider the task: “Prepare the quarterly business review for the CEO.”</p>
+<p>List the five to seven steps a human analyst would take to complete this task. For each step, identify what tool the agent would use and what data it would need. Mark which steps need human approval before the agent continues.</p>
+<p>Then write a single prompt that describes the full workflow for an agent.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Exercise 4: Report App for Your Own Data">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exercise 4: Report App for Your Own Data
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Adapt the reporting pattern to a dataset from your work. Pick a database, spreadsheet, or API that you query regularly.</p>
+<p>Write an agent prompt that generates a report from your data — including the SQL (or data-fetching logic), chart type, summary style, and output format. Give the prompt to your coding agent and test the result.</p>
+<p>If you cannot use real work data, use a public dataset: the <a href="https://github.com/Microsoft/sql-server-samples/tree/master/samples/databases/northwind-pubs">Northwind database</a>, <a href="https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page">NYC taxi data</a>, or any CSV from your field.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Exercise 5: Agent Use Case Inventory">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exercise 5: Agent Use Case Inventory
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Review your team’s recurring tasks and identify five that are multi-step, repetitive, and data-driven — good candidates for agent automation.</p>
+<p>For each, describe the trigger (what starts the task), the steps (what happens), the output (what gets delivered), and the frequency (how often it runs). Rate each on automation potential (high, medium, or low) and risk level (high, medium, or low).</p>
+<p>Pick the highest-potential, lowest-risk workflow as your pilot candidate and write one paragraph explaining why you would start there.</p>
 </div>
 </div>
 </div>
@@ -1018,13 +997,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./index.html" class="pagination-link" aria-label="Preface">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Preface</span>
+      <a href="./05-connecting-databases.html" class="pagination-link" aria-label="Connecting Databases">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Connecting Databases</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./02-exploring-data.html" class="pagination-link" aria-label="Exploring Data with AI">
-        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Exploring Data with AI</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./07-rag.html" class="pagination-link" aria-label="Retrieval-Augmented Generation">
+        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Retrieval-Augmented Generation</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
