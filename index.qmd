@@ -1,38 +1,38 @@
 # Preface {.unnumbered}
 
-Traditional business intelligence --- dashboards, static reports, and fixed queries --- is being replaced by AI agents that understand your questions, query your data, and deliver answers in seconds.  This book gives professionals from any background a hands-on understanding of how agentic AI transforms analysis, reporting, and decision-making.  No coding experience is required.
+Traditional business intelligence --- dashboards, static reports, and fixed queries --- is being replaced by AI agents that understand your questions, query your data, and deliver answers in seconds.  This course gives professionals from any background a hands-on understanding of how agentic AI transforms analysis, reporting, and decision-making.  No coding experience is required.
 
-Chapter 1 explains what AI agents are and why they are displacing dashboards as the primary interface between decision-makers and data.  It lays out the conceptual foundation --- the agent loop, tool use, and the shift from fixed reports to conversational intelligence --- that the rest of the book builds on.
+Module 1 explains what AI agents are and why they are displacing dashboards as the primary interface between decision-makers and data.  It lays out the conceptual foundation --- the agent loop, tool use, and the shift from fixed reports to conversational intelligence --- that the rest of the course builds on.
 
-Chapter 2 introduces the tools.  You will install a coding agent, learn how the major options differ, and understand the environments where AI can execute code.
+Module 2 introduces the tools.  You will install a coding agent, learn how the major options differ, and understand the environments where AI can execute code.
 
-Chapter 3 shows how to query data and generate visualizations and reports with plain English.  You will open a coding agent in a folder containing a spreadsheet and go from raw data to a written recommendation with charts in under ten minutes.
+Module 3 shows how to query data and generate visualizations and reports with plain English.  You will open a coding agent in a folder containing a spreadsheet and go from raw data to a written recommendation with charts in under ten minutes.
 
-Chapter 4 shows how AI can help you think through decisions.  You will use AI as a sparring partner --- challenging assumptions, running pre-mortems, and stress-testing your own analysis from Chapter 3.
+Module 4 shows how AI can help you think through decisions.  You will use AI as a sparring partner --- challenging assumptions, running pre-mortems, and stress-testing your own analysis from Module 3.
 
-Chapter 5 shows how AI can be connected to your company's databases, so anyone with proper credentials can query them in plain English.  You will learn about MCP connectors, build a reusable "skill" that encodes a database schema, and build a demo web app that anyone can use from a browser.
+Module 5 shows how AI can be connected to your company's databases, so anyone with proper credentials can query them in plain English.  You will learn about MCP connectors, build a reusable "skill" that encodes a database schema, and build a demo web app that anyone can use from a browser.
 
-Chapter 6 shows how to automate multi-step workflows.  You will build a reporting pipeline that queries a database, generates charts, writes summaries, and assembles a PowerPoint deck --- all from a single instruction.
+Module 6 shows how to automate multi-step workflows.  You will build a reporting pipeline that queries a database, generates charts, writes summaries, and assembles a PowerPoint deck --- all from a single instruction.
 
-Chapter 7 shows how to use AI to query your company's documents and return answers grounded in your documents (with citations) rather than relying on its general knowledge.  This is called Retrieval-Augmented Generation (RAG).
+Module 7 shows how to use AI to query your company's documents and return answers grounded in your documents (with citations) rather than relying on its general knowledge.  This is called Retrieval-Augmented Generation (RAG).
 
-Chapter 8 addresses reliability and compliance.  You will validate AI outputs, red-team skills and RAG systems, and build the governance framework your organization needs before deploying any of this.
+Module 8 addresses reliability and compliance.  You will validate AI outputs, red-team skills and RAG systems, and build the governance framework your organization needs before deploying any of this.
 
 
 ## Data files
 
-The exercises in this book use three datasets.
+The exercises in this course use three datasets.
 
-The [Superstore CSV](files/data/superstore.csv) contains roughly 10,000 retail orders across four U.S. regions with columns for sales, profit, discount, product category, and customer segment.^[The Sample Superstore dataset is published on Kaggle at <https://www.kaggle.com/datasets/vivek468/superstore-dataset-final>.  It is widely used in data-visualization tutorials and Tableau exercises.]  It is used throughout Chapters 3, 4, and 8.
+The [Superstore CSV](files/data/superstore.csv) contains roughly 10,000 retail orders across four U.S. regions with columns for sales, profit, discount, product category, and customer segment.^[The Sample Superstore dataset is published on Kaggle at <https://www.kaggle.com/datasets/vivek468/superstore-dataset-final>.  It is widely used in data-visualization tutorials and Tableau exercises.]  It is used throughout Modules 3, 4, and 8.
 
-The [Employee Attrition CSV](files/data/employee-attrition.csv) contains 1,470 employee records with 35 attributes including department, job role, monthly income, overtime status, job satisfaction, and whether the employee left the company.^[The IBM HR Analytics Employee Attrition & Performance dataset is a fictional dataset created by IBM data scientists, published on Kaggle at <https://www.kaggle.com/datasets/pavansubhasht/ibm-hr-analytics-attrition-dataset>.]  It is used in Chapter 3 exercises.
+The [Employee Attrition CSV](files/data/employee-attrition.csv) contains 1,470 employee records with 35 attributes including department, job role, monthly income, overtime status, job satisfaction, and whether the employee left the company.^[The IBM HR Analytics Employee Attrition & Performance dataset is a fictional dataset created by IBM data scientists, published on Kaggle at <https://www.kaggle.com/datasets/pavansubhasht/ibm-hr-analytics-attrition-dataset>.]  It is used in Module 3 exercises.
 
-The [Chinook database](files/data/chinook.db) is a SQLite file representing a music retailer's operations with 11 related tables covering employees, customers, invoices, tracks, albums, artists, and genres.^[The Chinook database was created by Luis Rocha as a modern alternative to the Northwind sample database.  The source repository is at <https://github.com/lerocha/chinook-database>.]  It is the primary dataset for Chapter 5 and is revisited in Chapters 6 and 8.
+The [Chinook database](files/data/chinook.db) is a SQLite file representing a music retailer's operations with 11 related tables covering employees, customers, invoices, tracks, albums, artists, and genres.^[The Chinook database was created by Luis Rocha as a modern alternative to the Northwind sample database.  The source repository is at <https://github.com/lerocha/chinook-database>.]  It is the primary dataset for Module 5 and is revisited in Modules 6 and 8.
 
-Chapter 7 uses a [sample company handbook](files/data/company-handbook.md) for RAG exercises.
+Module 7 uses a [sample company handbook](files/data/company-handbook.md) for RAG exercises.
 
 ## Prerequisites
 
-You need the Claude Desktop app installed on your machine.  Chapter 2 walks through installation and introduces the **Code** tab --- the interface we use throughout this book.  No prior coding or data science experience is assumed.
+You need the Claude Desktop app installed on your machine.  Module 2 walks through installation and introduces the **Code** tab --- the interface we use throughout this course.  No prior coding or data science experience is assumed.
 
-The examples use Claude Code via the Desktop app, but the concepts and workflows apply equally to alternative coding agents like Gemini CLI and OpenAI Codex, which Chapter 2 also describes.
+The examples use Claude Code via the Desktop app, but the concepts and workflows apply equally to alternative coding agents like Gemini CLI and OpenAI Codex, which Module 2 also describes.

@@ -21,7 +21,7 @@ book:
   repo-url: "https://github.com/kerryback/bi-to-ai/tree/master/files"
   chapters:
     - index.qmd
-    - 01-agents-and-dashboards.qmd
+    - 01-agents.qmd
     - 02-getting-started.qmd
     - 03-exploring-data.qmd
     - 04-thinking-partner.qmd
@@ -41,7 +41,7 @@ format:
         - custom-dark.css
     toc: true
     toc-depth: 3
-    toc-title: Chapter contents
+    toc-title: Module contents
     code-fold: true
     code-block-bg: true
     code-block-border-left: "#31BAE9"

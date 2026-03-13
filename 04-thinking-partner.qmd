@@ -1,8 +1,8 @@
 # AI as Thinking Partner
 
-Chapter 3 showed how AI can analyze data in minutes.  But many of the hardest decisions in business are not data problems --- they are thinking problems.  The data may be clear, but the implications are not.  The options are not fully explored.  The assumptions are unchallenged.  The failure modes are unexamined.
+Module 3 showed how AI can analyze data in minutes.  But many of the hardest decisions in business are not data problems --- they are thinking problems.  The data may be clear, but the implications are not.  The options are not fully explored.  The assumptions are unchallenged.  The failure modes are unexamined.
 
-This chapter is about using AI as a sparring partner: someone who will argue with you, challenge your preferred option, and surface the assumptions you did not know you were making.
+This module is about using AI as a sparring partner: someone who will argue with you, challenge your preferred option, and surface the assumptions you did not know you were making.
 
 ## Why AI is a good sparring partner
 
@@ -85,9 +85,9 @@ Scenario planning is particularly valuable when combined with the pre-mortem.  T
 
 ## Combining data and thinking
 
-The most powerful conversations blend Chapter 3 analysis with Chapter 4 thinking moves.
+The most powerful conversations blend Module 3 analysis with Module 4 thinking moves.
 
-"Here's my Chapter 3 memo.  Find the three weakest claims."  This takes the Superstore recommendation you built in the previous chapter and subjects it to adversarial scrutiny.
+"Here's my Module 3 memo.  Find the three weakest claims."  This takes the Superstore recommendation you built in the previous module and subjects it to adversarial scrutiny.
 
 "The data says the West region has the highest margin.  What alternative explanations fit the same data?"  This is the scientific method applied to business analysis: generating alternative hypotheses for the same evidence.
 
@@ -96,7 +96,7 @@ The most powerful conversations blend Chapter 3 analysis with Chapter 4 thinking
 
 ## Challenging your own analysis
 
-Bring your Chapter 3 analysis and ask AI to poke holes in it.  Open your recommendation memo and ask:
+Bring your Module 3 analysis and ask AI to poke holes in it.  Open your recommendation memo and ask:
 
 > Read this memo.  What are the three weakest claims?  What data would strengthen or disprove each one?
 
@@ -124,8 +124,8 @@ After each move, write one sentence describing what the move revealed.  At the e
 Write up the conversation transcript and a five-sentence reflection, one per move.
 :::
 
-::: {.callout-note title="Exercise 2: Challenge Your Chapter 3 Analysis" collapse="true"}
-Open the recommendation memo you wrote in Chapter 3 (or re-run the Superstore analysis using [superstore.csv](files/data/superstore.csv)).  Give the memo to Claude and ask it to find the three weakest claims.
+::: {.callout-note title="Exercise 2: Challenge Your Module 3 Analysis" collapse="true"}
+Open the recommendation memo you wrote in Module 3 (or re-run the Superstore analysis using [superstore.csv](files/data/superstore.csv)).  Give the memo to Claude and ask it to find the three weakest claims.
 
 For each weak claim, ask what data you would need to strengthen it.  Then ask Claude to rewrite the executive summary to acknowledge the limitations it identified.
 
@@ -133,7 +133,7 @@ Compare the original and revised summaries.  Which one would survive tougher scr
 :::
 
 ::: {.callout-note title="Exercise 3: Challenge Your Retention Memo" collapse="true"}
-Open the retention memo you wrote in Chapter 3 Exercise 3 (or re-run the attrition analysis using [employee-attrition.csv](files/data/employee-attrition.csv)).  Give the memo to Claude and work through three thinking-partner moves.
+Open the retention memo you wrote in Module 3 Exercise 3 (or re-run the attrition analysis using [employee-attrition.csv](files/data/employee-attrition.csv)).  Give the memo to Claude and work through three thinking-partner moves.
 
 First, ask Claude to argue against your top recommendation.  If you recommended reducing overtime, have it make the case that overtime is a symptom, not a cause.  If you recommended raising salaries, have it explain why that might not move the needle.
 
@@ -145,7 +145,7 @@ Revise your memo to acknowledge the strongest counterargument.
 :::
 
 ::: {.callout-note title="Exercise 4: Scenario Swap" collapse="true"}
-If you are working through this book with a colleague, write down a real business decision you are facing in one or two sentences.  Swap scenarios.  Have a thinking-partner conversation about your colleague's scenario using at least three of the five conversation moves.
+If you are working through this course with a colleague, write down a real business decision you are facing in one or two sentences.  Swap scenarios.  Have a thinking-partner conversation about your colleague's scenario using at least three of the five conversation moves.
 
 Share back: "Here's what AI surfaced about your decision."  It is often easier to be objective about someone else's problem.
 :::

@@ -1,6 +1,6 @@
 # Getting Started
 
-Chapter 1 explained what AI agents are and why they are transforming business intelligence.  This chapter gets you set up to use one.  By the end, you will have a coding agent running on your machine, ready to analyze data, write code, and produce documents from plain-English conversation.
+Module 1 explained what AI agents are and why they are transforming business intelligence.  This module gets you set up to use one.  By the end, you will have a coding agent running on your machine, ready to analyze data, write code, and produce documents from plain-English conversation.
 
 ## Code execution environments
 
@@ -10,9 +10,9 @@ A cloud sandbox is a temporary computing environment hosted by the AI provider. 
 
 A virtual machine is a sandboxed environment that runs on your own computer.  Claude Cowork is an example: it spins up a VM locally, giving AI a full computing environment with file access and persistence across sessions.  Virtual machines are good for longer batch work, and because they run on your machine, your data stays local.
 
-A local environment runs directly on your machine.  The Claude Desktop app is the primary example: the agent writes code that executes right where you work, with full access to your files, databases, and network.  Nothing is uploaded.  This is what we use throughout this book.
+A local environment runs directly on your machine.  The Claude Desktop app is the primary example: the agent writes code that executes right where you work, with full access to your files, databases, and network.  Nothing is uploaded.  This is what we use throughout this course.
 
-The key takeaway is that AI does not need a special platform to analyze your data.  It runs where you already work --- on your laptop, with your files.  The rest of this chapter shows how to set that up.
+The key takeaway is that AI does not need a special platform to analyze your data.  It runs where you already work --- on your laptop, with your files.  The rest of this module shows how to set that up.
 
 ```{mermaid}
 %%| label: fig-environments
@@ -44,7 +44,7 @@ flowchart LR
 
 The coding agent writes and runs Python behind the scenes, so both Python and the Claude Desktop app must be installed on your machine.  We provide installers that handle everything --- Python, Claude Desktop, and skills:
 
-**Windows** --- download the [Windows installer](install/windows/INSTALL.bat).  Right-click `INSTALL.bat` and select **Run as administrator**.  The script installs Python 3.12 (auto-detecting your processor architecture), Claude Desktop, and the skills used in this book.
+**Windows** --- download the [Windows installer](install/windows/INSTALL.bat).  Right-click `INSTALL.bat` and select **Run as administrator**.  The script installs Python 3.12 (auto-detecting your processor architecture), Claude Desktop, and the skills used in this course.
 
 **Mac** --- download the [Mac installer](install/mac/install.sh).  Open Terminal and run:
 
@@ -73,21 +73,21 @@ If the installer does not work for Claude Desktop, download it directly from [cl
 
 ## Using the Code tab
 
-The Claude Desktop app has three tabs in the sidebar: **Chat**, **Cowork**, and **Code**.  Click the **Code** tab.  This is where you will do all of the work in this book.
+The Claude Desktop app has three tabs in the sidebar: **Chat**, **Cowork**, and **Code**.  Click the **Code** tab.  This is where you will do all of the work in this course.
 
-The Code tab runs the Claude Code engine --- a coding agent with full access to your local files, databases, and network.  This is the agent architecture described in Chapter 1: an LLM connected to tools through an execution layer, running the plan-execute-observe-iterate loop autonomously.  It reads files, writes and runs Python, renders charts, and produces documents, all from plain-English conversation.
+The Code tab runs the Claude Code engine --- a coding agent with full access to your local files, databases, and network.  This is the agent architecture described in Module 1: an LLM connected to tools through an execution layer, running the plan-execute-observe-iterate loop autonomously.  It reads files, writes and runs Python, renders charts, and produces documents, all from plain-English conversation.
 
-To get started, click **Code** in the sidebar, then select a folder as your working directory.  Choose a model (Sonnet is fast and capable; Opus is more thorough) and a permission mode.  For the exercises in this book, **"auto-accept"** is the most convenient permission mode --- it lets the agent run code without asking for approval on every step.
+To get started, click **Code** in the sidebar, then select a folder as your working directory.  Choose a model (Sonnet is fast and capable; Opus is more thorough) and a permission mode.  For the exercises in this course, **"auto-accept"** is the most convenient permission mode --- it lets the agent run code without asking for approval on every step.
 
 Try a quick test.  Type:
 
 > Create a CSV file with five rows of sample sales data --- columns for date, product, revenue, and profit.  Then describe the data back to me.
 
-The agent writes a Python script, creates the file in your working directory, reads it back, and reports the contents.  You will see the file appear in your folder.  That single exchange --- natural language in, working file out --- is the pattern for everything in this book.
+The agent writes a Python script, creates the file in your working directory, reads it back, and reports the contents.  You will see the file appear in your folder.  That single exchange --- natural language in, working file out --- is the pattern for everything in this course.
 
 Claude Code reads a file called `CLAUDE.md` in the project directory for persistent instructions.  This is where you store context about your data, preferred output formats, and any domain-specific guidance the agent should follow every session.
 
-Installing Python gives you the base language, but in practice most work relies on additional libraries --- code packages for data analysis, charting, web apps, and more.  At various points in this book, we will ask you to tell the coding agent to install specific libraries.  If you skip that step, the agent will notice when it tries to run code that requires them and will ask you for permission to install what it needs.  Just grant permission if that happens.
+Installing Python gives you the base language, but in practice most work relies on additional libraries --- code packages for data analysis, charting, web apps, and more.  At various points in this course, we will ask you to tell the coding agent to install specific libraries.  If you skip that step, the agent will notice when it tries to run code that requires them and will ask you for permission to install what it needs.  Just grant permission if that happens.
 
 ## Alternative coding agents
 
@@ -97,7 +97,7 @@ The Code tab in Claude Desktop is what we use in this course.  Under the hood it
 
 **OpenAI Codex** is an open-source terminal agent that connects to OpenAI's models.  It is installed with `npm install -g @openai/codex` (requires [Node.js](https://nodejs.org/) 22 or higher).  OpenAI also offers a native desktop app at [openai.com/codex](https://openai.com/codex).  Codex requires a ChatGPT Plus subscription or an OpenAI API key.  It reads project instructions from an `AGENTS.md` file.
 
-All three agents read local files, write Python, and return results in conversation.  The workflows in this book apply to any of them.  The key differences are cost (Claude Code requires a \$20/month subscription or API credits; Gemini CLI's free tier covers most individual use; Codex is open source but OpenAI API calls are billed per token), context windows (Gemini supports up to one million tokens; Claude Code ranges from 200,000 to over one million; Codex supports 192,000), and sandboxing (Codex uses an OS-level sandbox by default; Claude Code and Gemini CLI rely on permission prompts).
+All three agents read local files, write Python, and return results in conversation.  The workflows in this course apply to any of them.  The key differences are cost (Claude Code requires a \$20/month subscription or API credits; Gemini CLI's free tier covers most individual use; Codex is open source but OpenAI API calls are billed per token), context windows (Gemini supports up to one million tokens; Claude Code ranges from 200,000 to over one million; Codex supports 192,000), and sandboxing (Codex uses an OS-level sandbox by default; Claude Code and Gemini CLI rely on permission prompts).
 
 ## Skills
 
@@ -108,13 +108,13 @@ Claude Code has a skill system built in.  A skill is a folder containing a markd
 - **xlsx** --- read, create, and edit Excel spreadsheets with formulas, formatting, and charts.
 - **docx** --- create and edit Word documents with tracked changes, comments, and formatting.
 - **pptx** --- create and edit PowerPoint presentations.
-- **skill-creator** --- a guide for building your own skills.  You will use this in Chapter 5 when you create a database skill.
+- **skill-creator** --- a guide for building your own skills.  You will use this in Module 5 when you create a database skill.
 
 You can verify the skills are installed by opening the Code tab and typing `/` --- the available skills appear as slash commands.
 
 ## Setting up the Anthropic API
 
-Later chapters include demo apps that call Claude Sonnet via the Anthropic API.  You will need an API key.
+Later modules include demo apps that call Claude Sonnet via the Anthropic API.  You will need an API key.
 
 1. Sign up at [console.anthropic.com](https://console.anthropic.com) and add a payment method.
 2. Create an API key under **Settings → API Keys**.
@@ -148,7 +148,7 @@ response = client.messages.create(
 print(response.content[0].text)
 ```
 
-If you see a greeting, the key is working and you are ready for the demo apps in Chapters 5 and beyond.
+If you see a greeting, the key is working and you are ready for the demo apps in Modules 5 and beyond.
 
 ## Other interfaces
 

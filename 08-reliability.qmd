@@ -1,8 +1,8 @@
 # Reliability and Compliance
 
-The previous seven chapters built an increasingly powerful toolkit: agent concepts, coding tools, data analysis, thinking-partner conversations, database skills, agent workflows, and document-based AI.  Before any of this is deployed, leadership will ask one question: can we trust it?
+The previous seven modules built an increasingly powerful toolkit: agent concepts, coding tools, data analysis, thinking-partner conversations, database skills, agent workflows, and document-based AI.  Before any of this is deployed, leadership will ask one question: can we trust it?
 
-This chapter provides the answer, which is yes --- with the right verification.  You will learn a repeatable protocol for validating AI outputs, stress-testing skills and RAG systems, and building the governance framework your organization needs.
+This module provides the answer, which is yes --- with the right verification.  You will learn a repeatable protocol for validating AI outputs, stress-testing skills and RAG systems, and building the governance framework your organization needs.
 
 ## The trust spectrum
 
@@ -10,9 +10,9 @@ AI with code execution is like a fast junior analyst --- capable but in need of 
 
 For low-stakes work (exploratory charts, directional trends, internal brainstorming), a quick sanity check is sufficient.  Glance at the numbers, confirm they are in the right ballpark, and move on.
 
-For medium-stakes work (team skills from Chapter 5, recurring reports, RAG-based Q&A from Chapter 7), test with known answers before relying on the results.  Run queries where you already know the answer and confirm that AI matches.
+For medium-stakes work (team skills from Module 5, recurring reports, RAG-based Q&A from Module 7), test with known answers before relying on the results.  Run queries where you already know the answer and confirm that AI matches.
 
-For high-stakes work (board presentations, budget recommendations, external reporting), apply the full verification protocol described later in this chapter.  Every number, every chart, every claim should be independently verified.
+For high-stakes work (board presentations, budget recommendations, external reporting), apply the full verification protocol described later in this module.  Every number, every chart, every claim should be independently verified.
 
 
 ## Hallucination: the core risk
@@ -23,7 +23,7 @@ AI in code-execution mode does not invent facts the way a chatbot might.  It rea
 
 These errors are dangerous precisely because the output looks professional.  Charts render cleanly even when the underlying data is wrong.  Memos read smoothly even when the conclusion does not follow from the evidence.  A polished result inspires confidence, and confidence without verification is the real risk.
 
-You have seen examples throughout this book.  Date or currency parsing surprises in Chapter 3.  Incorrect join paths in Chapter 5.  Hallucinated citations in Chapter 7.  Each error was fixable, but only if someone checked.
+You have seen examples throughout this course.  Date or currency parsing surprises in Module 3.  Incorrect join paths in Module 5.  Hallucinated citations in Module 7.  Each error was fixable, but only if someone checked.
 
 ## The verification protocol
 
@@ -51,7 +51,7 @@ The more specific the filter logic, the more likely AI misinterprets it.
 
 ## Trusting RAG answers
 
-RAG (Chapter 7) grounds AI in your documents, but grounding does not guarantee correctness.
+RAG (Module 7) grounds AI in your documents, but grounding does not guarantee correctness.
 
 RAG introduces three specific risks.  The first is hallucinated citations: the LLM cites a page or section that does not actually contain the claim.  The citation looks authoritative, but when you check the source, the passage says something different or does not address the question at all.
 
@@ -77,7 +77,7 @@ Every failure you find now is one your team will not encounter in production.
 
 ## Red-teaming your skill
 
-The database skill from Chapter 5 is the kind of tool people stop questioning once it is deployed.  Test it like any tool your team depends on.
+The database skill from Module 5 is the kind of tool people stop questioning once it is deployed.  Test it like any tool your team depends on.
 
 Validate with known answers by running queries where you already know the result (total invoices, number of customers).  Compare AI's SQL to a hand-written query.  Ask the same question multiple times and check for consistency.
 
@@ -91,7 +91,7 @@ Production AI systems should have multiple layers of verification.
 
 The first layer is RAG: the LLM answers based on your documents, with citations.  This grounds responses in source material.  You verify by checking citations against the original text.
 
-The second layer is code transparency: the agent displays the SQL or Python it ran.  Analysts review the logic, not just the answer.  This is what you practiced in Chapters 3 through 5.
+The second layer is code transparency: the agent displays the SQL or Python it ran.  Analysts review the logic, not just the answer.  This is what you practiced in Modules 3 through 5.
 
 The third layer is guardrails: read-only database access, restricted tables, and every query logged for audit.  The system prevents mistakes, not just detects them.
 
@@ -127,7 +127,7 @@ Before deploying AI with your data, three questions need clear answers: what dat
 
 When you call a cloud API --- OpenAI, Anthropic, Google --- your application sends a prompt to the provider's servers, the LLM runs inference there, and the response comes back.  The key question is what is in that prompt.
 
-As Chapter 5 showed, you often need to send only a schema description and a user question.  The LLM returns SQL or code, and your application executes it locally against your own database.  The actual data --- customer names, revenue figures, health records --- never leaves your network.  In this pattern, cloud inference is compatible with most data policies because the sensitive data stays behind your firewall.
+As Module 5 showed, you often need to send only a schema description and a user question.  The LLM returns SQL or code, and your application executes it locally against your own database.  The actual data --- customer names, revenue figures, health records --- never leaves your network.  In this pattern, cloud inference is compatible with most data policies because the sensitive data stays behind your firewall.
 
 However, some use cases do require sending data to the LLM.  RAG prompts include document chunks.  Summarization tasks send the full text to be summarized.  In these cases, the data does travel to the provider's servers, and the provider's data-processing agreement governs what happens to it.
 
@@ -167,7 +167,7 @@ Ask your vendor three things: Do you train on our data?  How long do you retain 
 
 FERPA protects student education records.  HIPAA protects health information.  SOX governs financial reporting.  GDPR regulates personal data in the EU.  Every regulated industry has its version of the same concern: where does the data go, and who can see it?
 
-AI can analyze sensitive data without ever reading the actual records.  The technique from Chapter 5 applies: describe the table structure in the SKILL.md (table names, column names, data types), and the agent writes SQL from the schema alone, never seeing the actual records.  The script runs locally, and the output stays on your server.
+AI can analyze sensitive data without ever reading the actual records.  The technique from Module 5 applies: describe the table structure in the SKILL.md (table names, column names, data types), and the agent writes SQL from the schema alone, never seeing the actual records.  The script runs locally, and the output stays on your server.
 
 Table metadata is not PII.  The actual records stay behind the firewall.  The LLM produces the code, not the output.  This pattern --- send the schema, keep the data --- works for any regulated environment.
 
@@ -183,7 +183,7 @@ Export logs, archive them, and review them periodically.  Session logs are not j
 
 Before deploying any AI workflow to your team, follow three phases.
 
-In the sandbox phase, run the full workflow with synthetic or test data.  Test edge cases.  Break it on purpose.  This is where you discover the failure modes described throughout this chapter.
+In the sandbox phase, run the full workflow with synthetic or test data.  Test edge cases.  Break it on purpose.  This is where you discover the failure modes described throughout this module.
 
 In the audit phase, export session logs and review the generated code.  Verify SQL logic.  Check RAG citations.  Look for data leakage.  Have a colleague who did not build the system try to break it.
 
@@ -220,9 +220,9 @@ flowchart LR
 
 Each stage of AI adoption maps to a trust level.
 
-Quick wins, achievable in weeks, require only light verification.  Using AI for research, summarization, and email drafting.  Analyzing local data with a coding agent (Chapter 3).  Having thinking-partner conversations (Chapter 4).
+Quick wins, achievable in weeks, require only light verification.  Using AI for research, summarization, and email drafting.  Analyzing local data with a coding agent (Module 3).  Having thinking-partner conversations (Module 4).
 
-Medium-term adoption, taking months, requires test-before-deploy discipline.  Skills for recurring database workflows (Chapter 5).  Agent-powered reports and pipelines (Chapter 6).  RAG for document-based Q&A (Chapter 7).
+Medium-term adoption, taking months, requires test-before-deploy discipline.  Skills for recurring database workflows (Module 5).  Agent-powered reports and pipelines (Module 6).  RAG for document-based Q&A (Module 7).
 
 Strategic adoption, measured in quarters, requires a full audit trail.  Production apps with authentication and audit trails.  An AI usage policy, compliance review, and governance framework.  Organization-wide adoption with monitoring.
 
@@ -267,7 +267,7 @@ Third, spot-check edge cases: test three edge cases (empty results, boundary dat
 :::
 
 ::: {.callout-note title="Exercise 2: Red-Team Your Skill" collapse="true"}
-Open your coding agent with the [Chinook database](files/data/chinook.db) and your SKILL.md from Chapter 5.
+Open your coding agent with the [Chinook database](files/data/chinook.db) and your SKILL.md from Module 5.
 
 Run five adversarial queries designed to break the skill: a query about nonexistent data ("Sales in 2025"), a complex multi-table join ("Revenue by artist by country"), a request for data not in the schema ("Customer satisfaction scores"), an ambiguous column name, and a boundary date query.
 
@@ -275,7 +275,7 @@ For each failure, diagnose the root cause, fix the SKILL.md, and retest.
 :::
 
 ::: {.callout-note title="Exercise 3: RAG Citation Audit" collapse="true"}
-Open your coding agent with the [company handbook](files/data/company-handbook.md) from Chapter 7 and ask five factual questions.
+Open your coding agent with the [company handbook](files/data/company-handbook.md) from Module 7 and ask five factual questions.
 
 For each answer, locate every cited passage in the original document.  Rate each citation as accurate, partially accurate, or hallucinated.
 

@@ -2,7 +2,7 @@
 
 Something big is happening in how organizations use data.  For decades, business intelligence meant dashboards --- fixed views of fixed data, built by specialists, delivered weeks after the question was asked.  That era is ending.  AI agents are replacing dashboards with a fundamentally different model: you ask a question in plain English, and an intelligent system queries your data, runs the analysis, and delivers the answer in seconds.
 
-This chapter explains what AI agents are, why they are displacing traditional BI, and what the shift means for anyone who makes decisions with data.  The rest of the course shows you how to do it.
+This module explains what AI agents are, why they are displacing traditional BI, and what the shift means for anyone who makes decisions with data.  The rest of the course shows you how to do it.
 
 ## The evolution of the user interface
 
@@ -187,25 +187,25 @@ flowchart LR
     style D fill:#fce4ec,stroke:#e91e63
 ```
 
-You do not need to build this by hand.  You describe what you want to a coding agent, and it builds the pipeline for you.  Your job is to test the result, refine the prompt, and iterate until the output meets your standards.  Chapters 4 through 6 show how.
+You do not need to build this by hand.  You describe what you want to a coding agent, and it builds the pipeline for you.  Your job is to test the result, refine the prompt, and iterate until the output meets your standards.  Modules 4 through 6 show how.
 
 ## What this course covers
 
-This book is a hands-on guide to building the capabilities just described.  Each chapter adds a layer of skill, from basic data analysis to production-ready AI systems.
+This course is a hands-on guide to building the capabilities just described.  Each module adds a layer of skill, from basic data analysis to production-ready AI systems.
 
-**Chapter 2: Getting Started** walks through installation and introduces the coding agent you will use throughout the book.
+**Module 2: Getting Started** walks through installation and introduces the coding agent you will use throughout the course.
 
-**Chapter 3: Exploring Data** goes from a raw spreadsheet to a written recommendation with charts in under ten minutes --- using nothing but plain-English conversation.
+**Module 3: Exploring Data** goes from a raw spreadsheet to a written recommendation with charts in under ten minutes --- using nothing but plain-English conversation.
 
-**Chapter 4: AI as Thinking Partner** shows how to use AI as a sparring partner for decisions --- challenging assumptions, running pre-mortems, and stress-testing your own analysis.
+**Module 4: AI as Thinking Partner** shows how to use AI as a sparring partner for decisions --- challenging assumptions, running pre-mortems, and stress-testing your own analysis.
 
-**Chapter 5: Connecting Databases** shows how to connect AI to your company's databases so anyone can query them in plain English.  You will build a reusable skill and a demo web app.
+**Module 5: Connecting Databases** shows how to connect AI to your company's databases so anyone can query them in plain English.  You will build a reusable skill and a demo web app.
 
-**Chapter 6: Automating with Agents** chains database queries, charts, narratives, and document assembly into reporting pipelines that run from a single instruction.
+**Module 6: Automating with Agents** chains database queries, charts, narratives, and document assembly into reporting pipelines that run from a single instruction.
 
-**Chapter 7: Retrieval-Augmented Generation** shows how to give AI knowledge of your company's documents --- policies, contracts, manuals --- and get answers grounded in those documents with citations.
+**Module 7: Retrieval-Augmented Generation** shows how to give AI knowledge of your company's documents --- policies, contracts, manuals --- and get answers grounded in those documents with citations.
 
-**Chapter 8: Reliability and Compliance** provides the verification protocols, governance frameworks, and deployment patterns your organization needs before any of this goes to production.
+**Module 8: Reliability and Compliance** provides the verification protocols, governance frameworks, and deployment patterns your organization needs before any of this goes to production.
 
 No coding experience is required.  The AI writes the code.  You provide the questions, the judgment, and the domain expertise.
 

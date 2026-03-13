@@ -1,10 +1,10 @@
 # Automating with Agents
 
-Chapter 1 introduced the agent loop --- plan, execute, observe, iterate --- and the concept of agents chaining tools together.  This chapter puts that pattern to work.  You will build a reporting pipeline that queries a database, generates charts, writes narrative, and assembles a PowerPoint deck, all from a single instruction.
+Module 1 introduced the agent loop --- plan, execute, observe, iterate --- and the concept of agents chaining tools together.  This module puts that pattern to work.  You will build a reporting pipeline that queries a database, generates charts, writes narrative, and assembles a PowerPoint deck, all from a single instruction.
 
 ## From query to report
 
-In Chapter 5, the Chinook query app answered questions one at a time.  You asked "What are the top ten countries by revenue?" and got a table.  Useful, but a stakeholder does not want a table --- they want a slide deck with a chart, key findings, and a recommendation.
+In Module 5, the Chinook query app answered questions one at a time.  You asked "What are the top ten countries by revenue?" and got a table.  Useful, but a stakeholder does not want a table --- they want a slide deck with a chart, key findings, and a recommendation.
 
 Getting from a raw query to a finished report means executing a sequence of steps: run the SQL, transform the results, generate a visualization, write a summary, and assemble the output document.  That sequence is a pipeline, and automating it is what agents do.
 
@@ -12,7 +12,7 @@ Getting from a raw query to a finished report means executing a sequence of step
 
 Here is the workflow, step by step.
 
-**Step 1: Query the database.**  The agent runs a SQL query against the Chinook database --- the same kind of query the Chapter 5 app generates.  The result is a pandas DataFrame: rows of data ready for analysis.
+**Step 1: Query the database.**  The agent runs a SQL query against the Chinook database --- the same kind of query the Module 5 app generates.  The result is a pandas DataFrame: rows of data ready for analysis.
 
 **Step 2: Render a chart.**  The agent passes the DataFrame to matplotlib (or Plotly) and generates a visualization --- a bar chart, line chart, or whatever fits the data.  The chart is saved as a PNG image.
 
@@ -20,7 +20,7 @@ Here is the workflow, step by step.
 
 **Step 4: Assemble the deck.**  The agent uses python-pptx to build a three-slide PowerPoint: a title slide with the report name and date, a slide with the chart, and a slide with the key findings.  The deck is saved as a `.pptx` file.
 
-**Step 5: Deliver.**  In a Streamlit app, the chart and summary appear on screen, and a download button lets the user grab the PowerPoint file.  The same pattern from Chapter 5 --- Streamlit as the web wrapper --- but the output is a document instead of a table.
+**Step 5: Deliver.**  In a Streamlit app, the chart and summary appear on screen, and a download button lets the user grab the PowerPoint file.  The same pattern from Module 5 --- Streamlit as the web wrapper --- but the output is a document instead of a table.
 
 Each step is straightforward.  The value of the agent is chaining them together so the user clicks one button and gets a finished report.
 
@@ -54,7 +54,7 @@ This prompt is specific enough that a coding agent can execute it end to end.  I
 
 Your job is not to write the code.  Your job is to test the result, refine the prompt, and iterate until the output meets your standards.  If the charts are ugly, tell the agent to improve the styling.  If the summaries are too generic, tell it to include specific numbers.  If a report query is wrong, describe the correct logic.  Prompt engineering is the skill; the agent is the labor.
 
-Notice the last line of the prompt: logging.  Every LLM request and response is written to a JSONL file with timestamps.  This creates an audit trail --- you can see exactly what the LLM was asked and what it returned.  Chapter 8 will use these logs for verification and governance.
+Notice the last line of the prompt: logging.  Every LLM request and response is written to a JSONL file with timestamps.  This creates an audit trail --- you can see exactly what the LLM was asked and what it returned.  Module 8 will use these logs for verification and governance.
 
 ## Sandboxed execution
 
@@ -104,7 +104,7 @@ The reporting pipeline you prototyped is the same artifact that powers the produ
 ## Exercises
 
 ::: {.callout-note title="Exercise 1: Multi-Step Agent Workflow" collapse="true"}
-Open your coding agent in a folder containing the [Chinook database](files/data/chinook.db) and your SKILL.md from Chapter 5.  Give it a single compound instruction that requires at least three steps.
+Open your coding agent in a folder containing the [Chinook database](files/data/chinook.db) and your SKILL.md from Module 5.  Give it a single compound instruction that requires at least three steps.
 
 For example: "Query the Chinook database for the top ten artists by revenue.  Create a bar chart.  Write a one-paragraph executive summary.  Save the chart and summary to a reports folder."
 
