@@ -54,7 +54,7 @@ This prompt is specific enough that a coding agent can execute it end to end.  I
 
 Your job is not to write the code.  Your job is to test the result, refine the prompt, and iterate until the output meets your standards.  If the charts are ugly, tell the agent to improve the styling.  If the summaries are too generic, tell it to include specific numbers.  If a report query is wrong, describe the correct logic.  Prompt engineering is the skill; the agent is the labor.
 
-Notice the last line of the prompt: logging.  Every LLM request and response is written to a JSONL file with timestamps.  This creates an audit trail --- you can see exactly what the LLM was asked and what it returned.  Module 8 will use these logs for verification and governance.
+Notice the last line of the prompt: logging.  Every LLM request and response is written to a JSONL file with timestamps.  This creates an audit trail --- you can see exactly what the LLM was asked and what it returned.  Module 6 covers how these logs support verification and governance.
 
 ## Sandboxed execution
 

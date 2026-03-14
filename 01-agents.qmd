@@ -1,8 +1,8 @@
-# From Dashboards to AI Agents
+# AI Agents
 
 Something big is happening in how organizations use data.  For decades, business intelligence meant dashboards --- fixed views of fixed data, built by specialists, delivered weeks after the question was asked.  That era is ending.  AI agents are replacing dashboards with a fundamentally different model: you ask a question in plain English, and an intelligent system queries your data, runs the analysis, and delivers the answer in seconds.
 
-This module explains what AI agents are, why they are displacing traditional BI, and what the shift means for anyone who makes decisions with data.  The rest of the course shows you how to do it.
+This module explains what AI agents are, why they are displacing traditional BI, and what the shift means for anyone who makes decisions with data.  The rest of the course shows you how to do it.  
 
 ## The evolution of the user interface
 
@@ -201,11 +201,11 @@ This course is a hands-on guide to building the capabilities just described.  Ea
 
 **Module 5: Connecting Databases** shows how to connect AI to your company's databases so anyone can query them in plain English.  You will build a reusable skill and a demo web app.
 
-**Module 6: Automating with Agents** chains database queries, charts, narratives, and document assembly into reporting pipelines that run from a single instruction.
+**Module 6: Reliability and Compliance** provides the verification protocols, governance frameworks, and deployment patterns your organization needs before any of this goes to production.
 
-**Module 7: Retrieval-Augmented Generation** shows how to give AI knowledge of your company's documents --- policies, contracts, manuals --- and get answers grounded in those documents with citations.
+**Module 7: Automating with Agents** chains database queries, charts, narratives, and document assembly into reporting pipelines that run from a single instruction.
 
-**Module 8: Reliability and Compliance** provides the verification protocols, governance frameworks, and deployment patterns your organization needs before any of this goes to production.
+**Module 8: Retrieval-Augmented Generation** shows how to give AI knowledge of your company's documents --- policies, contracts, manuals --- and get answers grounded in those documents with citations.
 
 No coding experience is required.  The AI writes the code.  You provide the questions, the judgment, and the domain expertise.
 

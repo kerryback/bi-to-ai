@@ -177,13 +177,13 @@ The MCP registry at [registry.modelcontextprotocol.io](https://registry.modelcon
 
 ## The skill as deployment artifact
 
-A polished skill is what gets deployed on your intranet.  The skill file encodes which tables matter, how they relate, and what the business terminology means.  IT adds the infrastructure: SSO authentication, read-only database credentials, and query logging for audit.  Module 6 shows how to chain this skill into an automated reporting pipeline.
+A polished skill is what gets deployed on your intranet.  The skill file encodes which tables matter, how they relate, and what the business terminology means.  IT adds the infrastructure: SSO authentication, read-only database credentials, and query logging for audit.  Module 7 shows how to chain this skill into an automated reporting pipeline.
 
 ## A natural-language query app
 
 The skill-file approach works well with a coding agent, but what about the rest of your organization?  Not everyone will use a terminal.  The same pattern --- send a question and schema to an LLM, get SQL back, run it --- can be wrapped in a simple web app that anyone can use from a browser.
 
-In production, this app would be deployed on the corporate intranet, the database would be a PostgreSQL or Snowflake instance on the company's servers, and the LLM would be an enterprise-licensed model (more on licensing and compliance in Module 8).  For this demo, we run everything locally: a small Streamlit app on your laptop, the Chinook SQLite file in the same folder, and Claude Sonnet via the Anthropic API.
+In production, this app would be deployed on the corporate intranet, the database would be a PostgreSQL or Snowflake instance on the company's servers, and the LLM would be an enterprise-licensed model (more on licensing and compliance in Module 6).  For this demo, we run everything locally: a small Streamlit app on your laptop, the Chinook SQLite file in the same folder, and Claude Sonnet via the Anthropic API.
 
 ### Setting up the demo
 
@@ -337,11 +337,11 @@ streamlit run chinook-charts.py
 
 ### A note on executing generated code
 
-The chart app uses Python's `exec()` to run LLM-generated code.  For a local demo this is fine --- you are running it on your own machine.  In a production deployment, executing AI-generated code requires sandboxing: running the code in an isolated container with no network access and limited filesystem permissions.  Module 6 discusses sandboxing in more detail, and Module 8 covers the broader governance framework.
+The chart app uses Python's `exec()` to run LLM-generated code.  For a local demo this is fine --- you are running it on your own machine.  In a production deployment, executing AI-generated code requires sandboxing: running the code in an isolated container with no network access and limited filesystem permissions.  Module 7 discusses sandboxing in more detail, and Module 6 covers the broader governance framework.
 
 ### From demo to production
 
-This is a demo, not a production application.  There is no authentication, no guardrails on the SQL, and no sandboxing of query execution.  The chart app adds another consideration: it executes LLM-generated Python, not just SQL, which makes sandboxing even more important.  In a production deployment, IT would add SSO login, restrict the database connection to read-only credentials, log every query for audit, run generated code in an isolated container, and use an enterprise LLM with a data-processing agreement.  Module 8 covers these considerations in detail.  But as a prototype that proves the concept, fifty lines of Python is all it takes.
+This is a demo, not a production application.  There is no authentication, no guardrails on the SQL, and no sandboxing of query execution.  The chart app adds another consideration: it executes LLM-generated Python, not just SQL, which makes sandboxing even more important.  In a production deployment, IT would add SSO login, restrict the database connection to read-only credentials, log every query for audit, run generated code in an isolated container, and use an enterprise LLM with a data-processing agreement.  Module 6 covers these considerations in detail.  But as a prototype that proves the concept, fifty lines of Python is all it takes.
 
 ## Exercises
 

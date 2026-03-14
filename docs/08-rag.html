@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>7&nbsp; Retrieval-Augmented Generation – From BI to AI</title>
+<title>8&nbsp; Retrieval-Augmented Generation – From BI to AI</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,8 +30,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./08-reliability.html" rel="next">
-<link href="./06-reporting-pipelines.html" rel="prev">
+<link href="./07-reporting-pipelines.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -92,7 +91,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./07-rag.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Retrieval-Augmented Generation</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./08-rag.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Retrieval-Augmented Generation</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -135,7 +134,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./01-agents.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">From Dashboards to AI Agents</span></span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">AI Agents</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -164,20 +163,20 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./06-reporting-pipelines.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Automating with Agents</span></span></a>
+  <a href="./06-reliability.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Reliability and Compliance</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./07-rag.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Retrieval-Augmented Generation</span></span></a>
+  <a href="./07-reporting-pipelines.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Automating with Agents</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./08-reliability.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Reliability and Compliance</span></span></a>
+  <a href="./08-rag.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Retrieval-Augmented Generation</span></span></a>
   </div>
 </li>
     </ul>
@@ -190,18 +189,18 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Module contents</h2>
    
   <ul>
-  <li><a href="#the-problem-ai-does-not-know-your-documents" id="toc-the-problem-ai-does-not-know-your-documents" class="nav-link active" data-scroll-target="#the-problem-ai-does-not-know-your-documents"><span class="header-section-number">7.1</span> The problem: AI does not know your documents</a></li>
-  <li><a href="#the-open-book-exam-analogy" id="toc-the-open-book-exam-analogy" class="nav-link" data-scroll-target="#the-open-book-exam-analogy"><span class="header-section-number">7.2</span> The open-book exam analogy</a></li>
-  <li><a href="#the-rag-pipeline" id="toc-the-rag-pipeline" class="nav-link" data-scroll-target="#the-rag-pipeline"><span class="header-section-number">7.3</span> The RAG pipeline</a></li>
-  <li><a href="#embeddings-and-semantic-search" id="toc-embeddings-and-semantic-search" class="nav-link" data-scroll-target="#embeddings-and-semantic-search"><span class="header-section-number">7.4</span> Embeddings and semantic search</a></li>
-  <li><a href="#citations-and-source-attribution" id="toc-citations-and-source-attribution" class="nav-link" data-scroll-target="#citations-and-source-attribution"><span class="header-section-number">7.5</span> Citations and source attribution</a></li>
-  <li><a href="#when-to-use-rag" id="toc-when-to-use-rag" class="nav-link" data-scroll-target="#when-to-use-rag"><span class="header-section-number">7.6</span> When to use RAG</a></li>
-  <li><a href="#why-chunk-size-matters" id="toc-why-chunk-size-matters" class="nav-link" data-scroll-target="#why-chunk-size-matters"><span class="header-section-number">7.7</span> Why chunk size matters</a></li>
-  <li><a href="#common-failure-modes" id="toc-common-failure-modes" class="nav-link" data-scroll-target="#common-failure-modes"><span class="header-section-number">7.8</span> Common failure modes</a></li>
-  <li><a href="#hands-on-querying-your-documents" id="toc-hands-on-querying-your-documents" class="nav-link" data-scroll-target="#hands-on-querying-your-documents"><span class="header-section-number">7.9</span> Hands-on: querying your documents</a></li>
-  <li><a href="#evaluating-rag-quality" id="toc-evaluating-rag-quality" class="nav-link" data-scroll-target="#evaluating-rag-quality"><span class="header-section-number">7.10</span> Evaluating RAG quality</a></li>
-  <li><a href="#rag-in-production" id="toc-rag-in-production" class="nav-link" data-scroll-target="#rag-in-production"><span class="header-section-number">7.11</span> RAG in production</a></li>
-  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">7.12</span> Exercises</a></li>
+  <li><a href="#the-problem-ai-does-not-know-your-documents" id="toc-the-problem-ai-does-not-know-your-documents" class="nav-link active" data-scroll-target="#the-problem-ai-does-not-know-your-documents"><span class="header-section-number">8.1</span> The problem: AI does not know your documents</a></li>
+  <li><a href="#the-open-book-exam-analogy" id="toc-the-open-book-exam-analogy" class="nav-link" data-scroll-target="#the-open-book-exam-analogy"><span class="header-section-number">8.2</span> The open-book exam analogy</a></li>
+  <li><a href="#the-rag-pipeline" id="toc-the-rag-pipeline" class="nav-link" data-scroll-target="#the-rag-pipeline"><span class="header-section-number">8.3</span> The RAG pipeline</a></li>
+  <li><a href="#embeddings-and-semantic-search" id="toc-embeddings-and-semantic-search" class="nav-link" data-scroll-target="#embeddings-and-semantic-search"><span class="header-section-number">8.4</span> Embeddings and semantic search</a></li>
+  <li><a href="#citations-and-source-attribution" id="toc-citations-and-source-attribution" class="nav-link" data-scroll-target="#citations-and-source-attribution"><span class="header-section-number">8.5</span> Citations and source attribution</a></li>
+  <li><a href="#when-to-use-rag" id="toc-when-to-use-rag" class="nav-link" data-scroll-target="#when-to-use-rag"><span class="header-section-number">8.6</span> When to use RAG</a></li>
+  <li><a href="#why-chunk-size-matters" id="toc-why-chunk-size-matters" class="nav-link" data-scroll-target="#why-chunk-size-matters"><span class="header-section-number">8.7</span> Why chunk size matters</a></li>
+  <li><a href="#common-failure-modes" id="toc-common-failure-modes" class="nav-link" data-scroll-target="#common-failure-modes"><span class="header-section-number">8.8</span> Common failure modes</a></li>
+  <li><a href="#hands-on-querying-your-documents" id="toc-hands-on-querying-your-documents" class="nav-link" data-scroll-target="#hands-on-querying-your-documents"><span class="header-section-number">8.9</span> Hands-on: querying your documents</a></li>
+  <li><a href="#evaluating-rag-quality" id="toc-evaluating-rag-quality" class="nav-link" data-scroll-target="#evaluating-rag-quality"><span class="header-section-number">8.10</span> Evaluating RAG quality</a></li>
+  <li><a href="#rag-in-production" id="toc-rag-in-production" class="nav-link" data-scroll-target="#rag-in-production"><span class="header-section-number">8.11</span> RAG in production</a></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">8.12</span> Exercises</a></li>
   </ul>
 </nav>
     </div>
@@ -210,7 +209,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Retrieval-Augmented Generation</span></h1>
+<h1 class="title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Retrieval-Augmented Generation</span></h1>
 </div>
 
 
@@ -228,8 +227,8 @@ ul.task-list li input[type="checkbox"] {
 
 
 <p>The previous modules worked with structured data — spreadsheets and databases where every row has the same columns. But much of the knowledge in an organization lives in unstructured documents: policy handbooks, contracts, product manuals, research reports, meeting transcripts. This module covers Retrieval-Augmented Generation, or RAG — the technique that lets AI answer questions about your documents with grounded, cited answers instead of hallucinations.</p>
-<section id="the-problem-ai-does-not-know-your-documents" class="level2" data-number="7.1">
-<h2 data-number="7.1" class="anchored" data-anchor-id="the-problem-ai-does-not-know-your-documents"><span class="header-section-number">7.1</span> The problem: AI does not know your documents</h2>
+<section id="the-problem-ai-does-not-know-your-documents" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="the-problem-ai-does-not-know-your-documents"><span class="header-section-number">8.1</span> The problem: AI does not know your documents</h2>
 <p>AI models are trained on public data. They know a great deal about the world in general, but they know nothing about your company’s travel policy, your product warranty terms, or last quarter’s board report.</p>
 <p>Without RAG, if you ask “What is our return policy for enterprise customers?” the LLM will either make something up (confidently and plausibly) or admit it does not know. Neither response is useful. What you want is for the system to look up the answer in your actual policy document, quote the relevant passage, and tell you where it found it.</p>
 <p>That is what RAG does.</p>
@@ -266,7 +265,7 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-knowledge-approaches-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;7.1: Three ways to give AI knowledge it was not trained on — from least effort to most control.
+Figure&nbsp;8.1: Three ways to give AI knowledge it was not trained on — from least effort to most control.
 </figcaption>
 </figure>
 </div>
@@ -274,13 +273,13 @@ Figure&nbsp;7.1: Three ways to give AI knowledge it was not trained on — from 
 </div>
 <p>This module focuses on RAG — the lightest-weight option and the one most accessible to business teams without machine-learning infrastructure.</p>
 </section>
-<section id="the-open-book-exam-analogy" class="level2" data-number="7.2">
-<h2 data-number="7.2" class="anchored" data-anchor-id="the-open-book-exam-analogy"><span class="header-section-number">7.2</span> The open-book exam analogy</h2>
+<section id="the-open-book-exam-analogy" class="level2" data-number="8.2">
+<h2 data-number="8.2" class="anchored" data-anchor-id="the-open-book-exam-analogy"><span class="header-section-number">8.2</span> The open-book exam analogy</h2>
 <p>The simplest way to understand RAG is the open-book exam. Standard AI is a closed-book exam: the student answers from memory, is confident even when wrong, and cannot cite sources. RAG is an open-book exam: the student looks up the answer in the reference materials, quotes the source, and can say “this is not covered in my materials” when the answer is not there.</p>
 <p>The quality of the answer depends entirely on what is in the book. If the documents are incomplete, outdated, or poorly organized, the RAG system will produce incomplete, outdated, or confused answers. The AI is only as good as the documents you give it.</p>
 </section>
-<section id="the-rag-pipeline" class="level2" data-number="7.3">
-<h2 data-number="7.3" class="anchored" data-anchor-id="the-rag-pipeline"><span class="header-section-number">7.3</span> The RAG pipeline</h2>
+<section id="the-rag-pipeline" class="level2" data-number="8.3">
+<h2 data-number="8.3" class="anchored" data-anchor-id="the-rag-pipeline"><span class="header-section-number">8.3</span> The RAG pipeline</h2>
 <p>RAG works in three stages: ingest, retrieve, and generate.</p>
 <p>In the ingest stage, documents are split into chunks — typically paragraphs or sections — and each chunk is converted into a numerical representation called an embedding. The embeddings are stored in a vector database (a searchable index optimized for similarity search).</p>
 <p>In the retrieve stage, when a user asks a question, the question is also converted into an embedding. The system finds the chunks whose embeddings are most similar to the question’s embedding. These are the chunks most likely to contain the answer.</p>
@@ -315,15 +314,15 @@ Figure&nbsp;7.1: Three ways to give AI knowledge it was not trained on — from 
 </div>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-rag-pipeline-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;7.2: The three stages of RAG: ingest documents, retrieve relevant chunks, generate a cited answer.
+Figure&nbsp;8.2: The three stages of RAG: ingest documents, retrieve relevant chunks, generate a cited answer.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
 </section>
-<section id="embeddings-and-semantic-search" class="level2" data-number="7.4">
-<h2 data-number="7.4" class="anchored" data-anchor-id="embeddings-and-semantic-search"><span class="header-section-number">7.4</span> Embeddings and semantic search</h2>
+<section id="embeddings-and-semantic-search" class="level2" data-number="8.4">
+<h2 data-number="8.4" class="anchored" data-anchor-id="embeddings-and-semantic-search"><span class="header-section-number">8.4</span> Embeddings and semantic search</h2>
 <p>Embeddings are what make RAG fundamentally different from keyword search.</p>
 <p>Traditional keyword search finds documents containing the exact words you typed. If you search for “vacation policy,” you will find documents containing those words but miss documents that say “PTO guidelines” or “time-off rules” or “leave entitlement.”</p>
 <p>Semantic search works on meaning. Embeddings convert text into high-dimensional numerical vectors such that texts with similar meanings point in similar directions. When you search for “vacation policy,” semantic search finds all of those variations because they have similar embeddings. It understands meaning, not just words.</p>
@@ -334,19 +333,19 @@ Figure&nbsp;7.2: The three stages of RAG: ingest documents, retrieve relevant ch
 <img src="files/images/keyword-vs-semantic.svg" class="img-fluid quarto-figure quarto-figure-center figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-keyword-vs-semantic-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;7.3: Keyword search finds only exact word matches. Semantic search finds all passages with the same meaning — even when the wording differs.
+Figure&nbsp;8.3: Keyword search finds only exact word matches. Semantic search finds all passages with the same meaning — even when the wording differs.
 </figcaption>
 </figure>
 </div>
 </section>
-<section id="citations-and-source-attribution" class="level2" data-number="7.5">
-<h2 data-number="7.5" class="anchored" data-anchor-id="citations-and-source-attribution"><span class="header-section-number">7.5</span> Citations and source attribution</h2>
+<section id="citations-and-source-attribution" class="level2" data-number="8.5">
+<h2 data-number="8.5" class="anchored" data-anchor-id="citations-and-source-attribution"><span class="header-section-number">8.5</span> Citations and source attribution</h2>
 <p>RAG does not just answer — it shows where the answer came from.</p>
 <p>Each answer includes references to the source documents and, when possible, page numbers or section headings. Users can click through to verify the original text. If the answer is not in the documents, a well-built RAG system says so instead of hallucinating.</p>
 <p>Citations transform AI from “trust me” to “here’s the evidence.” This is what makes RAG suitable for high-stakes use cases where accuracy matters and where someone will eventually ask “where did you get that number?”</p>
 </section>
-<section id="when-to-use-rag" class="level2" data-number="7.6">
-<h2 data-number="7.6" class="anchored" data-anchor-id="when-to-use-rag"><span class="header-section-number">7.6</span> When to use RAG</h2>
+<section id="when-to-use-rag" class="level2" data-number="8.6">
+<h2 data-number="8.6" class="anchored" data-anchor-id="when-to-use-rag"><span class="header-section-number">8.6</span> When to use RAG</h2>
 <p>RAG is not always the right approach. The choice depends on the type of data.</p>
 <p>For structured data (spreadsheets, databases, tables of numbers), a skill that writes SQL queries is more appropriate. This is what you built in Module 5.</p>
 <p>For unstructured documents (policies, contracts, manuals, reports), RAG is the right tool.</p>
@@ -398,29 +397,29 @@ Context window sizes
 </div>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-rag-decision-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;7.4: Choosing the right approach depends on what kind of data you are working with.
+Figure&nbsp;8.4: Choosing the right approach depends on what kind of data you are working with.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
 </section>
-<section id="why-chunk-size-matters" class="level2" data-number="7.7">
-<h2 data-number="7.7" class="anchored" data-anchor-id="why-chunk-size-matters"><span class="header-section-number">7.7</span> Why chunk size matters</h2>
+<section id="why-chunk-size-matters" class="level2" data-number="8.7">
+<h2 data-number="8.7" class="anchored" data-anchor-id="why-chunk-size-matters"><span class="header-section-number">8.7</span> Why chunk size matters</h2>
 <p>Documents are split into chunks before embedding. The size of these chunks determines what the system can find and what it misses.</p>
 <p>Chunks that are too small (individual sentences) lose context. A sentence alone may be meaningless without the paragraph around it. The system retrieves fragments instead of answers.</p>
 <p>Chunks that are too large (entire chapters) include too much irrelevant content. The signal is diluted by noise. The AI may struggle to identify which part of the chunk actually answers the question.</p>
 <p>The sweet spot is usually a few paragraphs — enough context to be meaningful, small enough to be relevant. Overlapping chunks (where each chunk shares some text with its neighbors) help ensure that nothing falls through the cracks.</p>
 </section>
-<section id="common-failure-modes" class="level2" data-number="7.8">
-<h2 data-number="7.8" class="anchored" data-anchor-id="common-failure-modes"><span class="header-section-number">7.8</span> Common failure modes</h2>
+<section id="common-failure-modes" class="level2" data-number="8.8">
+<h2 data-number="8.8" class="anchored" data-anchor-id="common-failure-modes"><span class="header-section-number">8.8</span> Common failure modes</h2>
 <p>RAG is not perfect. Understanding the failure modes helps you spot and fix problems.</p>
 <p>On the retrieval side, the system may retrieve the wrong chunk (semantically similar but irrelevant), miss the right chunk entirely (the answer exists but was not retrieved), or retrieve chunks that contradict each other.</p>
 <p>On the generation side, the LLM may hallucinate a citation (citing a page that does not contain the claim), over-generalize (drawing a conclusion the source does not support), or give an incomplete answer (using one chunk when the full answer spans multiple documents).</p>
 <p>The most dangerous failure is the hallucinated citation. The answer looks grounded — it has a source reference — but when you check the cited passage, it does not say what the LLM claims. This creates false confidence, which is worse than no citation at all.</p>
 </section>
-<section id="hands-on-querying-your-documents" class="level2" data-number="7.9">
-<h2 data-number="7.9" class="anchored" data-anchor-id="hands-on-querying-your-documents"><span class="header-section-number">7.9</span> Hands-on: querying your documents</h2>
+<section id="hands-on-querying-your-documents" class="level2" data-number="8.9">
+<h2 data-number="8.9" class="anchored" data-anchor-id="hands-on-querying-your-documents"><span class="header-section-number">8.9</span> Hands-on: querying your documents</h2>
 <p>The simplest way to experience RAG is to point your coding agent at a folder of documents and start asking questions.</p>
 <p>Download the <a href="files/data/company-handbook.md">sample company handbook</a> and place it in a folder. Open your coding agent in that folder. Then ask questions:</p>
 <blockquote class="blockquote">
@@ -435,23 +434,23 @@ Figure&nbsp;7.4: Choosing the right approach depends on what kind of data you ar
 <p>For each answer, evaluate three things. Is it relevant — did it find the right section of the document? Is it faithful — does the answer accurately represent what the source says? Is it complete — did it find all the relevant passages, or did it miss something?</p>
 <p>Then test the boundaries. Ask a question the document cannot answer: “What is our competitor’s market share?” Does AI admit the information is not in the document, or does it hallucinate an answer?</p>
 </section>
-<section id="evaluating-rag-quality" class="level2" data-number="7.10">
-<h2 data-number="7.10" class="anchored" data-anchor-id="evaluating-rag-quality"><span class="header-section-number">7.10</span> Evaluating RAG quality</h2>
+<section id="evaluating-rag-quality" class="level2" data-number="8.10">
+<h2 data-number="8.10" class="anchored" data-anchor-id="evaluating-rag-quality"><span class="header-section-number">8.10</span> Evaluating RAG quality</h2>
 <p>There are three dimensions for judging whether a RAG answer is good.</p>
 <p>Relevance measures whether the retrieved passages are on-topic. Did the system find the right sections? Would a human reading the document have picked the same passages?</p>
 <p>Faithfulness measures whether the generated answer accurately represents the source material. Does the answer match what the cited passage actually says? Are there any added claims that go beyond the source?</p>
 <p>Completeness measures whether the system found everything relevant. Did it retrieve all the passages that bear on the question? Would adding more context from the document change the answer?</p>
 <p>Use these three questions to evaluate every RAG answer: is it relevant, faithful, and complete?</p>
 </section>
-<section id="rag-in-production" class="level2" data-number="7.11">
-<h2 data-number="7.11" class="anchored" data-anchor-id="rag-in-production"><span class="header-section-number">7.11</span> RAG in production</h2>
+<section id="rag-in-production" class="level2" data-number="8.11">
+<h2 data-number="8.11" class="anchored" data-anchor-id="rag-in-production"><span class="header-section-number">8.11</span> RAG in production</h2>
 <p>In production, RAG has a document pipeline that runs continuously. New documents are automatically chunked and embedded. A vector store (Pinecone, Weaviate, Chroma, or similar) maintains a searchable index of all document chunks. When a user asks a question, the system retrieves the most relevant chunks, feeds them to the AI, and returns a cited answer.</p>
 <p>Production RAG requires ongoing maintenance. Documents need refresh schedules so that updated policies replace outdated ones. Access controls ensure that users can only query documents they are authorized to see. Versioning tracks changes so that when a policy is updated, the old version expires from the index.</p>
 <p>Quality assurance means maintaining a test suite of known question-answer pairs to validate accuracy, monitoring retrieval quality over time, and building a feedback loop where users can flag incorrect answers for improvement.</p>
-<p>The same sandbox-audit-deploy pattern from Module 6 applies. RAG is a system, not a feature, and it needs the same care as any production system.</p>
+<p>The same sandbox-audit-deploy pattern from Module 7 applies. RAG is a system, not a feature, and it needs the same care as any production system.</p>
 </section>
-<section id="exercises" class="level2" data-number="7.12">
-<h2 data-number="7.12" class="anchored" data-anchor-id="exercises"><span class="header-section-number">7.12</span> Exercises</h2>
+<section id="exercises" class="level2" data-number="8.12">
+<h2 data-number="8.12" class="anchored" data-anchor-id="exercises"><span class="header-section-number">8.12</span> Exercises</h2>
 <div class="callout callout-style-default callout-note callout-titled" title="Exercise 1: Document Querying">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -1110,14 +1109,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./06-reporting-pipelines.html" class="pagination-link" aria-label="Automating with Agents">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Automating with Agents</span></span>
+      <a href="./07-reporting-pipelines.html" class="pagination-link" aria-label="Automating with Agents">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Automating with Agents</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./08-reliability.html" class="pagination-link" aria-label="Reliability and Compliance">
-        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Reliability and Compliance</span></span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->

@@ -26,9 +26,9 @@ book:
     - 03-exploring-data.qmd
     - 04-thinking-partner.qmd
     - 05-connecting-databases.qmd
-    - 06-reporting-pipelines.qmd
-    - 07-rag.qmd
-    - 08-reliability.qmd
+    - 06-reliability.qmd
+    - 07-reporting-pipelines.qmd
+    - 08-rag.qmd
 
 format:
   html:

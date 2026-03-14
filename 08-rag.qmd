@@ -205,7 +205,7 @@ Production RAG requires ongoing maintenance.  Documents need refresh schedules s
 
 Quality assurance means maintaining a test suite of known question-answer pairs to validate accuracy, monitoring retrieval quality over time, and building a feedback loop where users can flag incorrect answers for improvement.
 
-The same sandbox-audit-deploy pattern from Module 6 applies.  RAG is a system, not a feature, and it needs the same care as any production system.
+The same sandbox-audit-deploy pattern from Module 7 applies.  RAG is a system, not a feature, and it needs the same care as any production system.
 
 ## Exercises
 

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Kerry Back">
-<meta name="dcterms.date" content="2026-03-13">
+<meta name="dcterms.date" content="2026-03-14">
 
 <title>From BI to AI</title>
 <style>
@@ -133,7 +133,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./01-agents.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">From Dashboards to AI Agents</span></span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">AI Agents</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -162,20 +162,20 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./06-reporting-pipelines.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Automating with Agents</span></span></a>
+  <a href="./06-reliability.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Reliability and Compliance</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./07-rag.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Retrieval-Augmented Generation</span></span></a>
+  <a href="./07-reporting-pipelines.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Automating with Agents</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./08-reliability.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Reliability and Compliance</span></span></a>
+  <a href="./08-rag.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Retrieval-Augmented Generation</span></span></a>
   </div>
 </li>
     </ul>
@@ -219,7 +219,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">March 13, 2026</p>
+      <p class="date">March 14, 2026</p>
     </div>
   </div>
   
@@ -239,16 +239,16 @@ ul.task-list li input[type="checkbox"] {
 <p>Module 3 shows how to query data and generate visualizations and reports with plain English. You will open a coding agent in a folder containing a spreadsheet and go from raw data to a written recommendation with charts in under ten minutes.</p>
 <p>Module 4 shows how AI can help you think through decisions. You will use AI as a sparring partner — challenging assumptions, running pre-mortems, and stress-testing your own analysis from Module 3.</p>
 <p>Module 5 shows how AI can be connected to your company’s databases, so anyone with proper credentials can query them in plain English. You will learn about MCP connectors, build a reusable “skill” that encodes a database schema, and build a demo web app that anyone can use from a browser.</p>
-<p>Module 6 shows how to automate multi-step workflows. You will build a reporting pipeline that queries a database, generates charts, writes summaries, and assembles a PowerPoint deck — all from a single instruction.</p>
-<p>Module 7 shows how to use AI to query your company’s documents and return answers grounded in your documents (with citations) rather than relying on its general knowledge. This is called Retrieval-Augmented Generation (RAG).</p>
-<p>Module 8 addresses reliability and compliance. You will validate AI outputs, red-team skills and RAG systems, and build the governance framework your organization needs before deploying any of this.</p>
+<p>Module 6 addresses reliability and compliance. You will validate AI outputs, red-team skills and RAG systems, and build the governance framework your organization needs before deploying any of this.</p>
+<p>Module 7 shows how to automate multi-step workflows. You will build a reporting pipeline that queries a database, generates charts, writes summaries, and assembles a PowerPoint deck — all from a single instruction.</p>
+<p>Module 8 shows how to use AI to query your company’s documents and return answers grounded in your documents (with citations) rather than relying on its general knowledge. This is called Retrieval-Augmented Generation (RAG).</p>
 <section id="data-files" class="level2">
 <h2 class="anchored" data-anchor-id="data-files">Data files</h2>
 <p>The exercises in this course use three datasets.</p>
-<p>The <a href="files/data/superstore.csv">Superstore CSV</a> contains roughly 10,000 retail orders across four U.S. regions with columns for sales, profit, discount, product category, and customer segment.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> It is used throughout Modules 3, 4, and 8.</p>
+<p>The <a href="files/data/superstore.csv">Superstore CSV</a> contains roughly 10,000 retail orders across four U.S. regions with columns for sales, profit, discount, product category, and customer segment.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> It is used throughout Modules 3, 4, and 6.</p>
 <p>The <a href="files/data/employee-attrition.csv">Employee Attrition CSV</a> contains 1,470 employee records with 35 attributes including department, job role, monthly income, overtime status, job satisfaction, and whether the employee left the company.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> It is used in Module 3 exercises.</p>
-<p>The <a href="files/data/chinook.db">Chinook database</a> is a SQLite file representing a music retailer’s operations with 11 related tables covering employees, customers, invoices, tracks, albums, artists, and genres.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> It is the primary dataset for Module 5 and is revisited in Modules 6 and 8.</p>
-<p>Module 7 uses a <a href="files/data/company-handbook.md">sample company handbook</a> for RAG exercises.</p>
+<p>The <a href="files/data/chinook.db">Chinook database</a> is a SQLite file representing a music retailer’s operations with 11 related tables covering employees, customers, invoices, tracks, albums, artists, and genres.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> It is the primary dataset for Module 5 and is revisited in Modules 6 and 7.</p>
+<p>Module 8 uses a <a href="files/data/company-handbook.md">sample company handbook</a> for RAG exercises.</p>
 </section>
 <section id="prerequisites" class="level2">
 <h2 class="anchored" data-anchor-id="prerequisites">Prerequisites</h2>
@@ -833,8 +833,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   <div class="nav-page nav-page-previous">
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./01-agents.html" class="pagination-link" aria-label="From Dashboards to AI Agents">
-        <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">From Dashboards to AI Agents</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./01-agents.html" class="pagination-link" aria-label="AI Agents">
+        <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">AI Agents</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

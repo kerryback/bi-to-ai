@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>6&nbsp; Automating with Agents – From BI to AI</title>
+<title>7&nbsp; Automating with Agents – From BI to AI</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,8 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./07-rag.html" rel="next">
-<link href="./05-connecting-databases.html" rel="prev">
+<link href="./08-rag.html" rel="next">
+<link href="./06-reliability.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -92,7 +92,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./06-reporting-pipelines.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Automating with Agents</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./07-reporting-pipelines.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Automating with Agents</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -135,7 +135,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./01-agents.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">From Dashboards to AI Agents</span></span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">AI Agents</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -164,20 +164,20 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./06-reporting-pipelines.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Automating with Agents</span></span></a>
+  <a href="./06-reliability.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Reliability and Compliance</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./07-rag.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Retrieval-Augmented Generation</span></span></a>
+  <a href="./07-reporting-pipelines.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Automating with Agents</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./08-reliability.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Reliability and Compliance</span></span></a>
+  <a href="./08-rag.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Retrieval-Augmented Generation</span></span></a>
   </div>
 </li>
     </ul>
@@ -190,12 +190,12 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Module contents</h2>
    
   <ul>
-  <li><a href="#from-query-to-report" id="toc-from-query-to-report" class="nav-link active" data-scroll-target="#from-query-to-report"><span class="header-section-number">6.1</span> From query to report</a></li>
-  <li><a href="#the-reporting-pipeline" id="toc-the-reporting-pipeline" class="nav-link" data-scroll-target="#the-reporting-pipeline"><span class="header-section-number">6.2</span> The reporting pipeline</a></li>
-  <li><a href="#building-it-with-your-coding-agent" id="toc-building-it-with-your-coding-agent" class="nav-link" data-scroll-target="#building-it-with-your-coding-agent"><span class="header-section-number">6.3</span> Building it with your coding agent</a></li>
-  <li><a href="#sandboxed-execution" id="toc-sandboxed-execution" class="nav-link" data-scroll-target="#sandboxed-execution"><span class="header-section-number">6.4</span> Sandboxed execution</a></li>
-  <li><a href="#from-prototype-to-production" id="toc-from-prototype-to-production" class="nav-link" data-scroll-target="#from-prototype-to-production"><span class="header-section-number">6.5</span> From prototype to production</a></li>
-  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">6.6</span> Exercises</a></li>
+  <li><a href="#from-query-to-report" id="toc-from-query-to-report" class="nav-link active" data-scroll-target="#from-query-to-report"><span class="header-section-number">7.1</span> From query to report</a></li>
+  <li><a href="#the-reporting-pipeline" id="toc-the-reporting-pipeline" class="nav-link" data-scroll-target="#the-reporting-pipeline"><span class="header-section-number">7.2</span> The reporting pipeline</a></li>
+  <li><a href="#building-it-with-your-coding-agent" id="toc-building-it-with-your-coding-agent" class="nav-link" data-scroll-target="#building-it-with-your-coding-agent"><span class="header-section-number">7.3</span> Building it with your coding agent</a></li>
+  <li><a href="#sandboxed-execution" id="toc-sandboxed-execution" class="nav-link" data-scroll-target="#sandboxed-execution"><span class="header-section-number">7.4</span> Sandboxed execution</a></li>
+  <li><a href="#from-prototype-to-production" id="toc-from-prototype-to-production" class="nav-link" data-scroll-target="#from-prototype-to-production"><span class="header-section-number">7.5</span> From prototype to production</a></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">7.6</span> Exercises</a></li>
   </ul>
 </nav>
     </div>
@@ -204,7 +204,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Automating with Agents</span></h1>
+<h1 class="title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Automating with Agents</span></h1>
 </div>
 
 
@@ -222,13 +222,13 @@ ul.task-list li input[type="checkbox"] {
 
 
 <p>Module 1 introduced the agent loop — plan, execute, observe, iterate — and the concept of agents chaining tools together. This module puts that pattern to work. You will build a reporting pipeline that queries a database, generates charts, writes narrative, and assembles a PowerPoint deck, all from a single instruction.</p>
-<section id="from-query-to-report" class="level2" data-number="6.1">
-<h2 data-number="6.1" class="anchored" data-anchor-id="from-query-to-report"><span class="header-section-number">6.1</span> From query to report</h2>
+<section id="from-query-to-report" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="from-query-to-report"><span class="header-section-number">7.1</span> From query to report</h2>
 <p>In Module 5, the Chinook query app answered questions one at a time. You asked “What are the top ten countries by revenue?” and got a table. Useful, but a stakeholder does not want a table — they want a slide deck with a chart, key findings, and a recommendation.</p>
 <p>Getting from a raw query to a finished report means executing a sequence of steps: run the SQL, transform the results, generate a visualization, write a summary, and assemble the output document. That sequence is a pipeline, and automating it is what agents do.</p>
 </section>
-<section id="the-reporting-pipeline" class="level2" data-number="6.2">
-<h2 data-number="6.2" class="anchored" data-anchor-id="the-reporting-pipeline"><span class="header-section-number">6.2</span> The reporting pipeline</h2>
+<section id="the-reporting-pipeline" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="the-reporting-pipeline"><span class="header-section-number">7.2</span> The reporting pipeline</h2>
 <p>Here is the workflow, step by step.</p>
 <p><strong>Step 1: Query the database.</strong> The agent runs a SQL query against the Chinook database — the same kind of query the Module 5 app generates. The result is a pandas DataFrame: rows of data ready for analysis.</p>
 <p><strong>Step 2: Render a chart.</strong> The agent passes the DataFrame to matplotlib (or Plotly) and generates a visualization — a bar chart, line chart, or whatever fits the data. The chart is saved as a PNG image.</p>
@@ -260,25 +260,25 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-reporting-pipeline-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;6.1: The reporting pipeline — five steps from query to delivered report.
+Figure&nbsp;7.1: The reporting pipeline — five steps from query to delivered report.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
 </section>
-<section id="building-it-with-your-coding-agent" class="level2" data-number="6.3">
-<h2 data-number="6.3" class="anchored" data-anchor-id="building-it-with-your-coding-agent"><span class="header-section-number">6.3</span> Building it with your coding agent</h2>
+<section id="building-it-with-your-coding-agent" class="level2" data-number="7.3">
+<h2 data-number="7.3" class="anchored" data-anchor-id="building-it-with-your-coding-agent"><span class="header-section-number">7.3</span> Building it with your coding agent</h2>
 <p>You do not need to write this app by hand. Your coding agent can build it for you. Here is an example prompt you can give it:</p>
 <blockquote class="blockquote">
 <p>Build a Streamlit app that connects to chinook.db. Add a dropdown with five pre-defined reports: Revenue by Country, Monthly Revenue Trend, Top 10 Artists, Genre Breakdown, and Customer Spending. When the user selects a report and clicks Generate, run the SQL query, create a chart with matplotlib, call OpenRouter to write a three-sentence executive summary, and assemble a three-slide PowerPoint (title, chart, findings) using python-pptx. Show the chart and summary on screen with a download button for the PowerPoint file. Log every LLM request and response to llm_log.jsonl with timestamps.</p>
 </blockquote>
 <p>This prompt is specific enough that a coding agent can execute it end to end. It names the database, the reports, the tools (matplotlib, python-pptx, OpenRouter), the output format, and the logging requirement.</p>
 <p>Your job is not to write the code. Your job is to test the result, refine the prompt, and iterate until the output meets your standards. If the charts are ugly, tell the agent to improve the styling. If the summaries are too generic, tell it to include specific numbers. If a report query is wrong, describe the correct logic. Prompt engineering is the skill; the agent is the labor.</p>
-<p>Notice the last line of the prompt: logging. Every LLM request and response is written to a JSONL file with timestamps. This creates an audit trail — you can see exactly what the LLM was asked and what it returned. Module 8 will use these logs for verification and governance.</p>
+<p>Notice the last line of the prompt: logging. Every LLM request and response is written to a JSONL file with timestamps. This creates an audit trail — you can see exactly what the LLM was asked and what it returned. Module 6 covers how these logs support verification and governance.</p>
 </section>
-<section id="sandboxed-execution" class="level2" data-number="6.4">
-<h2 data-number="6.4" class="anchored" data-anchor-id="sandboxed-execution"><span class="header-section-number">6.4</span> Sandboxed execution</h2>
+<section id="sandboxed-execution" class="level2" data-number="7.4">
+<h2 data-number="7.4" class="anchored" data-anchor-id="sandboxed-execution"><span class="header-section-number">7.4</span> Sandboxed execution</h2>
 <p>When an agent runs code, you need to control where it runs. On your laptop during development, a coding agent runs in your environment with access to your files. That is fine for prototyping. In production, you want isolation.</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Built-in sandboxing">
 <div class="callout-header d-flex align-content-center">
@@ -324,21 +324,21 @@ Built-in sandboxing
 </div>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-sandbox-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;6.2: Production sandbox architecture — the agent runs in isolation, the database is read-only.
+Figure&nbsp;7.2: Production sandbox architecture — the agent runs in isolation, the database is read-only.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
 </section>
-<section id="from-prototype-to-production" class="level2" data-number="6.5">
-<h2 data-number="6.5" class="anchored" data-anchor-id="from-prototype-to-production"><span class="header-section-number">6.5</span> From prototype to production</h2>
+<section id="from-prototype-to-production" class="level2" data-number="7.5">
+<h2 data-number="7.5" class="anchored" data-anchor-id="from-prototype-to-production"><span class="header-section-number">7.5</span> From prototype to production</h2>
 <p>The reporting app on your laptop is a prototype. Moving it to production adds infrastructure, not intelligence.</p>
 <p>Production adds SSO authentication so only authorized users can generate reports, scheduled runs so weekly reports are generated automatically, logging so every query and LLM call is recorded for compliance, and read-only database credentials so the agent cannot modify data.</p>
 <p>The reporting pipeline you prototyped is the same artifact that powers the production tool. IT wraps it in infrastructure; you provide the domain knowledge and the prompt.</p>
 </section>
-<section id="exercises" class="level2" data-number="6.6">
-<h2 data-number="6.6" class="anchored" data-anchor-id="exercises"><span class="header-section-number">6.6</span> Exercises</h2>
+<section id="exercises" class="level2" data-number="7.6">
+<h2 data-number="7.6" class="anchored" data-anchor-id="exercises"><span class="header-section-number">7.6</span> Exercises</h2>
 <div class="callout callout-style-default callout-note callout-titled" title="Exercise 1: Multi-Step Agent Workflow">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -997,13 +997,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./05-connecting-databases.html" class="pagination-link" aria-label="Connecting Databases">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Connecting Databases</span></span>
+      <a href="./06-reliability.html" class="pagination-link" aria-label="Reliability and Compliance">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Reliability and Compliance</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./07-rag.html" class="pagination-link" aria-label="Retrieval-Augmented Generation">
-        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Retrieval-Augmented Generation</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./08-rag.html" class="pagination-link" aria-label="Retrieval-Augmented Generation">
+        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Retrieval-Augmented Generation</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

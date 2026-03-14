@@ -12,24 +12,24 @@ Module 4 shows how AI can help you think through decisions.  You will use AI as 
 
 Module 5 shows how AI can be connected to your company's databases, so anyone with proper credentials can query them in plain English.  You will learn about MCP connectors, build a reusable "skill" that encodes a database schema, and build a demo web app that anyone can use from a browser.
 
-Module 6 shows how to automate multi-step workflows.  You will build a reporting pipeline that queries a database, generates charts, writes summaries, and assembles a PowerPoint deck --- all from a single instruction.
+Module 6 addresses reliability and compliance.  You will validate AI outputs, red-team skills and RAG systems, and build the governance framework your organization needs before deploying any of this.
 
-Module 7 shows how to use AI to query your company's documents and return answers grounded in your documents (with citations) rather than relying on its general knowledge.  This is called Retrieval-Augmented Generation (RAG).
+Module 7 shows how to automate multi-step workflows.  You will build a reporting pipeline that queries a database, generates charts, writes summaries, and assembles a PowerPoint deck --- all from a single instruction.
 
-Module 8 addresses reliability and compliance.  You will validate AI outputs, red-team skills and RAG systems, and build the governance framework your organization needs before deploying any of this.
+Module 8 shows how to use AI to query your company's documents and return answers grounded in your documents (with citations) rather than relying on its general knowledge.  This is called Retrieval-Augmented Generation (RAG).
 
 
 ## Data files
 
 The exercises in this course use three datasets.
 
-The [Superstore CSV](files/data/superstore.csv) contains roughly 10,000 retail orders across four U.S. regions with columns for sales, profit, discount, product category, and customer segment.^[The Sample Superstore dataset is published on Kaggle at <https://www.kaggle.com/datasets/vivek468/superstore-dataset-final>.  It is widely used in data-visualization tutorials and Tableau exercises.]  It is used throughout Modules 3, 4, and 8.
+The [Superstore CSV](files/data/superstore.csv) contains roughly 10,000 retail orders across four U.S. regions with columns for sales, profit, discount, product category, and customer segment.^[The Sample Superstore dataset is published on Kaggle at <https://www.kaggle.com/datasets/vivek468/superstore-dataset-final>.  It is widely used in data-visualization tutorials and Tableau exercises.]  It is used throughout Modules 3, 4, and 6.
 
 The [Employee Attrition CSV](files/data/employee-attrition.csv) contains 1,470 employee records with 35 attributes including department, job role, monthly income, overtime status, job satisfaction, and whether the employee left the company.^[The IBM HR Analytics Employee Attrition & Performance dataset is a fictional dataset created by IBM data scientists, published on Kaggle at <https://www.kaggle.com/datasets/pavansubhasht/ibm-hr-analytics-attrition-dataset>.]  It is used in Module 3 exercises.
 
-The [Chinook database](files/data/chinook.db) is a SQLite file representing a music retailer's operations with 11 related tables covering employees, customers, invoices, tracks, albums, artists, and genres.^[The Chinook database was created by Luis Rocha as a modern alternative to the Northwind sample database.  The source repository is at <https://github.com/lerocha/chinook-database>.]  It is the primary dataset for Module 5 and is revisited in Modules 6 and 8.
+The [Chinook database](files/data/chinook.db) is a SQLite file representing a music retailer's operations with 11 related tables covering employees, customers, invoices, tracks, albums, artists, and genres.^[The Chinook database was created by Luis Rocha as a modern alternative to the Northwind sample database.  The source repository is at <https://github.com/lerocha/chinook-database>.]  It is the primary dataset for Module 5 and is revisited in Modules 6 and 7.
 
-Module 7 uses a [sample company handbook](files/data/company-handbook.md) for RAG exercises.
+Module 8 uses a [sample company handbook](files/data/company-handbook.md) for RAG exercises.
 
 ## Prerequisites
 

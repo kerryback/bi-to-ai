@@ -1,6 +1,6 @@
 # Reliability and Compliance
 
-The previous seven modules built an increasingly powerful toolkit: agent concepts, coding tools, data analysis, thinking-partner conversations, database skills, agent workflows, and document-based AI.  Before any of this is deployed, leadership will ask one question: can we trust it?
+The previous five modules built an increasingly powerful toolkit: agent concepts, coding tools, data analysis, thinking-partner conversations, and database skills.  The next two modules will add agent workflows and document-based AI.  Before any of this is deployed, leadership will ask one question: can we trust it?
 
 This module provides the answer, which is yes --- with the right verification.  You will learn a repeatable protocol for validating AI outputs, stress-testing skills and RAG systems, and building the governance framework your organization needs.
 
@@ -10,10 +10,22 @@ AI with code execution is like a fast junior analyst --- capable but in need of 
 
 For low-stakes work (exploratory charts, directional trends, internal brainstorming), a quick sanity check is sufficient.  Glance at the numbers, confirm they are in the right ballpark, and move on.
 
-For medium-stakes work (team skills from Module 5, recurring reports, RAG-based Q&A from Module 7), test with known answers before relying on the results.  Run queries where you already know the answer and confirm that AI matches.
+For medium-stakes work (team skills from Module 5, recurring reports, RAG-based Q&A from Module 8), test with known answers before relying on the results.  Run queries where you already know the answer and confirm that AI matches.
 
 For high-stakes work (board presentations, budget recommendations, external reporting), apply the full verification protocol described later in this module.  Every number, every chart, every claim should be independently verified.
 
+::: {.callout-tip title="Key Terms" collapse="true"}
+
+- **Hallucination** — AI generating plausible but incorrect output (wrong numbers, fabricated citations, confident but false claims).
+- **RAG (Retrieval-Augmented Generation)** — grounding LLM responses in retrieved documents so answers cite real sources rather than relying on the model's training data alone.
+- **Red-teaming** — deliberately attacking your own system to find weaknesses before real users or adversaries do.[^owasp]
+- **Guardrails** — technical constraints that prevent misuse: read-only database access, restricted tables, input validation, and query logging.
+- **Defense in depth** — layering multiple independent safeguards so that no single failure compromises the system.
+- **PII (Personally Identifiable Information)** — data that can identify an individual (names, Social Security numbers, email addresses, etc.).
+- **Data sovereignty** — the legal requirement that data remain under a specific jurisdiction's control.[^nist]
+- **Air-gapped** — infrastructure with no internet connectivity, used for classified or highly sensitive workloads.
+
+:::
 
 ## Hallucination: the core risk
 
@@ -23,7 +35,7 @@ AI in code-execution mode does not invent facts the way a chatbot might.  It rea
 
 These errors are dangerous precisely because the output looks professional.  Charts render cleanly even when the underlying data is wrong.  Memos read smoothly even when the conclusion does not follow from the evidence.  A polished result inspires confidence, and confidence without verification is the real risk.
 
-You have seen examples throughout this course.  Date or currency parsing surprises in Module 3.  Incorrect join paths in Module 5.  Hallucinated citations in Module 7.  Each error was fixable, but only if someone checked.
+You have already seen examples.  Date or currency parsing surprises in Module 3.  Incorrect join paths in Module 5.  Module 8 will show how RAG can produce hallucinated citations.  Each error is fixable, but only if someone checks.
 
 ## The verification protocol
 
@@ -51,7 +63,7 @@ The more specific the filter logic, the more likely AI misinterprets it.
 
 ## Trusting RAG answers
 
-RAG (Module 7) grounds AI in your documents, but grounding does not guarantee correctness.
+RAG (Module 8) grounds AI in your documents, but grounding does not guarantee correctness.
 
 RAG introduces three specific risks.  The first is hallucinated citations: the LLM cites a page or section that does not actually contain the claim.  The citation looks authoritative, but when you check the source, the passage says something different or does not address the question at all.
 
@@ -65,7 +77,7 @@ A citation that looks right but is not is worse than no citation at all.  It cre
 
 ## Red-teaming RAG
 
-Test your RAG system the way an adversary would.
+Red-teaming means deliberately attacking your own system to find weaknesses before real users do.[^owasp]  Test your RAG system the way an adversary would.
 
 Ask out-of-scope questions: "What is our competitor's revenue?" when no competitor data is in the documents.  Does AI admit it does not know, or does it hallucinate an answer?
 
@@ -77,7 +89,7 @@ Every failure you find now is one your team will not encounter in production.
 
 ## Red-teaming your skill
 
-The database skill from Module 5 is the kind of tool people stop questioning once it is deployed.  Test it like any tool your team depends on.
+The database skill from Module 5 is the kind of tool people stop questioning once it is deployed.  Test it like any tool your team depends on.[^mitre]
 
 Validate with known answers by running queries where you already know the result (total invoices, number of customers).  Compare AI's SQL to a hand-written query.  Ask the same question multiple times and check for consistency.
 
@@ -123,9 +135,9 @@ flowchart TB
 
 Before deploying AI with your data, three questions need clear answers: what data leaves your network, where does inference happen, and what audit trail exists?
 
-### Cloud inference
+### Cloud API
 
-When you call a cloud API --- OpenAI, Anthropic, Google --- your application sends a prompt to the provider's servers, the LLM runs inference there, and the response comes back.  The key question is what is in that prompt.
+When you call a cloud API --- OpenAI, Anthropic, Google --- your application sends a prompt to the provider's shared infrastructure, the LLM runs inference there, and the response comes back.  The key question is what is in that prompt.
 
 As Module 5 showed, you often need to send only a schema description and a user question.  The LLM returns SQL or code, and your application executes it locally against your own database.  The actual data --- customer names, revenue figures, health records --- never leaves your network.  In this pattern, cloud inference is compatible with most data policies because the sensitive data stays behind your firewall.
 
@@ -133,25 +145,33 @@ However, some use cases do require sending data to the LLM.  RAG prompts include
 
 Enterprise API tiers from Anthropic, OpenAI, and Google typically guarantee that your data is not used for training, offer short or zero retention windows, and provide contractual commitments on data handling.  Consumer tiers (free ChatGPT, free Claude) may not offer these guarantees.  Always confirm the terms before sending sensitive data.
 
-### On-premise inference
+### Dedicated cloud tenancy
 
-On-premise means running the LLM on servers your organization owns or controls --- in your data center or in a private cloud tenancy (AWS, Azure, or GCP instances dedicated to your organization).  Nothing leaves your network.  You control the hardware, the model weights, and the logs.
+Dedicated cloud tenancy means running inference on isolated instances within a public cloud provider --- hardware in the provider's data center but reserved exclusively for your organization and walled off from other tenants.[^aws-dedicated]  Examples include AWS Dedicated Hosts, Azure Dedicated Host, and GCP sole-tenant nodes.[^azure-dedicated]
+
+For closed-source models, the providers offer dedicated deployment options.  Anthropic offers Claude on Amazon Bedrock and Google Cloud Vertex AI, where inference runs in your dedicated tenancy under your security controls.  OpenAI offers Azure OpenAI Service, where GPT models run in your Azure subscription.  These are enterprise licensing arrangements: you pay for compute and per-token usage, and the provider guarantees that your data stays within your tenancy and is not used for training.
+
+Dedicated tenancy gives you the security isolation of on-premise infrastructure with the operational convenience of a cloud provider.  It is a common choice for organizations that need strong data controls but do not want to manage their own GPU hardware.
+
+### Private cloud and on-premise inference
+
+Private cloud means running the LLM on servers your organization owns or operates --- in your own data center, with cloud-like characteristics such as elastic scaling and self-service provisioning.[^nist]  Examples include HPE GreenLake and Dell APEX.  On-premise deployments without these cloud characteristics are simply traditional data-center hosting.  In either case, nothing leaves your network.  You control the hardware, the model weights, and the logs.
 
 For open-source models (Llama, Mistral, DeepSeek), you download the model weights and run inference on your own GPU servers.  There is no vendor relationship for the model itself --- you manage everything.
 
-For closed-source models (Claude, GPT), the providers offer private deployment options.  Anthropic offers Claude on Amazon Bedrock and Google Cloud Vertex AI, where inference runs in your cloud tenancy under your security controls.  OpenAI offers Azure OpenAI Service, where GPT models run in your Azure subscription.  These are enterprise licensing arrangements: you pay for compute and per-token usage, and the provider guarantees that your data stays within your tenancy and is not used for training.
+On-premise and private-cloud deployments give maximum control but require GPU infrastructure and operational expertise.  They may also lag behind the latest cloud-hosted models in capability.
 
-On-premise models give maximum control but require GPU infrastructure and operational expertise.  They may also lag behind the latest cloud-hosted models in capability.
+Air-gapped environments --- on-premise infrastructure with no internet connectivity --- represent the most restrictive deployment.  These are required for classified and military workloads where even outbound network traffic is prohibited.
 
 ### Choosing the right deployment
 
-Most organizations need a mix.  Cloud APIs work well for non-sensitive tasks where only schema or public information is sent.  On-premise or private-cloud deployment is appropriate for workloads involving confidential data, regulated records, or proprietary documents.
+Most organizations need a mix.  Cloud APIs work well for non-sensitive tasks where only schema or public information is sent.  Dedicated cloud tenancy suits workloads that need isolation without the burden of managing hardware.  Private cloud or on-premise deployment is appropriate for the most sensitive workloads: regulated records, proprietary documents, or data subject to strict sovereignty requirements.
 
-The deciding factor is not the model but the data.  Ask: does this prompt contain information that cannot leave our network?  If yes, run inference on-premise or in a private cloud tenancy.  If no, a cloud API with an enterprise data-processing agreement is typically sufficient.
+The deciding factor is not the model but the data.  Ask: does this prompt contain information that cannot leave our network?  If yes, run inference in a dedicated tenancy or on-premise.  If no, a cloud API with an enterprise data-processing agreement is typically sufficient.
 
 ### Data sovereignty
 
-Data sovereignty is the legal and organizational requirement that data remain under the jurisdiction and governance controls of a specific country or entity.  It goes beyond the cloud-vs.-on-prem deployment choice: even data stored in a cloud provider's data center may violate sovereignty requirements if that data center is in another country or subject to another government's laws.
+Data sovereignty is the legal and organizational requirement that data remain under the jurisdiction and governance controls of a specific country or entity.[^nist]  It goes beyond the cloud-vs.-on-prem deployment choice: even data stored in a cloud provider's data center may violate sovereignty requirements if that data center is in another country or subject to another government's laws.
 
 GDPR requires that EU residents' personal data be processed under EU-adequate protections.  U.S. defense agencies require air-gapped environments --- infrastructure with no internet connectivity --- for classified workloads.  Financial regulators in many countries require that customer records stay within national borders.  When you connect an AI agent to enterprise data, these constraints determine not just *how* inference runs but *where* it runs.
 
@@ -159,7 +179,7 @@ The pattern emerging across industries is **hybrid**: sensitive and regulated wo
 
 ### Audit requirements
 
-SOX, GDPR, HIPAA, and industry-specific regulations all impose requirements on how data is processed and by whom.  Every prompt sent to an LLM is a data-processing event and must be treated accordingly --- logged, governed, and reviewed.
+SOX, GDPR, HIPAA, and industry-specific regulations all impose requirements on how data is processed and by whom.[^compliance]  Every prompt sent to an LLM is a data-processing event and must be treated accordingly --- logged, governed, and reviewed.
 
 ## Data policies: training and retention
 
@@ -232,7 +252,7 @@ Each stage of AI adoption maps to a trust level.
 
 Quick wins, achievable in weeks, require only light verification.  Using AI for research, summarization, and email drafting.  Analyzing local data with a coding agent (Module 3).  Having thinking-partner conversations (Module 4).
 
-Medium-term adoption, taking months, requires test-before-deploy discipline.  Skills for recurring database workflows (Module 5).  Agent-powered reports and pipelines (Module 6).  RAG for document-based Q&A (Module 7).
+Medium-term adoption, taking months, requires test-before-deploy discipline.  Skills for recurring database workflows (Module 5).  Agent-powered reports and pipelines (Module 7).  RAG for document-based Q&A (Module 8).
 
 Strategic adoption, measured in quarters, requires a full audit trail.  Production apps with authentication and audit trails.  An AI usage policy, compliance review, and governance framework.  Organization-wide adoption with monitoring.
 
@@ -248,8 +268,8 @@ flowchart LR
     end
     subgraph M["📈 Medium-Term\n_Months_"]
         M1["Database skills\n_Ch. 5_"]
-        M2["Reporting pipelines\n_Ch. 6_"]
-        M3["Document Q&A\n_Ch. 7_"]
+        M2["Reporting pipelines\n_Ch. 7_"]
+        M3["Document Q&A\n_Ch. 8_"]
     end
     subgraph Q["🏗️ Strategic\n_Quarters_"]
         Q1["Production apps\nwith auth & audit"]
@@ -285,7 +305,7 @@ For each failure, diagnose the root cause, fix the SKILL.md, and retest.
 :::
 
 ::: {.callout-note title="Exercise 3: RAG Citation Audit" collapse="true"}
-Open your coding agent with the [company handbook](files/data/company-handbook.md) from Module 7 and ask five factual questions.
+Open your coding agent with the [company handbook](files/data/company-handbook.md) from Module 8 and ask five factual questions.
 
 For each answer, locate every cited passage in the original document.  Rate each citation as accurate, partially accurate, or hallucinated.
 
@@ -308,3 +328,10 @@ Describe a specific use case: what data would AI access, and what questions woul
 List three guardrails you would add to enforce compliance.
 
 :::
+
+[^nist]: NIST SP 800-145 defines cloud deployment models including private cloud, public cloud, and hybrid cloud.  See [csrc.nist.gov/pubs/sp/800/145/final](https://csrc.nist.gov/pubs/sp/800/145/final).
+[^owasp]: OWASP Top 10 for LLM Applications covers prompt injection, data poisoning, and other AI-specific security risks.  See [owasp.org/www-project-top-10-for-large-language-model-applications](https://owasp.org/www-project-top-10-for-large-language-model-applications/).
+[^mitre]: MITRE ATLAS (Adversarial Threat Landscape for AI Systems) catalogs known attack techniques against AI systems.  See [atlas.mitre.org](https://atlas.mitre.org/).
+[^aws-dedicated]: AWS Dedicated Hosts provide physical servers fully dedicated to your use.  See [docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-hosts-overview.html](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-hosts-overview.html).
+[^azure-dedicated]: Azure Dedicated Host provides physical servers dedicated to your organization.  See [learn.microsoft.com/en-us/azure/virtual-machines/dedicated-hosts](https://learn.microsoft.com/en-us/azure/virtual-machines/dedicated-hosts).
+[^compliance]: For overviews of these regulations, see: [GDPR](https://gdpr.eu/), [HIPAA](https://www.hhs.gov/hipaa/), [SOX](https://www.congress.gov/bill/107th-congress/house-bill/3763).

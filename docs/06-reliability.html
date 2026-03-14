@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>8&nbsp; Reliability and Compliance – From BI to AI</title>
+<title>6&nbsp; Reliability and Compliance – From BI to AI</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,7 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./07-rag.html" rel="prev">
+<link href="./07-reporting-pipelines.html" rel="next">
+<link href="./05-connecting-databases.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -91,7 +92,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./08-reliability.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Reliability and Compliance</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./06-reliability.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Reliability and Compliance</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -134,7 +135,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./01-agents.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">From Dashboards to AI Agents</span></span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">AI Agents</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -163,20 +164,20 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./06-reporting-pipelines.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Automating with Agents</span></span></a>
+  <a href="./06-reliability.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Reliability and Compliance</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./07-rag.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Retrieval-Augmented Generation</span></span></a>
+  <a href="./07-reporting-pipelines.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Automating with Agents</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./08-reliability.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Reliability and Compliance</span></span></a>
+  <a href="./08-rag.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Retrieval-Augmented Generation</span></span></a>
   </div>
 </li>
     </ul>
@@ -189,28 +190,29 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Module contents</h2>
    
   <ul>
-  <li><a href="#the-trust-spectrum" id="toc-the-trust-spectrum" class="nav-link active" data-scroll-target="#the-trust-spectrum"><span class="header-section-number">8.1</span> The trust spectrum</a></li>
-  <li><a href="#hallucination-the-core-risk" id="toc-hallucination-the-core-risk" class="nav-link" data-scroll-target="#hallucination-the-core-risk"><span class="header-section-number">8.2</span> Hallucination: the core risk</a></li>
-  <li><a href="#the-verification-protocol" id="toc-the-verification-protocol" class="nav-link" data-scroll-target="#the-verification-protocol"><span class="header-section-number">8.3</span> The verification protocol</a></li>
-  <li><a href="#catching-silent-errors" id="toc-catching-silent-errors" class="nav-link" data-scroll-target="#catching-silent-errors"><span class="header-section-number">8.4</span> Catching silent errors</a></li>
-  <li><a href="#trusting-rag-answers" id="toc-trusting-rag-answers" class="nav-link" data-scroll-target="#trusting-rag-answers"><span class="header-section-number">8.5</span> Trusting RAG answers</a></li>
-  <li><a href="#red-teaming-rag" id="toc-red-teaming-rag" class="nav-link" data-scroll-target="#red-teaming-rag"><span class="header-section-number">8.6</span> Red-teaming RAG</a></li>
-  <li><a href="#red-teaming-your-skill" id="toc-red-teaming-your-skill" class="nav-link" data-scroll-target="#red-teaming-your-skill"><span class="header-section-number">8.7</span> Red-teaming your skill</a></li>
-  <li><a href="#three-layers-of-auditability" id="toc-three-layers-of-auditability" class="nav-link" data-scroll-target="#three-layers-of-auditability"><span class="header-section-number">8.8</span> Three layers of auditability</a></li>
-  <li><a href="#security-and-governance" id="toc-security-and-governance" class="nav-link" data-scroll-target="#security-and-governance"><span class="header-section-number">8.9</span> Security and governance</a>
+  <li><a href="#the-trust-spectrum" id="toc-the-trust-spectrum" class="nav-link active" data-scroll-target="#the-trust-spectrum"><span class="header-section-number">6.1</span> The trust spectrum</a></li>
+  <li><a href="#hallucination-the-core-risk" id="toc-hallucination-the-core-risk" class="nav-link" data-scroll-target="#hallucination-the-core-risk"><span class="header-section-number">6.2</span> Hallucination: the core risk</a></li>
+  <li><a href="#the-verification-protocol" id="toc-the-verification-protocol" class="nav-link" data-scroll-target="#the-verification-protocol"><span class="header-section-number">6.3</span> The verification protocol</a></li>
+  <li><a href="#catching-silent-errors" id="toc-catching-silent-errors" class="nav-link" data-scroll-target="#catching-silent-errors"><span class="header-section-number">6.4</span> Catching silent errors</a></li>
+  <li><a href="#trusting-rag-answers" id="toc-trusting-rag-answers" class="nav-link" data-scroll-target="#trusting-rag-answers"><span class="header-section-number">6.5</span> Trusting RAG answers</a></li>
+  <li><a href="#red-teaming-rag" id="toc-red-teaming-rag" class="nav-link" data-scroll-target="#red-teaming-rag"><span class="header-section-number">6.6</span> Red-teaming RAG</a></li>
+  <li><a href="#red-teaming-your-skill" id="toc-red-teaming-your-skill" class="nav-link" data-scroll-target="#red-teaming-your-skill"><span class="header-section-number">6.7</span> Red-teaming your skill</a></li>
+  <li><a href="#three-layers-of-auditability" id="toc-three-layers-of-auditability" class="nav-link" data-scroll-target="#three-layers-of-auditability"><span class="header-section-number">6.8</span> Three layers of auditability</a></li>
+  <li><a href="#security-and-governance" id="toc-security-and-governance" class="nav-link" data-scroll-target="#security-and-governance"><span class="header-section-number">6.9</span> Security and governance</a>
   <ul class="collapse">
-  <li><a href="#cloud-inference" id="toc-cloud-inference" class="nav-link" data-scroll-target="#cloud-inference">Cloud inference</a></li>
-  <li><a href="#on-premise-inference" id="toc-on-premise-inference" class="nav-link" data-scroll-target="#on-premise-inference">On-premise inference</a></li>
+  <li><a href="#cloud-api" id="toc-cloud-api" class="nav-link" data-scroll-target="#cloud-api">Cloud API</a></li>
+  <li><a href="#dedicated-cloud-tenancy" id="toc-dedicated-cloud-tenancy" class="nav-link" data-scroll-target="#dedicated-cloud-tenancy">Dedicated cloud tenancy</a></li>
+  <li><a href="#private-cloud-and-on-premise-inference" id="toc-private-cloud-and-on-premise-inference" class="nav-link" data-scroll-target="#private-cloud-and-on-premise-inference">Private cloud and on-premise inference</a></li>
   <li><a href="#choosing-the-right-deployment" id="toc-choosing-the-right-deployment" class="nav-link" data-scroll-target="#choosing-the-right-deployment">Choosing the right deployment</a></li>
   <li><a href="#data-sovereignty" id="toc-data-sovereignty" class="nav-link" data-scroll-target="#data-sovereignty">Data sovereignty</a></li>
   <li><a href="#audit-requirements" id="toc-audit-requirements" class="nav-link" data-scroll-target="#audit-requirements">Audit requirements</a></li>
   </ul></li>
-  <li><a href="#data-policies-training-and-retention" id="toc-data-policies-training-and-retention" class="nav-link" data-scroll-target="#data-policies-training-and-retention"><span class="header-section-number">8.10</span> Data policies: training and retention</a></li>
-  <li><a href="#compliance-in-practice" id="toc-compliance-in-practice" class="nav-link" data-scroll-target="#compliance-in-practice"><span class="header-section-number">8.11</span> Compliance in practice</a></li>
-  <li><a href="#session-log-auditing" id="toc-session-log-auditing" class="nav-link" data-scroll-target="#session-log-auditing"><span class="header-section-number">8.12</span> Session log auditing</a></li>
-  <li><a href="#the-sandbox-audit-deploy-pattern" id="toc-the-sandbox-audit-deploy-pattern" class="nav-link" data-scroll-target="#the-sandbox-audit-deploy-pattern"><span class="header-section-number">8.13</span> The sandbox-audit-deploy pattern</a></li>
-  <li><a href="#the-adoption-roadmap" id="toc-the-adoption-roadmap" class="nav-link" data-scroll-target="#the-adoption-roadmap"><span class="header-section-number">8.14</span> The adoption roadmap</a></li>
-  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">8.15</span> Exercises</a></li>
+  <li><a href="#data-policies-training-and-retention" id="toc-data-policies-training-and-retention" class="nav-link" data-scroll-target="#data-policies-training-and-retention"><span class="header-section-number">6.10</span> Data policies: training and retention</a></li>
+  <li><a href="#compliance-in-practice" id="toc-compliance-in-practice" class="nav-link" data-scroll-target="#compliance-in-practice"><span class="header-section-number">6.11</span> Compliance in practice</a></li>
+  <li><a href="#session-log-auditing" id="toc-session-log-auditing" class="nav-link" data-scroll-target="#session-log-auditing"><span class="header-section-number">6.12</span> Session log auditing</a></li>
+  <li><a href="#the-sandbox-audit-deploy-pattern" id="toc-the-sandbox-audit-deploy-pattern" class="nav-link" data-scroll-target="#the-sandbox-audit-deploy-pattern"><span class="header-section-number">6.13</span> The sandbox-audit-deploy pattern</a></li>
+  <li><a href="#the-adoption-roadmap" id="toc-the-adoption-roadmap" class="nav-link" data-scroll-target="#the-adoption-roadmap"><span class="header-section-number">6.14</span> The adoption roadmap</a></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">6.15</span> Exercises</a></li>
   </ul>
 </nav>
     </div>
@@ -219,7 +221,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Reliability and Compliance</span></h1>
+<h1 class="title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Reliability and Compliance</span></h1>
 </div>
 
 
@@ -236,64 +238,89 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>The previous seven modules built an increasingly powerful toolkit: agent concepts, coding tools, data analysis, thinking-partner conversations, database skills, agent workflows, and document-based AI. Before any of this is deployed, leadership will ask one question: can we trust it?</p>
+<p>The previous five modules built an increasingly powerful toolkit: agent concepts, coding tools, data analysis, thinking-partner conversations, and database skills. The next two modules will add agent workflows and document-based AI. Before any of this is deployed, leadership will ask one question: can we trust it?</p>
 <p>This module provides the answer, which is yes — with the right verification. You will learn a repeatable protocol for validating AI outputs, stress-testing skills and RAG systems, and building the governance framework your organization needs.</p>
-<section id="the-trust-spectrum" class="level2" data-number="8.1">
-<h2 data-number="8.1" class="anchored" data-anchor-id="the-trust-spectrum"><span class="header-section-number">8.1</span> The trust spectrum</h2>
+<section id="the-trust-spectrum" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="the-trust-spectrum"><span class="header-section-number">6.1</span> The trust spectrum</h2>
 <p>AI with code execution is like a fast junior analyst — capable but in need of oversight. The appropriate level of oversight depends on the stakes.</p>
 <p>For low-stakes work (exploratory charts, directional trends, internal brainstorming), a quick sanity check is sufficient. Glance at the numbers, confirm they are in the right ballpark, and move on.</p>
-<p>For medium-stakes work (team skills from Module 5, recurring reports, RAG-based Q&amp;A from Module 7), test with known answers before relying on the results. Run queries where you already know the answer and confirm that AI matches.</p>
+<p>For medium-stakes work (team skills from Module 5, recurring reports, RAG-based Q&amp;A from Module 8), test with known answers before relying on the results. Run queries where you already know the answer and confirm that AI matches.</p>
 <p>For high-stakes work (board presentations, budget recommendations, external reporting), apply the full verification protocol described later in this module. Every number, every chart, every claim should be independently verified.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Key Terms">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Key Terms
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>Hallucination</strong> — AI generating plausible but incorrect output (wrong numbers, fabricated citations, confident but false claims).</li>
+<li><strong>RAG (Retrieval-Augmented Generation)</strong> — grounding LLM responses in retrieved documents so answers cite real sources rather than relying on the model’s training data alone.</li>
+<li><strong>Red-teaming</strong> — deliberately attacking your own system to find weaknesses before real users or adversaries do.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></li>
+<li><strong>Guardrails</strong> — technical constraints that prevent misuse: read-only database access, restricted tables, input validation, and query logging.</li>
+<li><strong>Defense in depth</strong> — layering multiple independent safeguards so that no single failure compromises the system.</li>
+<li><strong>PII (Personally Identifiable Information)</strong> — data that can identify an individual (names, Social Security numbers, email addresses, etc.).</li>
+<li><strong>Data sovereignty</strong> — the legal requirement that data remain under a specific jurisdiction’s control.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></li>
+<li><strong>Air-gapped</strong> — infrastructure with no internet connectivity, used for classified or highly sensitive workloads.</li>
+</ul>
+</div>
+</div>
+</div>
 </section>
-<section id="hallucination-the-core-risk" class="level2" data-number="8.2">
-<h2 data-number="8.2" class="anchored" data-anchor-id="hallucination-the-core-risk"><span class="header-section-number">8.2</span> Hallucination: the core risk</h2>
+<section id="hallucination-the-core-risk" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="hallucination-the-core-risk"><span class="header-section-number">6.2</span> Hallucination: the core risk</h2>
 <p>“How do I know the AI isn’t making things up?”</p>
 <p>AI in code-execution mode does not invent facts the way a chatbot might. It reads real data and runs real computations. But it makes silent analytical errors: wrong filters, dropped rows, incorrect joins, misinterpreted column names. In RAG mode, it can also hallucinate citations — citing a page that does not actually contain the claim.</p>
 <p>These errors are dangerous precisely because the output looks professional. Charts render cleanly even when the underlying data is wrong. Memos read smoothly even when the conclusion does not follow from the evidence. A polished result inspires confidence, and confidence without verification is the real risk.</p>
-<p>You have seen examples throughout this course. Date or currency parsing surprises in Module 3. Incorrect join paths in Module 5. Hallucinated citations in Module 7. Each error was fixable, but only if someone checked.</p>
+<p>You have already seen examples. Date or currency parsing surprises in Module 3. Incorrect join paths in Module 5. Module 8 will show how RAG can produce hallucinated citations. Each error is fixable, but only if someone checks.</p>
 </section>
-<section id="the-verification-protocol" class="level2" data-number="8.3">
-<h2 data-number="8.3" class="anchored" data-anchor-id="the-verification-protocol"><span class="header-section-number">8.3</span> The verification protocol</h2>
+<section id="the-verification-protocol" class="level2" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="the-verification-protocol"><span class="header-section-number">6.3</span> The verification protocol</h2>
 <p>A three-step process you can apply to any AI-generated analysis.</p>
 <p>The first step is to sanity-check with known answers. Ask questions where you already know the result: row count, column names, a total you can verify in Excel. “How many rows are in this dataset?” “What is the total revenue?” If AI’s answer does not match your independently verified number, stop and investigate before proceeding.</p>
 <p>The second step is to inspect the methodology. Ask “show me the code” or “show me the SQL.” Read the logic, not just the output. Check that the joins are correct, the filters make sense, and the aggregation matches your intent. Then rephrase the question and run it again. If the answers agree, you have confirmation. If they differ, one approach is wrong.</p>
 <p>The third step is to spot-check edge cases. Test the smallest group, zero values, null fields, and boundary dates. Errors hide at the edges. A query that works perfectly for the top ten countries may break for the bottom three.</p>
 <p>If you would spot-check a human analyst’s work, spot-check AI’s.</p>
 </section>
-<section id="catching-silent-errors" class="level2" data-number="8.4">
-<h2 data-number="8.4" class="anchored" data-anchor-id="catching-silent-errors"><span class="header-section-number">8.4</span> Catching silent errors</h2>
+<section id="catching-silent-errors" class="level2" data-number="6.4">
+<h2 data-number="6.4" class="anchored" data-anchor-id="catching-silent-errors"><span class="header-section-number">6.4</span> Catching silent errors</h2>
 <p>To make this concrete, consider a deliberately tricky prompt.</p>
 <p>“What’s the average profit margin by sub-category? Exclude any sub-categories with negative total profit.”</p>
 <p>The trap is in the filter logic. Does AI filter before or after aggregating? Does it drop individual rows with negative profit, or sub-categories whose total profit is negative? The order matters, and AI often gets it wrong.</p>
 <p>To catch it, ask three follow-up questions. “Show me the code” — inspect the filter logic. “How many rows are in the result?” — does the count match your expectation? “List the excluded sub-categories” — are they the right ones?</p>
 <p>The more specific the filter logic, the more likely AI misinterprets it.</p>
 </section>
-<section id="trusting-rag-answers" class="level2" data-number="8.5">
-<h2 data-number="8.5" class="anchored" data-anchor-id="trusting-rag-answers"><span class="header-section-number">8.5</span> Trusting RAG answers</h2>
-<p>RAG (Module 7) grounds AI in your documents, but grounding does not guarantee correctness.</p>
+<section id="trusting-rag-answers" class="level2" data-number="6.5">
+<h2 data-number="6.5" class="anchored" data-anchor-id="trusting-rag-answers"><span class="header-section-number">6.5</span> Trusting RAG answers</h2>
+<p>RAG (Module 8) grounds AI in your documents, but grounding does not guarantee correctness.</p>
 <p>RAG introduces three specific risks. The first is hallucinated citations: the LLM cites a page or section that does not actually contain the claim. The citation looks authoritative, but when you check the source, the passage says something different or does not address the question at all.</p>
 <p>The second is stale documents. If a policy changed but the old version is still in the index, RAG will retrieve and cite the outdated version. The answer is grounded — just in the wrong version of the truth.</p>
 <p>The third is wrong-chunk retrieval. The retrieved passage is semantically similar to the question but does not actually answer it. This happens when the document contains multiple sections that use similar language for different purposes.</p>
 <p>The verification approach is the same: click through every citation and confirm that the cited passage actually says what the LLM claims. Check document dates to ensure you are getting the current version. Ask the same question in different words to see if the citation changes.</p>
 <p>A citation that looks right but is not is worse than no citation at all. It creates false confidence.</p>
 </section>
-<section id="red-teaming-rag" class="level2" data-number="8.6">
-<h2 data-number="8.6" class="anchored" data-anchor-id="red-teaming-rag"><span class="header-section-number">8.6</span> Red-teaming RAG</h2>
-<p>Test your RAG system the way an adversary would.</p>
+<section id="red-teaming-rag" class="level2" data-number="6.6">
+<h2 data-number="6.6" class="anchored" data-anchor-id="red-teaming-rag"><span class="header-section-number">6.6</span> Red-teaming RAG</h2>
+<p>Red-teaming means deliberately attacking your own system to find weaknesses before real users do.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> Test your RAG system the way an adversary would.</p>
 <p>Ask out-of-scope questions: “What is our competitor’s revenue?” when no competitor data is in the documents. Does AI admit it does not know, or does it hallucinate an answer?</p>
 <p>Upload two documents that disagree on a fact and ask about the disputed point. Does AI cite both? Pick one? Acknowledge the conflict?</p>
 <p>Ask boundary questions about topics at the edge of what is documented. These are the questions most likely to produce hallucinated citations, because the system retrieves a passage that is close but not quite on point.</p>
 <p>Every failure you find now is one your team will not encounter in production.</p>
 </section>
-<section id="red-teaming-your-skill" class="level2" data-number="8.7">
-<h2 data-number="8.7" class="anchored" data-anchor-id="red-teaming-your-skill"><span class="header-section-number">8.7</span> Red-teaming your skill</h2>
-<p>The database skill from Module 5 is the kind of tool people stop questioning once it is deployed. Test it like any tool your team depends on.</p>
+<section id="red-teaming-your-skill" class="level2" data-number="6.7">
+<h2 data-number="6.7" class="anchored" data-anchor-id="red-teaming-your-skill"><span class="header-section-number">6.7</span> Red-teaming your skill</h2>
+<p>The database skill from Module 5 is the kind of tool people stop questioning once it is deployed. Test it like any tool your team depends on.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></p>
 <p>Validate with known answers by running queries where you already know the result (total invoices, number of customers). Compare AI’s SQL to a hand-written query. Ask the same question multiple times and check for consistency.</p>
 <p>Stress-test with edge cases. Ask for revenue from a nonexistent country. Query boundary dates (the first and last month in the dataset). Use ambiguous column names (“show me the name” when multiple tables have a name column).</p>
 <p>For each failure, diagnose the root cause (bad SQL, missing context, or wrong table), fix the SKILL.md, and retest. This is how production skills get hardened. Every failure makes the skill better.</p>
 </section>
-<section id="three-layers-of-auditability" class="level2" data-number="8.8">
-<h2 data-number="8.8" class="anchored" data-anchor-id="three-layers-of-auditability"><span class="header-section-number">8.8</span> Three layers of auditability</h2>
+<section id="three-layers-of-auditability" class="level2" data-number="6.8">
+<h2 data-number="6.8" class="anchored" data-anchor-id="three-layers-of-auditability"><span class="header-section-number">6.8</span> Three layers of auditability</h2>
 <p>Production AI systems should have multiple layers of verification.</p>
 <p>The first layer is RAG: the LLM answers based on your documents, with citations. This grounds responses in source material. You verify by checking citations against the original text.</p>
 <p>The second layer is code transparency: the agent displays the SQL or Python it ran. Analysts review the logic, not just the answer. This is what you practiced in Modules 3 through 5.</p>
@@ -325,68 +352,74 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-auditability-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;8.1: Three layers of auditability — each layer catches errors the previous one might miss.
+Figure&nbsp;6.1: Three layers of auditability — each layer catches errors the previous one might miss.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
 </section>
-<section id="security-and-governance" class="level2" data-number="8.9">
-<h2 data-number="8.9" class="anchored" data-anchor-id="security-and-governance"><span class="header-section-number">8.9</span> Security and governance</h2>
+<section id="security-and-governance" class="level2" data-number="6.9">
+<h2 data-number="6.9" class="anchored" data-anchor-id="security-and-governance"><span class="header-section-number">6.9</span> Security and governance</h2>
 <p>Before deploying AI with your data, three questions need clear answers: what data leaves your network, where does inference happen, and what audit trail exists?</p>
-<section id="cloud-inference" class="level3">
-<h3 class="anchored" data-anchor-id="cloud-inference">Cloud inference</h3>
-<p>When you call a cloud API — OpenAI, Anthropic, Google — your application sends a prompt to the provider’s servers, the LLM runs inference there, and the response comes back. The key question is what is in that prompt.</p>
+<section id="cloud-api" class="level3">
+<h3 class="anchored" data-anchor-id="cloud-api">Cloud API</h3>
+<p>When you call a cloud API — OpenAI, Anthropic, Google — your application sends a prompt to the provider’s shared infrastructure, the LLM runs inference there, and the response comes back. The key question is what is in that prompt.</p>
 <p>As Module 5 showed, you often need to send only a schema description and a user question. The LLM returns SQL or code, and your application executes it locally against your own database. The actual data — customer names, revenue figures, health records — never leaves your network. In this pattern, cloud inference is compatible with most data policies because the sensitive data stays behind your firewall.</p>
 <p>However, some use cases do require sending data to the LLM. RAG prompts include document chunks. Summarization tasks send the full text to be summarized. In these cases, the data does travel to the provider’s servers, and the provider’s data-processing agreement governs what happens to it.</p>
 <p>Enterprise API tiers from Anthropic, OpenAI, and Google typically guarantee that your data is not used for training, offer short or zero retention windows, and provide contractual commitments on data handling. Consumer tiers (free ChatGPT, free Claude) may not offer these guarantees. Always confirm the terms before sending sensitive data.</p>
 </section>
-<section id="on-premise-inference" class="level3">
-<h3 class="anchored" data-anchor-id="on-premise-inference">On-premise inference</h3>
-<p>On-premise means running the LLM on servers your organization owns or controls — in your data center or in a private cloud tenancy (AWS, Azure, or GCP instances dedicated to your organization). Nothing leaves your network. You control the hardware, the model weights, and the logs.</p>
+<section id="dedicated-cloud-tenancy" class="level3">
+<h3 class="anchored" data-anchor-id="dedicated-cloud-tenancy">Dedicated cloud tenancy</h3>
+<p>Dedicated cloud tenancy means running inference on isolated instances within a public cloud provider — hardware in the provider’s data center but reserved exclusively for your organization and walled off from other tenants.<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a> Examples include AWS Dedicated Hosts, Azure Dedicated Host, and GCP sole-tenant nodes.<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a></p>
+<p>For closed-source models, the providers offer dedicated deployment options. Anthropic offers Claude on Amazon Bedrock and Google Cloud Vertex AI, where inference runs in your dedicated tenancy under your security controls. OpenAI offers Azure OpenAI Service, where GPT models run in your Azure subscription. These are enterprise licensing arrangements: you pay for compute and per-token usage, and the provider guarantees that your data stays within your tenancy and is not used for training.</p>
+<p>Dedicated tenancy gives you the security isolation of on-premise infrastructure with the operational convenience of a cloud provider. It is a common choice for organizations that need strong data controls but do not want to manage their own GPU hardware.</p>
+</section>
+<section id="private-cloud-and-on-premise-inference" class="level3">
+<h3 class="anchored" data-anchor-id="private-cloud-and-on-premise-inference">Private cloud and on-premise inference</h3>
+<p>Private cloud means running the LLM on servers your organization owns or operates — in your own data center, with cloud-like characteristics such as elastic scaling and self-service provisioning.<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a> Examples include HPE GreenLake and Dell APEX. On-premise deployments without these cloud characteristics are simply traditional data-center hosting. In either case, nothing leaves your network. You control the hardware, the model weights, and the logs.</p>
 <p>For open-source models (Llama, Mistral, DeepSeek), you download the model weights and run inference on your own GPU servers. There is no vendor relationship for the model itself — you manage everything.</p>
-<p>For closed-source models (Claude, GPT), the providers offer private deployment options. Anthropic offers Claude on Amazon Bedrock and Google Cloud Vertex AI, where inference runs in your cloud tenancy under your security controls. OpenAI offers Azure OpenAI Service, where GPT models run in your Azure subscription. These are enterprise licensing arrangements: you pay for compute and per-token usage, and the provider guarantees that your data stays within your tenancy and is not used for training.</p>
-<p>On-premise models give maximum control but require GPU infrastructure and operational expertise. They may also lag behind the latest cloud-hosted models in capability.</p>
+<p>On-premise and private-cloud deployments give maximum control but require GPU infrastructure and operational expertise. They may also lag behind the latest cloud-hosted models in capability.</p>
+<p>Air-gapped environments — on-premise infrastructure with no internet connectivity — represent the most restrictive deployment. These are required for classified and military workloads where even outbound network traffic is prohibited.</p>
 </section>
 <section id="choosing-the-right-deployment" class="level3">
 <h3 class="anchored" data-anchor-id="choosing-the-right-deployment">Choosing the right deployment</h3>
-<p>Most organizations need a mix. Cloud APIs work well for non-sensitive tasks where only schema or public information is sent. On-premise or private-cloud deployment is appropriate for workloads involving confidential data, regulated records, or proprietary documents.</p>
-<p>The deciding factor is not the model but the data. Ask: does this prompt contain information that cannot leave our network? If yes, run inference on-premise or in a private cloud tenancy. If no, a cloud API with an enterprise data-processing agreement is typically sufficient.</p>
+<p>Most organizations need a mix. Cloud APIs work well for non-sensitive tasks where only schema or public information is sent. Dedicated cloud tenancy suits workloads that need isolation without the burden of managing hardware. Private cloud or on-premise deployment is appropriate for the most sensitive workloads: regulated records, proprietary documents, or data subject to strict sovereignty requirements.</p>
+<p>The deciding factor is not the model but the data. Ask: does this prompt contain information that cannot leave our network? If yes, run inference in a dedicated tenancy or on-premise. If no, a cloud API with an enterprise data-processing agreement is typically sufficient.</p>
 </section>
 <section id="data-sovereignty" class="level3">
 <h3 class="anchored" data-anchor-id="data-sovereignty">Data sovereignty</h3>
-<p>Data sovereignty is the legal and organizational requirement that data remain under the jurisdiction and governance controls of a specific country or entity. It goes beyond the cloud-vs.-on-prem deployment choice: even data stored in a cloud provider’s data center may violate sovereignty requirements if that data center is in another country or subject to another government’s laws.</p>
+<p>Data sovereignty is the legal and organizational requirement that data remain under the jurisdiction and governance controls of a specific country or entity.<a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a> It goes beyond the cloud-vs.-on-prem deployment choice: even data stored in a cloud provider’s data center may violate sovereignty requirements if that data center is in another country or subject to another government’s laws.</p>
 <p>GDPR requires that EU residents’ personal data be processed under EU-adequate protections. U.S. defense agencies require air-gapped environments — infrastructure with no internet connectivity — for classified workloads. Financial regulators in many countries require that customer records stay within national borders. When you connect an AI agent to enterprise data, these constraints determine not just <em>how</em> inference runs but <em>where</em> it runs.</p>
 <p>The pattern emerging across industries is <strong>hybrid</strong>: sensitive and regulated workloads run on private infrastructure (on-premises or sovereign cloud), while non-sensitive tasks use public cloud APIs. The U.S. Department of Defense awarded a $931 million contract to modernize its data centers with on-premise private cloud. Barclays migrated over 50,000 workloads to private cloud infrastructure for regulatory compliance. New Zealand telecom provider 2degrees built a sovereign AI platform to ensure customer data stays under New Zealand jurisdiction. These are not edge cases — they reflect the standard enterprise pattern for AI deployment with sensitive data.</p>
 </section>
 <section id="audit-requirements" class="level3">
 <h3 class="anchored" data-anchor-id="audit-requirements">Audit requirements</h3>
-<p>SOX, GDPR, HIPAA, and industry-specific regulations all impose requirements on how data is processed and by whom. Every prompt sent to an LLM is a data-processing event and must be treated accordingly — logged, governed, and reviewed.</p>
+<p>SOX, GDPR, HIPAA, and industry-specific regulations all impose requirements on how data is processed and by whom.<a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a> Every prompt sent to an LLM is a data-processing event and must be treated accordingly — logged, governed, and reviewed.</p>
 </section>
 </section>
-<section id="data-policies-training-and-retention" class="level2" data-number="8.10">
-<h2 data-number="8.10" class="anchored" data-anchor-id="data-policies-training-and-retention"><span class="header-section-number">8.10</span> Data policies: training and retention</h2>
+<section id="data-policies-training-and-retention" class="level2" data-number="6.10">
+<h2 data-number="6.10" class="anchored" data-anchor-id="data-policies-training-and-retention"><span class="header-section-number">6.10</span> Data policies: training and retention</h2>
 <p>Before sending data to any AI provider, know the answers to two questions.</p>
 <p>Will they train on your data? Consumer tiers (free ChatGPT, free Claude) may use your input to improve their models. API and enterprise tiers typically do not. Check your agreement and confirm that any opt-out is active.</p>
 <p>How long do they retain it? Providers retain prompts for a window (often 30 days) for safety monitoring. Enterprise contracts may offer zero retention. Know the policy before you send sensitive data.</p>
 <p>Ask your vendor three things: Do you train on our data? How long do you retain it? Can we request deletion?</p>
 </section>
-<section id="compliance-in-practice" class="level2" data-number="8.11">
-<h2 data-number="8.11" class="anchored" data-anchor-id="compliance-in-practice"><span class="header-section-number">8.11</span> Compliance in practice</h2>
+<section id="compliance-in-practice" class="level2" data-number="6.11">
+<h2 data-number="6.11" class="anchored" data-anchor-id="compliance-in-practice"><span class="header-section-number">6.11</span> Compliance in practice</h2>
 <p>FERPA protects student education records. HIPAA protects health information. SOX governs financial reporting. GDPR regulates personal data in the EU. Every regulated industry has its version of the same concern: where does the data go, and who can see it?</p>
 <p>AI can analyze sensitive data without ever reading the actual records. The technique from Module 5 applies: describe the table structure in the SKILL.md (table names, column names, data types), and the agent writes SQL from the schema alone, never seeing the actual records. The script runs locally, and the output stays on your server.</p>
 <p>Table metadata is not PII. The actual records stay behind the firewall. The LLM produces the code, not the output. This pattern — send the schema, keep the data — works for any regulated environment.</p>
 <p>You can improve the quality of the generated SQL by including a few synthetic rows alongside the schema. Databricks found that adding approximately three sample rows per table raises SQL accuracy by about six percentage points on standard benchmarks compared to schema alone. The sample rows reveal data formatting patterns (is the status column stored as <code>Active</code>/<code>Inactive</code> or <code>1</code>/<code>0</code>?), disambiguate column semantics (is <code>code</code> a country code or a product code?), and help the model write correct WHERE clauses with properly formatted literal values. The key is that the rows are synthetic — fabricated to match the real data’s formats and value ranges without containing any actual records. Three rows is the sweet spot; more than that tends to distract the model rather than help it. Keep the synthetic data in sync with your schema: when you add a column or change a data type in production, update the synthetic rows to match.</p>
 </section>
-<section id="session-log-auditing" class="level2" data-number="8.12">
-<h2 data-number="8.12" class="anchored" data-anchor-id="session-log-auditing"><span class="header-section-number">8.12</span> Session log auditing</h2>
+<section id="session-log-auditing" class="level2" data-number="6.12">
+<h2 data-number="6.12" class="anchored" data-anchor-id="session-log-auditing"><span class="header-section-number">6.12</span> Session log auditing</h2>
 <p>Every AI conversation can be exported as a transcript. The transcript contains the user’s questions, the AI’s responses, the code it generated, and the results it produced. This is the paper trail your compliance team needs.</p>
 <p>Review session logs for three things: PII or proprietary data that should stay internal, SQL or Python logic errors in the generated code, and RAG citations that do not match the source.</p>
 <p>Export logs, archive them, and review them periodically. Session logs are not just a compliance requirement; they are a learning tool. Reviewing what went wrong in past sessions tells you exactly what to improve in your SKILL.md or RAG configuration.</p>
 </section>
-<section id="the-sandbox-audit-deploy-pattern" class="level2" data-number="8.13">
-<h2 data-number="8.13" class="anchored" data-anchor-id="the-sandbox-audit-deploy-pattern"><span class="header-section-number">8.13</span> The sandbox-audit-deploy pattern</h2>
+<section id="the-sandbox-audit-deploy-pattern" class="level2" data-number="6.13">
+<h2 data-number="6.13" class="anchored" data-anchor-id="the-sandbox-audit-deploy-pattern"><span class="header-section-number">6.13</span> The sandbox-audit-deploy pattern</h2>
 <p>Before deploying any AI workflow to your team, follow three phases.</p>
 <p>In the sandbox phase, run the full workflow with synthetic or test data. Test edge cases. Break it on purpose. This is where you discover the failure modes described throughout this module.</p>
 <p>In the audit phase, export session logs and review the generated code. Verify SQL logic. Check RAG citations. Look for data leakage. Have a colleague who did not build the system try to break it.</p>
@@ -422,18 +455,18 @@ Figure&nbsp;8.1: Three layers of auditability — each layer catches errors the 
 </div>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-sandbox-audit-deploy-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;8.2: Three phases before any AI workflow goes live.
+Figure&nbsp;6.2: Three phases before any AI workflow goes live.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
 </section>
-<section id="the-adoption-roadmap" class="level2" data-number="8.14">
-<h2 data-number="8.14" class="anchored" data-anchor-id="the-adoption-roadmap"><span class="header-section-number">8.14</span> The adoption roadmap</h2>
+<section id="the-adoption-roadmap" class="level2" data-number="6.14">
+<h2 data-number="6.14" class="anchored" data-anchor-id="the-adoption-roadmap"><span class="header-section-number">6.14</span> The adoption roadmap</h2>
 <p>Each stage of AI adoption maps to a trust level.</p>
 <p>Quick wins, achievable in weeks, require only light verification. Using AI for research, summarization, and email drafting. Analyzing local data with a coding agent (Module 3). Having thinking-partner conversations (Module 4).</p>
-<p>Medium-term adoption, taking months, requires test-before-deploy discipline. Skills for recurring database workflows (Module 5). Agent-powered reports and pipelines (Module 6). RAG for document-based Q&amp;A (Module 7).</p>
+<p>Medium-term adoption, taking months, requires test-before-deploy discipline. Skills for recurring database workflows (Module 5). Agent-powered reports and pipelines (Module 7). RAG for document-based Q&amp;A (Module 8).</p>
 <p>Strategic adoption, measured in quarters, requires a full audit trail. Production apps with authentication and audit trails. An AI usage policy, compliance review, and governance framework. Organization-wide adoption with monitoring.</p>
 <div class="cell" data-fig-width="100%" data-layout-align="default">
 <div class="cell-output-display">
@@ -449,8 +482,8 @@ Figure&nbsp;8.2: Three phases before any AI workflow goes live.
     end
     subgraph M["📈 Medium-Term\n_Months_"]
         M1["Database skills\n_Ch. 5_"]
-        M2["Reporting pipelines\n_Ch. 6_"]
-        M3["Document Q&amp;A\n_Ch. 7_"]
+        M2["Reporting pipelines\n_Ch. 7_"]
+        M3["Document Q&amp;A\n_Ch. 8_"]
     end
     subgraph Q["🏗️ Strategic\n_Quarters_"]
         Q1["Production apps\nwith auth &amp; audit"]
@@ -466,17 +499,17 @@ Figure&nbsp;8.2: Three phases before any AI workflow goes live.
 </div>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-adoption-roadmap-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;8.3: The adoption roadmap — each stage builds trust and adds governance.
+Figure&nbsp;6.3: The adoption roadmap — each stage builds trust and adds governance.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
 </section>
-<section id="exercises" class="level2" data-number="8.15">
-<h2 data-number="8.15" class="anchored" data-anchor-id="exercises"><span class="header-section-number">8.15</span> Exercises</h2>
+<section id="exercises" class="level2" data-number="6.15">
+<h2 data-number="6.15" class="anchored" data-anchor-id="exercises"><span class="header-section-number">6.15</span> Exercises</h2>
 <div class="callout callout-style-default callout-note callout-titled" title="Exercise 1: The Verification Protocol">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -485,7 +518,7 @@ Exercise 1: The Verification Protocol
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Run the complete three-step verification protocol on a real analysis.</p>
 <p>First, sanity-check: open the <a href="files/data/superstore.csv">Superstore data</a> in your coding agent and ask three questions where you know the answer (row count, total revenue, number of unique customers). Does AI match?</p>
@@ -495,7 +528,7 @@ Exercise 1: The Verification Protocol
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled" title="Exercise 2: Red-Team Your Skill">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -504,7 +537,7 @@ Exercise 2: Red-Team Your Skill
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Open your coding agent with the <a href="files/data/chinook.db">Chinook database</a> and your SKILL.md from Module 5.</p>
 <p>Run five adversarial queries designed to break the skill: a query about nonexistent data (“Sales in 2025”), a complex multi-table join (“Revenue by artist by country”), a request for data not in the schema (“Customer satisfaction scores”), an ambiguous column name, and a boundary date query.</p>
@@ -513,7 +546,7 @@ Exercise 2: Red-Team Your Skill
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled" title="Exercise 3: RAG Citation Audit">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -522,16 +555,16 @@ Exercise 3: RAG Citation Audit
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Open your coding agent with the <a href="files/data/company-handbook.md">company handbook</a> from Module 7 and ask five factual questions.</p>
+<p>Open your coding agent with the <a href="files/data/company-handbook.md">company handbook</a> from Module 8 and ask five factual questions.</p>
 <p>For each answer, locate every cited passage in the original document. Rate each citation as accurate, partially accurate, or hallucinated.</p>
 <p>Then ask three questions the document cannot answer. Does AI admit it does not know, or does it hallucinate?</p>
 </div>
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled" title="Exercise 4: Draft an AI Usage Policy">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -540,7 +573,7 @@ Exercise 4: Draft an AI Usage Policy
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Write a one-page AI usage policy for your organization (or a hypothetical one).</p>
 <p>Cover four areas. First, what data can and cannot be sent to AI providers, classified by sensitivity level. Second, which AI tools are approved for which use cases. Third, when human review is required before acting on AI output. Fourth, how RAG citations should be verified before sharing results externally.</p>
@@ -548,7 +581,7 @@ Exercise 4: Draft an AI Usage Policy
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled" title="Exercise 5: Compliance Scenario Analysis">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -557,7 +590,7 @@ Exercise 5: Compliance Scenario Analysis
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Identify the primary data regulation in your industry (HIPAA, SOX, GDPR, PCI-DSS, FERPA, or another).</p>
 <p>Describe a specific use case: what data would AI access, and what questions would it answer? Design the compliant workflow: what information goes to AI (schema only, or actual data)? What stays local? Where are the audit points?</p>
@@ -567,6 +600,20 @@ Exercise 5: Compliance Scenario Analysis
 </div>
 
 
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>OWASP Top 10 for LLM Applications covers prompt injection, data poisoning, and other AI-specific security risks. See <a href="https://owasp.org/www-project-top-10-for-large-language-model-applications/">owasp.org/www-project-top-10-for-large-language-model-applications</a>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>NIST SP 800-145 defines cloud deployment models including private cloud, public cloud, and hybrid cloud. See <a href="https://csrc.nist.gov/pubs/sp/800/145/final">csrc.nist.gov/pubs/sp/800/145/final</a>.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>OWASP Top 10 for LLM Applications covers prompt injection, data poisoning, and other AI-specific security risks. See <a href="https://owasp.org/www-project-top-10-for-large-language-model-applications/">owasp.org/www-project-top-10-for-large-language-model-applications</a>.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>MITRE ATLAS (Adversarial Threat Landscape for AI Systems) catalogs known attack techniques against AI systems. See <a href="https://atlas.mitre.org/">atlas.mitre.org</a>.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>AWS Dedicated Hosts provide physical servers fully dedicated to your use. See <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-hosts-overview.html">docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-hosts-overview.html</a>.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6"><p>Azure Dedicated Host provides physical servers dedicated to your organization. See <a href="https://learn.microsoft.com/en-us/azure/virtual-machines/dedicated-hosts">learn.microsoft.com/en-us/azure/virtual-machines/dedicated-hosts</a>.<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn7"><p>NIST SP 800-145 defines cloud deployment models including private cloud, public cloud, and hybrid cloud. See <a href="https://csrc.nist.gov/pubs/sp/800/145/final">csrc.nist.gov/pubs/sp/800/145/final</a>.<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn8"><p>NIST SP 800-145 defines cloud deployment models including private cloud, public cloud, and hybrid cloud. See <a href="https://csrc.nist.gov/pubs/sp/800/145/final">csrc.nist.gov/pubs/sp/800/145/final</a>.<a href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn9"><p>For overviews of these regulations, see: <a href="https://gdpr.eu/">GDPR</a>, <a href="https://www.hhs.gov/hipaa/">HIPAA</a>, <a href="https://www.congress.gov/bill/107th-congress/house-bill/3763">SOX</a>.<a href="#fnref9" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
 </section>
 
 </main> <!-- /main -->
@@ -1133,11 +1180,14 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./07-rag.html" class="pagination-link" aria-label="Retrieval-Augmented Generation">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Retrieval-Augmented Generation</span></span>
+      <a href="./05-connecting-databases.html" class="pagination-link" aria-label="Connecting Databases">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Connecting Databases</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="./07-reporting-pipelines.html" class="pagination-link" aria-label="Automating with Agents">
+        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Automating with Agents</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->
