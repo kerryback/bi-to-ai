@@ -12,7 +12,7 @@ Module 4 shows how AI can help you think through decisions.  You will use AI as 
 
 Module 5 shows how AI can be connected to your company's databases, so anyone with proper credentials can query them in plain English.  You will learn about MCP connectors, build a reusable "skill" that encodes a database schema, and build a demo web app that anyone can use from a browser.
 
-Module 6 addresses reliability and compliance.  You will validate AI outputs, red-team skills and RAG systems, and build the governance framework your organization needs before deploying any of this.
+Module 6 addresses reliability and compliance.  You will validate AI outputs, red-team skills, and build the governance framework your organization needs before deploying any of this.
 
 Module 7 shows how to automate multi-step workflows.  You will build a reporting pipeline that queries a database, generates charts, writes summaries, and assembles a PowerPoint deck --- all from a single instruction.
 
