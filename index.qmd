@@ -14,9 +14,11 @@ Module 5 shows how AI can be connected to your company's databases, so anyone wi
 
 Module 6 addresses reliability and compliance.  You will validate AI outputs, red-team skills, and build the governance framework your organization needs before deploying any of this.
 
-Module 7 shows how to automate multi-step workflows.  You will build a reporting pipeline that queries a database, generates charts, writes summaries, and assembles a PowerPoint deck --- all from a single instruction.
+Module 7 shows how to automate a reporting pipeline.  You will build an agent workflow that queries a database, generates charts, writes summaries, and assembles a PowerPoint deck --- all from a single instruction.
 
-Module 8 shows how to use AI to query your company's documents and return answers grounded in your documents (with citations) rather than relying on its general knowledge.  This is called Retrieval-Augmented Generation (RAG).
+Module 8 explores agent workflows beyond reporting --- email agents that search, summarize, and draft responses; calendar agents that check availability and propose meetings; and scheduling as conversational AI, where the agent reasons through scattered constraints to find workable times.
+
+Module 9 shows how to use AI to query your company's documents and return answers grounded in your documents (with citations) rather than relying on its general knowledge.  This is called Retrieval-Augmented Generation (RAG).
 
 
 ## Data files
@@ -29,7 +31,7 @@ The [Employee Attrition CSV](files/data/employee-attrition.csv) contains 1,470 e
 
 The [Chinook database](files/data/chinook.db) is a SQLite file representing a music retailer's operations with 11 related tables covering employees, customers, invoices, tracks, albums, artists, and genres.^[The Chinook database was created by Luis Rocha as a modern alternative to the Northwind sample database.  The source repository is at <https://github.com/lerocha/chinook-database>.]  It is the primary dataset for Module 5 and is revisited in Modules 6 and 7.
 
-Module 8 uses a [sample company handbook](files/data/company-handbook.md) for RAG exercises.
+Module 9 uses a [sample company handbook](files/data/company-handbook.md) for RAG exercises.
 
 ## Prerequisites
 

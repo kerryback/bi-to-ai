@@ -1,4 +1,4 @@
-# Automating with Agents
+# Reporting Pipelines
 
 Module 1 introduced the agent loop --- plan, execute, observe, iterate --- and the concept of agents chaining tools together.  This module puts that pattern to work.  You will build a reporting pipeline that queries a database, generates charts, writes narrative, and assembles a PowerPoint deck, all from a single instruction.
 
@@ -136,14 +136,5 @@ Adapt the reporting pattern to a dataset from your work.  Pick a database, sprea
 Write an agent prompt that generates a report from your data --- including the SQL (or data-fetching logic), chart type, summary style, and output format.  Give the prompt to your coding agent and test the result.
 
 If you cannot use real work data, use a public dataset: the [Northwind database](https://github.com/Microsoft/sql-server-samples/tree/master/samples/databases/northwind-pubs), [NYC taxi data](https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page), or any CSV from your field.
-
-:::
-
-::: {.callout-note title="Exercise 5: Agent Use Case Inventory" collapse="true"}
-Review your team's recurring tasks and identify five that are multi-step, repetitive, and data-driven --- good candidates for agent automation.
-
-For each, describe the trigger (what starts the task), the steps (what happens), the output (what gets delivered), and the frequency (how often it runs).  Rate each on automation potential (high, medium, or low) and risk level (high, medium, or low).
-
-Pick the highest-potential, lowest-risk workflow as your pilot candidate and write one paragraph explaining why you would start there.
 
 :::

@@ -1,0 +1,150 @@
+# Agent Workflows
+
+Module 7 showed agents automating a reporting pipeline --- a linear sequence from query to finished deck.  But agents can orchestrate far more than reports.  This module explores workflows where the agent coordinates across multiple systems --- email, calendars, and scheduling --- turning unstructured inputs into organized actions.
+
+## Beyond reporting
+
+The reporting pipeline in Module 7 follows a predictable path: query data, make a chart, write a summary, assemble a document.  The steps are well-defined and the output is a file.
+
+Many real-world workflows are messier.  A manager wants to schedule a team meeting but availability is scattered across email threads.  A sales rep needs to draft follow-up emails based on notes from a dozen calls.  An executive assistant needs to reorganize next week's calendar after a last-minute conflict.
+
+These tasks are multi-step, repetitive, and involve reasoning over unstructured text --- exactly what agents do well.
+
+## Email agents
+
+An email agent connects to your email account and performs tasks that would otherwise require you to read, sort, and respond to messages manually.
+
+**Search and summarize.**  Instead of scrolling through your inbox, you ask the agent: "What emails came in about the Q2 budget this week?"  The agent searches your email, retrieves the relevant messages, and returns a summary with key points from each.
+
+**Draft responses.**  You tell the agent: "Draft a reply to Sarah's email accepting the meeting time but asking to move it to the conference room."  The agent reads the original message, drafts an appropriate reply, and presents it for your review before sending.
+
+**Organize and triage.**  The agent scans incoming messages and groups them: urgent items needing a response today, FYI messages that can wait, and newsletters to archive.  Instead of processing 50 emails one by one, you review three categories.
+
+The pattern is the same as the reporting pipeline: the agent chains tools together (search email, read message, generate text, send reply) in a loop.  The difference is that the data source is your inbox instead of a database.
+
+```{mermaid}
+%%| label: fig-email-agent
+%%| fig-cap: "An email agent workflow — search, reason, draft, and deliver."
+%%| fig-width: 100%
+flowchart LR
+    T["📝 Task\n_user instruction_"]
+    S["🔍 Search\n_find messages_"]
+    R["🧠 Reason\n_extract key info_"]
+    D["✍️ Draft\n_compose response_"]
+    V["👤 Review\n_human approval_"]
+
+    T --> S --> R --> D --> V
+
+    style T fill:#e3f2fd,stroke:#2196f3
+    style S fill:#e8f5e9,stroke:#4caf50
+    style R fill:#fff3e0,stroke:#ff9800
+    style D fill:#f3e5f5,stroke:#9c27b0
+    style V fill:#fce4ec,stroke:#e91e63
+```
+
+## Calendar agents
+
+A calendar agent reads and writes events on your calendar.  It can answer questions ("When is my next meeting with the marketing team?"), find open slots ("What times am I free on Thursday afternoon?"), and create or move events.
+
+The real power emerges when the calendar agent works with other tools.  Combined with email, it can read a message proposing a meeting time, check your calendar for conflicts, and draft a reply confirming or suggesting alternatives --- all from a single instruction.
+
+Calendar agents also illustrate a key agent design principle: **human-in-the-loop**.  Reading your calendar is low-risk; the agent should do it freely.  Creating or moving events changes your schedule and affects other people.  A well-designed calendar agent proposes changes and waits for your approval before executing them.
+
+## Scheduling as conversational AI
+
+Scheduling is a constraint satisfaction problem.  You have a set of people, each with their own availability, and you need to find a time that works for everyone.  Traditionally, this means sending a poll, chasing responses, and manually comparing calendars.
+
+An agent can do this conversationally.  Here is the workflow:
+
+1. **Gather constraints.**  The agent reads email threads where participants mentioned their availability: "I'm free Tuesday afternoon," "Wednesday works except before 10," "Any day but Friday."  These constraints are scattered across unstructured text --- exactly the kind of input that LLMs excel at parsing.
+
+2. **Check calendars.**  The agent looks at each participant's calendar to find existing commitments.  It combines the stated preferences from email with the hard conflicts from calendars.
+
+3. **Propose options.**  The agent reasons through the constraints and proposes two or three time slots that work for everyone (or the largest subset, if no time works for all).
+
+4. **Confirm and book.**  After the organizer approves, the agent sends calendar invitations and a confirmation email.
+
+```{mermaid}
+%%| label: fig-scheduling
+%%| fig-cap: "Scheduling as an agent workflow — from scattered constraints to a booked meeting."
+%%| fig-width: 100%
+flowchart LR
+    E["📧 Read Emails\n_extract preferences_"]
+    C["📅 Check Calendars\n_find conflicts_"]
+    P["🧠 Propose Slots\n_satisfy constraints_"]
+    A["👤 Approve\n_human decision_"]
+    B["✅ Book & Notify\n_send invites_"]
+
+    E --> C --> P --> A --> B
+
+    style E fill:#e3f2fd,stroke:#2196f3
+    style C fill:#e8f5e9,stroke:#4caf50
+    style P fill:#fff3e0,stroke:#ff9800
+    style A fill:#fce4ec,stroke:#e91e63
+    style B fill:#f3e5f5,stroke:#9c27b0
+```
+
+This is fundamentally different from a scheduling poll.  A poll collects structured yes/no responses.  An agent reads natural language, infers availability from context, and handles ambiguity ("I'd prefer mornings" is a soft constraint, not a hard one).  The agent is doing what a skilled executive assistant does --- reasoning through messy, human communication to find a workable solution.
+
+## The MCP connection
+
+These workflows become practical through MCP (Model Context Protocol), which you met in Module 5.  Just as an MCP connector gave your agent access to a database, connectors exist for Gmail, Google Calendar, Outlook, Slack, and dozens of other services.
+
+The pattern is consistent: install a connector, grant the agent access, and it gains new tools.  A Gmail connector gives the agent `search_email`, `read_message`, and `send_email` tools.  A Google Calendar connector gives it `list_events`, `create_event`, and `find_free_time` tools.  The agent chains these tools the same way it chained SQL queries and chart generation in Module 7.
+
+## Designing safe agent workflows
+
+As agents gain access to more systems, safety becomes more important.  The principles from Module 6 apply here, plus a few specific to multi-system workflows.
+
+**Least privilege.**  Give the agent only the permissions it needs.  An email agent that summarizes your inbox needs read access, not send access.  A calendar agent that checks availability needs read access, not the ability to delete events.
+
+**Human approval for actions.**  Reading data is low-risk.  Writing data (sending an email, booking a meeting, modifying a document) is high-risk.  Design workflows so the agent proposes actions and a human approves them before execution.
+
+**Audit trails.**  Log every action the agent takes across every system.  When the agent reads an email, searches a calendar, and drafts a response, each step should be recorded.  If something goes wrong, you can trace exactly what happened.
+
+## Exercises
+
+::: {.callout-note title="Exercise 1: Agent Use Case Inventory" collapse="true"}
+Review your team's recurring tasks and identify five that are multi-step, repetitive, and data-driven --- good candidates for agent automation.
+
+For each, describe the trigger (what starts the task), the steps (what happens), the output (what gets delivered), and the frequency (how often it runs).  Rate each on automation potential (high, medium, or low) and risk level (high, medium, or low).
+
+Pick the highest-potential, lowest-risk workflow as your pilot candidate and write one paragraph explaining why you would start there.
+
+:::
+
+::: {.callout-note title="Exercise 2: Email Workflow Design" collapse="true"}
+Pick one email-related task you do regularly (triaging your inbox, drafting status updates, summarizing threads for your manager, etc.).
+
+Write a detailed prompt that describes the workflow step by step.  Specify what the agent should search for, what information it should extract, what it should draft, and what requires your approval before sending.
+
+If you have a coding agent with an email connector available, test the workflow.  If not, describe the workflow precisely enough that a colleague could execute it manually.
+
+:::
+
+::: {.callout-note title="Exercise 3: Scheduling Scenario" collapse="true"}
+Imagine you need to schedule a one-hour meeting with four colleagues.  Write out the constraints for each person in natural language (as they might appear in email):
+
+- Person A: "I'm pretty open this week, but I have a dentist appointment Wednesday morning."
+- Person B: "Tuesday and Thursday work for me, preferably after lunch."
+- Person C: "I'm slammed Monday and Friday.  Any other day before 3 PM."
+- Person D: "I can do Wednesday or Thursday, but not before 11."
+
+Work through the constraints manually and find all valid one-hour slots.  Then describe how you would prompt an agent to solve this --- what information would you provide, and what output would you expect?
+
+:::
+
+::: {.callout-note title="Exercise 4: Permission Design" collapse="true"}
+For each of the following agent capabilities, decide whether it should be automatic (no approval needed), require human approval, or be prohibited entirely:
+
+1. Reading your email inbox
+2. Sending an email on your behalf
+3. Reading your calendar
+4. Creating a calendar event
+5. Deleting a calendar event
+6. Forwarding an email to someone outside your organization
+7. Accessing a shared team calendar
+
+For each decision, write one sentence explaining your reasoning.  Compare your answers with a colleague --- where do you disagree, and why?
+
+:::
