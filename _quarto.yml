@@ -25,8 +25,8 @@ book:
     - 02-exploring-data.qmd
     - 03-thinking-partner.qmd
     - 04-connecting-databases.qmd
-    - 05-reliability.qmd
-    - 06-reporting-pipelines.qmd
+    - 05-reporting-pipelines.qmd
+    - 06-reliability.qmd
     - 07-agent-workflows.qmd
     - 08-rag.qmd
   appendices:

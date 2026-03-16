@@ -1,6 +1,6 @@
 # Reliability and Compliance
 
-The previous four modules built an increasingly powerful toolkit: agent concepts, data analysis, thinking-partner conversations, and database skills.  The next three modules will add agent workflows and document-based AI.  Before any of this is deployed, leadership will ask one question: can we trust it?
+The previous five modules built an increasingly powerful toolkit: agent concepts, data analysis, thinking-partner conversations, database skills, and reporting pipelines.  The next two modules will add broader agent workflows and document-based AI.  Before any of this is deployed, leadership will ask one question: can we trust it?
 
 This module provides the answer, which is yes --- with the right verification.  You will learn a repeatable protocol for validating AI outputs, stress-testing skills and RAG systems, and building the governance framework your organization needs.
 
@@ -252,7 +252,7 @@ Each stage of AI adoption maps to a trust level.
 
 Quick wins, achievable in weeks, require only light verification.  Using AI for research, summarization, and email drafting.  Analyzing local data with a coding agent (Module 2).  Having thinking-partner conversations (Module 3).
 
-Medium-term adoption, taking months, requires test-before-deploy discipline.  Skills for recurring database workflows (Module 4).  Agent-powered reports and pipelines (Module 6).  RAG for document-based Q&A (Module 8).
+Medium-term adoption, taking months, requires test-before-deploy discipline.  Skills for recurring database workflows (Module 4).  Agent-powered reports and pipelines (Module 5).  RAG for document-based Q&A (Module 8).
 
 Strategic adoption, measured in quarters, requires a full audit trail.  Production apps with authentication and audit trails.  An AI usage policy, compliance review, and governance framework.  Organization-wide adoption with monitoring.
 
@@ -268,7 +268,7 @@ flowchart LR
     end
     subgraph M["📈 Medium-Term\n_Months_"]
         M1["Database skills\n_Ch. 4_"]
-        M2["Reporting pipelines\n_Ch. 6_"]
+        M2["Reporting pipelines\n_Ch. 5_"]
         M3["Document Q&A\n_Ch. 8_"]
     end
     subgraph Q["🏗️ Strategic\n_Quarters_"]

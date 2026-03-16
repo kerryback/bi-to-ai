@@ -270,9 +270,9 @@ This course is a hands-on guide to building the capabilities just described.  Ea
 
 **Module 4: Connecting Databases** shows how to connect AI to your company's databases so anyone can query them in plain English.  You will build a reusable skill and a demo web app.
 
-**Module 5: Reliability and Compliance** provides the verification protocols, governance frameworks, and deployment patterns your organization needs before any of this goes to production.
+**Module 5: Reporting Pipelines** chains database queries, charts, narratives, and document assembly into reporting pipelines that run from a single instruction.
 
-**Module 6: Automating with Agents** chains database queries, charts, narratives, and document assembly into reporting pipelines that run from a single instruction.
+**Module 6: Reliability and Compliance** provides the verification protocols, governance frameworks, and deployment patterns your organization needs before any of this goes to production.
 
 **Module 7: Agent Workflows** explores agent workflows beyond reporting --- document processing, variance analysis, email and calendar agents.
 

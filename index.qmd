@@ -10,9 +10,9 @@ Module 3 shows how AI can help you think through decisions.  You will use AI as 
 
 Module 4 shows how AI can be connected to your company's databases, so anyone with proper credentials can query them in plain English.  You will learn about MCP connectors, build a reusable "skill" that encodes a database schema, and build a demo web app that anyone can use from a browser.
 
-Module 5 addresses reliability and compliance.  You will validate AI outputs, red-team skills, and build the governance framework your organization needs before deploying any of this.
+Module 5 shows how to automate a reporting pipeline.  You will build an agent workflow that queries a database, generates charts, writes summaries, and assembles a PowerPoint deck --- all from a single instruction.
 
-Module 6 shows how to automate a reporting pipeline.  You will build an agent workflow that queries a database, generates charts, writes summaries, and assembles a PowerPoint deck --- all from a single instruction.
+Module 6 addresses reliability and compliance.  You will validate AI outputs, red-team skills, and build the governance framework your organization needs before deploying any of this.
 
 Module 7 explores agent workflows beyond reporting --- email agents, calendar agents, scheduling as conversational AI, document processing agents that ingest multiple file formats (Excel, PDF, Word, CSV) and combine the results into a single analysis, and variance analysis agents that decompose budget misses into actionable drivers.
 
