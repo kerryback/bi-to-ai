@@ -50,7 +50,7 @@ The real power emerges when the calendar agent works with other tools.  Combined
 
 Calendar agents also illustrate a key agent design principle: **human-in-the-loop**.  Reading your calendar is low-risk; the agent should do it freely.  Creating or moving events changes your schedule and affects other people.  A well-designed calendar agent proposes changes and waits for your approval before executing them.
 
-## Scheduling as conversational AI
+## Using AI for scheduling
 
 Scheduling is a constraint satisfaction problem.  You have a set of people, each with their own availability, and you need to find a time that works for everyone.  Traditionally, this means sending a poll, chasing responses, and manually comparing calendars.
 
@@ -85,6 +85,58 @@ flowchart LR
 ```
 
 This is fundamentally different from a scheduling poll.  A poll collects structured yes/no responses.  An agent reads natural language, infers availability from context, and handles ambiguity ("I'd prefer mornings" is a soft constraint, not a hard one).  The agent is doing what a skilled executive assistant does --- reasoning through messy, human communication to find a workable solution.
+
+## Document processing agents
+
+The scheduling example coordinates across calendars and email.  Another powerful pattern coordinates across *file formats*.  In many business workflows, the information you need is scattered across Excel spreadsheets, PDF reports, Word memos, and CSV exports --- each in a different structure with different conventions.
+
+A document processing agent ingests all of these, extracts the relevant information from each, and combines the results into a single analysis.  The pattern looks like this:
+
+```{mermaid}
+%%| label: fig-doc-processing
+%%| fig-cap: "Document processing agent — ingest multiple formats, extract, analyze, and deliver."
+%%| fig-width: 100%
+flowchart LR
+    I["📂 Ingest\n_multiple formats_"]
+    X["🔍 Extract\n_rules & data_"]
+    A["🧠 Analyze\n_apply & combine_"]
+    O["📄 Output\n_report or memo_"]
+
+    I --> X --> A --> O
+
+    style I fill:#e3f2fd,stroke:#2196f3
+    style X fill:#e8f5e9,stroke:#4caf50
+    style A fill:#fff3e0,stroke:#ff9800
+    style O fill:#f3e5f5,stroke:#9c27b0
+```
+
+Here are three examples of this pattern in finance and business:
+
+**M&A due diligence.**  An acquisition target sends a data room with a customer list (Excel), contract terms (PDF), the acquirer's screening criteria (Word), and industry benchmarks (CSV).  You tell the agent: "Evaluate this acquisition target."  It reads each file, extracts contract terms and change-of-control provisions from the PDF, applies the screening criteria to each customer, benchmarks against industry standards, and produces a due diligence memo suitable for the investment committee.
+
+**Loan portfolio risk analysis.**  A bank's risk team has a loan tape with 220 loans (Excel), state banking regulations (PDF), and an internal risk policy memo (Word).  The agent extracts regulatory thresholds from the PDF, pulls classification criteria from the Word document, assigns each loan a risk tier, flags regulatory violations, and produces a risk report with tier distribution and estimated reserves.
+
+**Portfolio consolidation.**  An investor holds positions across three brokerages, each reporting in a different format (two Excel workbooks and a CSV).  The agent reads all three, standardizes the columns, resolves ticker symbol inconsistencies, sums positions that appear in multiple accounts, and produces a single consolidated view with total portfolio value and asset allocation.
+
+The key insight is that these tasks are not difficult for a human --- they are tedious.  Reading a 30-page PDF to find three regulatory thresholds, then cross-referencing them against 220 rows in a spreadsheet, is exactly the kind of work that agents eliminate.  The agent reads every format natively, never loses track of which rule came from which document, and finishes in minutes rather than hours.
+
+## Variance analysis agents
+
+Variance analysis --- comparing budgeted figures to actual results and decomposing the differences --- is the core analytical task in FP&A.  Every public company does it quarterly, and boards and investors ask "why did we miss?" after every earnings period.
+
+An agent can perform a full variance decomposition from a single prompt.  Consider this scenario:
+
+> **Q1 actuals just closed.  Operating income missed budget by $300K.**
+>
+> - Revenue: Budget 100K units at \$50 = \$5M; Actual 95K units at \$51 = \$4.845M --- \$155K miss
+> - COGS: Budget \$30/unit; Actual \$32/unit --- \$40K miss
+> - SG&A: Budget \$1.45M; Actual \$1.555M --- \$105K miss
+
+You prompt the agent: "Here is our Q1 budget vs. actuals spreadsheet.  Decompose the $300K operating income miss into volume, price, cost, and discretionary spending drivers.  Produce a waterfall chart and a summary memo for the CFO."
+
+The agent plans the decomposition, separates revenue variance into volume and price effects, breaks COGS variance into volume-driven and rate-driven components, itemizes SG&A overruns, generates a waterfall chart showing how each driver contributed to the $300K gap, and writes a CFO-ready memo --- all from that single instruction.
+
+This replaces two to four hours of manual FP&A work.  The agent applies the same variance decomposition formulas an analyst would, but it does so instantly and presents the results in a format ready for executive review.
 
 ## The MCP connection
 
@@ -146,5 +198,18 @@ For each of the following agent capabilities, decide whether it should be automa
 7. Accessing a shared team calendar
 
 For each decision, write one sentence explaining your reasoning.  Compare your answers with a colleague --- where do you disagree, and why?
+
+:::
+
+::: {.callout-note title="Exercise 5: Document Processing Workflow" collapse="true"}
+Give your coding agent a folder containing files in at least two different formats (for example, an Excel spreadsheet and a PDF, or a CSV and a Word document).  Ask the agent to extract information from each file, combine the results, and produce a summary report.
+
+Some ideas to get started:
+
+- **M&A due diligence**: a customer list (Excel), contract terms (PDF), screening criteria (Word), and industry benchmarks (CSV) --- ask the agent to evaluate the target and produce a memo.
+- **Loan risk analysis**: a loan tape (Excel), banking regulations (PDF), and a risk policy (Word) --- ask the agent to classify loans and flag violations.
+- **Any multi-source analysis from your work**: combine data from different systems or departments that arrive in different formats.
+
+Pay attention to how the agent handles each format.  Does it correctly extract the relevant information?  Does it combine the sources logically?  What would you need to verify before trusting the output?
 
 :::

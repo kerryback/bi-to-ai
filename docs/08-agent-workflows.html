@@ -199,10 +199,12 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#beyond-reporting" id="toc-beyond-reporting" class="nav-link active" data-scroll-target="#beyond-reporting"><span class="header-section-number">8.1</span> Beyond reporting</a></li>
   <li><a href="#email-agents" id="toc-email-agents" class="nav-link" data-scroll-target="#email-agents"><span class="header-section-number">8.2</span> Email agents</a></li>
   <li><a href="#calendar-agents" id="toc-calendar-agents" class="nav-link" data-scroll-target="#calendar-agents"><span class="header-section-number">8.3</span> Calendar agents</a></li>
-  <li><a href="#scheduling-as-conversational-ai" id="toc-scheduling-as-conversational-ai" class="nav-link" data-scroll-target="#scheduling-as-conversational-ai"><span class="header-section-number">8.4</span> Scheduling as conversational AI</a></li>
-  <li><a href="#the-mcp-connection" id="toc-the-mcp-connection" class="nav-link" data-scroll-target="#the-mcp-connection"><span class="header-section-number">8.5</span> The MCP connection</a></li>
-  <li><a href="#designing-safe-agent-workflows" id="toc-designing-safe-agent-workflows" class="nav-link" data-scroll-target="#designing-safe-agent-workflows"><span class="header-section-number">8.6</span> Designing safe agent workflows</a></li>
-  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">8.7</span> Exercises</a></li>
+  <li><a href="#using-ai-for-scheduling" id="toc-using-ai-for-scheduling" class="nav-link" data-scroll-target="#using-ai-for-scheduling"><span class="header-section-number">8.4</span> Using AI for scheduling</a></li>
+  <li><a href="#document-processing-agents" id="toc-document-processing-agents" class="nav-link" data-scroll-target="#document-processing-agents"><span class="header-section-number">8.5</span> Document processing agents</a></li>
+  <li><a href="#variance-analysis-agents" id="toc-variance-analysis-agents" class="nav-link" data-scroll-target="#variance-analysis-agents"><span class="header-section-number">8.6</span> Variance analysis agents</a></li>
+  <li><a href="#the-mcp-connection" id="toc-the-mcp-connection" class="nav-link" data-scroll-target="#the-mcp-connection"><span class="header-section-number">8.7</span> The MCP connection</a></li>
+  <li><a href="#designing-safe-agent-workflows" id="toc-designing-safe-agent-workflows" class="nav-link" data-scroll-target="#designing-safe-agent-workflows"><span class="header-section-number">8.8</span> Designing safe agent workflows</a></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">8.9</span> Exercises</a></li>
   </ul>
 </nav>
     </div>
@@ -279,8 +281,8 @@ Figure&nbsp;8.1: An email agent workflow — search, reason, draft, and deliver.
 <p>The real power emerges when the calendar agent works with other tools. Combined with email, it can read a message proposing a meeting time, check your calendar for conflicts, and draft a reply confirming or suggesting alternatives — all from a single instruction.</p>
 <p>Calendar agents also illustrate a key agent design principle: <strong>human-in-the-loop</strong>. Reading your calendar is low-risk; the agent should do it freely. Creating or moving events changes your schedule and affects other people. A well-designed calendar agent proposes changes and waits for your approval before executing them.</p>
 </section>
-<section id="scheduling-as-conversational-ai" class="level2" data-number="8.4">
-<h2 data-number="8.4" class="anchored" data-anchor-id="scheduling-as-conversational-ai"><span class="header-section-number">8.4</span> Scheduling as conversational AI</h2>
+<section id="using-ai-for-scheduling" class="level2" data-number="8.4">
+<h2 data-number="8.4" class="anchored" data-anchor-id="using-ai-for-scheduling"><span class="header-section-number">8.4</span> Using AI for scheduling</h2>
 <p>Scheduling is a constraint satisfaction problem. You have a set of people, each with their own availability, and you need to find a time that works for everyone. Traditionally, this means sending a poll, chasing responses, and manually comparing calendars.</p>
 <p>An agent can do this conversationally. Here is the workflow:</p>
 <ol type="1">
@@ -321,20 +323,74 @@ Figure&nbsp;8.2: Scheduling as an agent workflow — from scattered constraints 
 </div>
 <p>This is fundamentally different from a scheduling poll. A poll collects structured yes/no responses. An agent reads natural language, infers availability from context, and handles ambiguity (“I’d prefer mornings” is a soft constraint, not a hard one). The agent is doing what a skilled executive assistant does — reasoning through messy, human communication to find a workable solution.</p>
 </section>
-<section id="the-mcp-connection" class="level2" data-number="8.5">
-<h2 data-number="8.5" class="anchored" data-anchor-id="the-mcp-connection"><span class="header-section-number">8.5</span> The MCP connection</h2>
+<section id="document-processing-agents" class="level2" data-number="8.5">
+<h2 data-number="8.5" class="anchored" data-anchor-id="document-processing-agents"><span class="header-section-number">8.5</span> Document processing agents</h2>
+<p>The scheduling example coordinates across calendars and email. Another powerful pattern coordinates across <em>file formats</em>. In many business workflows, the information you need is scattered across Excel spreadsheets, PDF reports, Word memos, and CSV exports — each in a different structure with different conventions.</p>
+<p>A document processing agent ingests all of these, extracts the relevant information from each, and combines the results into a single analysis. The pattern looks like this:</p>
+<div class="cell" data-fig-width="100%" data-layout-align="default">
+<div class="cell-output-display">
+<div id="fig-doc-processing" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-doc-processing-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div>
+<pre class="mermaid mermaid-js" data-label="fig-doc-processing">flowchart LR
+    I["📂 Ingest\n_multiple formats_"]
+    X["🔍 Extract\n_rules &amp; data_"]
+    A["🧠 Analyze\n_apply &amp; combine_"]
+    O["📄 Output\n_report or memo_"]
+
+    I --&gt; X --&gt; A --&gt; O
+
+    style I fill:#e3f2fd,stroke:#2196f3
+    style X fill:#e8f5e9,stroke:#4caf50
+    style A fill:#fff3e0,stroke:#ff9800
+    style O fill:#f3e5f5,stroke:#9c27b0
+</pre>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-doc-processing-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;8.3: Document processing agent — ingest multiple formats, extract, analyze, and deliver.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Here are three examples of this pattern in finance and business:</p>
+<p><strong>M&amp;A due diligence.</strong> An acquisition target sends a data room with a customer list (Excel), contract terms (PDF), the acquirer’s screening criteria (Word), and industry benchmarks (CSV). You tell the agent: “Evaluate this acquisition target.” It reads each file, extracts contract terms and change-of-control provisions from the PDF, applies the screening criteria to each customer, benchmarks against industry standards, and produces a due diligence memo suitable for the investment committee.</p>
+<p><strong>Loan portfolio risk analysis.</strong> A bank’s risk team has a loan tape with 220 loans (Excel), state banking regulations (PDF), and an internal risk policy memo (Word). The agent extracts regulatory thresholds from the PDF, pulls classification criteria from the Word document, assigns each loan a risk tier, flags regulatory violations, and produces a risk report with tier distribution and estimated reserves.</p>
+<p><strong>Portfolio consolidation.</strong> An investor holds positions across three brokerages, each reporting in a different format (two Excel workbooks and a CSV). The agent reads all three, standardizes the columns, resolves ticker symbol inconsistencies, sums positions that appear in multiple accounts, and produces a single consolidated view with total portfolio value and asset allocation.</p>
+<p>The key insight is that these tasks are not difficult for a human — they are tedious. Reading a 30-page PDF to find three regulatory thresholds, then cross-referencing them against 220 rows in a spreadsheet, is exactly the kind of work that agents eliminate. The agent reads every format natively, never loses track of which rule came from which document, and finishes in minutes rather than hours.</p>
+</section>
+<section id="variance-analysis-agents" class="level2" data-number="8.6">
+<h2 data-number="8.6" class="anchored" data-anchor-id="variance-analysis-agents"><span class="header-section-number">8.6</span> Variance analysis agents</h2>
+<p>Variance analysis — comparing budgeted figures to actual results and decomposing the differences — is the core analytical task in FP&amp;A. Every public company does it quarterly, and boards and investors ask “why did we miss?” after every earnings period.</p>
+<p>An agent can perform a full variance decomposition from a single prompt. Consider this scenario:</p>
+<blockquote class="blockquote">
+<p><strong>Q1 actuals just closed. Operating income missed budget by $300K.</strong></p>
+<ul>
+<li>Revenue: Budget 100K units at $50 = $5M; Actual 95K units at $51 = $4.845M — $155K miss</li>
+<li>COGS: Budget $30/unit; Actual $32/unit — $40K miss</li>
+<li>SG&amp;A: Budget $1.45M; Actual $1.555M — $105K miss</li>
+</ul>
+</blockquote>
+<p>You prompt the agent: “Here is our Q1 budget vs.&nbsp;actuals spreadsheet. Decompose the $300K operating income miss into volume, price, cost, and discretionary spending drivers. Produce a waterfall chart and a summary memo for the CFO.”</p>
+<p>The agent plans the decomposition, separates revenue variance into volume and price effects, breaks COGS variance into volume-driven and rate-driven components, itemizes SG&amp;A overruns, generates a waterfall chart showing how each driver contributed to the $300K gap, and writes a CFO-ready memo — all from that single instruction.</p>
+<p>This replaces two to four hours of manual FP&amp;A work. The agent applies the same variance decomposition formulas an analyst would, but it does so instantly and presents the results in a format ready for executive review.</p>
+</section>
+<section id="the-mcp-connection" class="level2" data-number="8.7">
+<h2 data-number="8.7" class="anchored" data-anchor-id="the-mcp-connection"><span class="header-section-number">8.7</span> The MCP connection</h2>
 <p>These workflows become practical through MCP (Model Context Protocol), which you met in Module 5. Just as an MCP connector gave your agent access to a database, connectors exist for Gmail, Google Calendar, Outlook, Slack, and dozens of other services.</p>
 <p>The pattern is consistent: install a connector, grant the agent access, and it gains new tools. A Gmail connector gives the agent <code>search_email</code>, <code>read_message</code>, and <code>send_email</code> tools. A Google Calendar connector gives it <code>list_events</code>, <code>create_event</code>, and <code>find_free_time</code> tools. The agent chains these tools the same way it chained SQL queries and chart generation in Module 7.</p>
 </section>
-<section id="designing-safe-agent-workflows" class="level2" data-number="8.6">
-<h2 data-number="8.6" class="anchored" data-anchor-id="designing-safe-agent-workflows"><span class="header-section-number">8.6</span> Designing safe agent workflows</h2>
+<section id="designing-safe-agent-workflows" class="level2" data-number="8.8">
+<h2 data-number="8.8" class="anchored" data-anchor-id="designing-safe-agent-workflows"><span class="header-section-number">8.8</span> Designing safe agent workflows</h2>
 <p>As agents gain access to more systems, safety becomes more important. The principles from Module 6 apply here, plus a few specific to multi-system workflows.</p>
 <p><strong>Least privilege.</strong> Give the agent only the permissions it needs. An email agent that summarizes your inbox needs read access, not send access. A calendar agent that checks availability needs read access, not the ability to delete events.</p>
 <p><strong>Human approval for actions.</strong> Reading data is low-risk. Writing data (sending an email, booking a meeting, modifying a document) is high-risk. Design workflows so the agent proposes actions and a human approves them before execution.</p>
 <p><strong>Audit trails.</strong> Log every action the agent takes across every system. When the agent reads an email, searches a calendar, and drafts a response, each step should be recorded. If something goes wrong, you can trace exactly what happened.</p>
 </section>
-<section id="exercises" class="level2" data-number="8.7">
-<h2 data-number="8.7" class="anchored" data-anchor-id="exercises"><span class="header-section-number">8.7</span> Exercises</h2>
+<section id="exercises" class="level2" data-number="8.9">
+<h2 data-number="8.9" class="anchored" data-anchor-id="exercises"><span class="header-section-number">8.9</span> Exercises</h2>
 <div class="callout callout-style-default callout-note callout-titled" title="Exercise 1: Agent Use Case Inventory">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -417,6 +473,29 @@ Exercise 4: Permission Design
 <li>Accessing a shared team calendar</li>
 </ol>
 <p>For each decision, write one sentence explaining your reasoning. Compare your answers with a colleague — where do you disagree, and why?</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Exercise 5: Document Processing Workflow">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exercise 5: Document Processing Workflow
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Give your coding agent a folder containing files in at least two different formats (for example, an Excel spreadsheet and a PDF, or a CSV and a Word document). Ask the agent to extract information from each file, combine the results, and produce a summary report.</p>
+<p>Some ideas to get started:</p>
+<ul>
+<li><strong>M&amp;A due diligence</strong>: a customer list (Excel), contract terms (PDF), screening criteria (Word), and industry benchmarks (CSV) — ask the agent to evaluate the target and produce a memo.</li>
+<li><strong>Loan risk analysis</strong>: a loan tape (Excel), banking regulations (PDF), and a risk policy (Word) — ask the agent to classify loans and flag violations.</li>
+<li><strong>Any multi-source analysis from your work</strong>: combine data from different systems or departments that arrive in different formats.</li>
+</ul>
+<p>Pay attention to how the agent handles each format. Does it correctly extract the relevant information? Does it combine the sources logically? What would you need to verify before trusting the output?</p>
 </div>
 </div>
 </div>
