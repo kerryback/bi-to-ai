@@ -21,14 +21,18 @@ book:
   repo-url: "https://github.com/kerryback/bi-to-ai/tree/master/files"
   chapters:
     - index.qmd
-    - 01-agents.qmd
-    - 02-exploring-data.qmd
-    - 03-thinking-partner.qmd
-    - 04-connecting-databases.qmd
-    - 05-reporting-pipelines.qmd
-    - 06-reliability.qmd
-    - 07-agent-workflows.qmd
-    - 08-rag.qmd
+    - part: "Part I: From BI to AI"
+      chapters:
+        - 01-agents.qmd
+        - 02-exploring-data.qmd
+        - 03-thinking-partner.qmd
+        - 04-connecting-databases.qmd
+        - 05-reporting-pipelines.qmd
+        - 06-reliability.qmd
+    - part: "Part II: Beyond BI"
+      chapters:
+        - 07-agent-workflows.qmd
+        - 08-rag.qmd
   appendices:
     - appendix-alternatives.qmd
 
