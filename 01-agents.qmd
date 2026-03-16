@@ -128,6 +128,41 @@ Each instruction triggers dozens of tool calls --- writing Python files, install
 
 This course uses **Claude Code** --- a terminal agent --- because it can do everything the web-based tools can do and far more.  When you need to connect to a database, build an application, or produce a deliverable that lives beyond a chat window, terminal access is what makes it possible.
 
+::: {.callout-note title="Where does the code run?" collapse="true"}
+AI can execute code in three environments, each with different trade-offs.
+
+A **cloud sandbox** is a temporary environment hosted by the AI provider.  Claude.ai and ChatGPT offer this: you upload a file, the AI processes it on a remote server, and you download the results.  Convenient for quick analysis, but your data leaves your machine and the session is ephemeral.
+
+A **virtual machine** runs on your own computer in an isolated sandbox.  Claude Desktop's Cowork tab is an example: it spins up a VM locally, giving AI a full computing environment with persistence across sessions.  Your data stays on your machine.
+
+A **local environment** runs directly on your machine with no isolation.  Claude Desktop's Code tab does this: the agent writes code that executes right where you work, with full access to your files, databases, and network.  Nothing is uploaded.  This is what we use throughout this course.
+
+```{mermaid}
+%%| fig-cap: "Three code execution environments, from most isolated to most integrated."
+%%| fig-width: 100%
+flowchart LR
+    subgraph Cloud["Cloud Sandbox"]
+        direction TB
+        C1["Code runs on\nprovider's servers"]
+        C2["Data uploaded\ntemporarily"]
+        C3["Data leaves\nyour machine"]
+    end
+    subgraph VM["Virtual Machine"]
+        direction TB
+        V1["Code runs in\nlocal VM"]
+        V2["Files accessible\nwithin VM"]
+        V3["Data stays\non your machine"]
+    end
+    subgraph Local["Local App"]
+        direction TB
+        L1["Code runs\ndirectly on your machine"]
+        L2["Full access to\nfiles & databases"]
+        L3["Nothing\nuploaded"]
+    end
+    Cloud --> VM --> Local
+```
+:::
+
 ## The dashboard trap
 
 Organizations spend millions building dashboards.  When a new question arises, the cycle restarts.
@@ -223,23 +258,23 @@ flowchart LR
     style D fill:#fce4ec,stroke:#e91e63
 ```
 
-You do not need to build this by hand.  You describe what you want to a coding agent, and it builds the pipeline for you.  Your job is to test the result, refine the prompt, and iterate until the output meets your standards.  Modules 4 through 6 show how.
+You do not need to build this by hand.  You describe what you want to a coding agent, and it builds the pipeline for you.  Your job is to test the result, refine the prompt, and iterate until the output meets your standards.  Modules 3 through 5 show how.
 
 ## What this course covers
 
 This course is a hands-on guide to building the capabilities just described.  Each module adds a layer of skill, from basic data analysis to production-ready AI systems.
 
-**Module 2: Getting Started** walks through installation and introduces the coding agent you will use throughout the course.
+**Module 2: Exploring Data** goes from a raw spreadsheet to a written recommendation with charts in under ten minutes --- using nothing but plain-English conversation.
 
-**Module 3: Exploring Data** goes from a raw spreadsheet to a written recommendation with charts in under ten minutes --- using nothing but plain-English conversation.
+**Module 3: AI as Thinking Partner** shows how to use AI as a sparring partner for decisions --- challenging assumptions, running pre-mortems, and stress-testing your own analysis.
 
-**Module 4: AI as Thinking Partner** shows how to use AI as a sparring partner for decisions --- challenging assumptions, running pre-mortems, and stress-testing your own analysis.
+**Module 4: Connecting Databases** shows how to connect AI to your company's databases so anyone can query them in plain English.  You will build a reusable skill and a demo web app.
 
-**Module 5: Connecting Databases** shows how to connect AI to your company's databases so anyone can query them in plain English.  You will build a reusable skill and a demo web app.
+**Module 5: Reliability and Compliance** provides the verification protocols, governance frameworks, and deployment patterns your organization needs before any of this goes to production.
 
-**Module 6: Reliability and Compliance** provides the verification protocols, governance frameworks, and deployment patterns your organization needs before any of this goes to production.
+**Module 6: Automating with Agents** chains database queries, charts, narratives, and document assembly into reporting pipelines that run from a single instruction.
 
-**Module 7: Automating with Agents** chains database queries, charts, narratives, and document assembly into reporting pipelines that run from a single instruction.
+**Module 7: Agent Workflows** explores agent workflows beyond reporting --- document processing, variance analysis, email and calendar agents.
 
 **Module 8: Retrieval-Augmented Generation** shows how to give AI knowledge of your company's documents --- policies, contracts, manuals --- and get answers grounded in those documents with citations.
 

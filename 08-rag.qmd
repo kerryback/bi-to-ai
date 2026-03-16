@@ -108,7 +108,7 @@ Citations transform AI from "trust me" to "here's the evidence."  This is what m
 
 RAG is not always the right approach.  The choice depends on the type of data.
 
-For structured data (spreadsheets, databases, tables of numbers), a skill that writes SQL queries is more appropriate.  This is what you built in Module 5.
+For structured data (spreadsheets, databases, tables of numbers), a skill that writes SQL queries is more appropriate.  This is what you built in Module 4.
 
 For unstructured documents (policies, contracts, manuals, reports), RAG is the right tool.
 
@@ -130,7 +130,7 @@ flowchart TD
     Small["Small document set?\n_< ~100 pages_"]
     Large["Large document set?\n_Hundreds of pages+_"]
 
-    SQL["→ SQL skill\n_Module 5_"]
+    SQL["→ SQL skill\n_Module 4_"]
     Direct["→ Direct context\n_Give it to the agent_"]
     RAG["→ RAG pipeline\n_Chunk, embed, retrieve_"]
     Both["→ Skill + RAG\n_SQL for numbers,\nRAG for context_"]
@@ -205,7 +205,7 @@ Production RAG requires ongoing maintenance.  Documents need refresh schedules s
 
 Quality assurance means maintaining a test suite of known question-answer pairs to validate accuracy, monitoring retrieval quality over time, and building a feedback loop where users can flag incorrect answers for improvement.
 
-The same sandbox-audit-deploy pattern from Module 7 applies.  RAG is a system, not a feature, and it needs the same care as any production system.
+The same sandbox-audit-deploy pattern from Module 5 applies.  RAG is a system, not a feature, and it needs the same care as any production system.
 
 ## Exercises
 

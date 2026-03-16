@@ -1,10 +1,10 @@
 # Agent Workflows
 
-Module 7 showed agents automating a reporting pipeline --- a linear sequence from query to finished deck.  But agents can orchestrate far more than reports.  This module explores workflows where the agent coordinates across multiple systems --- email, calendars, and scheduling --- turning unstructured inputs into organized actions.
+Module 6 showed agents automating a reporting pipeline --- a linear sequence from query to finished deck.  But agents can orchestrate far more than reports.  This module explores workflows where the agent coordinates across multiple systems --- email, calendars, and scheduling --- turning unstructured inputs into organized actions.
 
 ## Beyond reporting
 
-The reporting pipeline in Module 7 follows a predictable path: query data, make a chart, write a summary, assemble a document.  The steps are well-defined and the output is a file.
+The reporting pipeline in Module 6 follows a predictable path: query data, make a chart, write a summary, assemble a document.  The steps are well-defined and the output is a file.
 
 Many real-world workflows are messier.  A manager wants to schedule a team meeting but availability is scattered across email threads.  A sales rep needs to draft follow-up emails based on notes from a dozen calls.  An executive assistant needs to reorganize next week's calendar after a last-minute conflict.
 
@@ -140,13 +140,13 @@ This replaces two to four hours of manual FP&A work.  The agent applies the same
 
 ## The MCP connection
 
-These workflows become practical through MCP (Model Context Protocol), which you met in Module 5.  Just as an MCP connector gave your agent access to a database, connectors exist for Gmail, Google Calendar, Outlook, Slack, and dozens of other services.
+These workflows become practical through MCP (Model Context Protocol), which you met in Module 4.  Just as an MCP connector gave your agent access to a database, connectors exist for Gmail, Google Calendar, Outlook, Slack, and dozens of other services.
 
-The pattern is consistent: install a connector, grant the agent access, and it gains new tools.  A Gmail connector gives the agent `search_email`, `read_message`, and `send_email` tools.  A Google Calendar connector gives it `list_events`, `create_event`, and `find_free_time` tools.  The agent chains these tools the same way it chained SQL queries and chart generation in Module 7.
+The pattern is consistent: install a connector, grant the agent access, and it gains new tools.  A Gmail connector gives the agent `search_email`, `read_message`, and `send_email` tools.  A Google Calendar connector gives it `list_events`, `create_event`, and `find_free_time` tools.  The agent chains these tools the same way it chained SQL queries and chart generation in Module 6.
 
 ## Designing safe agent workflows
 
-As agents gain access to more systems, safety becomes more important.  The principles from Module 6 apply here, plus a few specific to multi-system workflows.
+As agents gain access to more systems, safety becomes more important.  The principles from Module 5 apply here, plus a few specific to multi-system workflows.
 
 **Least privilege.**  Give the agent only the permissions it needs.  An email agent that summarizes your inbox needs read access, not send access.  A calendar agent that checks availability needs read access, not the ability to delete events.
 

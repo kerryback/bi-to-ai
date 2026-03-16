@@ -2,13 +2,13 @@
 
 Module 1 described the vision: replacing dashboards with natural-language queries.  This module makes it real.  You will connect a coding agent to a database and build the tools that let anyone query it in plain English --- no SQL required.
 
-The first three modules worked with individual files --- a CSV placed in a folder, a memo pasted into a conversation.  Most real business data does not live in spreadsheets.  It lives in databases: structured collections of related tables, hosted on servers, queried with SQL.
+The first two modules worked with individual files --- a CSV placed in a folder, a memo pasted into a conversation.  Most real business data does not live in spreadsheets.  It lives in databases: structured collections of related tables, hosted on servers, queried with SQL.
 
-This module connects AI to those databases.  By the end, you will understand how your organization can create tools so that everyone can query a database in plain English --- no SQL required.  As throughout this course, the examples use Claude Code, but the same workflows apply to Gemini CLI and OpenAI Codex.
+This module connects AI to those databases.  By the end, you will understand how your organization can create tools so that everyone can query a database in plain English --- no SQL required.  As throughout this course, the examples use Claude Code, but the same workflows apply to other coding agents (see Appendix).
 
 ## From spreadsheets to databases
 
-In Module 3 you analyzed a spreadsheet --- a single table of rows and columns living in a file on your machine.  Most real business data lives in databases: many related tables linked by keys, hosted on a server, queried with SQL.
+In Module 2 you analyzed a spreadsheet --- a single table of rows and columns living in a file on your machine.  Most real business data lives in databases: many related tables linked by keys, hosted on a server, queried with SQL.
 
 SQL is the language databases understand.  You do not need to learn it.  AI writes the SQL for you.  But you do need to tell the AI what is in the database --- which tables exist, what the columns mean, and how the tables relate to each other.
 
@@ -50,6 +50,17 @@ The exercises in this module use the Chinook sample database, which you can down
 The key tables are employees (8 staff members), customers (59 customers across 24 countries), invoices and invoice_items (412 transactions), and tracks, albums, artists, and genres (a product catalog of more than 3,500 tracks).  It is a publicly available SQLite file that requires no setup --- just place it in a folder and point your coding agent at it.  The same skill pattern you learn here works with any database.
 
 ## What is a skill?
+
+Out of the box, the coding agent can read files, write code, and run it.  But you can extend what it knows how to do by installing *skills* --- packaged instructions that teach the agent a specific workflow.
+
+Claude Code has a skill system built in.  A skill is a folder containing a markdown file that describes the task, the steps, and the output format.  When you invoke a skill, Claude Code reads the instructions and follows them.  The installer from the preface already set up four skills that are particularly useful for business work:
+
+- **xlsx** --- read, create, and edit Excel spreadsheets with formulas, formatting, and charts.
+- **docx** --- create and edit Word documents with tracked changes, comments, and formatting.
+- **pptx** --- create and edit PowerPoint presentations.
+- **skill-creator** --- a guide for building your own skills.  You will use this later in this module when you create a database skill.
+
+You can verify the skills are installed by opening the Code tab and typing `/` --- the available skills appear as slash commands.
 
 A skill is a set of instructions that specializes a general-purpose AI for a specific task.  Every AI customization works the same way: additional text is added to the prompt.  A skill provides three things: domain knowledge (what the data means), workflow instructions (how to do the task), and output format specifications (how to present results).
 
@@ -177,21 +188,35 @@ The MCP registry at [registry.modelcontextprotocol.io](https://registry.modelcon
 
 ## The skill as deployment artifact
 
-A polished skill is what gets deployed on your intranet.  The skill file encodes which tables matter, how they relate, and what the business terminology means.  IT adds the infrastructure: SSO authentication, read-only database credentials, and query logging for audit.  Module 7 shows how to chain this skill into an automated reporting pipeline.
+A polished skill is what gets deployed on your intranet.  The skill file encodes which tables matter, how they relate, and what the business terminology means.  IT adds the infrastructure: SSO authentication, read-only database credentials, and query logging for audit.  Module 6 shows how to chain this skill into an automated reporting pipeline.
 
 ## A natural-language query app
 
 The skill-file approach works well with a coding agent, but what about the rest of your organization?  Not everyone will use a terminal.  The same pattern --- send a question and schema to an LLM, get SQL back, run it --- can be wrapped in a simple web app that anyone can use from a browser.
 
-In production, this app would be deployed on the corporate intranet, the database would be a PostgreSQL or Snowflake instance on the company's servers, and the LLM would be an enterprise-licensed model (more on licensing and compliance in Module 6).  For this demo, we run everything locally: a small Streamlit app on your laptop, the Chinook SQLite file in the same folder, and Claude Sonnet via the Anthropic API.
+In production, this app would be deployed on the corporate intranet, the database would be a PostgreSQL or Snowflake instance on the company's servers, and the LLM would be an enterprise-licensed model (more on licensing and compliance in Module 5).  For this demo, we run everything locally: a small Streamlit app on your laptop, the Chinook SQLite file in the same folder, and Claude Sonnet via the Anthropic API.
 
-### Setting up the demo
+### Setting up the Anthropic API
 
-The demo apps call Claude Sonnet through the Anthropic API.  If you have not already set up your API key, follow the instructions in Module 2 ("Setting up the Anthropic API").  The key must be available as an environment variable:
+The demo apps call Claude Sonnet through the Anthropic API.  You will need an API key.
 
-```bash
-export ANTHROPIC_API_KEY="sk-ant-..."
-```
+1. Sign up at [console.anthropic.com](https://console.anthropic.com) and add a payment method.
+2. Create an API key under **Settings → API Keys**.
+3. Set the key as an environment variable so the demo apps can find it:
+
+   **Mac / Linux** --- add to your shell profile (`.bashrc` or `.zshrc`) to persist:
+
+   ```bash
+   export ANTHROPIC_API_KEY="sk-ant-..."
+   ```
+
+   **Windows** --- run once in a terminal, then restart the terminal:
+
+   ```bash
+   setx ANTHROPIC_API_KEY "sk-ant-..."
+   ```
+
+API calls are billed per token.  A short request costs a fraction of a cent; a longer conversation might cost a few cents to a few dollars.  Current prices are listed at [anthropic.com/pricing](https://www.anthropic.com/pricing).
 
 Download the app files here: [chinook-query.py](files/code/chinook-query.py) and [requirements.txt](files/code/requirements.txt).  Copy `chinook.db` into the same folder, install the dependencies by running `pip install -r requirements.txt` in a terminal or by asking your coding agent to install them, and then run:
 
@@ -337,11 +362,11 @@ streamlit run chinook-charts.py
 
 ### A note on executing generated code
 
-The chart app uses Python's `exec()` to run LLM-generated code.  For a local demo this is fine --- you are running it on your own machine.  In a production deployment, executing AI-generated code requires sandboxing: running the code in an isolated container with no network access and limited filesystem permissions.  Module 7 discusses sandboxing in more detail, and Module 6 covers the broader governance framework.
+The chart app uses Python's `exec()` to run LLM-generated code.  For a local demo this is fine --- you are running it on your own machine.  In a production deployment, executing AI-generated code requires sandboxing: running the code in an isolated container with no network access and limited filesystem permissions.  Module 6 discusses sandboxing in more detail, and Module 5 covers the broader governance framework.
 
 ### From demo to production
 
-This is a demo, not a production application.  There is no authentication, no guardrails on the SQL, and no sandboxing of query execution.  The chart app adds another consideration: it executes LLM-generated Python, not just SQL, which makes sandboxing even more important.  In a production deployment, IT would add SSO login, restrict the database connection to read-only credentials, log every query for audit, run generated code in an isolated container, and use an enterprise LLM with a data-processing agreement.  Module 6 covers these considerations in detail.  But as a prototype that proves the concept, fifty lines of Python is all it takes.
+This is a demo, not a production application.  There is no authentication, no guardrails on the SQL, and no sandboxing of query execution.  The chart app adds another consideration: it executes LLM-generated Python, not just SQL, which makes sandboxing even more important.  In a production deployment, IT would add SSO login, restrict the database connection to read-only credentials, log every query for audit, run generated code in an isolated container, and use an enterprise LLM with a data-processing agreement.  Module 5 covers these considerations in detail.  But as a prototype that proves the concept, fifty lines of Python is all it takes.
 
 ## Exercises
 

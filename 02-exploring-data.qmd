@@ -1,8 +1,18 @@
 # Exploring Data with AI
 
-Module 1 described how agents replace dashboards by letting you query data in plain English. This module puts that into practice. You will go from a raw spreadsheet to a written recommendation with charts in under ten minutes --- using nothing but plain-English conversation. The agent reads your data, writes and runs Python, renders charts, and synthesizes findings --- the full agent loop in action.
+Module 1 described how agents replace dashboards by letting you query data in plain English.  This module puts that into practice.  You will go from a raw spreadsheet to a written recommendation with charts in under ten minutes --- using nothing but plain-English conversation.  The agent reads your data, writes and runs Python, renders charts, and synthesizes findings --- the full agent loop in action.
 
-This module goes from a raw spreadsheet to a written recommendation with charts in under ten minutes --- using nothing but plain-English conversation.  We use a spreadsheet as an example, but other data sources can be used similarly.  Module 5 discusses databases.
+## Using the Code tab
+
+The Claude Desktop app has three tabs in the sidebar: **Chat**, **Cowork**, and **Code**.  Click the **Code** tab.  This is where you will do all of the work in this course.
+
+The Code tab runs the Claude Code engine --- a coding agent with full access to your local files, databases, and network.  This is the agent architecture described in Module 1: an LLM connected to tools through an execution layer, running the plan-execute-observe-iterate loop autonomously.  It reads files, writes and runs Python, renders charts, and produces documents, all from plain-English conversation.
+
+To get started, click **Code** in the sidebar, then select a folder as your working directory.  Choose a model (Sonnet is fast and capable; Opus is more thorough) and a permission mode.  For the exercises in this course, **"auto-accept"** is the most convenient permission mode --- it lets the agent run code without asking for approval on every step.
+
+Claude Code reads a file called `CLAUDE.md` in the project directory for persistent instructions.  This is where you store context about your data, preferred output formats, and any domain-specific guidance the agent should follow every session.
+
+Installing Python gives you the base language, but most work relies on additional libraries --- code packages for data analysis, charting, web apps, and more.  At various points in this course, we will ask you to tell the coding agent to install specific libraries.  If you skip that step, the agent will notice when it tries to run code that requires them and will ask you for permission to install what it needs.  Just grant permission if that happens.
 
 ## The scenario
 
@@ -141,11 +151,11 @@ This pattern --- extract, match, reconcile --- is the foundation of due diligenc
 ## Exercises
 
 ::: {.callout-note title="Exercise 1: The Superstore Walkthrough" collapse="true"}
-This is the core exercise for Module 3.  Download [superstore.csv](files/data/superstore.csv) and place it in a folder.  Open your coding agent in that folder and work through the four steps described above.
+This is the core exercise for Module 2.  Download [superstore.csv](files/data/superstore.csv) and place it in a folder.  Open your coding agent in that folder and work through the four steps described above.
 
 First, ask the agent to describe the data.  Confirm the row count, column names, date range, and financial summary.  Second, ask three decision-relevant questions tied to the marketing budget allocation decision.  Third, create at least one line chart (for trends), one bar chart (for comparisons), and one scatter plot (for relationships).  Iterate on at least one chart by adding annotations or improving the layout.  Fourth, ask the agent to write a one-page executive memo with the recommendation and supporting charts.
 
-Bring your dataset and memo to Module 4 --- you will use them as thinking-partner exercises.
+Bring your dataset and memo to Module 3 --- you will use them as thinking-partner exercises.
 :::
 
 
@@ -207,4 +217,10 @@ Open your coding agent in the folder and work through these steps:
 4. Ask for a final reconciliation summary: invoices paid, invoices unpaid but not disputed, invoices under dispute, and payments with no matching invoice.
 
 When you are done, you should have a clean reconciliation table that an accountant could use to close out the quarter.
+:::
+
+::: {.callout-note title="Exercise 8: Instruction Files" collapse="true"}
+Create a `CLAUDE.md` file in a folder containing the sample CSV from Exercise 1.  Add two instructions: a preferred chart style (for example, "use a dark background with white text for all charts") and a default analysis behavior (for example, "always show the code you run").
+
+Open the Code tab in that folder and ask the agent to create a chart.  Does it follow your instructions?  Modify the instruction file and ask again.
 :::

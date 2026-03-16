@@ -22,14 +22,15 @@ book:
   chapters:
     - index.qmd
     - 01-agents.qmd
-    - 02-getting-started.qmd
-    - 03-exploring-data.qmd
-    - 04-thinking-partner.qmd
-    - 05-connecting-databases.qmd
-    - 06-reliability.qmd
-    - 07-reporting-pipelines.qmd
-    - 08-agent-workflows.qmd
-    - 09-rag.qmd
+    - 02-exploring-data.qmd
+    - 03-thinking-partner.qmd
+    - 04-connecting-databases.qmd
+    - 05-reliability.qmd
+    - 06-reporting-pipelines.qmd
+    - 07-agent-workflows.qmd
+    - 08-rag.qmd
+  appendices:
+    - appendix-alternatives.qmd
 
 format:
   html:
