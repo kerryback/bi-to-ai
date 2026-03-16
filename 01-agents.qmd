@@ -92,6 +92,42 @@ Common agent tools include:
 
 An agent can use multiple tools in sequence.  For example: query a database, pass the results to Python for analysis, generate a chart, write a narrative summary, and assemble everything into a PowerPoint deck --- all from a single instruction.
 
+## Levels of agent capability
+
+Not all agents are equally powerful.  The tools an agent can access determine what it can do, and the difference between levels is dramatic.
+
+### Agents with code execution
+
+Web-based AI assistants like **Claude.ai** and **ChatGPT** can write and run code in a sandboxed environment.  This is a major step beyond a chatbot.  You can upload a spreadsheet and say *"analyze this data"* --- the agent writes Python, executes it, and returns charts and tables.
+
+But the sandbox has walls.  The agent cannot install new software, connect to your company's database, read files from your laptop, or save results anywhere permanent.  Every conversation starts from scratch.  It is powerful for one-off analysis, but it cannot build anything that persists.
+
+### Agents with terminal access
+
+A **terminal agent** like **Claude Code** operates directly on your computer through the command line.  It can do everything a code-execution agent can do, plus everything you could do yourself at a terminal:
+
+- **Install software and packages** --- set up Python libraries, database drivers, or any tool the task requires.
+- **Read and write files anywhere** --- access spreadsheets on your desktop, edit configuration files, create entire project directories.
+- **Connect to databases** --- query your company's SQL Server, PostgreSQL, or SQLite databases directly.
+- **Use git and version control** --- create branches, commit changes, push to GitHub.
+- **Build and run applications** --- create a web app, start a local server, and open it in your browser.
+- **Chain external tools** --- call APIs, run shell scripts, orchestrate multi-step workflows across different programs.
+- **Deploy to production** --- push a finished application to a hosting service so others can use it.
+
+The difference is not incremental --- it is qualitative.  A code-execution agent can *analyze* your sales data.  A terminal agent can analyze your sales data, build a web dashboard from the results, connect it to your live database so it updates automatically, and deploy it so your entire team can access it --- all from a single conversation.
+
+::: {.callout-tip title="Example: from question to deployed app"}
+In a single session with a terminal agent, you might say:
+
+1. *"Connect to our sales database and show me revenue by region for 2025."*
+2. *"Build a Streamlit app that lets anyone on the team explore this data with filters."*
+3. *"Deploy it so the team can access it at a URL."*
+
+Each instruction triggers dozens of tool calls --- writing Python files, installing packages, running the app locally to test it, fixing bugs, and finally deploying.  What would take a developer a day takes the agent minutes.
+:::
+
+This course uses **Claude Code** --- a terminal agent --- because it can do everything the web-based tools can do and far more.  When you need to connect to a database, build an application, or produce a deliverable that lives beyond a chat window, terminal access is what makes it possible.
+
 ## The dashboard trap
 
 Organizations spend millions building dashboards.  When a new question arises, the cycle restarts.
