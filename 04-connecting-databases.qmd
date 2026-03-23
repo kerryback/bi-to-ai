@@ -362,11 +362,194 @@ streamlit run chinook-charts.py
 
 ### A note on executing generated code
 
-The chart app uses Python's `exec()` to run LLM-generated code.  For a local demo this is fine --- you are running it on your own machine.  In a production deployment, executing AI-generated code requires sandboxing: running the code in an isolated container with no network access and limited filesystem permissions.  Module 5 discusses sandboxing in more detail, and Module 6 covers the broader governance framework.
+The chart app uses Python's `exec()` to run LLM-generated code.  For a local demo this is fine --- you are running it on your own machine.  In a production deployment, executing AI-generated code requires sandboxing.  The sections below explain the production-ready alternative: tool-use agents with sandboxed execution.
 
 ### From demo to production
 
-This is a demo, not a production application.  There is no authentication, no guardrails on the SQL, and no sandboxing of query execution.  The chart app adds another consideration: it executes LLM-generated Python, not just SQL, which makes sandboxing even more important.  In a production deployment, IT would add SSO login, restrict the database connection to read-only credentials, log every query for audit, run generated code in an isolated container, and use an enterprise LLM with a data-processing agreement.  Module 6 covers these considerations in detail.  But as a prototype that proves the concept, fifty lines of Python is all it takes.
+This is a demo, not a production application.  There is no authentication, no guardrails on the SQL, and no sandboxing of query execution.  The following sections describe how to cross that gap --- from a fifty-line prototype to something you can hand to IT.
+
+## Agents with Python tools
+
+The chart app works by asking the LLM to generate arbitrary Python code and then running it with `exec()`.  This is flexible --- the LLM can write whatever it needs --- but hard to control.  The LLM could generate code that reads files, makes network requests, or runs indefinitely.  And when something goes wrong, the error is somewhere inside a blob of generated code.
+
+**Tool use** is the production alternative.  Instead of generating arbitrary code, the LLM selects from a menu of Python functions you define and calls them by name.  You control exactly what the agent can do.  The LLM only decides *which* tool to call and *what arguments* to pass.
+
+For the Chinook query app, the tool menu might look like this:
+
+```python
+def run_query(sql: str) -> list[dict]:
+    """Execute a SQL SELECT and return rows as a list of dicts."""
+    cursor = conn.execute(sql)
+    columns = [d[0] for d in cursor.description]
+    return [dict(zip(columns, row)) for row in cursor.fetchall()]
+
+def make_bar_chart(sql: str, x_col: str, y_col: str, title: str) -> str:
+    """Run a query and produce a bar chart. Returns path to saved PNG."""
+    df = pd.read_sql_query(sql, conn)
+    fig, ax = plt.subplots()
+    ax.bar(df[x_col], df[y_col])
+    ax.set_title(title)
+    path = f"/tmp/chart_{title.replace(' ', '_')}.png"
+    fig.savefig(path)
+    return path
+
+def summarize_table(table_name: str) -> dict:
+    """Return row count and column names for a table."""
+    count = conn.execute(f"SELECT COUNT(*) FROM {table_name}").fetchone()[0]
+    cursor = conn.execute(f"SELECT * FROM {table_name} LIMIT 0")
+    columns = [d[0] for d in cursor.description]
+    return {"table": table_name, "rows": count, "columns": columns}
+```
+
+You describe these functions to the LLM as tool definitions --- name, description, and parameter types --- and the LLM reads the descriptions to decide which tool fits the question.  It never sees the implementation.  The tool definitions are the API; the Python functions are the implementation behind it.
+
+This gives you two things `exec()` cannot: a bounded set of operations (the agent can only call the tools you register) and a structured audit trail (every tool call is a named, logged event with specific inputs and outputs).
+
+Tool use also enables the LLM to do *multi-step reasoning* within a single question.  "Which sales rep should I assign this account to?" might trigger: `run_query` to get account revenue, `run_query` to get rep workloads, `run_query` to check rep industry specializations, then a final synthesis.  The LLM orchestrates the sequence; your code just runs the tools it requests.
+
+## The agent loop
+
+Tool use requires a conversation loop.  The LLM does not call a tool directly --- it returns a structured message saying "I want to call `run_query` with these arguments," and your code actually executes the function and returns the result.  Then the conversation continues until the LLM signals it is done.
+
+The pattern:
+
+```python
+messages = [{"role": "user", "content": question}]
+
+while True:
+    response = client.messages.create(
+        model="claude-sonnet-4-6",
+        system=system_prompt,
+        tools=[t["schema"] for t in TOOLS.values()],
+        messages=messages,
+    )
+
+    if response.stop_reason == "end_turn":
+        return response.content[0].text       # done — return final answer
+
+    # LLM wants to call a tool
+    tool_use_block = next(b for b in response.content if b.type == "tool_use")
+    result = TOOLS[tool_use_block.name]["fn"](**tool_use_block.input)
+
+    # Append the LLM's tool request and the result to the conversation
+    messages.append({"role": "assistant", "content": response.content})
+    messages.append({"role": "user", "content": [{
+        "type": "tool_result",
+        "tool_use_id": tool_use_block.id,
+        "content": str(result),
+    }]})
+    # Loop: LLM sees the result and decides what to do next
+```
+
+Each iteration the LLM either calls a tool or signals it is done.
+
+```{mermaid}
+%%| label: fig-agent-loop
+%%| fig-cap: "The agent loop: the LLM requests tool calls; your code executes them and returns results."
+%%| fig-width: 80%
+flowchart TD
+    Q["User question"] --> LLM["LLM\n_generates response_"]
+    LLM -- "stop_reason: tool_use" --> EXEC["Execute tool\n_run_query / make_chart / ..._"]
+    EXEC -- "tool_result" --> LLM
+    LLM -- "stop_reason: end_turn" --> ANS["Final answer"]
+
+    style Q fill:#e3f2fd,stroke:#2196f3
+    style LLM fill:#fff3e0,stroke:#ff9800
+    style EXEC fill:#e8f5e9,stroke:#4caf50
+    style ANS fill:#e3f2fd,stroke:#2196f3
+```
+
+This loop is what Claude Code runs when it executes a multi-step task.  You can wrap it with timeouts (stop after N iterations), cost tracking (count tokens per request), and retry logic (re-run a failed tool call with a corrected argument) --- all without changing the core pattern.
+
+## Containers and sandboxing
+
+Tool use limits what the agent *can* request.  Containers limit what the code *can reach*.  Both are needed in any deployment that handles real data.
+
+The risk is concrete.  If your app runs LLM-generated code --- via `exec()` or a code-execution tool --- and the app is exposed to users, a crafted input could produce code that reads credentials from the filesystem, makes outbound network calls, or exhausts server memory.  Sandboxing prevents all of this.
+
+**Docker.**  A container is an isolated process with its own filesystem and network stack.  It is created from an image (a recipe specifying the OS, libraries, and files), runs the code, and is discarded.  Nothing it does persists after exit.
+
+A minimal sandbox for executing generated Python:
+
+```bash
+docker run \
+  --rm \                          # discard container after exit
+  --network none \                # no internet access
+  --memory 256m \                 # memory cap
+  --cpus 0.5 \                    # CPU cap
+  --read-only \                   # immutable filesystem
+  --tmpfs /tmp:size=64m \         # writable scratch space only
+  python:3.12-slim \
+  python -c "$generated_code"
+```
+
+Code runs inside the container and cannot touch your database credentials, cannot make API calls, and terminates at timeout.  The database connection is the key exception: the `run_query` tool runs *outside* the container under read-only database credentials, passing results in as data.  Untrusted computation happens inside the container; trusted data access happens outside.  This separation is the standard pattern.
+
+**Hosted sandboxes.**  Running containers per-request adds operational work.  Several services manage this:
+
+- **E2B** --- a cloud service built for executing LLM-generated code.  Each call spins up an isolated micro-VM, runs the code, and returns the result.  No infrastructure to manage; the API is a few lines of Python.
+- **Modal** --- serverless containers that scale to zero between requests.  You define the Python environment as code; Modal handles cold starts, scaling, and isolation.  Useful when the agent needs heavier compute or persistent state across calls.
+- **Daytona / Morph** --- similar hosted execution environments with different tradeoffs on latency and cost.
+
+For an intranet prototype, one Docker container per request is fine.  For a multi-user deployment, a hosted sandbox service avoids significant infrastructure overhead.
+
+## Agent harnessing
+
+A *harness* is the scaffolding that wraps an agent: the system prompt, tool registry, conversation loop, error handling, and logging.  The demo apps have an implicit harness --- a system prompt and `exec()` --- but without the structure needed to hand off to IT.
+
+A minimal production harness has four components.
+
+**Tool registry.**  A dictionary mapping tool names to Python functions and their JSON schema descriptions.  Keep the registry separate from the loop so you can add or remove tools without touching control flow.
+
+```python
+TOOLS = {
+    "run_query": {
+        "fn": run_query,
+        "schema": {
+            "name": "run_query",
+            "description": "Execute a SQL SELECT and return rows as JSON.",
+            "input_schema": {
+                "type": "object",
+                "properties": {"sql": {"type": "string",
+                                       "description": "A valid SQLite SELECT statement."}},
+                "required": ["sql"],
+            },
+        },
+    },
+    "make_bar_chart": { ... },
+}
+```
+
+**Conversation manager.**  Tool use requires maintaining conversation history --- the LLM's tool requests and your tool results must both appear in the message list.  A conversation manager handles appending, truncation (messages grow long in multi-step tasks), and serialization for logging.
+
+**Error handling.**  Tools fail.  SQL has syntax errors; the database connection drops; a chart library raises an exception.  The harness catches these and returns a structured error to the LLM, which can retry with a corrected argument.  Without error handling, a single failed tool call terminates the entire conversation.
+
+```python
+try:
+    result = TOOLS[tool_name]["fn"](**tool_input)
+    content = json.dumps(result)
+    is_error = False
+except Exception as exc:
+    content = f"Error: {exc}"
+    is_error = True
+
+messages.append({"role": "user", "content": [{
+    "type": "tool_result",
+    "tool_use_id": tool_use_id,
+    "content": content,
+    "is_error": is_error,
+}]})
+```
+
+**Observability.**  Log every tool call: which tool, what arguments, how long it ran, whether it succeeded.  This gives you an audit trail (who asked what query, which SQL ran against the database), a debugging surface (why did the agent loop six times?), and cost data (how many tokens per question).
+
+```
+2026-03-23 14:02:11 | tool=run_query | sql="SELECT ..." | rows=12 | ms=43
+2026-03-23 14:02:12 | tool=make_bar_chart | title="Top 5 Countries" | ok=True | ms=210
+2026-03-23 14:02:13 | stop_reason=end_turn | input_tokens=1840 | output_tokens=312
+```
+
+A complete harness for the Chinook query app is around 150 lines of Python.  The code is not complex, but it is what separates a demo from something IT can deploy: they can read exactly what tools exist, what the agent can access, and where the logs go.  Module 6 covers the governance layer on top: authentication, data-processing agreements, and query approval workflows.
 
 ## Exercises
 
@@ -418,4 +601,20 @@ Add an instruction to the skill: "When I say 'Monday report,' run these three qu
 
 ::: {.callout-note title="Exercise 6: Build Your Own Query App" collapse="true"}
 Ask your coding agent to build a natural-language query app similar to the [chinook-query demo](files/code/chinook-query.py), either from scratch or by improving the demo.  Possible extensions: add chart generation for numeric results, show query history in a sidebar, add error handling that suggests corrections when the SQL fails, or let the user choose between different databases.
+:::
+
+::: {.callout-note title="Exercise 7: Build a Tool-Use Agent" collapse="true"}
+Ask your coding agent to convert the [chinook-charts demo](files/code/chinook-charts.py) from an `exec()`-based app to a tool-use agent.
+
+Define at least three tools: `run_query(sql)`, `make_bar_chart(sql, x_col, y_col, title)`, and one of your own choosing (ideas: `list_tables()`, `describe_table(name)`, `make_line_chart(...)`).  Register them with the Anthropic SDK using the tool definitions schema, and implement the conversation loop so the LLM can call them in sequence.
+
+Test with a multi-step question that requires at least two tool calls: for example, "List the available tables, then show me the top 5 countries by revenue as a bar chart."  Inspect the conversation history and verify you can see each tool call and its result.
+:::
+
+::: {.callout-note title="Exercise 8: Sandbox a Code Execution Tool" collapse="true"}
+Add a `run_python(code: str) -> str` tool to your agent from Exercise 7.  The tool should execute the provided Python code and return stdout.
+
+Run this version first with no sandboxing and confirm it works.  Then sandbox it: run the generated code inside a Docker container with `--network none`, a memory cap, and `--read-only`.  Pass the database query results in as a CSV string in the code, so the container never needs a database connection.
+
+Compare the output of the sandboxed and unsandboxed versions on the same question.  What limitations does the sandbox impose?  What security risks does it eliminate?
 :::
